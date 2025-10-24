@@ -20,6 +20,9 @@ const leaguePanels = document.getElementById("league-panels");
 const leagueListEl = document.getElementById("league-list");
 const navMenuBtn = document.getElementById("nav-menu");
 const toast = document.getElementById("toast");
+const playerModal = document.getElementById("player-modal");
+const playerModalBody = document.getElementById("player-modal-body");
+const playerModalClose = playerModal ? playerModal.querySelector(".player-modal__close") : null;
 
 let scoringProfiles = {};
 let availableStats = [];
@@ -29,6 +32,7 @@ let activeGameId = null;
 let leagueInitialized = false;
 let currentLeagueId = null;
 let leaguesCache = [];
+let lastFocusedElement = null;
 const STAT_ORDER = [
     { key: "PTS", label: "PTS" },
     { key: "OREB", label: "OREB" },
@@ -52,6 +56,55 @@ const STAT_ORDER = [
     { key: "PF", label: "PF" },
 ];
 const STAT_LABELS = Object.fromEntries(STAT_ORDER.map((item) => [item.key, item.label]));
+const PLAYER_MODAL_SUMMARY_HEADERS = [
+    { key: "label", label: "Split" },
+    { key: "matchup", label: "Matchup" },
+    { key: "fantasy", label: "Fan Pts" },
+    { key: "MIN", label: "MIN" },
+    { key: "PTS", label: "PTS" },
+    { key: "REB", label: "REB" },
+    { key: "AST", label: "AST" },
+    { key: "STL", label: "STL" },
+    { key: "BLK", label: "BLK" },
+    { key: "FG", label: "FG" },
+    { key: "3PT", label: "3PT" },
+    { key: "FT", label: "FT" },
+    { key: "TOV", label: "TO" },
+    { key: "PF", label: "PF" },
+];
+const PLAYER_MODAL_LOG_HEADERS = [
+    { key: "date", label: "Date" },
+    { key: "matchup", label: "Opponent" },
+    { key: "result", label: "Time / Result" },
+    { key: "fantasy", label: "Fan Pts" },
+    { key: "MIN", label: "MIN" },
+    { key: "PTS", label: "PTS" },
+    { key: "REB", label: "REB" },
+    { key: "AST", label: "AST" },
+    { key: "STL", label: "STL" },
+    { key: "BLK", label: "BLK" },
+    { key: "FG", label: "FG" },
+    { key: "3PT", label: "3PT" },
+    { key: "FT", label: "FT" },
+    { key: "TOV", label: "TO" },
+    { key: "PF", label: "PF" },
+];
+const SHOT_COLUMNS = {
+    FG: { made: "FGM", attempts: "FGA", percent: "FG_PCT" },
+    "3PT": { made: "FG3M", attempts: "FG3A", percent: "FG3_PCT" },
+    FT: { made: "FTM", attempts: "FTA", percent: "FT_PCT" },
+};
+function escapeHtml(value) {
+    if (value === null || value === undefined) {
+        return "";
+    }
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+}
 
 async function fetchJSON(url, options = {}) {
     const response = await fetch(url, {
@@ -84,6 +137,330 @@ function showToast(message, type = "success") {
     toast.className = `toast ${type}`;
     setTimeout(() => toast.classList.add("hidden"), 4000);
     requestAnimationFrame(() => toast.classList.remove("hidden"));
+}
+
+function parseIsoDate(value) {
+    if (!value) {
+        return null;
+    }
+    const parts = String(value).split("-");
+    if (parts.length !== 3) {
+        return null;
+    }
+    const [year, month, day] = parts.map((part) => Number.parseInt(part, 10));
+    if ([year, month, day].some((num) => Number.isNaN(num))) {
+        return null;
+    }
+    return new Date(Date.UTC(year, month - 1, day));
+}
+
+function formatDisplayDate(value, options = {}) {
+    const dateObj = value instanceof Date ? value : parseIsoDate(value);
+    if (!dateObj || Number.isNaN(dateObj.getTime())) {
+        return "";
+    }
+    const formatter = new Intl.DateTimeFormat(undefined, {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+        ...options,
+    });
+    return formatter.format(dateObj);
+}
+
+function formatNumber(value, { decimals = 1, allowZero = true } = {}) {
+    if (value === null || value === undefined) {
+        return "–";
+    }
+    const num = Number(value);
+    if (Number.isNaN(num)) {
+        return "–";
+    }
+    if (!allowZero && Math.abs(num) < 0.0001) {
+        return "–";
+    }
+    const fixed = num.toFixed(decimals);
+    return decimals ? fixed.replace(/\.0+$/, "") : fixed;
+}
+
+function formatFantasy(value) {
+    if (value === null || value === undefined) {
+        return "0.00";
+    }
+    const num = Number(value);
+    if (Number.isNaN(num)) {
+        return "0.00";
+    }
+    return num.toFixed(2);
+}
+
+function formatShotLine(stats, key, hasData) {
+    const config = SHOT_COLUMNS[key];
+    if (!config || !stats || !hasData) {
+        return "–";
+    }
+    const made = Number(stats[config.made] ?? 0);
+    const attempts = Number(stats[config.attempts] ?? 0);
+    if (!Number.isFinite(made) || !Number.isFinite(attempts)) {
+        return "–";
+    }
+    if (made === 0 && attempts === 0) {
+        return "0-0";
+    }
+    const madeText = formatNumber(made, { decimals: 1 }).replace(/\.0$/, "");
+    const attemptsText = formatNumber(attempts, { decimals: 1 }).replace(/\.0$/, "");
+    const pctValue = Number(stats[config.percent] ?? 0);
+    const pctText = Number.isFinite(pctValue) && pctValue > 0 ? `${pctValue.toFixed(1).replace(/\.0+$/, "")}%` : "";
+    return pctText ? `${madeText}-${attemptsText} (${pctText})` : `${madeText}-${attemptsText}`;
+}
+
+function buildSummaryRows(summary) {
+    return summary
+        .map((row) => {
+            const stats = row.stats || {};
+            const hasGames = (row.games_played || 0) > 0;
+            const metaParts = [];
+            if (row.result) {
+                metaParts.push(row.result);
+            } else if (row.time) {
+                metaParts.push(row.time);
+            }
+            const metaText = metaParts.map(escapeHtml).join(" · ");
+            const matchup = row.matchup ? escapeHtml(row.matchup) : "—";
+            const matchupCell = `
+                <div class="player-card__matchup-cell">
+                    <span>${matchup}</span>
+                    ${metaText ? `<span class="player-card__matchup-meta">${escapeHtml(metaText)}</span>` : ""}
+                </div>
+            `;
+            const cells = [
+                `<div class="player-card__matchup-label">${escapeHtml(row.label || "")}</div>`,
+                matchupCell,
+                formatFantasy(row.fantasy_points_avg),
+                formatNumber(stats.MIN, { decimals: 1, allowZero: hasGames }),
+                formatNumber(stats.PTS, { decimals: 1, allowZero: hasGames }),
+                formatNumber(stats.REB, { decimals: 1, allowZero: hasGames }),
+                formatNumber(stats.AST, { decimals: 1, allowZero: hasGames }),
+                formatNumber(stats.STL, { decimals: 1, allowZero: hasGames }),
+                formatNumber(stats.BLK, { decimals: 1, allowZero: hasGames }),
+                formatShotLine(stats, "FG", hasGames),
+                formatShotLine(stats, "3PT", hasGames),
+                formatShotLine(stats, "FT", hasGames),
+                formatNumber(stats.TOV ?? stats.TO, { decimals: 1, allowZero: hasGames }),
+                formatNumber(stats.PF, { decimals: 1, allowZero: hasGames }),
+            ];
+            const rowClass = hasGames ? "" : ' class="no-games"';
+            return `<tr${rowClass}>${cells.map((cell) => `<td>${cell}</td>`).join("")}</tr>`;
+        })
+        .join("");
+}
+
+function buildGameLogRows(entries) {
+    if (!entries || !entries.length) {
+        return "";
+    }
+    return entries
+        .map((entry) => {
+            const stats = entry.stats || {};
+            const played = Number(stats.MIN ?? 0) > 0;
+            const opp = entry.matchup ? escapeHtml(entry.matchup) : "—";
+            const result = entry.result
+                ? escapeHtml(entry.result)
+                : entry.status
+                    ? escapeHtml(entry.status)
+                    : entry.time
+                        ? escapeHtml(entry.time)
+                        : "—";
+            const cells = [
+                formatDisplayDate(entry.date) || "—",
+                opp,
+                result,
+                formatFantasy(entry.fantasy_points),
+                formatNumber(stats.MIN, { decimals: 1, allowZero: played }),
+                formatNumber(stats.PTS, { decimals: 1, allowZero: played }),
+                formatNumber(stats.REB, { decimals: 1, allowZero: played }),
+                formatNumber(stats.AST, { decimals: 1, allowZero: played }),
+                formatNumber(stats.STL, { decimals: 1, allowZero: played }),
+                formatNumber(stats.BLK, { decimals: 1, allowZero: played }),
+                formatShotLine(stats, "FG", played),
+                formatShotLine(stats, "3PT", played),
+                formatShotLine(stats, "FT", played),
+                formatNumber(stats.TOV ?? stats.TO, { decimals: 1, allowZero: played }),
+                formatNumber(stats.PF, { decimals: 1, allowZero: played }),
+            ];
+            const rowClass = played ? "" : ' class="dnp"';
+            return `<tr${rowClass}>${cells.map((cell) => `<td>${cell}</td>`).join("")}</tr>`;
+        })
+        .join("");
+}
+
+function renderPlayerProfile(profile) {
+    if (!profile || !profile.player) {
+        return '<p class="player-card__empty">No player data available.</p>';
+    }
+    const player = profile.player;
+    const summaryRows = profile.summary && profile.summary.length ? buildSummaryRows(profile.summary) : "";
+    const gameLogRows = buildGameLogRows(profile.game_log || []);
+    const throughDate = profile.target_date ? `Through ${escapeHtml(formatDisplayDate(profile.target_date))}` : "";
+    const fantasyTeam = player.fantasy_team ? escapeHtml(player.fantasy_team) : "Free Agent";
+    const positions = player.positions && player.positions.length ? escapeHtml(player.positions.join(", ")) : "—";
+    const teamLine = player.team_name
+        ? `${escapeHtml(player.team_name)}${player.team_abbreviation ? ` (${escapeHtml(player.team_abbreviation)})` : ""}`
+        : escapeHtml(player.team_abbreviation || "");
+    const scoringLine = player.scoring_profile ? `Scoring profile: ${escapeHtml(player.scoring_profile)}` : "";
+    const fantasyAverage =
+        typeof player.season_fantasy_avg === "number" && Number.isFinite(player.season_fantasy_avg)
+            ? `Season avg: ${player.season_fantasy_avg.toFixed(1)} fpts`
+            : null;
+    const initials = player.name
+        ? player.name
+              .split(/\s+/)
+              .filter(Boolean)
+              .map((part) => part[0])
+              .slice(0, 2)
+              .join("")
+        : "?";
+    const avatar = player.image_url
+        ? `<img src="${escapeHtml(player.image_url)}" alt="${escapeHtml(player.name)} headshot" />`
+        : `<div class="player-card__avatar-fallback">${escapeHtml(initials)}</div>`;
+    const metaLines = [
+        `${positions} &ndash; ${teamLine || "—"}`,
+        `Team name: ${fantasyTeam}`,
+    ];
+    if (scoringLine) {
+        metaLines.push(scoringLine);
+    }
+    if (fantasyAverage) {
+        metaLines.push(escapeHtml(fantasyAverage));
+    }
+    const actions = [];
+    if (!player.fantasy_team) {
+        actions.push({ key: "add", label: "Add" });
+    } else if (player.user_team && player.fantasy_team === player.user_team) {
+        actions.push({ key: "drop", label: "Drop" });
+        actions.push({ key: "trade", label: "Trade" });
+    } else {
+        actions.push({ key: "trade", label: "Trade" });
+    }
+    if (!actions.length) {
+        actions.push({ key: "watch", label: "Watch" });
+    }
+    const actionsHtml = actions
+        .map(
+            (action) =>
+                `<button type="button" class="player-card__action" data-player-action="${action.key}" data-player-id="${player.id}">${escapeHtml(action.label)}</button>`,
+        )
+        .join("");
+    const summaryTable = summaryRows
+        ? `
+            <div class="player-card__table-wrapper">
+                <table class="player-card__summary">
+                    <thead>
+                        <tr>${PLAYER_MODAL_SUMMARY_HEADERS.map((header) => `<th>${escapeHtml(header.label)}</th>`).join("")}</tr>
+                    </thead>
+                    <tbody>${summaryRows}</tbody>
+                </table>
+            </div>
+        `
+        : '<p class="player-card__empty">No summary stats yet.</p>';
+    const gameLogTable = gameLogRows
+        ? `
+            <div class="player-card__log-wrapper">
+                <table class="player-card__log">
+                    <thead>
+                        <tr>${PLAYER_MODAL_LOG_HEADERS.map((header) => `<th>${escapeHtml(header.label)}</th>`).join("")}</tr>
+                    </thead>
+                    <tbody>${gameLogRows}</tbody>
+                </table>
+            </div>
+        `
+        : '<p class="player-card__empty">No game log entries before this date.</p>';
+    const throughLabel = throughDate ? `<span class="player-card__through">${escapeHtml(throughDate)}</span>` : "";
+
+    return `
+        <article class="player-card" data-player-id="${player.id}">
+            <header class="player-card__header">
+                <div class="player-card__avatar">${avatar}</div>
+                <div class="player-card__details">
+                    <h2 id="player-modal-title">${escapeHtml(player.name || "Player")}</h2>
+                    <div class="player-card__meta-list">
+                        ${metaLines.map((line) => `<span class="player-card__meta-line">${line}</span>`).join("")}
+                    </div>
+                </div>
+            </header>
+            <div class="player-card__body">
+                <nav class="player-card__tabs" role="tablist" aria-label="Player detail tabs">
+                    <button type="button" class="player-card__tab active" role="tab" id="player-tab-stats" data-tab="stats" aria-controls="player-panel-stats" aria-selected="true">
+                        Stats Snapshot
+                    </button>
+                    <button type="button" class="player-card__tab" role="tab" id="player-tab-log" data-tab="log" aria-controls="player-panel-log" aria-selected="false">
+                        Game Log
+                    </button>
+                </nav>
+                <div class="player-card__panels">
+                    <section class="player-card__panel player-card__section is-active" role="tabpanel" id="player-panel-stats" data-panel="stats" aria-labelledby="player-tab-stats">
+                        <h3>Stats Snapshot</h3>
+                        ${summaryTable}
+                    </section>
+                    <section class="player-card__panel player-card__section" role="tabpanel" id="player-panel-log" data-panel="log" aria-labelledby="player-tab-log" aria-hidden="true">
+                        <div class="player-card__section-header">
+                            <h3>Game Log</h3>
+                            ${throughLabel}
+                        </div>
+                        ${gameLogTable}
+                    </section>
+                </div>
+            </div>
+            <footer class="player-card__actions">
+                ${actionsHtml}
+            </footer>
+        </article>
+    `;
+}
+
+async function openPlayerModal(playerId, { leagueId = currentLeagueId, date = null } = {}) {
+    if (!playerModal || !playerModalBody || !playerId) {
+        return;
+    }
+    lastFocusedElement = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    document.body.classList.add("modal-open");
+    playerModal.classList.remove("hidden");
+    playerModal.setAttribute("aria-hidden", "false");
+    playerModalBody.innerHTML = '<div class="player-card__loading">Loading player…</div>';
+
+    const params = new URLSearchParams();
+    if (leagueId) {
+        params.set("league_id", leagueId);
+    }
+    if (date) {
+        params.set("date", date);
+    }
+    const query = params.toString();
+
+    try {
+        const profile = await fetchJSON(`/players/${playerId}/profile${query ? `?${query}` : ""}`);
+        playerModalBody.innerHTML = renderPlayerProfile(profile);
+        initPlayerCardTabs();
+    } catch (error) {
+        const message = error.message || "Unable to load player.";
+        playerModalBody.innerHTML = `<p class="player-card__empty error">${escapeHtml(message)}</p>`;
+        showToast(message, "error");
+    }
+    (playerModalClose || playerModal.querySelector(".player-modal__close"))?.focus();
+}
+
+function closePlayerModal() {
+    if (!playerModal || !playerModalBody) {
+        return;
+    }
+    playerModal.classList.add("hidden");
+    playerModal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("modal-open");
+    playerModalBody.innerHTML = "";
+    if (lastFocusedElement && typeof lastFocusedElement.focus === "function") {
+        lastFocusedElement.focus();
+    }
+    lastFocusedElement = null;
 }
 
 function renderScoreboard(data) {
@@ -189,29 +566,51 @@ function renderBoxscore(card, detail, boxscore) {
     const away = boxscore.away_team;
 
     const renderTeamTable = (team) => {
-        const rows = team.players
-            .map(
-                (player) => `
-                <tr>
-                    <td>${player.player_name}</td>
-                    <td>${player.MINUTES?.toFixed ? player.MINUTES.toFixed(1) : player.MINUTES ?? ""}</td>
-                    <td>${player.PTS}</td>
-                    <td>${player.REB ?? (player.OREB + player.DREB)}</td>
-                    <td>${player.AST}</td>
-                    <td>${player.STL}</td>
-                    <td>${player.BLK}</td>
-                    <td>${player.FGM}-${player.FGA}</td>
-                    <td>${player.FG3M}-${player.FG3A}</td>
-                    <td>${player.FTM}-${player.FTA}</td>
-                    <td>${player.TOV}</td>
-                </tr>
-            `
-            )
+        const fmt = (value, decimals = 0) => {
+            if (value === null || value === undefined) {
+                return "";
+            }
+            const num = Number(value);
+            if (!Number.isFinite(num)) {
+                return escapeHtml(value);
+            }
+            if (decimals) {
+                return num.toFixed(decimals).replace(/\.0$/, "");
+            }
+            return num;
+        };
+        const gameDate = boxscore.date || currentScoreboardDate || card.dataset.date || "";
+        const rows = (team.players || [])
+            .map((player) => {
+                const name = escapeHtml(player.player_name || "");
+                const playerId = Number(player.player_id);
+                const playerButton =
+                    Number.isFinite(playerId) && playerId
+                        ? `<button type="button" class="player-link" data-player-id="${playerId}" data-player-name="${name}" data-game-date="${escapeHtml(gameDate)}" data-source="boxscore">${name}</button>`
+                        : name;
+                const rebounds =
+                    player.REB !== undefined ? fmt(player.REB) : fmt((player.OREB || 0) + (player.DREB || 0));
+                return `
+                    <tr>
+                        <td>${playerButton}</td>
+                        <td>${fmt(player.MINUTES, 1)}</td>
+                        <td>${fmt(player.PTS)}</td>
+                        <td>${rebounds}</td>
+                        <td>${fmt(player.AST)}</td>
+                        <td>${fmt(player.STL)}</td>
+                        <td>${fmt(player.BLK)}</td>
+                        <td>${fmt(player.FGM)}-${fmt(player.FGA)}</td>
+                        <td>${fmt(player.FG3M)}-${fmt(player.FG3A)}</td>
+                        <td>${fmt(player.FTM)}-${fmt(player.FTA)}</td>
+                        <td>${fmt(player.TOV)}</td>
+                    </tr>
+                `;
+            })
             .join("");
         const totals = team.totals;
         return `
             <div class="boxscore-team">
-                <h3>${team.name} (${team.abbreviation})</h3>
+                <h3>${escapeHtml(team.name || "")} (${escapeHtml(team.abbreviation || "")})</h3>
                 <table>
                     <thead>
                         <tr>
@@ -234,16 +633,16 @@ function renderBoxscore(card, detail, boxscore) {
                     <tfoot>
                         <tr>
                             <th>Total</th>
-                            <th>${totals.MINUTES?.toFixed ? totals.MINUTES.toFixed(1) : totals.MINUTES || ""}</th>
-                            <th>${totals.PTS}</th>
-                            <th>${totals.REB ?? (totals.OREB + totals.DREB)}</th>
-                            <th>${totals.AST}</th>
-                            <th>${totals.STL}</th>
-                            <th>${totals.BLK}</th>
-                            <th>${totals.FGM}-${totals.FGA}</th>
-                            <th>${totals.FG3M}-${totals.FG3A}</th>
-                            <th>${totals.FTM}-${totals.FTA}</th>
-                            <th>${totals.TOV}</th>
+                            <th>${fmt(totals.MINUTES, 1)}</th>
+                            <th>${fmt(totals.PTS)}</th>
+                            <th>${totals.REB !== undefined ? fmt(totals.REB) : fmt((totals.OREB || 0) + (totals.DREB || 0))}</th>
+                            <th>${fmt(totals.AST)}</th>
+                            <th>${fmt(totals.STL)}</th>
+                            <th>${fmt(totals.BLK)}</th>
+                            <th>${fmt(totals.FGM)}-${fmt(totals.FGA)}</th>
+                            <th>${fmt(totals.FG3M)}-${fmt(totals.FG3A)}</th>
+                            <th>${fmt(totals.FTM)}-${fmt(totals.FTA)}</th>
+                            <th>${fmt(totals.TOV)}</th>
                         </tr>
                     </tfoot>
                 </table>
@@ -254,17 +653,19 @@ function renderBoxscore(card, detail, boxscore) {
     detail.innerHTML = `
         <div class="boxscore-header">
             <div>
-                <strong>${away.name} ${scoreboard.away_score}</strong>
+                <strong>${escapeHtml(away.name || "")} ${escapeHtml(scoreboard.away_score ?? "")}</strong>
                 @
-                <strong>${home.name} ${scoreboard.home_score}</strong>
+                <strong>${escapeHtml(home.name || "")} ${escapeHtml(scoreboard.home_score ?? "")}</strong>
             </div>
-            <span>${boxscore.date}</span>
+            <span>${escapeHtml(boxscore.date || "")}</span>
         </div>
         <div class="score-detail-inner">
             ${renderTeamTable(away)}
             ${renderTeamTable(home)}
         </div>
     `;
+    detail.dataset.boxscoreDate = boxscore.date || currentScoreboardDate || "";
+    detail.dataset.leagueId = boxscore.league_id || currentLeagueId || "";
 }
 
 async function loadBoxScore(date, gameId, card, detail) {
@@ -295,10 +696,12 @@ function renderFantasyResults(result) {
         fantasyResultsEl.innerHTML = "<p>No simulation results yet. Run a simulation day to see fantasy totals.</p>";
         return;
     }
+    const resultDate = result.date || "";
 
     result.team_results.forEach((team) => {
         const card = document.createElement("article");
         card.className = "team-card";
+        card.dataset.resultDate = resultDate;
 
         const summary = document.createElement("div");
         summary.className = "team-summary";
@@ -314,6 +717,28 @@ function renderFantasyResults(result) {
 
         if (team.players && team.players.length) {
             const table = document.createElement("table");
+            const rows = team.players
+                .map((player) => {
+                    const name = escapeHtml(player.player_name || "");
+                    const playerId = Number(player.player_id);
+                    const playerButton =
+                        Number.isFinite(playerId) && playerId
+                            ? `<button type="button" class="player-link" data-player-id="${playerId}" data-player-name="${name}" data-result-date="${escapeHtml(resultDate)}" data-source="fantasy">${name}</button>`
+                            : name;
+                    const teamLabel = escapeHtml(player.team || "");
+                    const fantasy = Number.isFinite(Number(player.fantasy_points))
+                        ? Number(player.fantasy_points).toFixed(1)
+                        : "0.0";
+                    const rowClass = `player-row ${player.played ? "played" : "did-not-play"}`;
+                    return `
+                        <tr class="${rowClass}">
+                            <td>${playerButton}</td>
+                            <td>${teamLabel}</td>
+                            <td>${fantasy}</td>
+                        </tr>
+                    `;
+                })
+                .join("");
             table.innerHTML = `
                 <thead>
                     <tr>
@@ -322,19 +747,7 @@ function renderFantasyResults(result) {
                         <th>Fantasy</th>
                     </tr>
                 </thead>
-                <tbody>
-                    ${team.players
-                        .map(
-                            (player) => `
-                                <tr class="player-row ${player.played ? "played" : "did-not-play"}">
-                                    <td>${player.player_name}</td>
-                                    <td>${player.team}</td>
-                                    <td>${player.fantasy_points.toFixed(1)}</td>
-                                </tr>
-                            `
-                        )
-                        .join("")}
-                </tbody>
+                <tbody>${rows}</tbody>
             `;
             detail.appendChild(table);
         } else {
@@ -815,6 +1228,97 @@ async function saveScoringProfile(event) {
 }
 
 // Event listeners
+document.addEventListener("click", (event) => {
+    const trigger = event.target.closest(".player-link");
+    if (!trigger) {
+        return;
+    }
+    event.preventDefault();
+    const playerId = Number(trigger.dataset.playerId);
+    if (!Number.isFinite(playerId) || playerId <= 0) {
+        return;
+    }
+    const leagueId = trigger.dataset.leagueId || currentLeagueId;
+    const explicitDate = trigger.dataset.gameDate || trigger.dataset.resultDate || "";
+    const detailContainer = trigger.closest(".score-detail");
+    const teamCard = trigger.closest(".team-card");
+    const derivedDate =
+        explicitDate ||
+        (detailContainer && detailContainer.dataset.boxscoreDate) ||
+        (teamCard && teamCard.dataset.resultDate) ||
+        currentScoreboardDate ||
+        "";
+    openPlayerModal(playerId, { leagueId, date: derivedDate });
+});
+
+if (playerModal) {
+    playerModal.addEventListener("click", (event) => {
+        if (event.target.closest("[data-close-player-modal]")) {
+            closePlayerModal();
+            return;
+        }
+        const actionButton = event.target.closest("[data-player-action]");
+        if (actionButton) {
+            event.preventDefault();
+            const actionLabel = actionButton.textContent.trim() || "Action";
+            showToast(`${actionLabel} coming soon.`, "error");
+        }
+    });
+}
+
+if (playerModalClose) {
+    playerModalClose.addEventListener("click", (event) => {
+        event.preventDefault();
+        closePlayerModal();
+    });
+}
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && playerModal && !playerModal.classList.contains("hidden")) {
+        closePlayerModal();
+    }
+});
+
+function initPlayerCardTabs() {
+    if (!playerModalBody) {
+        return;
+    }
+    const card = playerModalBody.querySelector(".player-card");
+    if (!card) {
+        return;
+    }
+    const tabButtons = Array.from(card.querySelectorAll(".player-card__tab"));
+    const panels = Array.from(card.querySelectorAll(".player-card__panel"));
+    if (!tabButtons.length || !panels.length) {
+        return;
+    }
+    const activate = (target) => {
+        tabButtons.forEach((btn) => {
+            const isActive = btn.dataset.tab === target;
+            btn.classList.toggle("active", isActive);
+            btn.setAttribute("aria-selected", String(isActive));
+            btn.setAttribute("tabindex", isActive ? "0" : "-1");
+        });
+        panels.forEach((panel) => {
+            const isActive = panel.dataset.panel === target;
+            panel.classList.toggle("is-active", isActive);
+            panel.setAttribute("aria-hidden", String(!isActive));
+        });
+    };
+    tabButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            activate(btn.dataset.tab);
+        });
+        btn.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                activate(btn.dataset.tab);
+            }
+        });
+    });
+    activate("stats");
+}
+
 scoreboardDateInput.addEventListener("change", () => {
     if (scoreboardDateInput.disabled) return;
     loadScoreboard(scoreboardDateInput.value);

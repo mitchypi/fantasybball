@@ -29,6 +29,7 @@ from ..league import (
 )
 from ..schedule import daily_scoreboard, season_dates
 from ..scoring import delete_scoring_profile, rename_scoring_profile, update_scoring_profile
+from ..player_profile import build_player_profile_payload, build_team_lookup, load_player_images
 from ..simulator import create_demo_teams, simulate_head_to_head
 
 app = FastAPI(
@@ -40,6 +41,8 @@ app = FastAPI(
 PLAYER_BASE: Optional[pd.DataFrame] = None
 GAME_LOGS: Optional[pd.DataFrame] = None
 SCHEDULE_BASE: Optional[pd.DataFrame] = None
+PLAYER_IMAGES: Dict[str, str] = {}
+TEAM_LOOKUP: Dict[str, str] = {}
 
 BASE_DIR = DATA_DIR.parent
 templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
@@ -81,11 +84,23 @@ def _find_history_entry(state, target_date: date) -> Optional[Dict[str, Any]]:
     return None
 
 
+def _find_fantasy_team(state, player_id: int) -> Optional[str]:
+    for team_name, roster in (state.rosters or {}).items():
+        try:
+            if player_id in roster:
+                return team_name
+        except TypeError:
+            continue
+    return None
+
+
 @app.on_event("startup")
 def load_cached_data() -> None:
     global PLAYER_BASE  # pylint: disable=global-statement
     global GAME_LOGS  # pylint: disable=global-statement
     global SCHEDULE_BASE  # pylint: disable=global-statement
+    global PLAYER_IMAGES  # pylint: disable=global-statement
+    global TEAM_LOOKUP  # pylint: disable=global-statement
     try:
         GAME_LOGS = load_player_game_logs()
     except FileNotFoundError as err:
@@ -100,6 +115,14 @@ def load_cached_data() -> None:
     except FileNotFoundError as err:
         SCHEDULE_BASE = None
         print(f"[startup] Game schedule missing: {err}")  # noqa: T201
+        TEAM_LOOKUP = {}
+    else:
+        TEAM_LOOKUP = build_team_lookup(SCHEDULE_BASE)
+    try:
+        PLAYER_IMAGES = load_player_images()
+    except Exception as err:  # noqa: BLE001
+        PLAYER_IMAGES = {}
+        print(f"[startup] Unable to load player images: {err}")  # noqa: T201
 
 
 @app.get("/health")
@@ -180,6 +203,94 @@ def demo_simulation(
         "totals": result.team_totals,
         "winner": result.winning_team(),
     }
+
+
+@app.get("/players/{player_id}/profile")
+def get_player_profile(
+    player_id: int,
+    league_id: Optional[str] = Query(
+        None, description="Optional league identifier to contextualize fantasy data."
+    ),
+    date_query: Optional[str] = Query(
+        None, alias="date", description="Limit stats to games on or before this YYYY-MM-DD date."
+    ),
+    scoring: Optional[str] = Query(
+        None, description="Override scoring profile key (defaults to league or global default)."
+    ),
+) -> Dict[str, Any]:
+    game_logs = _ensure_game_logs()
+    schedule_df = _ensure_schedule()
+
+    requested_date: Optional[date] = None
+    if date_query:
+        try:
+            requested_date = datetime.fromisoformat(date_query).date()
+        except ValueError as err:
+            raise HTTPException(status_code=400, detail="Invalid date format; expected YYYY-MM-DD.") from err
+
+    scoring_profile_key = scoring
+    scoring_profile = None
+    scoring_name: Optional[str] = None
+    scoring_weights: Dict[str, float] = {}
+    target_date: Optional[date] = requested_date
+    fantasy_team_name: Optional[str] = None
+    state = None
+
+    if league_id:
+        try:
+            state = load_league_state(league_id)
+        except FileNotFoundError as err:
+            raise HTTPException(status_code=404, detail=str(err)) from err
+
+        scoring_profile_key = scoring_profile_key or state.scoring_profile_key
+        scoring_profile = settings.resolve_scoring_profile(scoring_profile_key)
+        if scoring and scoring != state.scoring_profile_key:
+            scoring_name = scoring_profile.name
+        else:
+            scoring_name = state.scoring_profile
+
+        scoring_weights = scoring_profile.weights
+        latest_completed = state.history[-1]["date"] if state.history else None
+        if latest_completed:
+            latest_date = datetime.fromisoformat(latest_completed).date()
+            target_date = min(requested_date, latest_date) if requested_date else latest_date
+        elif requested_date is None:
+            # No games have been simulated yet; nothing to show.
+            raise HTTPException(status_code=404, detail="No simulated games yet for this league.")
+
+        fantasy_team_name = _find_fantasy_team(state, player_id)
+    else:
+        scoring_profile = settings.resolve_scoring_profile(scoring_profile_key)
+        scoring_name = scoring_profile.name
+        scoring_weights = scoring_profile.weights
+
+    if scoring_profile is None:
+        scoring_profile = settings.resolve_scoring_profile(scoring_profile_key)
+        scoring_name = scoring_profile.name
+        scoring_weights = scoring_profile.weights
+
+    images = PLAYER_IMAGES or load_player_images()
+    team_lookup = TEAM_LOOKUP or build_team_lookup(schedule_df)
+
+    try:
+        payload = build_player_profile_payload(
+            player_id,
+            game_logs=game_logs,
+            schedule_df=schedule_df,
+            scoring_name=scoring_name,
+            scoring_weights=scoring_weights,
+            target_date=target_date,
+            player_images=images,
+            team_lookup=team_lookup,
+            fantasy_team_name=fantasy_team_name,
+        )
+    except ValueError as err:
+        raise HTTPException(status_code=404, detail=str(err)) from err
+
+    if state is not None:
+        payload.setdefault("player", {})["user_team"] = state.user_team_name
+    payload["league_id"] = league_id
+    return payload
 
 
 @app.get("/games")

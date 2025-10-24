@@ -94,6 +94,14 @@
         </div>
     </main>
 
+    <div id="player-modal" class="player-modal hidden" aria-hidden="true">
+        <div class="player-modal__backdrop" data-close-player-modal></div>
+        <div class="player-modal__container" role="dialog" aria-modal="true" aria-labelledby="player-modal-title">
+            <button type="button" class="player-modal__close" data-close-player-modal aria-label="Close player card">&times;</button>
+            <div id="player-modal-body" class="player-modal__body"></div>
+        </div>
+    </div>
+
     <div id="toast" class="toast hidden"></div>
 
     <script src="/static/dashboard.js" type="module"></script>
