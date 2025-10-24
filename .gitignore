@@ -1,3 +1,5 @@
 AGENTS.md
-data/leagues/
 todo.md
+
+data/leagues/*
+!data/leagues/.gitkeep
