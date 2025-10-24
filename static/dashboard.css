@@ -59,10 +59,6 @@ body.modal-open {
     gap: 0.5rem;
 }
 
-.league-list button {
-    background: rgba(37, 99, 235, 0.9);
-    border: 1px solid rgba(59, 130, 246, 0.7);
-}
 
 .top-bar {
     display: flex;
@@ -594,9 +590,7 @@ textarea {
     color: var(--muted);
 }
 
-.league-list button {
-    padding: 0.4rem 0.9rem;
-}
+
 
 .profile-actions {
     display: flex;

@@ -3,3 +3,10 @@ todo.md
 
 data/leagues/*
 !data/leagues/.gitkeep
+
+# Python cache/artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.$py.class
