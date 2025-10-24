@@ -1,0 +1,91 @@
+#setup-panel .existing-leagues {
+    margin-bottom: 1.5rem;
+}
+
+.league-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.75rem;
+}
+
+.league-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(15, 23, 42, 0.55);
+    border: 1px solid rgba(148, 163, 184, 0.15);
+    border-radius: 0.75rem;
+    padding: 0.65rem 0.85rem;
+}
+
+.league-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.league-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.league-info span {
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.league-list li.active {
+    border-color: rgba(59, 130, 246, 0.65);
+}
+
+.league-list li.empty {
+    justify-content: center;
+    color: var(--muted);
+}
+
+.profile-actions {
+    display: flex;
+    gap: 0.5rem;
+    margin: 0.75rem 0;
+}
+
+.league-settings {
+    margin-top: 1rem;
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    border-radius: 0.75rem;
+    padding: 0.75rem;
+    display: grid;
+    gap: 0.65rem;
+}
+
+.setup-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.weights-editor {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.5rem;
+}
+
+.weights-editor label {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+.weights-editor input {
+    margin-top: 0.25rem;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+}

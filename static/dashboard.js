@@ -69,8 +69,11 @@ const PLAYER_MODAL_SUMMARY_HEADERS = [
     { key: "STL", label: "STL" },
     { key: "BLK", label: "BLK" },
     { key: "FG", label: "FG" },
+    { key: "FG_PCT", label: "FG%" },
     { key: "3PT", label: "3PT" },
+    { key: "3PT_PCT", label: "3PT%" },
     { key: "FT", label: "FT" },
+    { key: "FT_PCT", label: "FT%" },
     { key: "TOV", label: "TO" },
     { key: "PF", label: "PF" },
 ];
@@ -86,8 +89,11 @@ const PLAYER_MODAL_LOG_HEADERS = [
     { key: "STL", label: "STL" },
     { key: "BLK", label: "BLK" },
     { key: "FG", label: "FG" },
+    { key: "FG_PCT", label: "FG%" },
     { key: "3PT", label: "3PT" },
+    { key: "3PT_PCT", label: "3PT%" },
     { key: "FT", label: "FT" },
+    { key: "FT_PCT", label: "FT%" },
     { key: "TOV", label: "TO" },
     { key: "PF", label: "PF" },
 ];
@@ -196,24 +202,28 @@ function formatFantasy(value) {
     return num.toFixed(2);
 }
 
-function formatShotLine(stats, key, hasData) {
+function formatShotDisplay(stats, key, hasData) {
     const config = SHOT_COLUMNS[key];
     if (!config || !stats || !hasData) {
-        return "–";
+        return { line: "–", percent: "–" };
     }
     const made = Number(stats[config.made] ?? 0);
     const attempts = Number(stats[config.attempts] ?? 0);
     if (!Number.isFinite(made) || !Number.isFinite(attempts)) {
-        return "–";
-    }
-    if (made === 0 && attempts === 0) {
-        return "0-0";
+        return { line: "–", percent: "–" };
     }
     const madeText = formatNumber(made, { decimals: 1 }).replace(/\.0$/, "");
     const attemptsText = formatNumber(attempts, { decimals: 1 }).replace(/\.0$/, "");
-    const pctValue = Number(stats[config.percent] ?? 0);
-    const pctText = Number.isFinite(pctValue) && pctValue > 0 ? `${pctValue.toFixed(1).replace(/\.0+$/, "")}%` : "";
-    return pctText ? `${madeText}-${attemptsText} (${pctText})` : `${madeText}-${attemptsText}`;
+    const line = `${madeText}-${attemptsText}`;
+    if (attempts === 0) {
+        return { line, percent: "—" };
+    }
+    const pctValue = Number(stats[config.percent]);
+    if (!Number.isFinite(pctValue)) {
+        return { line, percent: "—" };
+    }
+    const pctText = pctValue.toFixed(1).replace(/\.0+$/, "");
+    return { line, percent: `${pctText}%` };
 }
 
 function buildSummaryRows(summary) {
@@ -235,6 +245,9 @@ function buildSummaryRows(summary) {
                     ${metaText ? `<span class="player-card__matchup-meta">${escapeHtml(metaText)}</span>` : ""}
                 </div>
             `;
+            const fg = formatShotDisplay(stats, "FG", hasGames);
+            const three = formatShotDisplay(stats, "3PT", hasGames);
+            const ft = formatShotDisplay(stats, "FT", hasGames);
             const cells = [
                 `<div class="player-card__matchup-label">${escapeHtml(row.label || "")}</div>`,
                 matchupCell,
@@ -245,9 +258,12 @@ function buildSummaryRows(summary) {
                 formatNumber(stats.AST, { decimals: 1, allowZero: hasGames }),
                 formatNumber(stats.STL, { decimals: 1, allowZero: hasGames }),
                 formatNumber(stats.BLK, { decimals: 1, allowZero: hasGames }),
-                formatShotLine(stats, "FG", hasGames),
-                formatShotLine(stats, "3PT", hasGames),
-                formatShotLine(stats, "FT", hasGames),
+                fg.line,
+                fg.percent,
+                three.line,
+                three.percent,
+                ft.line,
+                ft.percent,
                 formatNumber(stats.TOV ?? stats.TO, { decimals: 1, allowZero: hasGames }),
                 formatNumber(stats.PF, { decimals: 1, allowZero: hasGames }),
             ];
@@ -273,6 +289,9 @@ function buildGameLogRows(entries) {
                     : entry.time
                         ? escapeHtml(entry.time)
                         : "—";
+            const fg = formatShotDisplay(stats, "FG", played);
+            const three = formatShotDisplay(stats, "3PT", played);
+            const ft = formatShotDisplay(stats, "FT", played);
             const cells = [
                 formatDisplayDate(entry.date) || "—",
                 opp,
@@ -284,9 +303,12 @@ function buildGameLogRows(entries) {
                 formatNumber(stats.AST, { decimals: 1, allowZero: played }),
                 formatNumber(stats.STL, { decimals: 1, allowZero: played }),
                 formatNumber(stats.BLK, { decimals: 1, allowZero: played }),
-                formatShotLine(stats, "FG", played),
-                formatShotLine(stats, "3PT", played),
-                formatShotLine(stats, "FT", played),
+                fg.line,
+                fg.percent,
+                three.line,
+                three.percent,
+                ft.line,
+                ft.percent,
                 formatNumber(stats.TOV ?? stats.TO, { decimals: 1, allowZero: played }),
                 formatNumber(stats.PF, { decimals: 1, allowZero: played }),
             ];

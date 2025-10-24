@@ -1,0 +1,162 @@
+.scoreboard-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.scoreboard-header input {
+    background: rgba(15, 23, 42, 0.7);
+    color: var(--text);
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    border-radius: 0.5rem;
+    padding: 0.45rem 0.6rem;
+}
+
+.scoreboard-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.score-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.85rem 1rem;
+    border-radius: 0.75rem;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.score-card:hover {
+    border-color: rgba(59, 130, 246, 0.5);
+    background: rgba(37, 99, 235, 0.15);
+}
+
+.score-card.active {
+    border-color: rgba(59, 130, 246, 0.5);
+    background: rgba(37, 99, 235, 0.15);
+}
+
+.score-card.disabled {
+    cursor: default;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.score-summary {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem;
+}
+
+.score-card .teams {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.score-card .team-row {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+}
+
+.score-card .meta {
+    text-align: right;
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+.score-card .status-final {
+    color: var(--success);
+    font-weight: 700;
+}
+
+.score-card .status-upcoming {
+    color: var(--muted);
+}
+
+.score-card .score-detail {
+    display: none;
+    margin-top: 0.75rem;
+    padding: 0.75rem 0.5rem 0.75rem;
+    border-top: 1px solid rgba(148, 163, 184, 0.15);
+    background: rgba(15, 23, 42, 0.6);
+    border-radius: 0.65rem;
+    overflow-x: auto;
+}
+
+.score-card .score-detail-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.score-card .boxscore-team {
+    flex: 1 1 360px;
+    min-width: 320px;
+}
+
+.score-card.active .score-detail {
+    display: block;
+}
+
+.score-card .boxscore-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.85rem;
+}
+
+.score-card .boxscore-teams {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.score-card .boxscore-team h3 {
+    margin: 0 0 0.5rem;
+    font-size: 0.95rem;
+}
+
+.score-card .boxscore-team table {
+    width: 100%;
+    min-width: 420px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 0.8rem;
+}
+
+.score-card .boxscore-team th,
+.score-card .boxscore-team td {
+    text-align: left;
+    padding: 0.45rem 0.5rem;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+}
+
+.score-card .boxscore-team td:first-child,
+.score-card .boxscore-team th:first-child {
+    width: 200px;
+    min-width: 200px;
+    white-space: nowrap;
+}
+
+.score-card .boxscore-team td:not(:first-child),
+.score-card .boxscore-team th:not(:first-child) {
+    text-align: right;
+}
+
+.score-card .boxscore-team tbody tr:last-child td {
+    border-bottom: none;
+}

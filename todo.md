@@ -11,25 +11,17 @@
 
 
 
--light mode
+-light mode. If light mode then the buttons must darken instead of lighten on hover
 
 --add fouls to the nba scoreboard
-
---add pycache to gitignore
-
-
--The box section height for NBA scores and Fantasy leaderboard are equal and the value is going the be the height of the taller box. Make the heights independent based on the size of the contents within. Attached is an image of how it looks right now.
 
 -add delete all leagues option.
 
 - Expand the simulation engine to support weekly head-to-head matchups, playoffs, waiver wire moves (no wire just free agents), and trade validation (player can force a trade between them and any other team). The first week starts when the first game is and a New week starts every Monday. You'll need to have standings somewhere on the dashboard as well as the matchup. Allow the player to view each. A matchup panel is comprised of the points for each team so far that week, along with the games played so far/games ahead, and also fantasy points/9cat contributions by each player on a team. Once you have weekly h2h matchups you can implement 9cat. 9cat matchups score based on how many categories won, so if I won my first matchup 6-3 then I would be in the standings as 6-3-0 WLD. Points matchups are winner take all, but for points leagues put points for and against in the standings too. 
 
-- Expand the simulation to support weekly head-to-head matchups and playoffs. The user can choose when playoffs starts and how many teams make it to playoffs. The fantasy league section will show all the matchups
+- Expand the simulation to support weekly head-to-head matchups and playoffs. The user can choose when playoffs starts and how many teams make it to playoffs. The fantasy league section will show all the matchups for the week instead of just the point totals for each team. so it will go from  Team 1 1000 points to Team 1: 100 points vs Team 2: 521 points. You shoud be able to navigate between all weeks in the matchup section. When it is a new week change the displayed matchup week. Put a fantasy standings panel under the matchups section. When you click on a matchup show the point totals for each player for that week
 
-- Make fantasy league teams act the same as nba scores
+-when generating team names use data/fantasy_team_names.csv instead of doing team 1, team 2 etc
 
-
-
--make player link buttons act like the nba score open on click thing
-
--make player names all on one line for the player buttons. you might have to expand the width of the button and player column for a scorecard.
+-dont allow user to create new league if league with name already exists
+-remove rename preset button, change save preset button to Save Preset As
