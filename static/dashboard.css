@@ -60,7 +60,8 @@ body.modal-open {
 }
 
 .league-list button {
-    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    background: rgba(37, 99, 235, 0.9);
+    border: 1px solid rgba(59, 130, 246, 0.7);
 }
 
 .top-bar {
@@ -93,20 +94,27 @@ body.modal-open {
 }
 
 button {
-    background: linear-gradient(135deg, var(--accent), var(--accent-light));
-    color: #fff;
-    border: none;
+    --btn-bg: #2563eb;
+    --btn-border: #3b82f6;
+    --btn-color: #fff;
+    --btn-bg-hover: #3b82f6;
+    --btn-border-hover: #60a5fa;
+    --btn-color-hover: var(--btn-color);
+    background: var(--btn-bg);
+    color: var(--btn-color);
+    border: 1px solid var(--btn-border);
     border-radius: 0.5rem;
     padding: 0.55rem 1rem;
     font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
 button:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 0.5rem 1.5rem rgba(37, 99, 235, 0.35);
+    background: var(--btn-bg-hover);
+    border-color: var(--btn-border-hover);
+    color: var(--btn-color-hover);
 }
 
 button:disabled {
@@ -115,23 +123,91 @@ button:disabled {
     box-shadow: none;
 }
 
+button[data-variant="success"] {
+    --btn-bg: #22c55e;
+    --btn-border: #22c55e;
+    --btn-color: #f8fafc;
+    --btn-bg-hover: #34d399;
+    --btn-border-hover: #34d399;
+    --btn-color-hover: #f8fafc;
+    background: var(--btn-bg);
+    border-color: var(--btn-border);
+    color: var(--btn-color);
+}
+
 button.player-link {
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(37, 99, 235, 0.35));
-    border: 1px solid rgba(96, 165, 250, 0.45);
-    color: #e2e8f0;
-    padding: 0.3rem 0.75rem;
-    border-radius: 999px;
+    --btn-bg: #2563eb;
+    --btn-border: #3b82f6;
+    --btn-color: #f8fafc;
+    --btn-bg-hover: #3b82f6;
+    --btn-border-hover: #60a5fa;
+    padding: 0.35rem 0.85rem;
+    border-radius: 0.65rem;
     font-size: 0.78rem;
     font-weight: 600;
     letter-spacing: 0.02em;
     text-transform: uppercase;
-    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
 }
 
-button.player-link:hover {
-    background: linear-gradient(135deg, rgba(59, 130, 246, 0.35), rgba(37, 99, 235, 0.55));
-    box-shadow: 0 0.4rem 1.2rem rgba(59, 130, 246, 0.35);
-    transform: translateY(-1px);
+/* Existing Leagues: Play (green) */
+.btn-league-play {
+    --btn-bg: #22c55e;
+    --btn-border: #22c55e;
+    --btn-color: #f8fafc;
+    --btn-bg-hover: #34d399;
+    --btn-border-hover: #34d399;
+    --btn-color-hover: #f8fafc;
+    background: var(--btn-bg);
+    border-color: var(--btn-border);
+    color: var(--btn-color);
+}
+
+.btn-league-play:hover {
+    background: var(--btn-bg-hover);
+    border-color: var(--btn-border-hover);
+    color: var(--btn-color-hover);
+}
+
+/* Ensure existing-league buttons override any base button styles */
+.league-actions .btn-league-play {
+    background: #22c55e;
+    border-color: #22c55e;
+    color: #f8fafc;
+}
+
+.league-actions .btn-league-play:hover {
+    background: #34d399;
+    border-color: #34d399;
+}
+
+/* Existing Leagues and Presets: Delete (red) */
+.btn-league-delete {
+    --btn-bg: #dc2626;
+    --btn-border: #dc2626;
+    --btn-color: #ffffff;
+    --btn-bg-hover: #ef4444;
+    --btn-border-hover: #ef4444;
+    --btn-color-hover: #ffffff;
+    background: var(--btn-bg);
+    border-color: var(--btn-border);
+    color: var(--btn-color);
+}
+
+.btn-league-delete:hover {
+    background: var(--btn-bg-hover);
+    border-color: var(--btn-border-hover);
+    color: var(--btn-color-hover);
+}
+
+.league-actions .btn-league-delete {
+    background: #dc2626;
+    border-color: #dc2626;
+    color: #ffffff;
+}
+
+.league-actions .btn-league-delete:hover {
+    background: #ef4444;
+    border-color: #ef4444;
 }
 
 button.player-link:focus-visible {
@@ -203,8 +279,8 @@ button.player-link:focus-visible {
 }
 
 .score-card.active {
-    border-color: rgba(59, 130, 246, 0.85);
-    background: rgba(37, 99, 235, 0.25);
+    border-color: rgba(59, 130, 246, 0.5);
+    background: rgba(37, 99, 235, 0.15);
 }
 
 .score-card.disabled {
@@ -488,10 +564,6 @@ textarea {
     margin-top: 1rem;
 }
 
-.setup-actions button:last-child {
-    background: linear-gradient(135deg, var(--success), #38bdf8);
-}
-
 .team-detail .did-not-play td {
     color: var(--muted);
     font-style: italic;
@@ -523,7 +595,6 @@ textarea {
 }
 
 .league-list button {
-    background: linear-gradient(135deg, var(--accent), var(--accent-light));
     padding: 0.4rem 0.9rem;
 }
 
@@ -533,8 +604,16 @@ textarea {
     margin: 0.75rem 0;
 }
 
-button.danger {
-    background: linear-gradient(135deg, #dc2626, #f97316);
+button[data-variant="danger"] {
+    --btn-bg: #dc2626;
+    --btn-border: #f87171;
+    --btn-color: #fff;
+    --btn-bg-hover: #f43f5e;
+    --btn-border-hover: #fda4af;
+    --btn-color-hover: #fff;
+    background: var(--btn-bg);
+    border-color: var(--btn-border);
+    color: var(--btn-color);
 }
 
 .player-modal {
@@ -671,40 +750,32 @@ button.danger {
     min-height: 0;
 }
 
+
+
 .player-card__tabs {
     display: inline-flex;
     gap: 0.75rem;
-    background: rgba(11, 20, 36, 0.65);
-    border: 1px solid rgba(59, 130, 246, 0.2);
-    border-radius: 999px;
-    padding: 0.35rem 0.5rem;
     width: fit-content;
 }
 
 .player-card__tab {
-    background: rgba(30, 41, 59, 0.85);
-    border: 1px solid rgba(59, 130, 246, 0.35);
-    color: rgba(226, 232, 240, 0.9);
+    background: #2563eb;
+    border: 1px solid #3b82f6;
+    color: #f8fafc;
     font-size: 0.82rem;
     letter-spacing: 0.04em;
     font-weight: 600;
     text-transform: uppercase;
     padding: 0.45rem 1.1rem;
-    border-radius: 999px;
+    border-radius: 0.65rem;
     cursor: pointer;
-    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
-.player-card__tab:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 0.45rem 1.2rem rgba(37, 99, 235, 0.35);
-}
-
+.player-card__tab:hover,
 .player-card__tab.active {
-    background: rgba(37, 99, 235, 0.9);
-    color: #f8fafc;
-    border-color: rgba(59, 130, 246, 0.9);
-    box-shadow: 0 0.6rem 1.5rem rgba(37, 99, 235, 0.35);
+    background: #3b82f6;
+    border-color: #60a5fa;
 }
 
 .player-card__panels {
@@ -883,20 +954,20 @@ button.danger {
 }
 
 .player-card__action {
-    background: rgba(37, 99, 235, 0.9);
-    border: 1px solid rgba(59, 130, 246, 0.6);
+    background: #2563eb;
+    border: 1px solid #3b82f6;
     padding: 0.45rem 1.45rem;
     border-radius: 0.65rem;
     font-size: 0.82rem;
     letter-spacing: 0.04em;
     color: #f8fafc;
     cursor: pointer;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
 .player-card__action:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 0.6rem 1.6rem rgba(37, 99, 235, 0.35);
+    background: #3b82f6;
+    border-color: #60a5fa;
 }
 
 .player-card__loading {

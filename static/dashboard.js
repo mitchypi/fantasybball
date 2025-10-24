@@ -393,7 +393,7 @@ function renderPlayerProfile(profile) {
             <div class="player-card__body">
                 <nav class="player-card__tabs" role="tablist" aria-label="Player detail tabs">
                     <button type="button" class="player-card__tab active" role="tab" id="player-tab-stats" data-tab="stats" aria-controls="player-panel-stats" aria-selected="true">
-                        Stats Snapshot
+                        Stats
                     </button>
                     <button type="button" class="player-card__tab" role="tab" id="player-tab-log" data-tab="log" aria-controls="player-panel-log" aria-selected="false">
                         Game Log
@@ -401,7 +401,7 @@ function renderPlayerProfile(profile) {
                 </nav>
                 <div class="player-card__panels">
                     <section class="player-card__panel player-card__section is-active" role="tabpanel" id="player-panel-stats" data-panel="stats" aria-labelledby="player-tab-stats" aria-hidden="false">
-                        <h3>Stats Snapshot</h3>
+                        <h3>Stats</h3>
                         ${summaryTable}
                     </section>
                     <section class="player-card__panel player-card__section" role="tabpanel" id="player-panel-log" data-panel="log" aria-labelledby="player-tab-log" aria-hidden="true" hidden>
@@ -884,12 +884,13 @@ function renderLeagueList(leagues) {
         const openButton = document.createElement("button");
         openButton.type = "button";
         openButton.textContent = "Play";
+        openButton.classList.add("btn-league-play");
         openButton.addEventListener("click", () => enterLeague(league.id));
 
         const deleteButton = document.createElement("button");
         deleteButton.type = "button";
         deleteButton.textContent = "Delete";
-        deleteButton.classList.add("danger");
+        deleteButton.classList.add("btn-league-delete");
         deleteButton.addEventListener("click", async () => {
             const confirmed = confirm(`Delete league "${league.league_name}"? This cannot be undone.`);
             if (!confirmed) {
