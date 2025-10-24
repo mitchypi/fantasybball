@@ -323,3 +323,10 @@ def reset_league_state(state: LeagueState, game_logs: Optional[pd.DataFrame] = N
     state.rosters = _auto_draft_teams(player_stats, state.team_names, state.roster_size, scoring.weights)
     save_league_state(state)
     return state
+
+
+def delete_league_state(league_id: str) -> None:
+    path = league_path(league_id)
+    if not path.exists():
+        raise FileNotFoundError(f"Unknown league id '{league_id}'")
+    path.unlink()

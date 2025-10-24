@@ -8,6 +8,9 @@ const fantasyResultsEl = document.getElementById("fantasy-results");
 const scoringSelect = document.getElementById("scoring-select");
 const weightsEditor = document.getElementById("weights-editor");
 const scoringForm = document.getElementById("scoring-form");
+const leagueNameInput = document.getElementById("league-name");
+const renameProfileBtn = document.getElementById("rename-profile");
+const deleteProfileBtn = document.getElementById("delete-profile");
 const teamCountInput = document.getElementById("team-count");
 const rosterSizeInput = document.getElementById("roster-size");
 const teamNameInput = document.getElementById("team-name");
@@ -61,7 +64,19 @@ async function fetchJSON(url, options = {}) {
         const detail = await response.json().catch(() => ({}));
         throw new Error(detail.detail || response.statusText);
     }
-    return response.json();
+    if (response.status === 204) {
+        return {};
+    }
+    const text = await response.text();
+    if (!text) {
+        return {};
+    }
+    try {
+        return JSON.parse(text);
+    } catch (error) {
+        console.warn("Non-JSON response received from", url);
+        return {};
+    }
 }
 
 function showToast(message, type = "success") {
@@ -411,13 +426,41 @@ function renderLeagueList(leagues) {
             `${league.team_count} teams`,
             league.latest_completed_date ? `Last: ${league.latest_completed_date}` : "No games yet",
             league.scoring_profile,
-        ].join(" � " );
+        ].join(" | ");
         info.innerHTML = `<strong>${league.league_name}</strong><span>${details}</span>`;
+        const actions = document.createElement("div");
+        actions.className = "league-actions";
+
         const openButton = document.createElement("button");
         openButton.type = "button";
         openButton.textContent = "Play";
         openButton.addEventListener("click", () => enterLeague(league.id));
-        li.append(info, openButton);
+
+        const deleteButton = document.createElement("button");
+        deleteButton.type = "button";
+        deleteButton.textContent = "Delete";
+        deleteButton.classList.add("danger");
+        deleteButton.addEventListener("click", async () => {
+            const confirmed = confirm(`Delete league "${league.league_name}"? This cannot be undone.`);
+            if (!confirmed) {
+                return;
+            }
+            const original = deleteButton.textContent;
+            deleteButton.disabled = true;
+            deleteButton.textContent = "Deleting...";
+            try {
+                await fetchJSON(`/leagues/${league.id}`, { method: "DELETE" });
+                showToast("League deleted.", "success");
+                await loadLeaguesList();
+            } catch (error) {
+                deleteButton.disabled = false;
+                deleteButton.textContent = original;
+                showToast(error.message || "Unable to delete league.", "error");
+            }
+        });
+
+        actions.append(openButton, deleteButton);
+        li.append(info, actions);
         leagueListEl.appendChild(li);
     });
 }
@@ -479,22 +522,104 @@ async function loadScoringProfiles() {
     const allKeys = new Set(Object.values(scoringProfiles).flatMap((profile) => Object.keys(profile.weights || {})));
     // ensure we include stat order even if defaults missing yet
     availableStats = STAT_ORDER.map((item) => item.key).filter((key) => allKeys.has(key) || STAT_LABELS[key]);
+    const previousKey = activeProfileKey;
     scoringSelect.innerHTML = "";
+    let fallbackKey = null;
     Object.entries(data.profiles).forEach(([key, profile]) => {
         const option = document.createElement("option");
         option.value = key;
         option.textContent = profile.name;
-        if (data.default === key) {
+        if (!fallbackKey) {
+            fallbackKey = key;
+        }
+        if (previousKey && key === previousKey) {
             option.selected = true;
-            activeProfileKey = key;
         }
         scoringSelect.appendChild(option);
     });
-    const activeKey = activeProfileKey || scoringSelect.value;
+    if (!scoringSelect.value) {
+        if (previousKey && scoringProfiles[previousKey]) {
+            scoringSelect.value = previousKey;
+        } else if (data.default && scoringProfiles[data.default]) {
+            scoringSelect.value = data.default;
+        } else if (fallbackKey) {
+            scoringSelect.value = fallbackKey;
+        }
+    }
+    activeProfileKey = scoringSelect.value || previousKey || fallbackKey || "";
+    const activeKey = activeProfileKey;
     if (activeKey && scoringProfiles[activeKey]) {
         populateWeightsEditor(scoringProfiles[activeKey].weights, availableStats);
-        document.getElementById("scoring-key").value = `${activeKey}_copy`;
-        document.getElementById("scoring-name").value = `${scoringProfiles[activeKey].name} (Custom)`;
+    }
+    updateProfileActionsState();
+}
+
+function updateProfileActionsState() {
+    const totalProfiles = Object.keys(scoringProfiles).length;
+    const hasActive = Boolean(activeProfileKey && scoringProfiles[activeProfileKey]);
+    if (renameProfileBtn) {
+        renameProfileBtn.disabled = !hasActive;
+    }
+    if (deleteProfileBtn) {
+        deleteProfileBtn.disabled = !hasActive || totalProfiles <= 1;
+    }
+}
+
+async function renameScoringProfilePrompt() {
+    if (!activeProfileKey || !scoringProfiles[activeProfileKey]) {
+        showToast("Select a scoring profile first.", "error");
+        return;
+    }
+    const current = scoringProfiles[activeProfileKey];
+    const response = window.prompt("Rename scoring profile:", current.name);
+    if (response === null) {
+        return;
+    }
+    const trimmed = response.trim();
+    if (!trimmed) {
+        showToast("Profile name cannot be empty.", "error");
+        return;
+    }
+    if (trimmed === current.name) {
+        return;
+    }
+    try {
+        await fetchJSON(`/settings/scoring/${activeProfileKey}`, {
+            method: "PATCH",
+            body: JSON.stringify({ name: trimmed }),
+        });
+        showToast("Scoring profile renamed.", "success");
+        await loadScoringProfiles();
+    } catch (error) {
+        showToast(error.message || "Unable to rename profile.", "error");
+    }
+}
+
+async function deleteScoringProfileAction() {
+    if (!activeProfileKey || !scoringProfiles[activeProfileKey]) {
+        showToast("Select a scoring profile first.", "error");
+        return;
+    }
+    if (Object.keys(scoringProfiles).length <= 1) {
+        showToast("At least one scoring profile must remain.", "error");
+        return;
+    }
+    const profile = scoringProfiles[activeProfileKey];
+    const confirmed = window.confirm(`Delete scoring profile "${profile.name}"?`);
+    if (!confirmed) {
+        return;
+    }
+    if (renameProfileBtn) renameProfileBtn.disabled = true;
+    if (deleteProfileBtn) deleteProfileBtn.disabled = true;
+    try {
+        await fetchJSON(`/settings/scoring/${activeProfileKey}`, { method: "DELETE" });
+        showToast("Scoring profile deleted.", "success");
+        activeProfileKey = "";
+        await loadScoringProfiles();
+    } catch (error) {
+        showToast(error.message || "Unable to delete profile.", "error");
+    } finally {
+        updateProfileActionsState();
     }
 }
 
@@ -554,6 +679,9 @@ async function createLeague() {
     const rosterSize = Math.max(1, Number(rosterSizeInput.value) || 13);
     const userTeamName = teamNameInput.value.trim();
     const scoringProfileKey = scoringSelect.value || activeProfileKey;
+    const leagueName = leagueNameInput.value.trim();
+    const profileFallbackName =
+        (scoringProfileKey && scoringProfiles[scoringProfileKey] && scoringProfiles[scoringProfileKey].name) || "";
 
     const teamNames = [];
     const used = new Set();
@@ -574,7 +702,7 @@ async function createLeague() {
     createLeagueBtn.textContent = "Creating...";
     try {
         const payload = {
-            league_name: document.getElementById("scoring-name").value.trim() || "New League",
+            league_name: leagueName || profileFallbackName || "New League",
             scoring_profile: scoringProfileKey || undefined,
             team_count: teamCount,
             roster_size: rosterSize,
@@ -634,8 +762,27 @@ async function resetLeague() {
 async function saveScoringProfile(event) {
     event.preventDefault();
     const formData = new FormData(scoringForm);
-    const key = formData.get("key");
-    const name = formData.get("name");
+    const sourceProfileKey = scoringSelect.value || activeProfileKey;
+    const sourceProfile =
+        (sourceProfileKey && scoringProfiles[sourceProfileKey]) || null;
+    const defaultSuggestion = sourceProfile ? `${sourceProfile.name} Copy` : "Custom Points";
+    const rawNameInput = window.prompt("Name this scoring profile:", defaultSuggestion);
+    if (rawNameInput === null) {
+        return;
+    }
+    const rawName = rawNameInput.trim();
+    if (!rawName) {
+        showToast("Profile name cannot be empty.", "error");
+        return;
+    }
+    let key = rawName
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "_")
+        .replace(/^_+|_+$/g, "");
+    if (!key) {
+        key = `profile_${Date.now()}`;
+    }
+    const name = rawName;
     const makeDefault = !!formData.get("make_default");
     const weights = {};
     weightsEditor.querySelectorAll("input[data-stat]").forEach((input) => {
@@ -684,9 +831,16 @@ scoringSelect.addEventListener("change", () => {
     if (selected) {
         populateWeightsEditor(selected.weights, availableStats);
     }
+    updateProfileActionsState();
 });
 scoringForm.addEventListener("submit", saveScoringProfile);
 createLeagueBtn.addEventListener("click", createLeague);
+if (renameProfileBtn) {
+    renameProfileBtn.addEventListener("click", renameScoringProfilePrompt);
+}
+if (deleteProfileBtn) {
+    deleteProfileBtn.addEventListener("click", deleteScoringProfileAction);
+}
 
 // Bootstrap
 (async function init() {

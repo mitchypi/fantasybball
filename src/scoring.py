@@ -108,3 +108,30 @@ load_custom_scoring_profiles()
 for _profile_key, _profile in list(settings.scoring_profiles.items()):
     merged = _merge_weights_with_defaults({}, _profile.weights)
     settings.scoring_profiles[_profile_key] = ScoringProfile(name=_profile.name, weights=merged)
+
+
+def delete_scoring_profile(key: str) -> None:
+    normalized = key.strip()
+    if normalized not in settings.scoring_profiles:
+        raise KeyError(f"Unknown scoring profile '{key}'")
+    if len(settings.scoring_profiles) <= 1:
+        raise ValueError("At least one scoring profile must remain.")
+    settings.scoring_profiles.pop(normalized)
+    if settings.default_scoring_profile == normalized:
+        fallback = "points_league" if "points_league" in settings.scoring_profiles else next(iter(settings.scoring_profiles))
+        settings.default_scoring_profile = fallback
+    persist_scoring_profiles()
+
+
+def rename_scoring_profile(key: str, new_name: str) -> ScoringProfile:
+    normalized = key.strip()
+    if normalized not in settings.scoring_profiles:
+        raise KeyError(f"Unknown scoring profile '{key}'")
+    name = new_name.strip()
+    if not name:
+        raise ValueError("Profile name cannot be empty.")
+    profile = settings.scoring_profiles[normalized]
+    updated = ScoringProfile(name=name, weights=dict(profile.weights))
+    settings.scoring_profiles[normalized] = updated
+    persist_scoring_profiles()
+    return updated

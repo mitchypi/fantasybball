@@ -5,7 +5,7 @@ import uuid
 from typing import Any, Dict, Optional
 
 import pandas as pd
-from fastapi import Body, FastAPI, HTTPException, Query
+from fastapi import Body, FastAPI, HTTPException, Query, Response
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -19,6 +19,7 @@ from ..data_loader import (
     player_season_averages,
 )
 from ..league import (
+    delete_league_state,
     initialize_league,
     list_leagues,
     load_league_state,
@@ -27,7 +28,7 @@ from ..league import (
     simulate_day,
 )
 from ..schedule import daily_scoreboard, season_dates
-from ..scoring import update_scoring_profile
+from ..scoring import delete_scoring_profile, rename_scoring_profile, update_scoring_profile
 from ..simulator import create_demo_teams, simulate_head_to_head
 
 app = FastAPI(
@@ -247,6 +248,15 @@ def create_league_endpoint(payload: Dict[str, Any]) -> Dict[str, Any]:
     return {"league_id": state.league_id, "state": state.to_dict()}
 
 
+@app.delete("/leagues/{league_id}", status_code=204)
+def delete_league_endpoint(league_id: str) -> Response:
+    try:
+        delete_league_state(league_id)
+    except FileNotFoundError as err:
+        raise HTTPException(status_code=404, detail=str(err)) from err
+    return Response(status_code=204)
+
+
 @app.get("/leagues/{league_id}")
 def get_league_state_endpoint(league_id: str) -> Dict[str, Any]:
     state = load_league_state(league_id)
@@ -404,6 +414,36 @@ def create_or_update_scoring_profile(
         "weights": profile.weights,
         "default": make_default or settings.default_scoring_profile == key,
     }
+
+
+@app.patch("/settings/scoring/{key}")
+def rename_scoring_profile_endpoint(key: str, payload: Dict[str, Any]) -> Dict[str, Any]:
+    new_name = payload.get("name")
+    if not new_name or not str(new_name).strip():
+        raise HTTPException(status_code=400, detail="Missing or empty 'name' in request body.")
+    try:
+        profile = rename_scoring_profile(key, str(new_name).strip())
+    except KeyError as err:
+        raise HTTPException(status_code=404, detail=str(err)) from err
+    except ValueError as err:
+        raise HTTPException(status_code=400, detail=str(err)) from err
+    return {
+        "key": key,
+        "name": profile.name,
+        "weights": profile.weights,
+        "default": settings.default_scoring_profile == key,
+    }
+
+
+@app.delete("/settings/scoring/{key}", status_code=204)
+def delete_scoring_profile_endpoint(key: str) -> Response:
+    try:
+        delete_scoring_profile(key)
+    except KeyError as err:
+        raise HTTPException(status_code=404, detail=str(err)) from err
+    except ValueError as err:
+        raise HTTPException(status_code=400, detail=str(err)) from err
+    return Response(status_code=204)
 
 
 @app.get("/dashboard", response_class=HTMLResponse)
