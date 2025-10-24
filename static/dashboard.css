@@ -682,9 +682,9 @@ button.danger {
 }
 
 .player-card__tab {
-    background: transparent;
-    border: none;
-    color: rgba(148, 163, 184, 0.75);
+    background: rgba(30, 41, 59, 0.85);
+    border: 1px solid rgba(59, 130, 246, 0.35);
+    color: rgba(226, 232, 240, 0.9);
     font-size: 0.82rem;
     letter-spacing: 0.04em;
     font-weight: 600;
@@ -692,16 +692,18 @@ button.danger {
     padding: 0.45rem 1.1rem;
     border-radius: 999px;
     cursor: pointer;
-    transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
 }
 
 .player-card__tab:hover {
-    color: #e2e8f0;
+    transform: translateY(-1px);
+    box-shadow: 0 0.45rem 1.2rem rgba(37, 99, 235, 0.35);
 }
 
 .player-card__tab.active {
-    background: linear-gradient(135deg, rgba(96, 165, 250, 0.75), rgba(37, 99, 235, 0.9));
+    background: rgba(37, 99, 235, 0.9);
     color: #f8fafc;
+    border-color: rgba(59, 130, 246, 0.9);
     box-shadow: 0 0.6rem 1.5rem rgba(37, 99, 235, 0.35);
 }
 
@@ -736,6 +738,10 @@ button.danger {
     display: none;
     flex-direction: column;
     gap: 0.75rem;
+}
+
+.player-card__panel[hidden] {
+    display: none !important;
 }
 
 .player-card__panel.is-active {
@@ -877,11 +883,20 @@ button.danger {
 }
 
 .player-card__action {
-    background: linear-gradient(135deg, rgba(96, 165, 250, 0.85), rgba(37, 99, 235, 0.95));
+    background: rgba(37, 99, 235, 0.9);
+    border: 1px solid rgba(59, 130, 246, 0.6);
     padding: 0.45rem 1.45rem;
-    border-radius: 999px;
+    border-radius: 0.65rem;
     font-size: 0.82rem;
     letter-spacing: 0.04em;
+    color: #f8fafc;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.player-card__action:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0.6rem 1.6rem rgba(37, 99, 235, 0.35);
 }
 
 .player-card__loading {

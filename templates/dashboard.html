@@ -30,7 +30,7 @@
 
             <h3>Create a New League</h3>
             <form id="scoring-form">
-                <label for="scoring-select">Scoring Profile</label>
+                <label for="scoring-select">Scoring Preset</label>
                 <select id="scoring-select"></select>
 
                 <div class="weights-editor" id="weights-editor"></div>
@@ -41,8 +41,9 @@
                 </label>
 
                 <div class="profile-actions">
-                    <button type="button" id="rename-profile">Rename Profile</button>
-                    <button type="button" id="delete-profile" class="danger">Delete Profile</button>
+                    <button type="button" id="rename-profile">Rename Preset</button>
+                    <button type="submit" id="save-profile">Save Preset</button>
+                    <button type="button" id="delete-profile" class="danger">Delete Preset</button>
                 </div>
 
                 <fieldset class="league-settings">
@@ -61,7 +62,6 @@
                 </fieldset>
 
                 <div class="setup-actions">
-                    <button type="submit">Save Profile</button>
                     <button type="button" id="create-league">Create League</button>
                 </div>
             </form>

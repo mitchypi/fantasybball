@@ -8,6 +8,7 @@ const fantasyResultsEl = document.getElementById("fantasy-results");
 const scoringSelect = document.getElementById("scoring-select");
 const weightsEditor = document.getElementById("weights-editor");
 const scoringForm = document.getElementById("scoring-form");
+const saveProfileBtn = document.getElementById("save-profile");
 const leagueNameInput = document.getElementById("league-name");
 const renameProfileBtn = document.getElementById("rename-profile");
 const deleteProfileBtn = document.getElementById("delete-profile");
@@ -33,6 +34,7 @@ let leagueInitialized = false;
 let currentLeagueId = null;
 let leaguesCache = [];
 let lastFocusedElement = null;
+let currentLeagueState = null;
 const STAT_ORDER = [
     { key: "PTS", label: "PTS" },
     { key: "OREB", label: "OREB" },
@@ -307,7 +309,7 @@ function renderPlayerProfile(profile) {
     const teamLine = player.team_name
         ? `${escapeHtml(player.team_name)}${player.team_abbreviation ? ` (${escapeHtml(player.team_abbreviation)})` : ""}`
         : escapeHtml(player.team_abbreviation || "");
-    const scoringLine = player.scoring_profile ? `Scoring profile: ${escapeHtml(player.scoring_profile)}` : "";
+    const scoringLine = player.scoring_profile ? `Scoring preset: ${escapeHtml(player.scoring_profile)}` : "";
     const fantasyAverage =
         typeof player.season_fantasy_avg === "number" && Number.isFinite(player.season_fantasy_avg)
             ? `Season avg: ${player.season_fantasy_avg.toFixed(1)} fpts`
@@ -325,7 +327,7 @@ function renderPlayerProfile(profile) {
         : `<div class="player-card__avatar-fallback">${escapeHtml(initials)}</div>`;
     const metaLines = [
         `${positions} &ndash; ${teamLine || "—"}`,
-        `Team name: ${fantasyTeam}`,
+        `Team: ${fantasyTeam}`,
     ];
     if (scoringLine) {
         metaLines.push(scoringLine);
@@ -398,11 +400,11 @@ function renderPlayerProfile(profile) {
                     </button>
                 </nav>
                 <div class="player-card__panels">
-                    <section class="player-card__panel player-card__section is-active" role="tabpanel" id="player-panel-stats" data-panel="stats" aria-labelledby="player-tab-stats">
+                    <section class="player-card__panel player-card__section is-active" role="tabpanel" id="player-panel-stats" data-panel="stats" aria-labelledby="player-tab-stats" aria-hidden="false">
                         <h3>Stats Snapshot</h3>
                         ${summaryTable}
                     </section>
-                    <section class="player-card__panel player-card__section" role="tabpanel" id="player-panel-log" data-panel="log" aria-labelledby="player-tab-log" aria-hidden="true">
+                    <section class="player-card__panel player-card__section" role="tabpanel" id="player-panel-log" data-panel="log" aria-labelledby="player-tab-log" aria-hidden="true" hidden>
                         <div class="player-card__section-header">
                             <h3>Game Log</h3>
                             ${throughLabel}
@@ -773,25 +775,60 @@ function renderFantasyResults(result) {
 }
 
 function renderLeagueState(state) {
+    currentLeagueState = state || null;
     if (!state) {
         leagueDateEl.textContent = "—";
         leagueScoringEl.textContent = "—";
         fantasyResultsEl.innerHTML = "<p>Create a league to begin your season replay.</p>";
         simulateBtn.disabled = true;
+        simulateBtn.textContent = "Play today's games";
+        simulateBtn.dataset.action = "play";
         return;
     }
 
-    const nextDate = state.current_date || "Season Complete";
-    const latestCompleted = state.latest_completed_date ? ` (Last: ${state.latest_completed_date})` : "";
-    leagueDateEl.textContent = `${nextDate}${latestCompleted}`;
+    const currentDate = state.current_date;
+    const awaiting = Boolean(state.awaiting_simulation && currentDate);
+    let dateLabel = "Season complete";
+    if (currentDate) {
+        const status = awaiting ? " (awaiting simulation)" : " (completed)";
+        dateLabel = `${currentDate}${status}`;
+        simulateBtn.disabled = false;
+        simulateBtn.textContent = awaiting ? "Play today's games" : "Go to next day";
+        simulateBtn.dataset.action = awaiting ? "play" : "advance";
+    } else {
+        const last = state.latest_completed_date ? ` (Last: ${state.latest_completed_date})` : "";
+        dateLabel = `Season complete${last}`;
+        simulateBtn.disabled = true;
+        simulateBtn.textContent = "Season complete";
+        simulateBtn.dataset.action = "complete";
+    }
+    leagueDateEl.textContent = dateLabel;
     leagueScoringEl.textContent = state.scoring_profile;
-    simulateBtn.disabled = !state.current_date;
+    if (!currentDate) {
+        simulateBtn.disabled = true;
+    }
 
-    const latest = state.history && state.history.length ? state.history[state.history.length - 1] : null;
-    renderFantasyResults(latest);
+    let fantasyRecord = null;
+    if (currentDate && !awaiting && Array.isArray(state.history)) {
+        fantasyRecord = state.history.find((record) => record && record.date === currentDate) || null;
+    }
+    if (!fantasyRecord && Array.isArray(state.history) && state.history.length) {
+        const last = state.latest_completed_date;
+        if (last) {
+            fantasyRecord = state.history.find((record) => record && record.date === last) || null;
+        }
+        if (!fantasyRecord) {
+            fantasyRecord = state.history[state.history.length - 1] || null;
+        }
+    }
+    if (awaiting) {
+        fantasyRecord = null;
+    }
+    renderFantasyResults(fantasyRecord);
 }
 
 function showSetupView() {
+    currentLeagueState = null;
     setupPanel.classList.remove("hidden");
     leaguePanels.classList.remove("active");
     renderLeagueList(leaguesCache);
@@ -980,17 +1017,17 @@ function updateProfileActionsState() {
 
 async function renameScoringProfilePrompt() {
     if (!activeProfileKey || !scoringProfiles[activeProfileKey]) {
-        showToast("Select a scoring profile first.", "error");
+        showToast("Select a scoring preset first.", "error");
         return;
     }
     const current = scoringProfiles[activeProfileKey];
-    const response = window.prompt("Rename scoring profile:", current.name);
+    const response = window.prompt("Rename scoring preset:", current.name);
     if (response === null) {
         return;
     }
     const trimmed = response.trim();
     if (!trimmed) {
-        showToast("Profile name cannot be empty.", "error");
+        showToast("Preset name cannot be empty.", "error");
         return;
     }
     if (trimmed === current.name) {
@@ -1001,24 +1038,24 @@ async function renameScoringProfilePrompt() {
             method: "PATCH",
             body: JSON.stringify({ name: trimmed }),
         });
-        showToast("Scoring profile renamed.", "success");
+        showToast("Scoring preset renamed.", "success");
         await loadScoringProfiles();
     } catch (error) {
-        showToast(error.message || "Unable to rename profile.", "error");
+        showToast(error.message || "Unable to rename preset.", "error");
     }
 }
 
 async function deleteScoringProfileAction() {
     if (!activeProfileKey || !scoringProfiles[activeProfileKey]) {
-        showToast("Select a scoring profile first.", "error");
+        showToast("Select a scoring preset first.", "error");
         return;
     }
     if (Object.keys(scoringProfiles).length <= 1) {
-        showToast("At least one scoring profile must remain.", "error");
+        showToast("At least one scoring preset must remain.", "error");
         return;
     }
     const profile = scoringProfiles[activeProfileKey];
-    const confirmed = window.confirm(`Delete scoring profile "${profile.name}"?`);
+    const confirmed = window.confirm(`Delete scoring preset "${profile.name}"?`);
     if (!confirmed) {
         return;
     }
@@ -1026,11 +1063,11 @@ async function deleteScoringProfileAction() {
     if (deleteProfileBtn) deleteProfileBtn.disabled = true;
     try {
         await fetchJSON(`/settings/scoring/${activeProfileKey}`, { method: "DELETE" });
-        showToast("Scoring profile deleted.", "success");
+        showToast("Scoring preset deleted.", "success");
         activeProfileKey = "";
         await loadScoringProfiles();
     } catch (error) {
-        showToast(error.message || "Unable to delete profile.", "error");
+        showToast(error.message || "Unable to delete preset.", "error");
     } finally {
         updateProfileActionsState();
     }
@@ -1072,9 +1109,10 @@ async function loadLeagueState(leagueId, options = {}) {
         currentLeagueId = leagueId;
         navMenuBtn.classList.remove("hidden");
         renderLeagueState(state);
-        if (state.latest_completed_date) {
-            scoreboardDateInput.value = state.latest_completed_date;
-            await loadScoreboard(state.latest_completed_date);
+        const scoreboardTarget = state.current_date || state.latest_completed_date || "";
+        if (scoreboardTarget) {
+            scoreboardDateInput.value = scoreboardTarget;
+            await loadScoreboard(scoreboardTarget);
         } else {
             scoreboardDateInput.value = "";
             await loadScoreboard(null);
@@ -1144,13 +1182,36 @@ async function simulateDay() {
         showToast("Select a league first.", "error");
         return;
     }
+    if (!currentLeagueState) {
+        showToast("League state not ready yet.", "error");
+        return;
+    }
+    if (!currentLeagueState.current_date) {
+        showToast("Season complete.", "error");
+        return;
+    }
+    const awaiting = Boolean(currentLeagueState.awaiting_simulation);
+    const endpoint = awaiting ? `/leagues/${currentLeagueId}/simulate` : `/leagues/${currentLeagueId}/advance`;
+    const requestOptions = awaiting
+        ? { method: "POST", body: JSON.stringify({}) }
+        : { method: "POST" };
     try {
-        const result = await fetchJSON(`/leagues/${currentLeagueId}/simulate`, { method: "POST", body: JSON.stringify({}) });
-        showToast(`Simulated ${result.date}`, "success");
+        const response = await fetchJSON(endpoint, requestOptions);
+        let message;
+        if (awaiting) {
+            message = response && response.date ? `Played ${response.date}` : "Today's games simulated.";
+        } else {
+            if (response && Object.prototype.hasOwnProperty.call(response, "current_date")) {
+                message = response.current_date ? `Advanced to ${response.current_date}` : "Season complete.";
+            } else {
+                message = "Advanced to next day.";
+            }
+        }
+        showToast(message, "success");
         await loadLeagueState(currentLeagueId, { suppressToast: true });
         await loadLeaguesList();
     } catch (error) {
-        showToast(error.message, "error");
+        showToast(error.message || "Unable to update league day.", "error");
     }
 }
 
@@ -1179,13 +1240,13 @@ async function saveScoringProfile(event) {
     const sourceProfile =
         (sourceProfileKey && scoringProfiles[sourceProfileKey]) || null;
     const defaultSuggestion = sourceProfile ? `${sourceProfile.name} Copy` : "Custom Points";
-    const rawNameInput = window.prompt("Name this scoring profile:", defaultSuggestion);
+    const rawNameInput = window.prompt("Name this scoring preset:", defaultSuggestion);
     if (rawNameInput === null) {
         return;
     }
     const rawName = rawNameInput.trim();
     if (!rawName) {
-        showToast("Profile name cannot be empty.", "error");
+        showToast("Preset name cannot be empty.", "error");
         return;
     }
     let key = rawName
@@ -1217,7 +1278,7 @@ async function saveScoringProfile(event) {
             }),
         });
         activeProfileKey = key;
-        showToast("Scoring profile saved.", "success");
+        showToast("Scoring preset saved.", "success");
         await loadScoringProfiles();
         if (currentLeagueId) {
             await loadLeagueState(currentLeagueId, { suppressToast: true });
@@ -1303,6 +1364,11 @@ function initPlayerCardTabs() {
             const isActive = panel.dataset.panel === target;
             panel.classList.toggle("is-active", isActive);
             panel.setAttribute("aria-hidden", String(!isActive));
+            if (isActive) {
+                panel.removeAttribute("hidden");
+            } else if (!panel.hasAttribute("hidden")) {
+                panel.setAttribute("hidden", "");
+            }
         });
     };
     tabButtons.forEach((btn) => {

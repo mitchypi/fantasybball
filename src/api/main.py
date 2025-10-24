@@ -20,6 +20,7 @@ from ..data_loader import (
 )
 from ..league import (
     delete_league_state,
+    advance_league_day,
     initialize_league,
     list_leagues,
     load_league_state,
@@ -308,15 +309,34 @@ def list_games(
     if date_query:
         target_date = datetime.fromisoformat(date_query).date()
     else:
-        if state.history:
+        current = state.current_date
+        if current is not None:
+            target_date = current
+        elif state.history:
             target_date = datetime.fromisoformat(state.history[-1]["date"]).date()
         else:
             schedule_df = _ensure_schedule()
             target_date = season_dates(schedule_df=schedule_df)[0]
 
     history_entry = _find_history_entry(state, target_date)
-    games = history_entry.get("nba_scoreboard", []) if history_entry else []
-    return {"date": target_date.isoformat(), "games": games}
+    if history_entry:
+        games = history_entry.get("nba_scoreboard", []) or []
+        for game in games:
+            game.setdefault("simulated", True)
+    else:
+        schedule_df = _ensure_schedule()
+        games = []
+        for game in daily_scoreboard(target_date, schedule_df=schedule_df):
+            entry = game.to_dict()
+            entry["simulated"] = False
+            games.append(entry)
+
+    return {
+        "date": target_date.isoformat(),
+        "games": games,
+        "current_date": None if state.current_date is None else state.current_date.isoformat(),
+        "awaiting_simulation": bool(state.awaiting_simulation and state.current_date == target_date),
+    }
 
 
 @app.get("/settings/scoring")
@@ -379,15 +399,27 @@ def simulate_league_day(league_id: str, scoring_profile: Optional[str] = Body(No
     state = load_league_state(league_id)
     if GAME_LOGS is None or PLAYER_BASE is None or SCHEDULE_BASE is None:
         raise HTTPException(status_code=503, detail="Cached data not ready. Run the data download script first.")
-    result = simulate_day(
-        state,
-        game_logs=GAME_LOGS,
-        player_stats=PLAYER_BASE,
-        scoring_profile_key=scoring_profile,
-        schedule_df=SCHEDULE_BASE,
-    )
-    save_league_state(state)
+    try:
+        result = simulate_day(
+            state,
+            game_logs=GAME_LOGS,
+            player_stats=PLAYER_BASE,
+            scoring_profile_key=scoring_profile,
+            schedule_df=SCHEDULE_BASE,
+        )
+    except ValueError as err:
+        raise HTTPException(status_code=400, detail=str(err)) from err
     return result
+
+
+@app.post("/leagues/{league_id}/advance")
+def advance_league_day_endpoint(league_id: str) -> Dict[str, Any]:
+    state = load_league_state(league_id)
+    try:
+        advance_league_day(state)
+    except ValueError as err:
+        raise HTTPException(status_code=400, detail=str(err)) from err
+    return state.to_dict()
 
 
 @app.post("/leagues/{league_id}/reset")

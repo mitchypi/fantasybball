@@ -53,6 +53,7 @@ class LeagueState:
     current_index: int
     rosters: Dict[str, List[int]]
     history: List[Dict[str, object]] = field(default_factory=list)
+    awaiting_simulation: bool = True
     created_at: str = field(default_factory=lambda: datetime.utcnow().isoformat())
 
     @property
@@ -78,12 +79,13 @@ class LeagueState:
             "latest_completed_date": self.history[-1]["date"] if self.history else None,
             "rosters": self.rosters,
             "history": self.history,
+            "awaiting_simulation": self.awaiting_simulation,
         }
 
     @classmethod
     def from_dict(cls, raw: Dict[str, object]) -> "LeagueState":
         calendar = [date.fromisoformat(item) for item in raw.get("calendar", [])]
-        return cls(
+        state = cls(
             league_id=str(raw.get("league_id")),
             league_name=str(raw.get("league_name")),
             user_team_name=raw.get("user_team_name"),
@@ -98,6 +100,13 @@ class LeagueState:
             history=[dict(item) for item in raw.get("history", [])],
             created_at=str(raw.get("created_at", datetime.utcnow().isoformat())),
         )
+        awaiting = raw.get("awaiting_simulation")
+        if awaiting is None:
+            awaiting = True
+        state.awaiting_simulation = bool(awaiting)
+        if state.current_date is None:
+            state.awaiting_simulation = False
+        return state
 
 
 def _auto_draft_teams(
@@ -258,6 +267,8 @@ def simulate_day(
     current_date = state.current_date
     if current_date is None:
         raise ValueError("The season simulation has already completed.")
+    if not state.awaiting_simulation:
+        raise ValueError("Today's games have already been simulated.")
 
     scoring_profile_key = scoring_profile_key or state.scoring_profile_key
     scoring = settings.resolve_scoring_profile(scoring_profile_key)
@@ -306,8 +317,10 @@ def simulate_day(
         "nba_scoreboard": scoreboard,
     }
 
+    iso_date = current_date.isoformat()
+    state.history = [record for record in state.history if record.get("date") != iso_date]
     state.history.append(day_record)
-    state.current_index += 1
+    state.awaiting_simulation = False
     save_league_state(state)
     return day_record
 
@@ -320,6 +333,7 @@ def reset_league_state(state: LeagueState, game_logs: Optional[pd.DataFrame] = N
     state.calendar = list(season_dates())
     state.current_index = 0
     state.history = []
+    state.awaiting_simulation = True
     state.rosters = _auto_draft_teams(player_stats, state.team_names, state.roster_size, scoring.weights)
     save_league_state(state)
     return state
@@ -330,3 +344,20 @@ def delete_league_state(league_id: str) -> None:
     if not path.exists():
         raise FileNotFoundError(f"Unknown league id '{league_id}'")
     path.unlink()
+
+
+def advance_league_day(state: LeagueState) -> LeagueState:
+    if state.awaiting_simulation and state.current_date is not None:
+        raise ValueError("Play today's games before advancing to the next day.")
+    if state.current_date is None:
+        state.awaiting_simulation = False
+        save_league_state(state)
+        return state
+    if state.current_index >= len(state.calendar) - 1:
+        state.current_index = len(state.calendar)
+        state.awaiting_simulation = False
+    else:
+        state.current_index += 1
+        state.awaiting_simulation = True
+    save_league_state(state)
+    return state
