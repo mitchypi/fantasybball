@@ -1,0 +1,1322 @@
+GAME_ID,GAME_DATE,SEASON,STATUS,PERIOD,TIME,POSTSEASON,ARENA,CITY,STATE,HOME_TEAM_ID,HOME_TEAM_ABBREVIATION,HOME_TEAM_FULL_NAME,HOME_TEAM_SCORE,VISITOR_TEAM_ID,VISITOR_TEAM_ABBREVIATION,VISITOR_TEAM_FULL_NAME,VISITOR_TEAM_SCORE
+15907438,2024-10-22,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,132,20,NYK,New York Knicks,109
+15907439,2024-10-22,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,110,18,MIN,Minnesota Timberwolves,103
+15907440,2024-10-23,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,109,12,IND,Indiana Pacers,115
+15907441,2024-10-23,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,120,3,BKN,Brooklyn Nets,116
+15907442,2024-10-23,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,97,22,ORL,Orlando Magic,116
+15907443,2024-10-23,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,109,17,MIL,Milwaukee Bucks,124
+15907444,2024-10-23,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,106,6,CLE,Cleveland Cavaliers,136
+15907445,2024-10-23,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,105,4,CHA,Charlotte Hornets,110
+15907446,2024-10-23,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,123,5,CHI,Chicago Bulls,111
+15907447,2024-10-23,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,124,15,MEM,Memphis Grizzlies,126
+15907448,2024-10-23,2024,Final,5,Final,False,,,,13,LAC,LA Clippers,113,24,PHX,Phoenix Suns,116
+15907449,2024-10-23,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,104,10,GSW,Golden State Warriors,139
+15907450,2024-10-24,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,102,2,BOS,Boston Celtics,122
+15907451,2024-10-24,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,120,27,SAS,San Antonio Spurs,109
+15907452,2024-10-24,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,87,21,OKC,Oklahoma City Thunder,102
+15907453,2024-10-24,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,115,18,MIN,Minnesota Timberwolves,117
+15907454,2024-10-25,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,116,3,BKN,Brooklyn Nets,101
+15907455,2024-10-25,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,115,23,PHI,Philadelphia 76ers,107
+15907456,2024-10-25,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,125,4,CHA,Charlotte Hornets,120
+15907457,2024-10-25,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,113,9,DET,Detroit Pistons,101
+15907458,2024-10-25,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,123,12,IND,Indiana Pacers,98
+15907459,2024-10-25,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,128,15,MEM,Memphis Grizzlies,108
+15907460,2024-10-25,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,122,5,CHI,Chicago Bulls,133
+15907461,2024-10-25,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,86,10,GSW,Golden State Warriors,127
+15907462,2024-10-25,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,123,24,PHX,Phoenix Suns,116
+15907463,2024-10-25,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,103,19,NOP,New Orleans Pelicans,105
+15907464,2024-10-26,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,104,13,LAC,LA Clippers,109
+15907465,2024-10-26,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,106,16,MIA,Miami Heat,114
+15907466,2024-10-26,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,118,2,BOS,Boston Celtics,124
+15907467,2024-10-26,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,116,6,CLE,Cleveland Cavaliers,135
+15907468,2024-10-26,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,95,21,OKC,Oklahoma City Thunder,114
+15907469,2024-10-26,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,124,22,ORL,Orlando Magic,111
+15907470,2024-10-26,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,112,28,TOR,Toronto Raptors,101
+15907471,2024-10-26,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,109,11,HOU,Houston Rockets,106
+15907472,2024-10-26,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,114,7,DAL,Dallas Mavericks,102
+15907473,2024-10-26,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,131,26,SAC,Sacramento Kings,127
+15907474,2024-10-27,2024,Final,5,Final,False,,,,12,IND,Indiana Pacers,114,23,PHI,Philadelphia 76ers,118
+15907475,2024-10-27,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,115,17,MIL,Milwaukee Bucks,102
+15907476,2024-10-27,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,125,19,NOP,New Orleans Pelicans,103
+15907477,2024-10-27,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,128,1,ATL,Atlanta Hawks,104
+15907478,2024-10-27,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,104,13,LAC,LA Clippers,112
+15907479,2024-10-28,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,119,12,IND,Indiana Pacers,115
+15907480,2024-10-28,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,119,30,WAS,Washington Wizards,121
+15907481,2024-10-28,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,119,17,MIL,Milwaukee Bucks,108
+15907482,2024-10-28,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,106,9,DET,Detroit Pistons,98
+15907483,2024-10-28,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,104,6,CLE,Cleveland Cavaliers,110
+15907484,2024-10-28,2024,Final,5,Final,False,,,,28,TOR,Toronto Raptors,125,8,DEN,Denver Nuggets,127
+15907485,2024-10-28,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,123,5,CHI,Chicago Bulls,126
+15907486,2024-10-28,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,101,11,HOU,Houston Rockets,106
+15907487,2024-10-28,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,110,29,UTA,Utah Jazz,102
+15907488,2024-10-28,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,109,14,LAL,Los Angeles Lakers,105
+15907489,2024-10-28,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,111,25,POR,Portland Trail Blazers,98
+15907490,2024-10-29,2024,Final,5,Final,False,,,,3,BKN,Brooklyn Nets,139,8,DEN,Denver Nuggets,144
+15907491,2024-10-29,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,114,7,DAL,Dallas Mavericks,120
+15907492,2024-10-29,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,96,26,SAC,Sacramento Kings,113
+15907493,2024-10-29,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,124,19,NOP,New Orleans Pelicans,106
+15907494,2024-10-30,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,138,28,TOR,Toronto Raptors,133
+15907495,2024-10-30,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,134,14,LAL,Los Angeles Lakers,110
+15907496,2024-10-30,2024,Final,5,Final,False,,,,12,IND,Indiana Pacers,135,2,BOS,Boston Celtics,132
+15907497,2024-10-30,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,95,9,DET,Detroit Pistons,105
+15907498,2024-10-30,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,133,1,ATL,Atlanta Hawks,120
+15907499,2024-10-30,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,107,20,NYK,New York Knicks,116
+15907500,2024-10-30,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,102,22,ORL,Orlando Magic,99
+15907501,2024-10-30,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,106,3,BKN,Brooklyn Nets,119
+15907502,2024-10-30,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,105,27,SAS,San Antonio Spurs,93
+15907503,2024-10-30,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,104,19,NOP,New Orleans Pelicans,89
+15907504,2024-10-30,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,105,25,POR,Portland Trail Blazers,106
+15907505,2024-10-31,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,122,17,MIL,Milwaukee Bucks,99
+15907506,2024-10-31,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,102,11,HOU,Houston Rockets,108
+15907507,2024-10-31,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,88,27,SAS,San Antonio Spurs,106
+15907508,2024-10-31,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,119,24,PHX,Phoenix Suns,125
+15907509,2024-11-01,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,109,2,BOS,Boston Celtics,124
+15907510,2024-11-01,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,120,22,ORL,Orlando Magic,109
+15907511,2024-11-01,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,98,20,NYK,New York Knicks,128
+15907512,2024-11-01,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,115,26,SAC,Sacramento Kings,123
+15907513,2024-11-01,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,120,5,CHI,Chicago Bulls,112
+15907514,2024-11-01,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,125,14,LAL,Los Angeles Lakers,131
+15907515,2024-11-01,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,125,12,IND,Indiana Pacers,118
+15907516,2024-11-01,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,119,8,DEN,Denver Nuggets,116
+15907517,2024-11-01,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,114,21,OKC,Oklahoma City Thunder,137
+15907518,2024-11-02,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,103,2,BOS,Boston Celtics,113
+15907519,2024-11-02,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,107,15,MEM,Memphis Grizzlies,124
+15907520,2024-11-02,2024,Final,5,Final,False,,,,28,TOR,Toronto Raptors,131,26,SAC,Sacramento Kings,128
+15907521,2024-11-02,2024,Final,5,Final,False,,,,11,HOU,Houston Rockets,121,10,GSW,Golden State Warriors,127
+15907522,2024-11-02,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,113,6,CLE,Cleveland Cavaliers,114
+15907523,2024-11-02,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,113,18,MIN,Minnesota Timberwolves,103
+15907524,2024-11-02,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,98,16,MIA,Miami Heat,118
+15907525,2024-11-02,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,129,29,UTA,Utah Jazz,103
+15907526,2024-11-02,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,103,25,POR,Portland Trail Blazers,97
+15907527,2024-11-02,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,92,21,OKC,Oklahoma City Thunder,105
+15907528,2024-11-03,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,92,9,DET,Detroit Pistons,106
+15907529,2024-11-03,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,111,1,ATL,Atlanta Hawks,126
+15907530,2024-11-03,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,108,22,ORL,Orlando Magic,85
+15907531,2024-11-04,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,116,17,MIL,Milwaukee Bucks,114
+15907532,2024-11-04,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,112,10,GSW,Golden State Warriors,125
+15907533,2024-11-04,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,115,14,LAL,Los Angeles Lakers,103
+15907534,2024-11-04,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,93,2,BOS,Boston Celtics,123
+15907535,2024-11-04,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,106,15,MEM,Memphis Grizzlies,104
+15907536,2024-11-04,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,110,26,SAC,Sacramento Kings,111
+15907537,2024-11-04,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,126,29,UTA,Utah Jazz,135
+15907538,2024-11-04,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,109,20,NYK,New York Knicks,97
+15907539,2024-11-04,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,114,4,CHA,Charlotte Hornets,93
+15907540,2024-11-04,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,102,22,ORL,Orlando Magic,86
+15907541,2024-11-04,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,100,25,POR,Portland Trail Blazers,118
+15907542,2024-11-04,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,127,12,IND,Indiana Pacers,134
+15907543,2024-11-04,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,121,28,TOR,Toronto Raptors,119
+15907544,2024-11-04,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,118,23,PHI,Philadelphia 76ers,116
+15907545,2024-11-04,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,113,27,SAS,San Antonio Spurs,104
+15907546,2024-11-06,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,108,9,DET,Detroit Pistons,107
+15907547,2024-11-06,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,118,22,ORL,Orlando Magic,111
+15907548,2024-11-06,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,121,20,NYK,New York Knicks,116
+15907549,2024-11-06,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,112,10,GSW,Golden State Warriors,118
+15907550,2024-11-06,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,127,27,SAS,San Antonio Spurs,100
+15907551,2024-11-06,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,131,14,LAL,Los Angeles Lakers,114
+15907552,2024-11-06,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,122,6,CLE,Cleveland Cavaliers,131
+15907553,2024-11-06,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,119,5,CHI,Chicago Bulls,99
+15907554,2024-11-06,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,124,21,OKC,Oklahoma City Thunder,122
+15907555,2024-11-06,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,115,16,MIA,Miami Heat,112
+15907556,2024-11-06,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,110,23,PHI,Philadelphia 76ers,98
+15907557,2024-11-06,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,122,28,TOR,Toronto Raptors,107
+15907558,2024-11-07,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,119,18,MIN,Minnesota Timberwolves,135
+15907559,2024-11-07,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,123,29,UTA,Utah Jazz,100
+15907560,2024-11-07,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,118,25,POR,Portland Trail Blazers,105
+15907561,2024-11-08,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,103,12,IND,Indiana Pacers,83
+15907562,2024-11-08,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,122,1,ATL,Atlanta Hawks,121
+15907563,2024-11-08,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,115,19,NOP,New Orleans Pelicans,88
+15907564,2024-11-08,2024,Final,5,Final,False,,,,2,BOS,Boston Celtics,108,3,BKN,Brooklyn Nets,104
+15907565,2024-11-08,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,136,10,GSW,Golden State Warriors,117
+15907566,2024-11-08,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,116,17,MIL,Milwaukee Bucks,94
+15907567,2024-11-08,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,113,24,PHX,Phoenix Suns,114
+15907568,2024-11-08,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,128,30,WAS,Washington Wizards,104
+15907569,2024-11-08,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,126,11,HOU,Houston Rockets,107
+15907570,2024-11-08,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,127,25,POR,Portland Trail Blazers,102
+15907571,2024-11-08,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,135,16,MIA,Miami Heat,122
+15907572,2024-11-08,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,116,23,PHI,Philadelphia 76ers,106
+15907573,2024-11-08,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,98,13,LAC,LA Clippers,107
+15907574,2024-11-09,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,110,29,UTA,Utah Jazz,111
+15907575,2024-11-09,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,113,5,CHI,Chicago Bulls,125
+15907576,2024-11-09,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,105,3,BKN,Brooklyn Nets,100
+15907577,2024-11-09,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,105,28,TOR,Toronto Raptors,103
+15907578,2024-11-10,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,99,11,HOU,Houston Rockets,101
+15907579,2024-11-10,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,107,2,BOS,Boston Celtics,113
+15907580,2024-11-10,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,132,20,NYK,New York Knicks,121
+15907581,2024-11-10,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,121,30,WAS,Washington Wizards,94
+15907582,2024-11-10,2024,Final,5,Final,False,,,,23,PHI,Philadelphia 76ers,107,4,CHA,Charlotte Hornets,105
+15907583,2024-11-10,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,94,16,MIA,Miami Heat,95
+15907584,2024-11-10,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,116,10,GSW,Golden State Warriors,127
+15907585,2024-11-10,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,122,7,DAL,Dallas Mavericks,120
+15907586,2024-11-10,2024,Final,5,Final,False,,,,24,PHX,Phoenix Suns,118,26,SAC,Sacramento Kings,127
+15907587,2024-11-10,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,89,15,MEM,Memphis Grizzlies,134
+15907588,2024-11-10,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,123,28,TOR,Toronto Raptors,103
+15907589,2024-11-11,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,113,6,CLE,Cleveland Cavaliers,119
+15907590,2024-11-11,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,107,30,WAS,Washington Wizards,92
+15907591,2024-11-11,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,105,3,BKN,Brooklyn Nets,107
+15907592,2024-11-11,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,134,13,LAC,LA Clippers,128
+15907593,2024-11-11,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,116,26,SAC,Sacramento Kings,96
+15907594,2024-11-12,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,116,1,ATL,Atlanta Hawks,117
+15907595,2024-11-12,2024,Final,5,Final,False,,,,9,DET,Detroit Pistons,123,16,MIA,Miami Heat,121
+15907596,2024-11-12,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,114,4,CHA,Charlotte Hornets,89
+15907597,2024-11-12,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,99,20,NYK,New York Knicks,111
+15907598,2024-11-12,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,99,28,TOR,Toronto Raptors,85
+15907599,2024-11-12,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,112,24,PHX,Phoenix Suns,120
+15907600,2024-11-12,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,120,7,DAL,Dallas Mavericks,117
+15907601,2024-11-12,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,122,18,MIN,Minnesota Timberwolves,108
+15907602,2024-11-13,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,94,12,IND,Indiana Pacers,90
+15907603,2024-11-13,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,114,2,BOS,Boston Celtics,139
+15907604,2024-11-13,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,123,5,CHI,Chicago Bulls,124
+15907605,2024-11-13,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,106,6,CLE,Cleveland Cavaliers,114
+15907606,2024-11-13,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,106,19,NOP,New Orleans Pelicans,88
+15907607,2024-11-13,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,111,13,LAC,LA Clippers,103
+15907608,2024-11-13,2024,Final,5,Final,False,,,,17,MIL,Milwaukee Bucks,127,9,DET,Detroit Pistons,120
+15907609,2024-11-13,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,139,30,WAS,Washington Wizards,130
+15907610,2024-11-13,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,128,15,MEM,Memphis Grizzlies,123
+15907611,2024-11-13,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,106,18,MIN,Minnesota Timberwolves,98
+15907612,2024-11-13,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,127,24,PHX,Phoenix Suns,104
+15907613,2024-11-14,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,115,7,DAL,Dallas Mavericks,113
+15907614,2024-11-15,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,111,16,MIA,Miami Heat,124
+15907615,2024-11-15,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,98,23,PHI,Philadelphia 76ers,86
+15907616,2024-11-15,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,95,9,DET,Detroit Pistons,99
+15907617,2024-11-15,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,129,30,WAS,Washington Wizards,117
+15907618,2024-11-15,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,144,5,CHI,Chicago Bulls,126
+15907619,2024-11-15,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,124,3,BKN,Brooklyn Nets,122
+15907620,2024-11-15,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,115,14,LAL,Los Angeles Lakers,120
+15907621,2024-11-15,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,125,13,LAC,LA Clippers,104
+15907622,2024-11-15,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,101,8,DEN,Denver Nuggets,94
+15907623,2024-11-15,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,99,24,PHX,Phoenix Suns,83
+15907624,2024-11-15,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,123,15,MEM,Memphis Grizzlies,118
+15907625,2024-11-15,2024,Final,5,Final,False,,,,26,SAC,Sacramento Kings,126,18,MIN,Minnesota Timberwolves,130
+15907626,2024-11-16,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,115,17,MIL,Milwaukee Bucks,114
+15907627,2024-11-16,2024,Final,5,Final,False,,,,2,BOS,Boston Celtics,126,28,TOR,Toronto Raptors,123
+15907628,2024-11-16,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,99,14,LAL,Los Angeles Lakers,104
+15907629,2024-11-16,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,110,27,SAS,San Antonio Spurs,93
+15907630,2024-11-16,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,121,29,UTA,Utah Jazz,117
+15907631,2024-11-17,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,120,24,PHX,Phoenix Suns,117
+15907632,2024-11-17,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,119,16,MIA,Miami Heat,110
+15907633,2024-11-17,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,128,4,CHA,Charlotte Hornets,114
+15907634,2024-11-17,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,104,9,DET,Detroit Pistons,124
+15907635,2024-11-17,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,105,8,DEN,Denver Nuggets,90
+15907636,2024-11-17,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,114,1,ATL,Atlanta Hawks,110
+15907637,2024-11-17,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,114,3,BKN,Brooklyn Nets,104
+15907638,2024-11-17,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,107,11,HOU,Houston Rockets,143
+15907639,2024-11-17,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,119,7,DAL,Dallas Mavericks,121
+15907640,2024-11-17,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,116,29,UTA,Utah Jazz,105
+15907641,2024-11-18,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,112,5,CHI,Chicago Bulls,122
+15907642,2024-11-18,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,106,23,PHI,Philadelphia 76ers,89
+15907643,2024-11-18,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,134,30,WAS,Washington Wizards,106
+15907644,2024-11-18,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,130,12,IND,Indiana Pacers,119
+15907645,2024-11-18,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,101,11,HOU,Houston Rockets,100
+15907646,2024-11-18,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,99,22,ORL,Orlando Magic,109
+15907647,2024-11-18,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,108,1,ATL,Atlanta Hawks,109
+15907648,2024-11-18,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,102,10,GSW,Golden State Warriors,99
+15907649,2024-11-19,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,120,6,CLE,Cleveland Cavaliers,117
+15907650,2024-11-19,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,116,4,CHA,Charlotte Hornets,115
+15907651,2024-11-19,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,110,8,DEN,Denver Nuggets,122
+15907652,2024-11-19,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,132,19,NOP,New Orleans Pelicans,91
+15907653,2024-11-19,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,110,21,OKC,Oklahoma City Thunder,104
+15907654,2024-11-19,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,124,29,UTA,Utah Jazz,118
+15907655,2024-11-20,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,128,19,NOP,New Orleans Pelicans,100
+15907656,2024-11-20,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,122,5,CHI,Chicago Bulls,106
+15907657,2024-11-20,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,130,12,IND,Indiana Pacers,113
+15907658,2024-11-20,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,117,23,PHI,Philadelphia 76ers,111
+15907659,2024-11-20,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,109,25,POR,Portland Trail Blazers,99
+15907660,2024-11-20,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,122,20,NYK,New York Knicks,138
+15907661,2024-11-20,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,120,1,ATL,Atlanta Hawks,97
+15907662,2024-11-20,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,104,22,ORL,Orlando Magic,93
+15907663,2024-11-21,2024,Final,5,Final,False,,,,4,CHA,Charlotte Hornets,123,9,DET,Detroit Pistons,121
+15907664,2024-11-21,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,110,18,MIN,Minnesota Timberwolves,105
+15907665,2024-11-21,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,126,29,UTA,Utah Jazz,118
+15907666,2024-11-21,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,118,22,ORL,Orlando Magic,119
+15907667,2024-11-22,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,113,3,BKN,Brooklyn Nets,98
+15907668,2024-11-22,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,96,2,BOS,Boston Celtics,108
+15907669,2024-11-22,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,129,12,IND,Indiana Pacers,117
+15907670,2024-11-22,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,136,1,ATL,Atlanta Hawks,122
+15907671,2024-11-22,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,116,25,POR,Portland Trail Blazers,88
+15907672,2024-11-22,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,108,10,GSW,Golden State Warriors,112
+15907673,2024-11-22,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,120,7,DAL,Dallas Mavericks,123
+15907674,2024-11-22,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,104,26,SAC,Sacramento Kings,88
+15907675,2024-11-23,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,121,20,NYK,New York Knicks,106
+15907676,2024-11-23,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,111,9,DET,Detroit Pistons,100
+15907677,2024-11-23,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,131,15,MEM,Memphis Grizzlies,142
+15907678,2024-11-23,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,98,25,POR,Portland Trail Blazers,104
+15907679,2024-11-23,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,125,4,CHA,Charlotte Hornets,119
+15907680,2024-11-23,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,104,10,GSW,Golden State Warriors,94
+15907681,2024-11-23,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,102,8,DEN,Denver Nuggets,127
+15907682,2024-11-24,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,107,18,MIN,Minnesota Timberwolves,105
+15907683,2024-11-24,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,115,30,WAS,Washington Wizards,103
+15907684,2024-11-24,2024,Final,5,Final,False,,,,16,MIA,Miami Heat,123,7,DAL,Dallas Mavericks,118
+15907685,2024-11-24,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,99,13,LAC,LA Clippers,125
+15907686,2024-11-24,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,122,28,TOR,Toronto Raptors,108
+15907687,2024-11-24,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,103,3,BKN,Brooklyn Nets,108
+15907688,2024-11-25,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,84,22,ORL,Orlando Magic,95
+15907689,2024-11-25,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,102,28,TOR,Toronto Raptors,100
+15907690,2024-11-25,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,114,19,NOP,New Orleans Pelicans,110
+15907691,2024-11-25,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,119,7,DAL,Dallas Mavericks,129
+15907692,2024-11-25,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,126,13,LAC,LA Clippers,94
+15907693,2024-11-25,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,123,25,POR,Portland Trail Blazers,98
+15907694,2024-11-25,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,118,20,NYK,New York Knicks,145
+15907695,2024-11-25,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,120,3,BKN,Brooklyn Nets,128
+15907696,2024-11-25,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,109,21,OKC,Oklahoma City Thunder,130
+15907697,2024-11-26,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,108,5,CHI,Chicago Bulls,127
+15907698,2024-11-26,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,103,17,MIL,Milwaukee Bucks,106
+15907699,2024-11-26,2024,Final,5,Final,False,,,,18,MIN,Minnesota Timberwolves,111,11,HOU,Houston Rockets,117
+15907700,2024-11-26,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,115,27,SAS,San Antonio Spurs,128
+15907701,2024-11-26,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,127,14,LAL,Los Angeles Lakers,100
+15907702,2024-11-27,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,94,16,MIA,Miami Heat,98
+15907703,2024-11-27,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,124,1,ATL,Atlanta Hawks,135
+15907704,2024-11-27,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,121,25,POR,Portland Trail Blazers,114
+15907705,2024-11-27,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,133,5,CHI,Chicago Bulls,119
+15907706,2024-11-27,2024,Final,5,Final,False,,,,23,PHI,Philadelphia 76ers,115,11,HOU,Houston Rockets,122
+15907707,2024-11-27,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,96,13,LAC,LA Clippers,121
+15907708,2024-11-27,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,129,20,NYK,New York Knicks,114
+15907709,2024-11-27,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,131,9,DET,Detroit Pistons,111
+15907710,2024-11-27,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,104,26,SAC,Sacramento Kings,115
+15907711,2024-11-27,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,93,28,TOR,Toronto Raptors,119
+15907712,2024-11-27,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,101,14,LAL,Los Angeles Lakers,119
+15907713,2024-11-27,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,117,3,BKN,Brooklyn Nets,127
+15907714,2024-11-27,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,103,8,DEN,Denver Nuggets,122
+15907715,2024-11-27,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,101,21,OKC,Oklahoma City Thunder,105
+15907716,2024-11-29,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,98,20,NYK,New York Knicks,99
+15907717,2024-11-29,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,117,6,CLE,Cleveland Cavaliers,101
+15907718,2024-11-29,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,120,19,NOP,New Orleans Pelicans,109
+15907719,2024-11-29,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,100,22,ORL,Orlando Magic,123
+15907720,2024-11-29,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,93,13,LAC,LA Clippers,92
+15907721,2024-11-29,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,108,9,DET,Detroit Pistons,130
+15907722,2024-11-29,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,121,28,TOR,Toronto Raptors,111
+15907723,2024-11-29,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,129,2,BOS,Boston Celtics,138
+15907724,2024-11-29,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,93,21,OKC,Oklahoma City Thunder,101
+15907725,2024-11-29,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,115,26,SAC,Sacramento Kings,106
+15907726,2024-11-30,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,104,1,ATL,Atlanta Hawks,107
+15907727,2024-11-30,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,96,23,PHI,Philadelphia 76ers,111
+15907728,2024-11-30,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,124,30,WAS,Washington Wizards,114
+15907729,2024-11-30,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,113,10,GSW,Golden State Warriors,105
+15907730,2024-11-30,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,94,7,DAL,Dallas Mavericks,106
+15907731,2024-12-01,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,92,22,ORL,Orlando Magic,100
+15907732,2024-12-01,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,136,12,IND,Indiana Pacers,121
+15907733,2024-12-01,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,115,2,BOS,Boston Celtics,111
+15907734,2024-12-01,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,118,19,NOP,New Orleans Pelicans,85
+15907735,2024-12-01,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,119,16,MIA,Miami Heat,116
+15907736,2024-12-01,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,119,21,OKC,Oklahoma City Thunder,116
+15907737,2024-12-01,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,104,14,LAL,Los Angeles Lakers,105
+15907738,2024-12-01,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,131,7,DAL,Dallas Mavericks,137
+15907739,2024-12-01,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,125,27,SAS,San Antonio Spurs,127
+15907740,2024-12-01,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,126,8,DEN,Denver Nuggets,122
+15907741,2024-12-02,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,124,19,NOP,New Orleans Pelicans,112
+15907742,2024-12-02,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,108,16,MIA,Miami Heat,89
+15907743,2024-12-02,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,128,3,BKN,Brooklyn Nets,102
+15907744,2024-12-02,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,109,14,LAL,Los Angeles Lakers,80
+15907745,2024-12-03,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,104,23,PHI,Philadelphia 76ers,110
+15907746,2024-12-03,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,118,30,WAS,Washington Wizards,87
+15907747,2024-12-03,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,107,17,MIL,Milwaukee Bucks,128
+15907748,2024-12-03,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,121,22,ORL,Orlando Magic,106
+15907749,2024-12-03,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,122,12,IND,Indiana Pacers,111
+15907750,2024-12-03,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,133,29,UTA,Utah Jazz,106
+15907751,2024-12-03,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,121,15,MEM,Memphis Grizzlies,116
+15907752,2024-12-03,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,104,27,SAS,San Antonio Spurs,93
+15907753,2024-12-03,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,119,10,GSW,Golden State Warriors,115
+15907754,2024-12-03,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,120,11,HOU,Houston Rockets,111
+15907755,2024-12-03,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,127,25,POR,Portland Trail Blazers,105
+15907756,2024-12-04,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,130,9,DET,Detroit Pistons,120
+15907757,2024-12-04,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,99,12,IND,Indiana Pacers,90
+15907758,2024-12-04,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,134,14,LAL,Los Angeles Lakers,93
+15907759,2024-12-04,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,102,22,ORL,Orlando Magic,106
+15907760,2024-12-04,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,104,1,ATL,Atlanta Hawks,119
+15907761,2024-12-04,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,80,18,MIN,Minnesota Timberwolves,108
+15907762,2024-12-05,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,126,8,DEN,Denver Nuggets,114
+15907763,2024-12-05,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,101,7,DAL,Dallas Mavericks,137
+15907764,2024-12-05,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,125,4,CHA,Charlotte Hornets,101
+15907765,2024-12-05,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,92,21,OKC,Oklahoma City Thunder,129
+15907766,2024-12-05,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,115,26,SAC,Sacramento Kings,110
+15907767,2024-12-05,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,126,24,PHX,Phoenix Suns,124
+15907768,2024-12-05,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,124,5,CHI,Chicago Bulls,139
+15907769,2024-12-05,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,99,11,HOU,Houston Rockets,93
+15907770,2024-12-06,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,102,22,ORL,Orlando Magic,94
+15907771,2024-12-06,2024,Final,5,Final,False,,,,1,ATL,Atlanta Hawks,134,14,LAL,Los Angeles Lakers,132
+15907772,2024-12-06,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,111,17,MIL,Milwaukee Bucks,105
+15907773,2024-12-06,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,123,12,IND,Indiana Pacers,132
+15907774,2024-12-06,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,113,26,SAC,Sacramento Kings,140
+15907775,2024-12-06,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,90,18,MIN,Minnesota Timberwolves,107
+15907776,2024-12-06,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,99,29,UTA,Utah Jazz,141
+15907777,2024-12-07,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,102,6,CLE,Cleveland Cavaliers,116
+15907778,2024-12-07,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,122,8,DEN,Denver Nuggets,113
+15907779,2024-12-07,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,109,21,OKC,Oklahoma City Thunder,119
+15907780,2024-12-07,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,111,9,DET,Detroit Pistons,120
+15907781,2024-12-07,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,118,7,DAL,Dallas Mavericks,125
+15907782,2024-12-07,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,121,15,MEM,Memphis Grizzlies,127
+15907783,2024-12-07,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,121,24,PHX,Phoenix Suns,111
+15907784,2024-12-08,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,100,23,PHI,Philadelphia 76ers,108
+15907785,2024-12-08,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,113,17,MIL,Milwaukee Bucks,118
+15907786,2024-12-08,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,109,4,CHA,Charlotte Hornets,113
+15907787,2024-12-08,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,111,8,DEN,Denver Nuggets,141
+15907788,2024-12-08,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,122,6,CLE,Cleveland Cavaliers,113
+15907789,2024-12-08,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,115,24,PHX,Phoenix Suns,110
+15907790,2024-12-08,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,112,15,MEM,Memphis Grizzlies,140
+15907791,2024-12-08,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,121,19,NOP,New Orleans Pelicans,116
+15907792,2024-12-08,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,114,18,MIN,Minnesota Timberwolves,106
+15907793,2024-12-08,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,106,11,HOU,Houston Rockets,117
+15907794,2024-12-08,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,141,29,UTA,Utah Jazz,97
+15907795,2024-12-08,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,107,25,POR,Portland Trail Blazers,98
+15907796,2024-12-09,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,108,20,NYK,New York Knicks,113
+16968270,2024-12-10,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,114,22,ORL,Orlando Magic,109
+16968271,2024-12-10,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,118,7,DAL,Dallas Mavericks,104
+16968272,2024-12-11,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,100,1,ATL,Atlanta Hawks,108
+16968273,2024-12-11,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,91,10,GSW,Golden State Warriors,90
+16968274,2024-12-12,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,123,9,DET,Detroit Pistons,99
+16968275,2024-12-12,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,114,28,TOR,Toronto Raptors,104
+16968276,2024-12-12,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,109,26,SAC,Sacramento Kings,111
+16968277,2024-12-13,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,115,30,WAS,Washington Wizards,105
+16968278,2024-12-13,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,107,12,IND,Indiana Pacers,121
+16968279,2024-12-13,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,97,14,LAL,Los Angeles Lakers,87
+16968280,2024-12-13,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,135,3,BKN,Brooklyn Nets,119
+16968281,2024-12-13,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,109,4,CHA,Charlotte Hornets,95
+16968282,2024-12-13,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,120,13,LAC,LA Clippers,98
+16968283,2024-12-13,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,126,24,PHX,Phoenix Suns,134
+16968284,2024-12-13,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,116,27,SAS,San Antonio Spurs,118
+17136012,2024-12-14,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,110,1,ATL,Atlanta Hawks,102
+17136013,2024-12-14,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,111,11,HOU,Houston Rockets,96
+16968285,2024-12-15,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,119,19,NOP,New Orleans Pelicans,104
+16968286,2024-12-15,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,98,2,BOS,Boston Celtics,112
+16968287,2024-12-15,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,92,18,MIN,Minnesota Timberwolves,106
+16968288,2024-12-15,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,116,25,POR,Portland Trail Blazers,109
+16968289,2024-12-15,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,116,15,MEM,Memphis Grizzlies,110
+17136019,2024-12-15,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,91,20,NYK,New York Knicks,100
+17136020,2024-12-15,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,133,7,DAL,Dallas Mavericks,143
+16968290,2024-12-16,2024,Final,5,Final,False,,,,9,DET,Detroit Pistons,125,16,MIA,Miami Heat,124
+16968291,2024-12-16,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,108,23,PHI,Philadelphia 76ers,121
+16968292,2024-12-16,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,121,5,CHI,Chicago Bulls,122
+16968293,2024-12-16,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,101,6,CLE,Cleveland Cavaliers,130
+16968294,2024-12-16,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,129,8,DEN,Denver Nuggets,130
+16968295,2024-12-16,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,144,29,UTA,Utah Jazz,107
+17195500,2024-12-17,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,81,17,MIL,Milwaukee Bucks,97
+15907797,2024-12-19,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,119,29,UTA,Utah Jazz,126
+15907798,2024-12-19,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,99,21,OKC,Oklahoma City Thunder,105
+15907799,2024-12-19,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,123,4,CHA,Charlotte Hornets,114
+15907800,2024-12-19,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,108,5,CHI,Chicago Bulls,117
+15907801,2024-12-19,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,94,3,BKN,Brooklyn Nets,101
+15907802,2024-12-19,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,133,19,NOP,New Orleans Pelicans,113
+15907803,2024-12-19,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,144,10,GSW,Golden State Warriors,93
+15907804,2024-12-19,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,107,20,NYK,New York Knicks,133
+15907805,2024-12-19,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,95,13,LAC,LA Clippers,118
+15907806,2024-12-19,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,111,12,IND,Indiana Pacers,120
+15907807,2024-12-19,2024,Final,5,Final,False,,,,27,SAS,San Antonio Spurs,133,1,ATL,Atlanta Hawks,126
+15907808,2024-12-19,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,126,8,DEN,Denver Nuggets,124
+15907809,2024-12-19,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,100,14,LAL,Los Angeles Lakers,113
+15907810,2024-12-20,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,108,4,CHA,Charlotte Hornets,98
+15907811,2024-12-20,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,124,17,MIL,Milwaukee Bucks,101
+15907812,2024-12-20,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,97,21,OKC,Oklahoma City Thunder,104
+15907813,2024-12-21,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,99,14,LAL,Los Angeles Lakers,103
+15907814,2024-12-21,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,121,16,MIA,Miami Heat,114
+15907815,2024-12-21,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,112,15,MEM,Memphis Grizzlies,128
+15907816,2024-12-21,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,94,29,UTA,Utah Jazz,105
+15907817,2024-12-21,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,126,23,PHI,Philadelphia 76ers,99
+15907818,2024-12-21,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,98,2,BOS,Boston Celtics,123
+15907819,2024-12-21,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,112,30,WAS,Washington Wizards,101
+15907820,2024-12-21,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,103,10,GSW,Golden State Warriors,113
+15907821,2024-12-21,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,93,20,NYK,New York Knicks,104
+15907822,2024-12-21,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,113,13,LAC,LA Clippers,97
+15907823,2024-12-21,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,114,25,POR,Portland Trail Blazers,94
+15907824,2024-12-21,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,125,9,DET,Detroit Pistons,133
+15907825,2024-12-22,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,110,11,HOU,Houston Rockets,114
+15907826,2024-12-22,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,95,12,IND,Indiana Pacers,122
+15907827,2024-12-22,2024,Final,5,Final,False,,,,19,NOP,New Orleans Pelicans,129,8,DEN,Denver Nuggets,132
+15907828,2024-12-23,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,101,11,HOU,Houston Rockets,114
+15907829,2024-12-23,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,124,29,UTA,Utah Jazz,113
+15907830,2024-12-23,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,108,2,BOS,Boston Celtics,104
+15907831,2024-12-23,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,111,27,SAS,San Antonio Spurs,106
+15907832,2024-12-23,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,117,18,MIN,Minnesota Timberwolves,104
+15907833,2024-12-23,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,110,3,BKN,Brooklyn Nets,95
+15907834,2024-12-23,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,139,28,TOR,Toronto Raptors,125
+15907835,2024-12-23,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,91,17,MIL,Milwaukee Bucks,112
+15907836,2024-12-23,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,110,13,LAC,LA Clippers,114
+15907837,2024-12-23,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,123,30,WAS,Washington Wizards,105
+15907838,2024-12-23,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,132,25,POR,Portland Trail Blazers,108
+15907839,2024-12-23,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,117,24,PHX,Phoenix Suns,90
+15907840,2024-12-23,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,105,12,IND,Indiana Pacers,111
+15907841,2024-12-23,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,114,9,DET,Detroit Pistons,117
+15907842,2024-12-25,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,117,27,SAS,San Antonio Spurs,114
+15907843,2024-12-25,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,99,18,MIN,Minnesota Timberwolves,105
+15907844,2024-12-25,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,114,23,PHI,Philadelphia 76ers,118
+15907845,2024-12-25,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,113,14,LAL,Los Angeles Lakers,115
+15907846,2024-12-25,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,110,8,DEN,Denver Nuggets,100
+15907847,2024-12-26,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,114,21,OKC,Oklahoma City Thunder,120
+15907848,2024-12-26,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,88,16,MIA,Miami Heat,89
+15907849,2024-12-26,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,113,4,CHA,Charlotte Hornets,110
+15907850,2024-12-26,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,141,5,CHI,Chicago Bulls,133
+15907851,2024-12-26,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,155,28,TOR,Toronto Raptors,126
+15907852,2024-12-26,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,105,3,BKN,Brooklyn Nets,111
+15907853,2024-12-26,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,111,11,HOU,Houston Rockets,128
+15907854,2024-12-26,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,122,29,UTA,Utah Jazz,120
+15907855,2024-12-26,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,113,9,DET,Detroit Pistons,114
+15907856,2024-12-27,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,85,20,NYK,New York Knicks,108
+15907857,2024-12-27,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,142,12,IND,Indiana Pacers,105
+15907858,2024-12-27,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,87,27,SAS,San Antonio Spurs,96
+15907859,2024-12-27,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,112,18,MIN,Minnesota Timberwolves,113
+15907860,2024-12-27,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,124,15,MEM,Memphis Grizzlies,132
+15907861,2024-12-27,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,135,6,CLE,Cleveland Cavaliers,149
+15907862,2024-12-27,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,89,7,DAL,Dallas Mavericks,98
+15907863,2024-12-27,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,102,10,GSW,Golden State Warriors,92
+15907864,2024-12-28,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,120,16,MIA,Miami Heat,110
+15907865,2024-12-28,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,94,21,OKC,Oklahoma City Thunder,106
+15907866,2024-12-28,2024,Final,5,Final,False,,,,30,WAS,Washington Wizards,132,20,NYK,New York Knicks,136
+15907867,2024-12-28,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,116,17,MIL,Milwaukee Bucks,111
+15907868,2024-12-28,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,109,24,PHX,Phoenix Suns,105
+15907869,2024-12-28,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,134,9,DET,Detroit Pistons,121
+15907870,2024-12-28,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,111,23,PHI,Philadelphia 76ers,114
+15907871,2024-12-28,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,126,7,DAL,Dallas Mavericks,122
+15907872,2024-12-28,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,132,26,SAC,Sacramento Kings,122
+15907873,2024-12-29,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,102,3,BKN,Brooklyn Nets,101
+15907874,2024-12-29,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,114,12,IND,Indiana Pacers,123
+15907875,2024-12-29,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,107,1,ATL,Atlanta Hawks,136
+15907876,2024-12-29,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,100,16,MIA,Miami Heat,104
+15907877,2024-12-29,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,130,15,MEM,Memphis Grizzlies,106
+15907878,2024-12-29,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,112,27,SAS,San Antonio Spurs,110
+15907879,2024-12-30,2024,Final,5,Final,False,,,,4,CHA,Charlotte Hornets,108,5,CHI,Chicago Bulls,115
+15907880,2024-12-30,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,106,20,NYK,New York Knicks,126
+15907881,2024-12-30,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,113,13,LAC,LA Clippers,116
+15907882,2024-12-30,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,121,8,DEN,Denver Nuggets,132
+15907883,2024-12-30,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,95,6,CLE,Cleveland Cavaliers,113
+15907884,2024-12-30,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,103,23,PHI,Philadelphia 76ers,125
+15907885,2024-12-30,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,110,7,DAL,Dallas Mavericks,100
+15907886,2024-12-31,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,125,28,TOR,Toronto Raptors,71
+15907887,2024-12-31,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,112,17,MIL,Milwaukee Bucks,120
+15907888,2024-12-31,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,122,13,LAC,LA Clippers,86
+15907889,2024-12-31,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,113,18,MIN,Minnesota Timberwolves,105
+15907890,2024-12-31,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,112,15,MEM,Memphis Grizzlies,117
+15907891,2024-12-31,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,110,6,CLE,Cleveland Cavaliers,122
+15907892,2025-01-01,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,105,22,ORL,Orlando Magic,96
+15907893,2025-01-01,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,125,5,CHI,Chicago Bulls,107
+15907894,2025-01-01,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,119,19,NOP,New Orleans Pelicans,108
+15907895,2025-01-01,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,119,29,UTA,Utah Jazz,103
+15907896,2025-01-01,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,130,3,BKN,Brooklyn Nets,113
+15907897,2025-01-01,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,110,7,DAL,Dallas Mavericks,99
+15907898,2025-01-01,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,139,1,ATL,Atlanta Hawks,120
+15907899,2025-01-01,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,113,23,PHI,Philadelphia 76ers,107
+15907900,2025-01-02,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,115,12,IND,Indiana Pacers,128
+15907901,2025-01-02,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,115,2,BOS,Boston Celtics,118
+15907902,2025-01-02,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,110,3,BKN,Brooklyn Nets,113
+15907903,2025-01-02,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,116,13,LAC,LA Clippers,98
+15907904,2025-01-02,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,139,23,PHI,Philadelphia 76ers,105
+15907905,2025-01-02,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,114,25,POR,Portland Trail Blazers,106
+15907906,2025-01-03,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,98,4,CHA,Charlotte Hornets,94
+15907907,2025-01-03,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,97,22,ORL,Orlando Magic,106
+15907908,2025-01-03,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,86,2,BOS,Boston Celtics,109
+15907909,2025-01-03,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,132,30,WAS,Washington Wizards,120
+15907910,2025-01-03,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,117,20,NYK,New York Knicks,107
+15907911,2025-01-03,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,122,6,CLE,Cleveland Cavaliers,134
+15907912,2025-01-03,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,110,27,SAS,San Antonio Spurs,113
+15907913,2025-01-03,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,138,15,MEM,Memphis Grizzlies,133
+15907914,2025-01-03,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,119,1,ATL,Atlanta Hawks,102
+15907915,2025-01-04,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,94,23,PHI,Philadelphia 76ers,123
+15907916,2025-01-04,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,119,18,MIN,Minnesota Timberwolves,105
+15907917,2025-01-04,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,126,24,PHX,Phoenix Suns,108
+15907918,2025-01-04,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,100,29,UTA,Utah Jazz,136
+15907919,2025-01-04,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,139,20,NYK,New York Knicks,126
+15907920,2025-01-04,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,102,25,POR,Portland Trail Blazers,105
+15907921,2025-01-04,2024,Final,5,Final,False,,,,27,SAS,San Antonio Spurs,111,8,DEN,Denver Nuggets,122
+15907922,2025-01-04,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,121,15,MEM,Memphis Grizzlies,113
+15907923,2025-01-04,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,131,1,ATL,Atlanta Hawks,105
+15907924,2025-01-05,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,105,2,BOS,Boston Celtics,92
+15907925,2025-01-05,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,115,4,CHA,Charlotte Hornets,105
+15907926,2025-01-05,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,98,19,NOP,New Orleans Pelicans,110
+15907927,2025-01-05,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,92,29,UTA,Utah Jazz,105
+15907928,2025-01-05,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,119,14,LAL,Los Angeles Lakers,115
+15907929,2025-01-05,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,99,26,SAC,Sacramento Kings,129
+15907930,2025-01-06,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,118,25,POR,Portland Trail Blazers,115
+15907931,2025-01-06,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,99,24,PHX,Phoenix Suns,109
+15907932,2025-01-06,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,99,12,IND,Indiana Pacers,113
+15907933,2025-01-06,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,94,22,ORL,Orlando Magic,103
+15907934,2025-01-06,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,104,17,MIL,Milwaukee Bucks,128
+15907935,2025-01-06,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,114,27,SAS,San Antonio Spurs,110
+15907936,2025-01-06,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,119,7,DAL,Dallas Mavericks,104
+15907937,2025-01-06,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,108,13,LAC,LA Clippers,106
+15907938,2025-01-06,2024,Final,6,Final,False,,,,26,SAC,Sacramento Kings,123,16,MIA,Miami Heat,118
+15907939,2025-01-07,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,115,24,PHX,Phoenix Suns,104
+15907940,2025-01-07,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,112,11,HOU,Houston Rockets,135
+15907941,2025-01-07,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,118,14,LAL,Los Angeles Lakers,97
+15907942,2025-01-07,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,97,18,MIN,Minnesota Timberwolves,104
+15907943,2025-01-07,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,121,1,ATL,Atlanta Hawks,124
+15907944,2025-01-07,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,106,2,BOS,Boston Celtics,118
+15907945,2025-01-07,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,98,16,MIA,Miami Heat,114
+15907946,2025-01-08,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,129,21,OKC,Oklahoma City Thunder,122
+15907947,2025-01-08,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,129,5,CHI,Chicago Bulls,113
+15907948,2025-01-08,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,112,28,TOR,Toronto Raptors,98
+15907949,2025-01-08,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,109,30,WAS,Washington Wizards,103
+15907950,2025-01-08,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,98,9,DET,Detroit Pistons,113
+15907951,2025-01-08,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,100,25,POR,Portland Trail Blazers,119
+15907952,2025-01-08,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,126,13,LAC,LA Clippers,103
+15907953,2025-01-08,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,121,27,SAS,San Antonio Spurs,105
+15907954,2025-01-09,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,132,28,TOR,Toronto Raptors,126
+15907955,2025-01-09,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,104,10,GSW,Golden State Warriors,107
+15907956,2025-01-09,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,89,18,MIN,Minnesota Timberwolves,104
+15907957,2025-01-09,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,115,11,HOU,Houston Rockets,119
+15907958,2025-01-09,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,117,25,POR,Portland Trail Blazers,111
+15907959,2025-01-09,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,123,1,ATL,Atlanta Hawks,115
+15907960,2025-01-09,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,92,16,MIA,Miami Heat,97
+15907962,2025-01-10,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,108,10,GSW,Golden State Warriors,96
+15907963,2025-01-10,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,106,17,MIL,Milwaukee Bucks,109
+15907964,2025-01-10,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,115,19,NOP,New Orleans Pelicans,123
+15907965,2025-01-10,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,97,26,SAC,Sacramento Kings,114
+15907966,2025-01-10,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,101,21,OKC,Oklahoma City Thunder,126
+15907967,2025-01-10,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,138,30,WAS,Washington Wizards,105
+15907968,2025-01-10,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,124,3,BKN,Brooklyn Nets,105
+15907970,2025-01-11,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,114,29,UTA,Utah Jazz,106
+15907971,2025-01-11,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,123,28,TOR,Toronto Raptors,114
+15907972,2025-01-11,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,125,15,MEM,Memphis Grizzlies,127
+15907973,2025-01-11,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,98,16,MIA,Miami Heat,119
+15907976,2025-01-12,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,140,17,MIL,Milwaukee Bucks,106
+15907977,2025-01-12,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,101,8,DEN,Denver Nuggets,112
+15907978,2025-01-12,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,119,26,SAC,Sacramento Kings,124
+15907979,2025-01-12,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,120,19,NOP,New Orleans Pelicans,119
+15907980,2025-01-12,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,93,12,IND,Indiana Pacers,108
+15907981,2025-01-12,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,104,23,PHI,Philadelphia 76ers,99
+15907982,2025-01-12,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,95,21,OKC,Oklahoma City Thunder,136
+15907983,2025-01-12,2024,Final,5,Final,False,,,,29,UTA,Utah Jazz,112,3,BKN,Brooklyn Nets,111
+15907984,2025-01-12,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,120,4,CHA,Charlotte Hornets,113
+15907985,2025-01-13,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,106,18,MIN,Minnesota Timberwolves,120
+15907986,2025-01-13,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,119,9,DET,Detroit Pistons,124
+15907987,2025-01-13,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,104,10,GSW,Golden State Warriors,101
+15907988,2025-01-13,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,120,15,MEM,Memphis Grizzlies,118
+15907989,2025-01-13,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,102,27,SAS,San Antonio Spurs,126
+15907990,2025-01-13,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,109,16,MIA,Miami Heat,98
+15907991,2025-01-14,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,117,6,CLE,Cleveland Cavaliers,127
+15907992,2025-01-14,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,102,21,OKC,Oklahoma City Thunder,118
+15907993,2025-01-14,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,122,24,PHX,Phoenix Suns,117
+15907994,2025-01-14,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,113,19,NOP,New Orleans Pelicans,119
+15907995,2025-01-14,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,130,26,SAC,Sacramento Kings,115
+15907996,2025-01-14,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,99,8,DEN,Denver Nuggets,118
+15907997,2025-01-14,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,114,3,BKN,Brooklyn Nets,132
+15907998,2025-01-15,2024,Final,5,Final,False,,,,23,PHI,Philadelphia 76ers,119,20,NYK,New York Knicks,125
+15907999,2025-01-15,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,110,2,BOS,Boston Celtics,97
+15908000,2025-01-15,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,94,1,ATL,Atlanta Hawks,110
+15908001,2025-01-15,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,122,22,ORL,Orlando Magic,93
+15908002,2025-01-15,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,115,10,GSW,Golden State Warriors,116
+15908003,2025-01-15,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,119,7,DAL,Dallas Mavericks,116
+15908004,2025-01-15,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,115,15,MEM,Memphis Grizzlies,129
+15908005,2025-01-15,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,108,11,HOU,Houston Rockets,128
+15908006,2025-01-15,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,112,4,CHA,Charlotte Hornets,117
+15908007,2025-01-15,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,117,16,MIA,Miami Heat,108
+15908008,2025-01-15,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,126,3,BKN,Brooklyn Nets,67
+15908009,2025-01-16,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,100,12,IND,Indiana Pacers,111
+15908010,2025-01-16,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,123,24,PHX,Phoenix Suns,130
+15908011,2025-01-16,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,134,6,CLE,Cleveland Cavaliers,114
+15908012,2025-01-16,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,89,13,LAC,LA Clippers,118
+15908013,2025-01-16,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,132,11,HOU,Houston Rockets,127
+15908014,2025-01-17,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,121,22,ORL,Orlando Magic,94
+15908015,2025-01-17,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,99,18,MIN,Minnesota Timberwolves,116
+15908016,2025-01-17,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,113,8,DEN,Denver Nuggets,133
+15908017,2025-01-17,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,130,28,TOR,Toronto Raptors,112
+15908018,2025-01-17,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,136,29,UTA,Utah Jazz,123
+15908019,2025-01-17,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,112,15,MEM,Memphis Grizzlies,140
+15908020,2025-01-17,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,106,21,OKC,Oklahoma City Thunder,98
+15908021,2025-01-17,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,123,4,CHA,Charlotte Hornets,125
+15908022,2025-01-17,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,102,3,BKN,Brooklyn Nets,101
+15908023,2025-01-18,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,121,24,PHX,Phoenix Suns,125
+15908024,2025-01-18,2024,Final,5,Final,False,,,,2,BOS,Boston Celtics,115,1,ATL,Atlanta Hawks,119
+15908025,2025-01-18,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,115,23,PHI,Philadelphia 76ers,102
+15908026,2025-01-18,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,122,30,WAS,Washington Wizards,114
+15908027,2025-01-18,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,117,6,CLE,Cleveland Cavaliers,124
+15908028,2025-01-18,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,103,11,HOU,Houston Rockets,125
+15908029,2025-01-19,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,128,27,SAS,San Antonio Spurs,107
+15908030,2025-01-19,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,100,8,DEN,Denver Nuggets,113
+15908031,2025-01-19,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,123,23,PHI,Philadelphia 76ers,109
+15908032,2025-01-19,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,127,3,BKN,Brooklyn Nets,101
+15908033,2025-01-19,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,116,14,LAL,Los Angeles Lakers,102
+15908034,2025-01-19,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,113,5,CHI,Chicago Bulls,102
+15908035,2025-01-19,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,123,30,WAS,Washington Wizards,100
+15908036,2025-01-20,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,110,7,DAL,Dallas Mavericks,105
+15908037,2025-01-20,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,96,9,DET,Detroit Pistons,107
+15908038,2025-01-20,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,108,18,MIN,Minnesota Timberwolves,106
+15908039,2025-01-20,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,119,1,ATL,Atlanta Hawks,110
+15908040,2025-01-20,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,118,24,PHX,Phoenix Suns,92
+15908041,2025-01-20,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,85,2,BOS,Boston Celtics,125
+15908042,2025-01-20,2024,Final,5,Final,False,,,,19,NOP,New Orleans Pelicans,123,29,UTA,Utah Jazz,119
+15908048,2025-01-20,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,99,5,CHI,Chicago Bulls,112
+15908043,2025-01-21,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,95,20,NYK,New York Knicks,99
+15908044,2025-01-21,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,107,25,POR,Portland Trail Blazers,116
+15908045,2025-01-21,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,109,22,ORL,Orlando Magic,93
+15908046,2025-01-21,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,144,23,PHI,Philadelphia 76ers,109
+15908047,2025-01-21,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,111,30,WAS,Washington Wizards,88
+15908049,2025-01-22,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,104,9,DET,Detroit Pistons,114
+15908050,2025-01-22,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,84,24,PHX,Phoenix Suns,108
+15908051,2025-01-22,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,114,18,MIN,Minnesota Timberwolves,115
+15908052,2025-01-22,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,109,6,CLE,Cleveland Cavaliers,108
+15908053,2025-01-22,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,132,4,CHA,Charlotte Hornets,120
+15908055,2025-01-22,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,123,29,UTA,Utah Jazz,114
+15908056,2025-01-22,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,123,10,GSW,Golden State Warriors,117
+15908057,2025-01-22,2024,Final,5,Final,False,,,,13,LAC,LA Clippers,113,2,BOS,Boston Celtics,117
+15908058,2025-01-23,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,110,27,SAS,San Antonio Spurs,140
+15908059,2025-01-23,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,79,25,POR,Portland Trail Blazers,101
+15908060,2025-01-23,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,119,28,TOR,Toronto Raptors,122
+15908061,2025-01-23,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,125,16,MIA,Miami Heat,96
+15908062,2025-01-23,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,115,7,DAL,Dallas Mavericks,121
+15908063,2025-01-23,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,132,26,SAC,Sacramento Kings,123
+15908065,2025-01-23,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,131,5,CHI,Chicago Bulls,106
+15908066,2025-01-23,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,117,2,BOS,Boston Celtics,96
+15908714,2025-01-23,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,110,30,WAS,Washington Wizards,93
+15908067,2025-01-24,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,97,25,POR,Portland Trail Blazers,102
+15908068,2025-01-24,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,132,6,CLE,Cleveland Cavaliers,129
+15908069,2025-01-24,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,139,19,NOP,New Orleans Pelicans,126
+15908070,2025-01-25,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,98,12,IND,Indiana Pacers,136
+15908071,2025-01-25,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,133,8,DEN,Denver Nuggets,104
+15908072,2025-01-25,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,107,2,BOS,Boston Celtics,122
+15908073,2025-01-25,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,97,16,MIA,Miami Heat,106
+15908074,2025-01-25,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,123,19,NOP,New Orleans Pelicans,92
+15908075,2025-01-25,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,121,9,DET,Detroit Pistons,113
+15908076,2025-01-25,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,94,28,TOR,Toronto Raptors,117
+15908077,2025-01-25,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,131,11,HOU,Houston Rockets,135
+15908078,2025-01-25,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,143,26,SAC,Sacramento Kings,120
+15908079,2025-01-25,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,97,23,PHI,Philadelphia 76ers,109
+15908080,2025-01-25,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,125,29,UTA,Utah Jazz,103
+15908081,2025-01-25,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,108,14,LAL,Los Angeles Lakers,118
+15908082,2025-01-25,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,119,30,WAS,Washington Wizards,109
+15908083,2025-01-25,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,127,17,MIL,Milwaukee Bucks,117
+15908084,2025-01-26,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,108,21,OKC,Oklahoma City Thunder,118
+15908085,2025-01-27,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,107,14,LAL,Los Angeles Lakers,112
+15908086,2025-01-27,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,110,9,DET,Detroit Pistons,91
+15908087,2025-01-27,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,112,11,HOU,Houston Rockets,114
+15908088,2025-01-27,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,96,26,SAC,Sacramento Kings,110
+15908089,2025-01-27,2024,Final,6,Final,False,,,,16,MIA,Miami Heat,125,22,ORL,Orlando Magic,119
+15908090,2025-01-27,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,143,15,MEM,Memphis Grizzlies,106
+15908091,2025-01-27,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,113,19,NOP,New Orleans Pelicans,104
+15908092,2025-01-27,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,129,8,DEN,Denver Nuggets,121
+15908093,2025-01-27,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,100,1,ATL,Atlanta Hawks,92
+15908094,2025-01-27,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,130,30,WAS,Washington Wizards,108
+15908095,2025-01-27,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,110,17,MIL,Milwaukee Bucks,125
+15908096,2025-01-27,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,111,13,LAC,LA Clippers,109
+15907969,2025-01-28,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,96,11,HOU,Houston Rockets,100
+15908097,2025-01-28,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,118,14,LAL,Los Angeles Lakers,104
+15908098,2025-01-28,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,114,29,UTA,Utah Jazz,103
+15908099,2025-01-28,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,125,17,MIL,Milwaukee Bucks,112
+15908100,2025-01-29,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,83,3,BKN,Brooklyn Nets,104
+15908101,2025-01-29,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,133,9,DET,Detroit Pistons,119
+15908102,2025-01-29,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,82,28,TOR,Toronto Raptors,106
+15908103,2025-01-29,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,122,5,CHI,Chicago Bulls,100
+15908104,2025-01-29,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,106,6,CLE,Cleveland Cavaliers,126
+15908105,2025-01-29,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,122,8,DEN,Denver Nuggets,112
+15908106,2025-01-29,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,117,26,SAC,Sacramento Kings,104
+15908107,2025-01-29,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,136,7,DAL,Dallas Mavericks,137
+15908108,2025-01-29,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,116,13,LAC,LA Clippers,128
+15908109,2025-01-29,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,113,18,MIN,Minnesota Timberwolves,121
+15908110,2025-01-29,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,116,21,OKC,Oklahoma City Thunder,109
+15908111,2025-01-30,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,96,14,LAL,Los Angeles Lakers,134
+15908112,2025-01-30,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,137,1,ATL,Atlanta Hawks,115
+15908113,2025-01-30,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,120,11,HOU,Houston Rockets,119
+15908114,2025-01-30,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,113,18,MIN,Minnesota Timberwolves,138
+15908115,2025-01-30,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,119,22,ORL,Orlando Magic,90
+15908116,2025-01-31,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,104,13,LAC,LA Clippers,112
+15908117,2025-01-31,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,117,7,DAL,Dallas Mavericks,102
+15908118,2025-01-31,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,134,8,DEN,Denver Nuggets,137
+15908119,2025-01-31,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,106,5,CHI,Chicago Bulls,122
+15908120,2025-01-31,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,116,2,BOS,Boston Celtics,118
+15908121,2025-01-31,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,144,17,MIL,Milwaukee Bucks,118
+15908122,2025-01-31,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,105,24,PHX,Phoenix Suns,130
+15908123,2025-02-01,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,132,1,ATL,Atlanta Hawks,127
+15908124,2025-02-01,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,113,22,ORL,Orlando Magic,99
+15908125,2025-02-01,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,104,8,DEN,Denver Nuggets,107
+15908126,2025-02-01,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,98,3,BKN,Brooklyn Nets,110
+15908127,2025-02-01,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,103,30,WAS,Washington Wizards,105
+15908128,2025-02-01,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,144,26,SAC,Sacramento Kings,110
+15908129,2025-02-01,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,112,14,LAL,Los Angeles Lakers,128
+15908130,2025-02-01,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,103,16,MIA,Miami Heat,105
+15908131,2025-02-01,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,127,24,PHX,Phoenix Suns,108
+15908132,2025-02-02,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,127,5,CHI,Chicago Bulls,119
+15908133,2025-02-02,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,144,7,DAL,Dallas Mavericks,101
+15908134,2025-02-02,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,115,13,LAC,LA Clippers,108
+15908135,2025-02-02,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,110,2,BOS,Boston Celtics,118
+15908136,2025-02-02,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,119,15,MEM,Memphis Grizzlies,132
+15908137,2025-02-03,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,114,30,WAS,Washington Wizards,124
+15908138,2025-02-03,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,130,1,ATL,Atlanta Hawks,132
+15908139,2025-02-03,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,124,11,HOU,Houston Rockets,118
+15908140,2025-02-03,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,128,27,SAS,San Antonio Spurs,109
+15908141,2025-02-03,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,114,26,SAC,Sacramento Kings,116
+15908142,2025-02-03,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,125,17,MIL,Milwaukee Bucks,96
+15908143,2025-02-03,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,125,19,NOP,New Orleans Pelicans,113
+15908144,2025-02-03,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,111,12,IND,Indiana Pacers,112
+15908145,2025-02-03,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,104,22,ORL,Orlando Magic,99
+15908146,2025-02-03,2024,Final,5,Final,False,,,,25,POR,Portland Trail Blazers,121,24,PHX,Phoenix Suns,119
+15908147,2025-02-04,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,105,2,BOS,Boston Celtics,112
+15908148,2025-02-04,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,99,11,HOU,Houston Rockets,97
+15908149,2025-02-04,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,118,7,DAL,Dallas Mavericks,116
+15908150,2025-02-04,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,115,20,NYK,New York Knicks,121
+15908151,2025-02-04,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,133,16,MIA,Miami Heat,124
+15908152,2025-02-04,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,97,14,LAL,Los Angeles Lakers,122
+15908153,2025-02-04,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,112,12,IND,Indiana Pacers,89
+15908154,2025-02-05,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,102,17,MIL,Milwaukee Bucks,112
+15908155,2025-02-05,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,115,6,CLE,Cleveland Cavaliers,118
+15908156,2025-02-05,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,125,27,SAS,San Antonio Spurs,126
+15908157,2025-02-05,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,102,30,WAS,Washington Wizards,119
+15908158,2025-02-05,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,101,16,MIA,Miami Heat,108
+15908159,2025-02-05,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,107,15,MEM,Memphis Grizzlies,138
+15908160,2025-02-05,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,127,5,CHI,Chicago Bulls,108
+15908161,2025-02-05,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,140,24,PHX,Phoenix Suns,109
+15908162,2025-02-05,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,131,10,GSW,Golden State Warriors,128
+15908163,2025-02-05,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,144,19,NOP,New Orleans Pelicans,119
+15908164,2025-02-05,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,111,22,ORL,Orlando Magic,130
+15908165,2025-02-06,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,120,7,DAL,Dallas Mavericks,127
+15908166,2025-02-06,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,127,11,HOU,Houston Rockets,114
+15908167,2025-02-06,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,112,22,ORL,Orlando Magic,90
+15908168,2025-02-06,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,120,10,GSW,Golden State Warriors,112
+15908169,2025-02-06,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,108,26,SAC,Sacramento Kings,100
+15908170,2025-02-06,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,112,12,IND,Indiana Pacers,119
+15908171,2025-02-07,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,117,27,SAS,San Antonio Spurs,116
+15908172,2025-02-07,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,124,6,CLE,Cleveland Cavaliers,134
+15908173,2025-02-07,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,115,17,MIL,Milwaukee Bucks,110
+15908174,2025-02-07,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,102,16,MIA,Miami Heat,86
+15908175,2025-02-07,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,125,23,PHI,Philadelphia 76ers,112
+15908176,2025-02-07,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,121,28,TOR,Toronto Raptors,109
+15908177,2025-02-07,2024,Final,5,Final,False,,,,24,PHX,Phoenix Suns,135,29,UTA,Utah Jazz,127
+15908178,2025-02-08,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,116,11,HOU,Houston Rockets,105
+15908179,2025-02-08,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,124,12,IND,Indiana Pacers,117
+15908180,2025-02-08,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,112,27,SAS,San Antonio Spurs,111
+15908181,2025-02-08,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,111,1,ATL,Atlanta Hawks,125
+15908182,2025-02-08,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,111,10,GSW,Golden State Warriors,132
+15908183,2025-02-08,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,112,21,OKC,Oklahoma City Thunder,125
+15908184,2025-02-08,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,114,25,POR,Portland Trail Blazers,98
+15908185,2025-02-08,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,104,2,BOS,Boston Celtics,131
+15908480,2025-02-08,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,105,8,DEN,Denver Nuggets,122
+15908481,2025-02-08,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,123,19,NOP,New Orleans Pelicans,118
+15908482,2025-02-08,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,130,29,UTA,Utah Jazz,110
+15908483,2025-02-09,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,112,4,CHA,Charlotte Hornets,102
+15908484,2025-02-09,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,94,28,TOR,Toronto Raptors,87
+15908485,2025-02-09,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,135,23,PHI,Philadelphia 76ers,127
+15908486,2025-02-10,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,128,18,MIN,Minnesota Timberwolves,107
+15908487,2025-02-10,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,106,1,ATL,Atlanta Hawks,112
+15908488,2025-02-10,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,121,27,SAS,San Antonio Spurs,131
+15908489,2025-02-10,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,97,4,CHA,Charlotte Hornets,89
+15908490,2025-02-10,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,85,2,BOS,Boston Celtics,103
+15908491,2025-02-10,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,111,10,GSW,Golden State Warriors,125
+15908492,2025-02-10,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,137,19,NOP,New Orleans Pelicans,101
+15908493,2025-02-10,2024,Final,5,Final,False,,,,7,DAL,Dallas Mavericks,128,26,SAC,Sacramento Kings,129
+15908494,2025-02-10,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,146,25,POR,Portland Trail Blazers,117
+15908499,2025-02-10,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,132,29,UTA,Utah Jazz,113
+15908495,2025-02-11,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,103,28,TOR,Toronto Raptors,106
+15908496,2025-02-11,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,115,20,NYK,New York Knicks,128
+15908497,2025-02-11,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,92,9,DET,Detroit Pistons,132
+15908498,2025-02-11,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,112,15,MEM,Memphis Grizzlies,119
+15908500,2025-02-12,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,116,27,SAS,San Antonio Spurs,103
+15908501,2025-02-12,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,102,4,CHA,Charlotte Hornets,86
+15908502,2025-02-12,2024,Final,5,Final,False,,,,30,WAS,Washington Wizards,130,12,IND,Indiana Pacers,134
+15908503,2025-02-12,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,100,23,PHI,Philadelphia 76ers,96
+15908504,2025-02-12,2024,Final,5,Final,False,,,,20,NYK,New York Knicks,149,1,ATL,Atlanta Hawks,148
+15908505,2025-02-12,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,108,6,CLE,Cleveland Cavaliers,131
+15908506,2025-02-12,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,110,9,DET,Detroit Pistons,128
+15908507,2025-02-12,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,101,17,MIL,Milwaukee Bucks,103
+15908508,2025-02-12,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,111,26,SAC,Sacramento Kings,119
+15908509,2025-02-12,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,115,16,MIA,Miami Heat,101
+15908510,2025-02-12,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,119,24,PHX,Phoenix Suns,111
+15908511,2025-02-12,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,132,25,POR,Portland Trail Blazers,121
+15908512,2025-02-12,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,131,14,LAL,Los Angeles Lakers,119
+15908513,2025-02-12,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,111,10,GSW,Golden State Warriors,107
+15908514,2025-02-12,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,128,15,MEM,Memphis Grizzlies,114
+15908515,2025-02-13,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,98,10,GSW,Golden State Warriors,105
+15908516,2025-02-13,2024,Final,5,Final,False,,,,19,NOP,New Orleans Pelicans,140,26,SAC,Sacramento Kings,133
+15908517,2025-02-13,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,118,16,MIA,Miami Heat,113
+15908518,2025-02-13,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,116,21,OKC,Oklahoma City Thunder,101
+15908735,2025-02-13,2024,Final,5,Final,False,,,,29,UTA,Utah Jazz,116,13,LAC,LA Clippers,120
+15907961,2025-02-19,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,97,4,CHA,Charlotte Hornets,100
+15908519,2025-02-20,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,127,15,MEM,Memphis Grizzlies,113
+15908520,2025-02-20,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,104,2,BOS,Boston Celtics,124
+15908521,2025-02-20,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,108,22,ORL,Orlando Magic,114
+15908522,2025-02-20,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,97,6,CLE,Cleveland Cavaliers,110
+15908523,2025-02-20,2024,Final,5,Final,False,,,,20,NYK,New York Knicks,113,5,CHI,Chicago Bulls,111
+15908524,2025-02-20,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,116,13,LAC,LA Clippers,110
+15908525,2025-02-20,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,129,4,CHA,Charlotte Hornets,115
+15908526,2025-02-20,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,120,24,PHX,Phoenix Suns,109
+15908527,2025-02-20,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,102,14,LAL,Los Angeles Lakers,110
+15908528,2025-02-21,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,142,20,NYK,New York Knicks,105
+15908529,2025-02-21,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,104,15,MEM,Memphis Grizzlies,105
+15908530,2025-02-21,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,101,17,MIL,Milwaukee Bucks,104
+15908531,2025-02-21,2024,Final,5,Final,False,,,,28,TOR,Toronto Raptors,111,16,MIA,Miami Heat,120
+15908532,2025-02-21,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,121,18,MIN,Minnesota Timberwolves,115
+15908533,2025-02-21,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,110,9,DET,Detroit Pistons,125
+15908534,2025-02-21,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,111,19,NOP,New Orleans Pelicans,103
+15908535,2025-02-21,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,107,21,OKC,Oklahoma City Thunder,130
+15908536,2025-02-21,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,108,10,GSW,Golden State Warriors,132
+15908537,2025-02-22,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,117,24,PHX,Phoenix Suns,121
+15908538,2025-02-22,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,103,3,BKN,Brooklyn Nets,105
+15908539,2025-02-22,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,100,14,LAL,Los Angeles Lakers,123
+15908540,2025-02-22,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,124,11,HOU,Houston Rockets,115
+15908541,2025-02-22,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,141,4,CHA,Charlotte Hornets,88
+15908542,2025-02-23,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,118,20,NYK,New York Knicks,105
+15908543,2025-02-23,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,126,7,DAL,Dallas Mavericks,102
+15908544,2025-02-23,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,129,13,LAC,LA Clippers,111
+15908545,2025-02-23,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,143,9,DET,Detroit Pistons,148
+15908546,2025-02-23,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,110,30,WAS,Washington Wizards,90
+15908547,2025-02-23,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,127,24,PHX,Phoenix Suns,109
+15908548,2025-02-23,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,120,16,MIA,Miami Heat,113
+15908549,2025-02-23,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,114,27,SAS,San Antonio Spurs,96
+15908550,2025-02-23,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,129,15,MEM,Memphis Grizzlies,123
+15908551,2025-02-23,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,123,21,OKC,Oklahoma City Thunder,130
+15908552,2025-02-24,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,106,13,LAC,LA Clippers,97
+15908553,2025-02-24,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,116,8,DEN,Denver Nuggets,125
+15908554,2025-02-24,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,110,5,CHI,Chicago Bulls,142
+15908555,2025-02-24,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,107,3,BKN,Brooklyn Nets,99
+15908556,2025-02-24,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,98,16,MIA,Miami Heat,86
+15908557,2025-02-24,2024,Final,5,Final,False,,,,21,OKC,Oklahoma City Thunder,128,18,MIN,Minnesota Timberwolves,131
+15908558,2025-02-24,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,112,25,POR,Portland Trail Blazers,114
+15908559,2025-02-24,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,130,4,CHA,Charlotte Hornets,88
+15908560,2025-02-25,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,101,2,BOS,Boston Celtics,111
+15908561,2025-02-25,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,82,6,CLE,Cleveland Cavaliers,122
+15908562,2025-02-25,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,100,17,MIL,Milwaukee Bucks,97
+15908563,2025-02-25,2024,Final,5,Final,False,,,,15,MEM,Memphis Grizzlies,151,24,PHX,Phoenix Suns,148
+15908564,2025-02-25,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,109,27,SAS,San Antonio Spurs,103
+15908565,2025-02-25,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,128,4,CHA,Charlotte Hornets,92
+15908566,2025-02-25,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,107,7,DAL,Dallas Mavericks,99
+15908567,2025-02-26,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,117,2,BOS,Boston Celtics,97
+15908568,2025-02-26,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,111,28,TOR,Toronto Raptors,91
+15908569,2025-02-26,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,110,23,PHI,Philadelphia 76ers,105
+15908570,2025-02-26,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,121,25,POR,Portland Trail Blazers,129
+15908571,2025-02-26,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,121,21,OKC,Oklahoma City Thunder,129
+15908572,2025-02-26,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,131,1,ATL,Atlanta Hawks,109
+15908573,2025-02-26,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,117,13,LAC,LA Clippers,122
+15908574,2025-02-26,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,101,26,SAC,Sacramento Kings,118
+15908575,2025-02-26,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,118,27,SAS,San Antonio Spurs,106
+15908576,2025-02-27,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,115,10,GSW,Golden State Warriors,121
+15908577,2025-02-27,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,121,8,DEN,Denver Nuggets,112
+15908578,2025-02-27,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,103,4,CHA,Charlotte Hornets,96
+15908579,2025-02-27,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,116,19,NOP,New Orleans Pelicans,124
+15908580,2025-02-27,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,111,18,MIN,Minnesota Timberwolves,102
+15908581,2025-02-28,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,119,8,DEN,Denver Nuggets,134
+15908582,2025-02-28,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,119,21,OKC,Oklahoma City Thunder,135
+15908583,2025-02-28,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,116,6,CLE,Cleveland Cavaliers,123
+15908584,2025-02-28,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,102,25,POR,Portland Trail Blazers,121
+15908585,2025-02-28,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,125,12,IND,Indiana Pacers,120
+15908586,2025-02-28,2024,Final,5,Final,False,,,,5,CHI,Chicago Bulls,125,28,TOR,Toronto Raptors,115
+15908587,2025-02-28,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,113,20,NYK,New York Knicks,114
+15908588,2025-02-28,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,125,19,NOP,New Orleans Pelicans,108
+15908589,2025-02-28,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,117,18,MIN,Minnesota Timberwolves,116
+15908590,2025-02-28,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,106,13,LAC,LA Clippers,102
+15908591,2025-03-01,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,100,30,WAS,Washington Wizards,113
+15908592,2025-03-01,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,115,3,BKN,Brooklyn Nets,94
+15908593,2025-03-01,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,103,26,SAC,Sacramento Kings,113
+15908594,2025-03-01,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,128,27,SAS,San Antonio Spurs,130
+15908595,2025-03-01,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,126,10,GSW,Golden State Warriors,119
+15908596,2025-03-01,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,117,17,MIL,Milwaukee Bucks,132
+15908597,2025-03-02,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,110,8,DEN,Denver Nuggets,103
+15908598,2025-03-02,2024,Final,5,Final,False,,,,6,CLE,Cleveland Cavaliers,133,25,POR,Portland Trail Blazers,129
+15908599,2025-03-02,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,127,5,CHI,Chicago Bulls,112
+15908600,2025-03-02,2024,Final,5,Final,False,,,,16,MIA,Miami Heat,112,20,NYK,New York Knicks,116
+15908601,2025-03-02,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,102,28,TOR,Toronto Raptors,104
+15908602,2025-03-02,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,132,21,OKC,Oklahoma City Thunder,146
+15908603,2025-03-02,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,121,19,NOP,New Orleans Pelicans,128
+15908604,2025-03-02,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,98,18,MIN,Minnesota Timberwolves,116
+15908605,2025-03-02,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,108,13,LAC,LA Clippers,102
+15908606,2025-03-03,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,101,10,GSW,Golden State Warriors,119
+15908607,2025-03-03,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,102,25,POR,Portland Trail Blazers,119
+15908608,2025-03-03,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,106,30,WAS,Washington Wizards,90
+15908609,2025-03-03,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,130,1,ATL,Atlanta Hawks,132
+15908610,2025-03-03,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,137,11,HOU,Houston Rockets,128
+15908611,2025-03-03,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,98,26,SAC,Sacramento Kings,122
+15908612,2025-03-03,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,106,9,DET,Detroit Pistons,134
+15908613,2025-03-04,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,115,11,HOU,Houston Rockets,102
+15908614,2025-03-04,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,113,28,TOR,Toronto Raptors,114
+15908615,2025-03-04,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,121,17,MIL,Milwaukee Bucks,127
+15908616,2025-03-04,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,102,10,GSW,Golden State Warriors,114
+15908617,2025-03-04,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,117,6,CLE,Cleveland Cavaliers,139
+15908618,2025-03-04,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,126,23,PHI,Philadelphia 76ers,112
+15908619,2025-03-04,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,127,3,BKN,Brooklyn Nets,113
+15908620,2025-03-04,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,119,13,LAC,LA Clippers,117
+15908621,2025-03-04,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,136,19,NOP,New Orleans Pelicans,115
+15908622,2025-03-05,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,128,25,POR,Portland Trail Blazers,118
+15908623,2025-03-05,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,110,18,MIN,Minnesota Timberwolves,125
+15908624,2025-03-05,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,112,16,MIA,Miami Heat,107
+15908625,2025-03-05,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,125,29,UTA,Utah Jazz,122
+15908626,2025-03-05,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,103,21,OKC,Oklahoma City Thunder,120
+15908627,2025-03-05,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,116,26,SAC,Sacramento Kings,110
+15908628,2025-03-05,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,137,7,DAL,Dallas Mavericks,107
+15908629,2025-03-05,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,123,9,DET,Detroit Pistons,115
+15908630,2025-03-06,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,124,12,IND,Indiana Pacers,118
+15908631,2025-03-06,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,123,23,PHI,Philadelphia 76ers,105
+15908632,2025-03-06,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,119,10,GSW,Golden State Warriors,121
+15908633,2025-03-06,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,97,11,HOU,Houston Rockets,109
+15908634,2025-03-06,2024,Final,5,Final,False,,,,14,LAL,Los Angeles Lakers,113,20,NYK,New York Knicks,109
+15908675,2025-03-06,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,123,5,CHI,Chicago Bulls,125
+15908635,2025-03-07,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,117,6,CLE,Cleveland Cavaliers,118
+15908636,2025-03-07,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,118,29,UTA,Utah Jazz,109
+15908637,2025-03-07,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,111,15,MEM,Memphis Grizzlies,122
+15908638,2025-03-07,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,104,18,MIN,Minnesota Timberwolves,106
+15908639,2025-03-07,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,107,25,POR,Portland Trail Blazers,89
+15908640,2025-03-07,2024,Final,5,Final,False,,,,8,DEN,Denver Nuggets,149,24,PHX,Phoenix Suns,141
+15908641,2025-03-07,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,127,27,SAS,San Antonio Spurs,109
+15908642,2025-03-07,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,105,20,NYK,New York Knicks,95
+15908643,2025-03-08,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,105,3,BKN,Brooklyn Nets,102
+15908644,2025-03-08,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,146,19,NOP,New Orleans Pelicans,117
+15908645,2025-03-08,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,120,12,IND,Indiana Pacers,118
+15908646,2025-03-08,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,117,30,WAS,Washington Wizards,118
+15908647,2025-03-08,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,109,5,CHI,Chicago Bulls,114
+15908648,2025-03-08,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,109,22,ORL,Orlando Magic,111
+15908649,2025-03-08,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,111,14,LAL,Los Angeles Lakers,101
+15908650,2025-03-08,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,115,9,DET,Detroit Pistons,110
+15908651,2025-03-09,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,127,8,DEN,Denver Nuggets,103
+15908652,2025-03-09,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,116,24,PHX,Phoenix Suns,125
+15908653,2025-03-09,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,100,6,CLE,Cleveland Cavaliers,112
+15908654,2025-03-09,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,104,15,MEM,Memphis Grizzlies,107
+15908655,2025-03-09,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,126,29,UTA,Utah Jazz,122
+15908656,2025-03-09,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,141,27,SAS,San Antonio Spurs,124
+15908657,2025-03-09,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,112,9,DET,Detroit Pistons,119
+15908658,2025-03-09,2024,Final,5,Final,False,,,,13,LAC,LA Clippers,111,26,SAC,Sacramento Kings,110
+15908659,2025-03-10,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,132,23,PHI,Philadelphia 76ers,123
+15908660,2025-03-10,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,114,29,UTA,Utah Jazz,108
+15908661,2025-03-10,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,111,14,LAL,Los Angeles Lakers,108
+15908662,2025-03-10,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,102,4,CHA,Charlotte Hornets,105
+15908663,2025-03-10,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,119,30,WAS,Washington Wizards,104
+15908664,2025-03-10,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,121,12,IND,Indiana Pacers,103
+15908665,2025-03-10,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,97,22,ORL,Orlando Magic,84
+15908666,2025-03-10,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,120,24,PHX,Phoenix Suns,118
+15908667,2025-03-10,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,127,8,DEN,Denver Nuggets,140
+15908668,2025-03-10,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,129,7,DAL,Dallas Mavericks,133
+15908669,2025-03-10,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,130,25,POR,Portland Trail Blazers,120
+15908670,2025-03-10,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,104,20,NYK,New York Knicks,133
+15908671,2025-03-11,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,109,3,BKN,Brooklyn Nets,104
+15908672,2025-03-11,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,123,30,WAS,Washington Wizards,103
+15908673,2025-03-11,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,115,17,MIL,Milwaukee Bucks,114
+15908674,2025-03-11,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,127,13,LAC,LA Clippers,120
+15908676,2025-03-12,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,123,4,CHA,Charlotte Hornets,110
+15908677,2025-03-12,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,112,21,OKC,Oklahoma City Thunder,118
+15908678,2025-03-12,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,118,23,PHI,Philadelphia 76ers,105
+15908679,2025-03-12,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,104,13,LAC,LA Clippers,119
+15908680,2025-03-12,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,111,24,PHX,Phoenix Suns,104
+15908681,2025-03-12,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,122,29,UTA,Utah Jazz,115
+15908682,2025-03-12,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,126,7,DAL,Dallas Mavericks,116
+15908683,2025-03-12,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,95,18,MIN,Minnesota Timberwolves,115
+15908684,2025-03-12,2024,Final,5,Final,False,,,,25,POR,Portland Trail Blazers,113,20,NYK,New York Knicks,114
+15908685,2025-03-13,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,125,30,WAS,Washington Wizards,129
+15908686,2025-03-13,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,126,14,LAL,Los Angeles Lakers,106
+15908687,2025-03-13,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,116,3,BKN,Brooklyn Nets,110
+15908688,2025-03-13,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,130,26,SAC,Sacramento Kings,104
+15908872,2025-03-13,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,93,22,ORL,Orlando Magic,113
+15908689,2025-03-14,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,91,2,BOS,Boston Celtics,103
+15908690,2025-03-14,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,100,12,IND,Indiana Pacers,112
+15908691,2025-03-14,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,98,13,LAC,LA Clippers,121
+15908692,2025-03-14,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,133,7,DAL,Dallas Mavericks,96
+15908693,2025-03-14,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,124,6,CLE,Cleveland Cavaliers,133
+15908694,2025-03-14,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,118,22,ORL,Orlando Magic,111
+15908695,2025-03-14,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,134,4,CHA,Charlotte Hornets,145
+15908696,2025-03-14,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,131,14,LAL,Los Angeles Lakers,126
+15908697,2025-03-14,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,118,28,TOR,Toronto Raptors,126
+15908698,2025-03-14,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,122,26,SAC,Sacramento Kings,106
+15908699,2025-03-15,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,113,2,BOS,Boston Celtics,115
+15908700,2025-03-15,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,107,21,OKC,Oklahoma City Thunder,113
+15908701,2025-03-15,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,117,5,CHI,Chicago Bulls,114
+15908702,2025-03-15,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,125,16,MIA,Miami Heat,91
+15908703,2025-03-15,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,126,12,IND,Indiana Pacers,119
+15908704,2025-03-15,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,119,19,NOP,New Orleans Pelicans,115
+15908705,2025-03-15,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,97,20,NYK,New York Knicks,94
+15908706,2025-03-15,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,123,30,WAS,Washington Wizards,126
+15907975,2025-03-16,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,123,4,CHA,Charlotte Hornets,88
+15908707,2025-03-16,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,125,23,PHI,Philadelphia 76ers,130
+15908708,2025-03-16,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,107,24,PHX,Phoenix Suns,96
+15908709,2025-03-16,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,122,1,ATL,Atlanta Hawks,114
+15908710,2025-03-16,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,103,22,ORL,Orlando Magic,108
+15908711,2025-03-16,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,105,28,TOR,Toronto Raptors,102
+15908712,2025-03-16,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,128,29,UTA,Utah Jazz,102
+15908713,2025-03-16,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,105,21,OKC,Oklahoma City Thunder,121
+15907974,2025-03-17,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,125,27,SAS,San Antonio Spurs,109
+15908715,2025-03-17,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,116,16,MIA,Miami Heat,95
+15908716,2025-03-17,2024,Final,5,Final,False,,,,11,HOU,Houston Rockets,144,23,PHI,Philadelphia 76ers,137
+15908717,2025-03-17,2024,Final,5,Final,False,,,,18,MIN,Minnesota Timberwolves,130,12,IND,Indiana Pacers,132
+15908718,2025-03-17,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,81,9,DET,Detroit Pistons,127
+15908720,2025-03-17,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,97,5,CHI,Chicago Bulls,111
+15908721,2025-03-17,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,105,8,DEN,Denver Nuggets,114
+15908722,2025-03-17,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,129,28,TOR,Toronto Raptors,89
+15908723,2025-03-17,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,132,15,MEM,Memphis Grizzlies,122
+15908726,2025-03-17,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,112,30,WAS,Washington Wizards,97
+15908724,2025-03-18,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,102,1,ATL,Atlanta Hawks,134
+15908725,2025-03-18,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,104,3,BKN,Brooklyn Nets,96
+15908728,2025-03-18,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,132,6,CLE,Cleveland Cavaliers,119
+15908743,2025-03-18,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,104,17,MIL,Milwaukee Bucks,93
+15908064,2025-03-19,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,128,30,WAS,Washington Wizards,112
+15908729,2025-03-19,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,135,7,DAL,Dallas Mavericks,131
+15908730,2025-03-19,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,108,11,HOU,Houston Rockets,116
+15908731,2025-03-19,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,113,9,DET,Detroit Pistons,116
+15908732,2025-03-19,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,115,19,NOP,New Orleans Pelicans,119
+15908733,2025-03-19,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,133,23,PHI,Philadelphia 76ers,100
+15908734,2025-03-19,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,120,20,NYK,New York Knicks,105
+15908737,2025-03-19,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,120,8,DEN,Denver Nuggets,108
+15908738,2025-03-19,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,127,5,CHI,Chicago Bulls,121
+15908739,2025-03-19,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,115,15,MEM,Memphis Grizzlies,99
+15908740,2025-03-19,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,123,6,CLE,Cleveland Cavaliers,119
+15908727,2025-03-20,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,89,17,MIL,Milwaukee Bucks,118
+15908736,2025-03-20,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,117,28,TOR,Toronto Raptors,114
+15908741,2025-03-20,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,115,20,NYK,New York Knicks,98
+15908742,2025-03-20,2024,Final,5,Final,False,,,,12,IND,Indiana Pacers,105,3,BKN,Brooklyn Nets,99
+15908744,2025-03-20,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,116,5,CHI,Chicago Bulls,128
+15908745,2025-03-21,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,105,22,ORL,Orlando Magic,120
+15908746,2025-03-21,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,98,11,HOU,Houston Rockets,102
+15908747,2025-03-21,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,134,19,NOP,New Orleans Pelicans,93
+15908748,2025-03-21,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,141,4,CHA,Charlotte Hornets,106
+15908749,2025-03-21,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,128,23,PHI,Philadelphia 76ers,120
+15908750,2025-03-21,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,123,9,DET,Detroit Pistons,117
+15908751,2025-03-21,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,99,2,BOS,Boston Celtics,121
+15908752,2025-03-21,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,123,6,CLE,Cleveland Cavaliers,112
+15908753,2025-03-21,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,128,8,DEN,Denver Nuggets,109
+15908754,2025-03-21,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,128,15,MEM,Memphis Grizzlies,108
+15908755,2025-03-22,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,108,3,BKN,Brooklyn Nets,103
+15908756,2025-03-22,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,124,10,GSW,Golden State Warriors,115
+15908757,2025-03-22,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,122,30,WAS,Washington Wizards,103
+15908758,2025-03-22,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,108,17,MIL,Milwaukee Bucks,114
+15908759,2025-03-22,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,115,5,CHI,Chicago Bulls,146
+15908760,2025-03-23,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,136,19,NOP,New Orleans Pelicans,130
+15908761,2025-03-23,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,91,6,CLE,Cleveland Cavaliers,120
+15908762,2025-03-23,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,132,23,PHI,Philadelphia 76ers,119
+15908763,2025-03-23,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,122,4,CHA,Charlotte Hornets,105
+15908764,2025-03-23,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,89,27,SAS,San Antonio Spurs,123
+15908765,2025-03-23,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,116,2,BOS,Boston Celtics,129
+15908766,2025-03-23,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,111,8,DEN,Denver Nuggets,116
+15908767,2025-03-23,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,101,21,OKC,Oklahoma City Thunder,103
+15908768,2025-03-24,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,119,18,MIN,Minnesota Timberwolves,103
+15908769,2025-03-24,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,118,14,LAL,Los Angeles Lakers,106
+15908770,2025-03-24,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,104,28,TOR,Toronto Raptors,112
+15908771,2025-03-24,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,101,7,DAL,Dallas Mavericks,120
+15908772,2025-03-24,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,112,23,PHI,Philadelphia 76ers,99
+15908773,2025-03-24,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,119,5,CHI,Chicago Bulls,129
+15908774,2025-03-24,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,108,17,MIL,Milwaukee Bucks,106
+15908775,2025-03-24,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,95,2,BOS,Boston Celtics,113
+15908776,2025-03-25,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,104,22,ORL,Orlando Magic,111
+15908777,2025-03-25,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,122,27,SAS,San Antonio Spurs,96
+15908778,2025-03-25,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,112,10,GSW,Golden State Warriors,86
+15908779,2025-03-25,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,128,7,DAL,Dallas Mavericks,113
+15908780,2025-03-25,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,121,1,ATL,Atlanta Hawks,114
+15908781,2025-03-25,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,103,15,MEM,Memphis Grizzlies,140
+15908782,2025-03-25,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,111,6,CLE,Cleveland Cavaliers,122
+15908783,2025-03-25,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,105,21,OKC,Oklahoma City Thunder,121
+15908784,2025-03-26,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,114,30,WAS,Washington Wizards,119
+15908785,2025-03-26,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,86,28,TOR,Toronto Raptors,116
+15908786,2025-03-26,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,119,14,LAL,Los Angeles Lakers,120
+15908787,2025-03-26,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,113,13,LAC,LA Clippers,126
+15908788,2025-03-26,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,127,17,MIL,Milwaukee Bucks,117
+15908789,2025-03-26,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,102,2,BOS,Boston Celtics,132
+15908790,2025-03-27,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,124,27,SAS,San Antonio Spurs,116
+15908791,2025-03-27,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,92,7,DAL,Dallas Mavericks,101
+15908792,2025-03-27,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,109,12,IND,Indiana Pacers,162
+15908793,2025-03-27,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,122,1,ATL,Atlanta Hawks,112
+15908794,2025-03-27,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,119,14,LAL,Los Angeles Lakers,117
+15908795,2025-03-27,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,125,15,MEM,Memphis Grizzlies,104
+15908796,2025-03-27,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,110,11,HOU,Houston Rockets,121
+15908797,2025-03-27,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,128,25,POR,Portland Trail Blazers,107
+15908798,2025-03-28,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,133,6,CLE,Cleveland Cavaliers,122
+15908799,2025-03-28,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,100,13,LAC,LA Clippers,132
+15908800,2025-03-28,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,108,4,CHA,Charlotte Hornets,97
+15908801,2025-03-28,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,107,20,NYK,New York Knicks,116
+15908802,2025-03-28,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,124,24,PHX,Phoenix Suns,109
+15908803,2025-03-28,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,95,10,GSW,Golden State Warriors,111
+15908804,2025-03-28,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,129,29,UTA,Utah Jazz,93
+15908805,2025-03-29,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,121,26,SAC,Sacramento Kings,91
+15908806,2025-03-29,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,112,3,BKN,Brooklyn Nets,115
+15908807,2025-03-29,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,95,16,MIA,Miami Heat,118
+15908808,2025-03-29,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,119,7,DAL,Dallas Mavericks,120
+15908809,2025-03-29,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,127,14,LAL,Los Angeles Lakers,134
+15908810,2025-03-29,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,132,12,IND,Indiana Pacers,111
+15908811,2025-03-29,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,111,2,BOS,Boston Celtics,121
+15908812,2025-03-30,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,127,13,LAC,LA Clippers,122
+15908813,2025-03-30,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,110,25,POR,Portland Trail Blazers,93
+15908814,2025-03-30,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,124,1,ATL,Atlanta Hawks,145
+15908815,2025-03-30,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,123,9,DET,Detroit Pistons,104
+15908816,2025-03-30,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,98,4,CHA,Charlotte Hornets,94
+15908817,2025-03-30,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,106,10,GSW,Golden State Warriors,148
+15908818,2025-03-30,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,109,28,TOR,Toronto Raptors,127
+15908819,2025-03-30,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,109,11,HOU,Houston Rockets,148
+15908820,2025-03-31,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,110,29,UTA,Utah Jazz,106
+15908821,2025-03-31,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,111,26,SAC,Sacramento Kings,109
+15908822,2025-03-31,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,87,13,LAC,LA Clippers,96
+15908823,2025-03-31,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,94,16,MIA,Miami Heat,120
+15908824,2025-03-31,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,103,2,BOS,Boston Celtics,117
+15908825,2025-03-31,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,145,5,CHI,Chicago Bulls,117
+15908826,2025-03-31,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,109,3,BKN,Brooklyn Nets,113
+15908827,2025-03-31,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,104,11,HOU,Houston Rockets,98
+15908719,2025-04-01,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,105,22,ORL,Orlando Magic,116
+15908828,2025-04-01,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,113,25,POR,Portland Trail Blazers,127
+15908829,2025-04-01,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,105,23,PHI,Philadelphia 76ers,91
+15908830,2025-04-01,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,137,28,TOR,Toronto Raptors,118
+15908831,2025-04-01,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,125,10,GSW,Golden State Warriors,134
+15908832,2025-04-01,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,133,24,PHX,Phoenix Suns,123
+15908833,2025-04-01,2024,Final,6,Final,False,,,,8,DEN,Denver Nuggets,139,18,MIN,Minnesota Timberwolves,140
+15908834,2025-04-02,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,124,20,NYK,New York Knicks,105
+15908835,2025-04-02,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,119,4,CHA,Charlotte Hornets,105
+15908836,2025-04-02,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,116,26,SAC,Sacramento Kings,111
+15908837,2025-04-02,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,103,16,MIA,Miami Heat,124
+15908838,2025-04-02,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,143,29,UTA,Utah Jazz,105
+15908839,2025-04-02,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,119,9,DET,Detroit Pistons,103
+15908840,2025-04-02,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,120,1,ATL,Atlanta Hawks,118
+15908841,2025-04-02,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,106,27,SAS,San Antonio Spurs,113
+15908842,2025-04-02,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,114,19,NOP,New Orleans Pelicans,98
+15908843,2025-04-03,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,97,22,ORL,Orlando Magic,109
+15908844,2025-04-03,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,90,18,MIN,Minnesota Timberwolves,105
+15908845,2025-04-03,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,108,15,MEM,Memphis Grizzlies,110
+15908846,2025-04-03,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,113,17,MIL,Milwaukee Bucks,126
+15908847,2025-04-03,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,103,25,POR,Portland Trail Blazers,112
+15908848,2025-04-03,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,116,10,GSW,Golden State Warriors,123
+15908849,2025-04-04,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,102,26,SAC,Sacramento Kings,125
+15908850,2025-04-04,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,140,29,UTA,Utah Jazz,112
+15908851,2025-04-04,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,123,24,PHX,Phoenix Suns,103
+15908852,2025-04-04,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,105,9,DET,Detroit Pistons,117
+15908853,2025-04-04,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,118,25,POR,Portland Trail Blazers,113
+15908854,2025-04-04,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,125,21,OKC,Oklahoma City Thunder,111
+15908855,2025-04-04,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,113,6,CLE,Cleveland Cavaliers,114
+15908856,2025-04-04,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,118,8,DEN,Denver Nuggets,104
+15908857,2025-04-04,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,124,19,NOP,New Orleans Pelicans,108
+15908858,2025-04-04,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,114,7,DAL,Dallas Mavericks,91
+15908859,2025-04-05,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,105,20,NYK,New York Knicks,121
+15908860,2025-04-05,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,103,15,MEM,Memphis Grizzlies,109
+15908861,2025-04-05,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,109,18,MIN,Minnesota Timberwolves,114
+15908862,2025-04-05,2024,Final,5,Final,False,,,,16,MIA,Miami Heat,115,17,MIL,Milwaukee Bucks,121
+15908863,2025-04-05,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,135,7,DAL,Dallas Mavericks,104
+15908054,2025-04-06,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,107,17,MIL,Milwaukee Bucks,111
+15908864,2025-04-06,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,117,5,CHI,Chicago Bulls,131
+15908865,2025-04-06,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,109,28,TOR,Toronto Raptors,120
+15908866,2025-04-06,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,99,14,LAL,Los Angeles Lakers,126
+15908867,2025-04-06,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,147,29,UTA,Utah Jazz,134
+15908868,2025-04-06,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,124,30,WAS,Washington Wizards,90
+15908869,2025-04-06,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,113,26,SAC,Sacramento Kings,120
+15908870,2025-04-06,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,120,27,SAS,San Antonio Spurs,109
+15908871,2025-04-06,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,112,24,PHX,Phoenix Suns,98
+15908873,2025-04-06,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,120,12,IND,Indiana Pacers,125
+15908874,2025-04-06,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,96,11,HOU,Houston Rockets,106
+15908875,2025-04-07,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,117,26,SAC,Sacramento Kings,127
+15908876,2025-04-07,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,117,23,PHI,Philadelphia 76ers,105
+15908877,2025-04-08,2024,Final,4,Final,False,,,,4,CHA,Charlotte Hornets,100,15,MEM,Memphis Grizzlies,124
+15908878,2025-04-08,2024,Final,4,Final,False,,,,6,CLE,Cleveland Cavaliers,135,5,CHI,Chicago Bulls,113
+15908879,2025-04-08,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,104,30,WAS,Washington Wizards,98
+15908880,2025-04-08,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,119,1,ATL,Atlanta Hawks,112
+15908881,2025-04-08,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,119,19,NOP,New Orleans Pelicans,114
+15908882,2025-04-08,2024,Final,5,Final,False,,,,20,NYK,New York Knicks,117,2,BOS,Boston Celtics,119
+15908883,2025-04-08,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,110,18,MIN,Minnesota Timberwolves,103
+15908884,2025-04-08,2024,Final,4,Final,False,,,,21,OKC,Oklahoma City Thunder,136,14,LAL,Los Angeles Lakers,120
+15908885,2025-04-08,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,95,10,GSW,Golden State Warriors,133
+15908886,2025-04-08,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,122,27,SAS,San Antonio Spurs,117
+15908887,2025-04-09,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,96,2,BOS,Boston Celtics,76
+15908888,2025-04-09,2024,Final,4,Final,False,,,,30,WAS,Washington Wizards,103,23,PHI,Philadelphia 76ers,122
+15908889,2025-04-09,2024,Final,4,Final,False,,,,28,TOR,Toronto Raptors,126,4,CHA,Charlotte Hornets,96
+15908890,2025-04-09,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,97,14,LAL,Los Angeles Lakers,112
+15908891,2025-04-09,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,119,16,MIA,Miami Heat,111
+15908893,2025-04-09,2024,Final,5,Final,False,,,,29,UTA,Utah Jazz,133,25,POR,Portland Trail Blazers,126
+15908894,2025-04-09,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,111,27,SAS,San Antonio Spurs,114
+15908895,2025-04-09,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,112,21,OKC,Oklahoma City Thunder,125
+15908896,2025-04-09,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,116,8,DEN,Denver Nuggets,124
+15908897,2025-04-09,2024,Final,4,Final,False,,,,13,LAC,LA Clippers,134,11,HOU,Houston Rockets,117
+15908892,2025-04-10,2024,Final,4,Final,False,,,,17,MIL,Milwaukee Bucks,136,19,NOP,New Orleans Pelicans,111
+15908898,2025-04-10,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,115,20,NYK,New York Knicks,106
+15908899,2025-04-10,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,114,6,CLE,Cleveland Cavaliers,112
+15908900,2025-04-10,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,109,1,ATL,Atlanta Hawks,133
+15908901,2025-04-10,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,125,18,MIN,Minnesota Timberwolves,141
+15908902,2025-04-11,2024,Final,4,Final,False,,,,9,DET,Detroit Pistons,119,17,MIL,Milwaukee Bucks,125
+15908903,2025-04-11,2024,Final,4,Final,False,,,,12,IND,Indiana Pacers,115,22,ORL,Orlando Magic,129
+15908904,2025-04-11,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,110,1,ATL,Atlanta Hawks,124
+15908905,2025-04-11,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,130,4,CHA,Charlotte Hornets,94
+15908906,2025-04-11,2024,Final,4,Final,False,,,,20,NYK,New York Knicks,102,6,CLE,Cleveland Cavaliers,108
+15908907,2025-04-11,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,119,30,WAS,Washington Wizards,89
+15908908,2025-04-11,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,104,16,MIA,Miami Heat,153
+15908909,2025-04-11,2024,Final,4,Final,False,,,,7,DAL,Dallas Mavericks,124,28,TOR,Toronto Raptors,102
+15908910,2025-04-11,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,117,3,BKN,Brooklyn Nets,91
+15908911,2025-04-11,2024,Final,4,Final,False,,,,8,DEN,Denver Nuggets,117,15,MEM,Memphis Grizzlies,109
+15908912,2025-04-11,2024,Final,4,Final,False,,,,29,UTA,Utah Jazz,111,21,OKC,Oklahoma City Thunder,145
+15908913,2025-04-11,2024,Final,4,Final,False,,,,24,PHX,Phoenix Suns,117,27,SAS,San Antonio Spurs,98
+15908914,2025-04-11,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,86,10,GSW,Golden State Warriors,103
+15908915,2025-04-11,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,100,13,LAC,LA Clippers,101
+15908916,2025-04-11,2024,Final,4,Final,False,,,,14,LAL,Los Angeles Lakers,140,11,HOU,Houston Rockets,109
+15908917,2025-04-13,2024,Final,4,Final,False,,,,1,ATL,Atlanta Hawks,117,22,ORL,Orlando Magic,105
+15908918,2025-04-13,2024,Final,4,Final,False,,,,2,BOS,Boston Celtics,93,4,CHA,Charlotte Hornets,86
+15908919,2025-04-13,2024,Final,4,Final,False,,,,3,BKN,Brooklyn Nets,105,20,NYK,New York Knicks,113
+15908920,2025-04-13,2024,Final,6,Final,False,,,,6,CLE,Cleveland Cavaliers,118,12,IND,Indiana Pacers,126
+15908921,2025-04-13,2024,Final,4,Final,False,,,,16,MIA,Miami Heat,118,30,WAS,Washington Wizards,119
+15908922,2025-04-13,2024,Final,4,Final,False,,,,23,PHI,Philadelphia 76ers,102,5,CHI,Chicago Bulls,122
+15908923,2025-04-13,2024,Final,5,Final,False,,,,17,MIL,Milwaukee Bucks,140,9,DET,Detroit Pistons,133
+15908924,2025-04-13,2024,Final,4,Final,False,,,,11,HOU,Houston Rockets,111,8,DEN,Denver Nuggets,126
+15908925,2025-04-13,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,132,7,DAL,Dallas Mavericks,97
+15908926,2025-04-13,2024,Final,4,Final,False,,,,18,MIN,Minnesota Timberwolves,116,29,UTA,Utah Jazz,105
+15908927,2025-04-13,2024,Final,4,Final,False,,,,19,NOP,New Orleans Pelicans,100,21,OKC,Oklahoma City Thunder,115
+15908928,2025-04-13,2024,Final,4,Final,False,,,,27,SAS,San Antonio Spurs,125,28,TOR,Toronto Raptors,118
+15908929,2025-04-13,2024,Final,5,Final,False,,,,10,GSW,Golden State Warriors,119,13,LAC,LA Clippers,124
+15908930,2025-04-13,2024,Final,4,Final,False,,,,25,POR,Portland Trail Blazers,109,14,LAL,Los Angeles Lakers,81
+15908931,2025-04-13,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,109,24,PHX,Phoenix Suns,98
+18421229,2025-04-15,2024,Final,4,Final,False,,,,22,ORL,Orlando Magic,120,1,ATL,Atlanta Hawks,95
+18421910,2025-04-15,2024,Final,4,Final,False,,,,10,GSW,Golden State Warriors,121,15,MEM,Memphis Grizzlies,116
+18421253,2025-04-16,2024,Final,4,Final,False,,,,5,CHI,Chicago Bulls,90,16,MIA,Miami Heat,109
+18421908,2025-04-16,2024,Final,4,Final,False,,,,26,SAC,Sacramento Kings,106,7,DAL,Dallas Mavericks,120
+18423164,2025-04-18,2024,Final,5,Final,False,,,,1,ATL,Atlanta Hawks,114,16,MIA,Miami Heat,123
+18423251,2025-04-18,2024,Final,4,Final,False,,,,15,MEM,Memphis Grizzlies,120,7,DAL,Dallas Mavericks,106
+18421937,2025-04-19,2024,Final,4,Final,True,,,,20,NYK,New York Knicks,123,9,DET,Detroit Pistons,112
+18421938,2025-04-19,2024,Final,4,Final,True,,,,12,IND,Indiana Pacers,117,17,MIL,Milwaukee Bucks,98
+18421939,2025-04-19,2024,Final,4,Final,True,,,,14,LAL,Los Angeles Lakers,95,18,MIN,Minnesota Timberwolves,117
+18421940,2025-04-19,2024,Final,5,Final,True,,,,8,DEN,Denver Nuggets,112,13,LAC,LA Clippers,110
+18422268,2025-04-20,2024,Final,4,Final,True,,,,2,BOS,Boston Celtics,103,22,ORL,Orlando Magic,86
+18422290,2025-04-20,2024,Final,4,Final,True,,,,11,HOU,Houston Rockets,85,10,GSW,Golden State Warriors,95
+18425147,2025-04-20,2024,Final,4,Final,True,,,,6,CLE,Cleveland Cavaliers,121,16,MIA,Miami Heat,100
+18425247,2025-04-20,2024,Final,4,Final,True,,,,21,OKC,Oklahoma City Thunder,131,15,MEM,Memphis Grizzlies,80
+18422291,2025-04-21,2024,Final,4,Final,True,,,,20,NYK,New York Knicks,94,9,DET,Detroit Pistons,100
+18422292,2025-04-21,2024,Final,4,Final,True,,,,8,DEN,Denver Nuggets,102,13,LAC,LA Clippers,105
+18422293,2025-04-22,2024,Final,4,Final,True,,,,12,IND,Indiana Pacers,123,17,MIL,Milwaukee Bucks,115
+18422294,2025-04-22,2024,Final,4,Final,True,,,,14,LAL,Los Angeles Lakers,94,18,MIN,Minnesota Timberwolves,85
+18425252,2025-04-22,2024,Final,4,Final,True,,,,21,OKC,Oklahoma City Thunder,118,15,MEM,Memphis Grizzlies,99
+18422295,2025-04-23,2024,Final,4,Final,True,,,,2,BOS,Boston Celtics,109,22,ORL,Orlando Magic,100
+18422296,2025-04-23,2024,Final,4,Final,True,,,,11,HOU,Houston Rockets,109,10,GSW,Golden State Warriors,94
+18425154,2025-04-23,2024,Final,4,Final,True,,,,6,CLE,Cleveland Cavaliers,121,16,MIA,Miami Heat,112
+18422297,2025-04-24,2024,Final,4,Final,True,,,,9,DET,Detroit Pistons,116,20,NYK,New York Knicks,118
+18422298,2025-04-24,2024,Final,4,Final,True,,,,13,LAC,LA Clippers,117,8,DEN,Denver Nuggets,83
+18425258,2025-04-24,2024,Final,4,Final,True,,,,15,MEM,Memphis Grizzlies,108,21,OKC,Oklahoma City Thunder,114
+18422299,2025-04-25,2024,Final,4,Final,True,,,,22,ORL,Orlando Magic,95,2,BOS,Boston Celtics,93
+18422300,2025-04-25,2024,Final,4,Final,True,,,,17,MIL,Milwaukee Bucks,117,12,IND,Indiana Pacers,101
+18422301,2025-04-25,2024,Final,4,Final,True,,,,18,MIN,Minnesota Timberwolves,116,14,LAL,Los Angeles Lakers,104
+18422302,2025-04-26,2024,Final,4,Final,True,,,,10,GSW,Golden State Warriors,104,11,HOU,Houston Rockets,93
+18422303,2025-04-26,2024,Final,4,Final,True,,,,13,LAC,LA Clippers,99,8,DEN,Denver Nuggets,101
+18425162,2025-04-26,2024,Final,4,Final,True,,,,16,MIA,Miami Heat,87,6,CLE,Cleveland Cavaliers,124
+18425264,2025-04-26,2024,Final,4,Final,True,,,,15,MEM,Memphis Grizzlies,115,21,OKC,Oklahoma City Thunder,117
+18422304,2025-04-27,2024,Final,4,Final,True,,,,22,ORL,Orlando Magic,98,2,BOS,Boston Celtics,107
+18422305,2025-04-27,2024,Final,4,Final,True,,,,9,DET,Detroit Pistons,93,20,NYK,New York Knicks,94
+18422306,2025-04-27,2024,Final,4,Final,True,,,,17,MIL,Milwaukee Bucks,103,12,IND,Indiana Pacers,129
+18422307,2025-04-27,2024,Final,4,Final,True,,,,18,MIN,Minnesota Timberwolves,116,14,LAL,Los Angeles Lakers,113
+18422308,2025-04-28,2024,Final,4,Final,True,,,,10,GSW,Golden State Warriors,109,11,HOU,Houston Rockets,106
+18425169,2025-04-28,2024,Final,4,Final,True,,,,16,MIA,Miami Heat,83,6,CLE,Cleveland Cavaliers,138
+18422309,2025-04-29,2024,Final,4,Final,True,,,,2,BOS,Boston Celtics,120,22,ORL,Orlando Magic,89
+18422310,2025-04-29,2024,Final,4,Final,True,,,,20,NYK,New York Knicks,103,9,DET,Detroit Pistons,106
+18422311,2025-04-29,2024,Final,5,Final,True,,,,12,IND,Indiana Pacers,119,17,MIL,Milwaukee Bucks,118
+18422312,2025-04-29,2024,Final,4,Final,True,,,,8,DEN,Denver Nuggets,131,13,LAC,LA Clippers,115
+18422313,2025-04-30,2024,Final,4,Final,True,,,,11,HOU,Houston Rockets,131,10,GSW,Golden State Warriors,116
+18422314,2025-04-30,2024,Final,4,Final,True,,,,14,LAL,Los Angeles Lakers,96,18,MIN,Minnesota Timberwolves,103
+18422316,2025-05-01,2024,Final,4,Final,True,,,,9,DET,Detroit Pistons,113,20,NYK,New York Knicks,116
+18422317,2025-05-01,2024,Final,4,Final,True,,,,13,LAC,LA Clippers,111,8,DEN,Denver Nuggets,105
+18422319,2025-05-02,2024,Final,4,Final,True,,,,10,GSW,Golden State Warriors,107,11,HOU,Houston Rockets,115
+18422323,2025-05-03,2024,Final,4,Final,True,,,,8,DEN,Denver Nuggets,120,13,LAC,LA Clippers,101
+18422325,2025-05-04,2024,Final,4,Final,True,,,,11,HOU,Houston Rockets,89,10,GSW,Golden State Warriors,103
+18435059,2025-05-04,2024,Final,4,Final,True,,,,6,CLE,Cleveland Cavaliers,112,12,IND,Indiana Pacers,121
+18435668,2025-05-05,2024,Final,5,Final,True,,,,2,BOS,Boston Celtics,105,20,NYK,New York Knicks,108
+18436460,2025-05-05,2024,Final,4,Final,True,,,,21,OKC,Oklahoma City Thunder,119,8,DEN,Denver Nuggets,121
+18435236,2025-05-06,2024,Final,4,Final,True,,,,6,CLE,Cleveland Cavaliers,119,12,IND,Indiana Pacers,120
+18436932,2025-05-06,2024,Final,4,Final,True,,,,18,MIN,Minnesota Timberwolves,88,10,GSW,Golden State Warriors,99
+18435670,2025-05-07,2024,Final,4,Final,True,,,,2,BOS,Boston Celtics,90,20,NYK,New York Knicks,91
+18436463,2025-05-07,2024,Final,4,Final,True,,,,21,OKC,Oklahoma City Thunder,149,8,DEN,Denver Nuggets,106
+18436935,2025-05-08,2024,Final,4,Final,True,,,,18,MIN,Minnesota Timberwolves,117,10,GSW,Golden State Warriors,93
+18435237,2025-05-09,2024,Final,4,Final,True,,,,12,IND,Indiana Pacers,104,6,CLE,Cleveland Cavaliers,126
+18436465,2025-05-09,2024,Final,5,Final,True,,,,8,DEN,Denver Nuggets,113,21,OKC,Oklahoma City Thunder,104
+18435672,2025-05-10,2024,Final,4,Final,True,,,,20,NYK,New York Knicks,93,2,BOS,Boston Celtics,115
+18436939,2025-05-10,2024,Final,4,Final,True,,,,10,GSW,Golden State Warriors,97,18,MIN,Minnesota Timberwolves,102
+18435238,2025-05-11,2024,Final,4,Final,True,,,,12,IND,Indiana Pacers,129,6,CLE,Cleveland Cavaliers,109
+18436468,2025-05-11,2024,Final,4,Final,True,,,,8,DEN,Denver Nuggets,87,21,OKC,Oklahoma City Thunder,92
+18435674,2025-05-12,2024,Final,4,Final,True,,,,20,NYK,New York Knicks,121,2,BOS,Boston Celtics,113
+18436943,2025-05-12,2024,Final,4,Final,True,,,,10,GSW,Golden State Warriors,110,18,MIN,Minnesota Timberwolves,117
+18435239,2025-05-13,2024,Final,4,Final,True,,,,6,CLE,Cleveland Cavaliers,105,12,IND,Indiana Pacers,114
+18436945,2025-05-13,2024,Final,4,Final,True,,,,21,OKC,Oklahoma City Thunder,112,8,DEN,Denver Nuggets,105
+18435676,2025-05-14,2024,Final,4,Final,True,,,,2,BOS,Boston Celtics,127,20,NYK,New York Knicks,102
+18436947,2025-05-14,2024,Final,4,Final,True,,,,18,MIN,Minnesota Timberwolves,121,10,GSW,Golden State Warriors,110
+18436949,2025-05-15,2024,Final,4,Final,True,,,,8,DEN,Denver Nuggets,119,21,OKC,Oklahoma City Thunder,107
+18435678,2025-05-16,2024,Final,4,Final,True,,,,20,NYK,New York Knicks,119,2,BOS,Boston Celtics,81
+18436952,2025-05-18,2024,Final,4,Final,True,,,,21,OKC,Oklahoma City Thunder,125,8,DEN,Denver Nuggets,93
+18441830,2025-05-20,2024,Final,4,Final,True,,,,21,OKC,Oklahoma City Thunder,114,18,MIN,Minnesota Timberwolves,88
+18441479,2025-05-21,2024,Final,5,Final,True,,,,20,NYK,New York Knicks,135,12,IND,Indiana Pacers,138
+18441832,2025-05-22,2024,Final,4,Final,True,,,,21,OKC,Oklahoma City Thunder,118,18,MIN,Minnesota Timberwolves,103
+18441480,2025-05-23,2024,Final,4,Final,True,,,,20,NYK,New York Knicks,109,12,IND,Indiana Pacers,114
+18441834,2025-05-24,2024,Final,4,Final,True,,,,18,MIN,Minnesota Timberwolves,143,21,OKC,Oklahoma City Thunder,101
+18441481,2025-05-25,2024,Final,4,Final,True,,,,12,IND,Indiana Pacers,100,20,NYK,New York Knicks,106
+18441836,2025-05-26,2024,Final,4,Final,True,,,,18,MIN,Minnesota Timberwolves,126,21,OKC,Oklahoma City Thunder,128
+18441482,2025-05-27,2024,Final,4,Final,True,,,,12,IND,Indiana Pacers,130,20,NYK,New York Knicks,121
+18441838,2025-05-28,2024,Final,4,Final,True,,,,21,OKC,Oklahoma City Thunder,124,18,MIN,Minnesota Timberwolves,94
+18441483,2025-05-29,2024,Final,4,Final,True,,,,20,NYK,New York Knicks,111,12,IND,Indiana Pacers,94
+18441484,2025-05-31,2024,Final,4,Final,True,,,,12,IND,Indiana Pacers,125,20,NYK,New York Knicks,108
+18444558,2025-06-05,2024,Final,4,Final,True,,,,21,OKC,Oklahoma City Thunder,110,12,IND,Indiana Pacers,111
+18444559,2025-06-08,2024,Final,4,Final,True,,,,21,OKC,Oklahoma City Thunder,123,12,IND,Indiana Pacers,107
+18444560,2025-06-11,2024,Final,4,Final,True,,,,12,IND,Indiana Pacers,116,21,OKC,Oklahoma City Thunder,107
+18444561,2025-06-13,2024,Final,4,Final,True,,,,12,IND,Indiana Pacers,104,21,OKC,Oklahoma City Thunder,111
+18444562,2025-06-16,2024,Final,4,Final,True,,,,21,OKC,Oklahoma City Thunder,120,12,IND,Indiana Pacers,109
+18444563,2025-06-19,2024,Final,4,Final,True,,,,12,IND,Indiana Pacers,108,21,OKC,Oklahoma City Thunder,91
+18444564,2025-06-22,2024,Final,4,Final,True,,,,21,OKC,Oklahoma City Thunder,103,12,IND,Indiana Pacers,91

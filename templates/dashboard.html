@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fantasy Simulator Dashboard</title>
+    <link rel="stylesheet" href="/static/dashboard.css" />
+</head>
+<body>
+    <header class="top-bar">
+        <div class="brand">
+            <h1>Fantasy Replay</h1>
+            <span class="season">Season: {{ season }}</span>
+        </div>
+        <nav class="nav-actions">
+            <button id="nav-menu" class="hidden">Menu</button>
+            <button id="simulate-day" class="hidden">Simulate Next Day</button>
+            <button id="reset-league" class="hidden">Reset League</button>
+        </nav>
+    </header>
+
+    <main class="dashboard-main">
+        <section class="panel" id="setup-panel">
+            <h2>League Menu</h2>
+
+            <div class="existing-leagues">
+                <h3>Existing Leagues</h3>
+                <ul id="league-list" class="league-list"></ul>
+            </div>
+
+            <h3>Create a New League</h3>
+            <form id="scoring-form">
+                <label for="scoring-key">Profile Key</label>
+                <input type="text" id="scoring-key" name="key" placeholder="custom_points" required />
+
+                <label for="scoring-name">League Name</label>
+                <input type="text" id="scoring-name" name="name" placeholder="Custom Points" required />
+
+                <label for="scoring-select">Base Profile</label>
+                <select id="scoring-select"></select>
+
+                <div class="weights-editor" id="weights-editor"></div>
+
+                <label class="checkbox">
+                    <input type="checkbox" id="make-default" name="make_default" />
+                    <span>Make default profile</span>
+                </label>
+
+                <fieldset class="league-settings">
+                    <legend>League Settings</legend>
+                    <label for="team-count">Number of Teams</label>
+                    <input type="number" id="team-count" name="team_count" min="2" value="12" />
+
+                    <label for="roster-size">Roster Size</label>
+                    <input type="number" id="roster-size" name="roster_size" min="1" value="13" />
+
+                    <label for="team-name">Your Team Name</label>
+                    <input type="text" id="team-name" name="team_name" placeholder="My Championship Squad" />
+                </fieldset>
+
+                <div class="setup-actions">
+                    <button type="submit">Save Profile</button>
+                    <button type="button" id="create-league">Create League</button>
+                </div>
+            </form>
+        </section>
+
+        <div id="league-panels" class="layout">
+            <section class="panel" id="scoreboard-panel">
+                <h2>NBA Scoreboard</h2>
+                <div class="scoreboard-header">
+                    <label for="scoreboard-date">Date</label>
+                    <input type="date" id="scoreboard-date" disabled />
+                </div>
+                <ul id="scoreboard-list" class="scoreboard-list"></ul>
+            </section>
+
+            <section class="panel" id="fantasy-panel">
+                <h2>Fantasy League</h2>
+                <div class="league-meta">
+                    <div>
+                        <span>Current Date:</span>
+                        <strong id="league-date">—</strong>
+                    </div>
+                    <div>
+                        <span>Scoring Profile:</span>
+                        <strong id="league-scoring">—</strong>
+                    </div>
+                </div>
+                <div id="fantasy-results"></div>
+            </section>
+        </div>
+    </main>
+
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="/static/dashboard.js" type="module"></script>
+</body>
+</html>
