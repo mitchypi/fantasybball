@@ -103,6 +103,7 @@ button {
     padding: 0.55rem 1rem;
     font-size: 0.9rem;
     font-weight: 600;
+    font-family: inherit;
     cursor: pointer;
     transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
@@ -132,17 +133,29 @@ button[data-variant="success"] {
 }
 
 button.player-link {
-    --btn-bg: #2563eb;
-    --btn-border: #3b82f6;
-    --btn-color: #f8fafc;
-    --btn-bg-hover: #3b82f6;
-    --btn-border-hover: #60a5fa;
-    padding: 0.35rem 0.85rem;
-    border-radius: 0.65rem;
+    --btn-bg: rgba(15, 23, 42, 0.6);
+    --btn-border: rgba(148, 163, 184, 0.12);
+    --btn-color: var(--text);
+    --btn-bg-hover: rgba(37, 99, 235, 0.15);
+    --btn-border-hover: rgba(59, 130, 246, 0.5);
+    --btn-color-hover: var(--text);
+    background: var(--btn-bg);
+    border-color: var(--btn-border);
+    color: var(--btn-color);
+    padding: 0.4rem 1rem;
+    border-radius: 0.75rem;
     font-size: 0.78rem;
     font-weight: 600;
     letter-spacing: 0.02em;
-    text-transform: uppercase;
+    transition: border-color 0.15s ease, background 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+button.player-link:hover {
+    background: var(--btn-bg-hover);
+    border-color: var(--btn-border-hover);
 }
 
 /* Existing Leagues: Play (green) */
@@ -323,7 +336,7 @@ button.player-link:focus-visible {
     margin-top: 0.75rem;
     padding: 0.75rem 0.5rem 0.75rem;
     border-top: 1px solid rgba(148, 163, 184, 0.15);
-    background: rgba(15, 23, 42, 0.55);
+    background: rgba(15, 23, 42, 0.6);
     border-radius: 0.65rem;
     overflow-x: auto;
 }
@@ -382,9 +395,9 @@ button.player-link:focus-visible {
 
 .score-card .boxscore-team td:first-child,
 .score-card .boxscore-team th:first-child {
-    width: 150px;
-    min-width: 150px;
-    white-space: normal;
+    width: 180px;
+    min-width: 180px;
+    white-space: nowrap;
 }
 
 .score-card .boxscore-team td:not(:first-child),
