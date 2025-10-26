@@ -77,33 +77,58 @@ def _most_common(value_series: pd.Series) -> str:
 
 
 def player_season_averages(game_logs: pd.DataFrame) -> pd.DataFrame:
-    """Aggregate per-game logs into season averages per player."""
+    """Aggregate per-game logs into season averages per player, ignoring DNPs."""
+    if game_logs.empty:
+        columns = ["PLAYER_ID", "PLAYER_NAME", "TEAM_ABBREVIATION", "GP", *NUMERIC_STAT_COLUMNS]
+        return pd.DataFrame(columns=columns)
+
+    logs = game_logs.copy()
     group_keys = ["PLAYER_ID", "PLAYER_NAME"]
-    numeric_cols = [col for col in NUMERIC_STAT_COLUMNS if col in game_logs.columns]
-    grouped = game_logs.groupby(group_keys)
+    numeric_cols = [col for col in NUMERIC_STAT_COLUMNS if col in logs.columns]
 
-    averages = grouped[numeric_cols].mean(numeric_only=True).reset_index()
+    if "MINUTES" in logs.columns:
+        logs["MINUTES"] = pd.to_numeric(logs["MINUTES"], errors="coerce").fillna(0.0)
+        played_mask = logs["MINUTES"] > 0
+    else:
+        played_mask = pd.Series(True, index=logs.index)
 
-    gp = grouped.size().reset_index(name="GP")
-    averages = averages.merge(gp, on=group_keys, how="left")
+    played_logs = logs.loc[played_mask].copy()
 
-    if "TEAM_ABBREVIATION" in game_logs.columns:
+    base = logs[group_keys].drop_duplicates()
+
+    if "TEAM_ABBREVIATION" in logs.columns:
         team_mode = (
-            grouped["TEAM_ABBREVIATION"]
+            logs.groupby(group_keys)["TEAM_ABBREVIATION"]
             .agg(_most_common)
             .reset_index()
-            .rename(columns={"TEAM_ABBREVIATION": "TEAM_ABBREVIATION"})
         )
-        averages = averages.merge(team_mode, on=group_keys, how="left")
+        base = base.merge(team_mode, on=group_keys, how="left")
     else:
-        averages["TEAM_ABBREVIATION"] = ""
+        base["TEAM_ABBREVIATION"] = ""
 
-    averages["GP"] = averages["GP"].fillna(0).astype(int)
-    averages["TEAM_ABBREVIATION"] = averages["TEAM_ABBREVIATION"].fillna("")
+    if numeric_cols and not played_logs.empty:
+        totals = played_logs.groupby(group_keys)[numeric_cols].sum(numeric_only=True).reset_index()
+        base = base.merge(totals, on=group_keys, how="left")
+        gp = played_logs.groupby(group_keys).size().reset_index(name="GP")
+    else:
+        for col in numeric_cols:
+            base[col] = 0.0
+        gp = pd.DataFrame(columns=[*group_keys, "GP"])
+
+    base = base.merge(gp, on=group_keys, how="left")
+    base["GP"] = base["GP"].fillna(0).astype(int)
+
+    for col in numeric_cols:
+        base[col] = pd.to_numeric(base[col], errors="coerce").fillna(0.0)
+        played = base["GP"] > 0
+        base.loc[played, col] = base.loc[played, col] / base.loc[played, "GP"]
+        base.loc[~played, col] = 0.0
+
+    base["TEAM_ABBREVIATION"] = base["TEAM_ABBREVIATION"].fillna("")
 
     columns = ["PLAYER_ID", "PLAYER_NAME", "TEAM_ABBREVIATION", "GP", *numeric_cols]
-    existing_columns = [col for col in columns if col in averages.columns]
-    return averages[existing_columns]
+    existing_columns = [col for col in columns if col in base.columns]
+    return base[existing_columns]
 
 
 def compute_fantasy_points(df: pd.DataFrame, scoring_weights: dict[str, float]) -> pd.DataFrame:
@@ -129,8 +154,10 @@ def _attach_double_triple_flags(df: pd.DataFrame) -> None:
         return
     thresholds = df[available].ge(10)
     counts = thresholds.sum(axis=1)
-    df["DOUBLE_DOUBLE"] = (counts >= 2).astype(int)
-    df["TRIPLE_DOUBLE"] = (counts >= 3).astype(int)
+    double_mask = counts >= 2
+    triple_mask = counts >= 3
+    df["DOUBLE_DOUBLE"] = double_mask.astype(int)
+    df["TRIPLE_DOUBLE"] = triple_mask.astype(int)
     df["DD"] = df["DOUBLE_DOUBLE"]
     df["TD"] = df["TRIPLE_DOUBLE"]
 def _attach_alias_columns(df: pd.DataFrame) -> None:

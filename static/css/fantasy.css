@@ -1,17 +1,76 @@
 .league-meta {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.75rem;
     font-size: 0.9rem;
     margin-bottom: 1rem;
 }
 
-#fantasy-results {
+.league-meta > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.league-meta .league-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.league-meta .league-actions button {
+    padding: 0.45rem 0.9rem;
+    font-size: 0.85rem;
+}
+
+.fantasy-week-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.fantasy-week-header select {
+    flex: 1;
+    min-width: 0;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    background: rgba(15, 23, 42, 0.75);
+    color: var(--text-primary);
+}
+
+.week-nav {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    background: rgba(15, 23, 42, 0.75);
+    color: var(--text-primary);
+    font-size: 1.15rem;
+    line-height: 1;
+    display: grid;
+    place-items: center;
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.week-nav:hover:not(:disabled) {
+    border-color: rgba(59, 130, 246, 0.7);
+    background: rgba(37, 99, 235, 0.2);
+}
+
+.week-nav:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.fantasy-matchups {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-.team-card {
+.matchup-card {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -23,33 +82,62 @@
     cursor: pointer;
 }
 
-.team-card:hover {
+.matchup-card:hover {
     border-color: rgba(59, 130, 246, 0.5);
     background: rgba(37, 99, 235, 0.15);
 }
 
-.team-card.active {
+.matchup-card.active {
     border-color: rgba(59, 130, 246, 0.5);
     background: rgba(37, 99, 235, 0.15);
 }
 
-.team-summary {
+.matchup-summary {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 0.5rem;
+    align-items: flex-start;
+    gap: 1rem;
     cursor: pointer;
 }
 
-.team-summary h3 {
+.matchup-summary h3 {
     margin: 0;
-    font-size: 1rem;
+    font-size: 1.05rem;
 }
 
-.team-detail {
+.matchup-summary .matchup-teams {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.matchup-summary .matchup-team {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    font-size: 0.95rem;
+}
+
+.matchup-summary .matchup-total {
+    font-weight: 600;
+}
+
+.matchup-summary .matchup-team.is-leading .matchup-total {
+    color: #34d399;
+}
+
+.matchup-summary .matchup-status {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+}
+
+.matchup-detail {
     display: none;
-    margin-top: 0.75rem;
-    padding: 0.75rem 0.5rem 0.75rem;
+    margin-top: 0.5rem;
+    padding: 0.75rem 0.5rem;
     border-top: 1px solid rgba(148, 163, 184, 0.15);
     background: rgba(15, 23, 42, 0.6);
     border-radius: 0.65rem;
@@ -57,33 +145,325 @@
     cursor: default;
 }
 
-.team-card.active .team-detail {
-    display: block;
+.matchup-card.active .matchup-detail {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
-.team-detail table {
+.matchup-team-detail h4 {
+    margin: 0 0 0.5rem;
+    font-size: 0.95rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.matchup-team-detail table {
     width: 100%;
     border-collapse: collapse;
     font-size: 0.85rem;
     min-width: 360px;
 }
 
-.team-detail th,
-.team-detail td {
+.matchup-team-detail th,
+.matchup-team-detail td {
     text-align: left;
     padding: 0.35rem 0.25rem;
     border-bottom: 1px solid rgba(148, 163, 184, 0.1);
 }
 
-.team-detail tbody tr:last-child td {
+.matchup-team-detail th:nth-child(n + 3),
+.matchup-team-detail td:nth-child(n + 3) {
+    text-align: right;
+}
+
+.matchup-team-detail tbody tr:last-child td {
     border-bottom: none;
 }
 
-.team-detail .did-not-play td:last-child {
+.matchup-team-detail .did-not-play td:last-child {
     color: var(--muted);
 }
 
-.team-detail .did-not-play td {
+.matchup-team-detail .did-not-play td {
     color: var(--muted);
     font-style: italic;
+}
+
+.fantasy-standings {
+    margin-top: 1.5rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    background: rgba(15, 23, 42, 0.55);
+    overflow: hidden;
+}
+
+.fantasy-standings h3 {
+    margin: 0;
+    padding: 0.85rem 1rem;
+    font-size: 1rem;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.fantasy-standings table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+.fantasy-standings th,
+.fantasy-standings td {
+    text-align: left;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.08);
+    white-space: nowrap;
+}
+
+.fantasy-standings th:nth-child(n + 3),
+.fantasy-standings td:nth-child(n + 3) {
+    text-align: right;
+}
+
+.fantasy-standings tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.fantasy-standings td.points {
+    white-space: nowrap;
+}
+
+.fantasy-roster {
+    margin-top: 1.25rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    background: rgba(15, 23, 42, 0.55);
+    overflow: hidden;
+}
+
+.fantasy-roster.hidden { display: none; }
+
+.fantasy-roster__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.85rem 1rem;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+.fantasy-roster__header h3 { margin: 0; font-size: 1rem; }
+
+.fantasy-roster__controls select {
+    padding: 0.4rem 0.6rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    background: rgba(15, 23, 42, 0.7);
+    color: var(--text);
+}
+
+#roster-team-view {
+    padding: 0.85rem 1rem;
+    overflow-x: auto;
+}
+
+#roster-team-view .matchup-team-detail table {
+    min-width: 1100px;
+    border-collapse: collapse;
+}
+
+#roster-team-view .matchup-team-detail th,
+#roster-team-view .matchup-team-detail td {
+    text-align: right;
+    white-space: nowrap;
+}
+
+#roster-team-view .matchup-team-detail th:nth-child(-n + 4),
+#roster-team-view .matchup-team-detail td:nth-child(-n + 4) {
+    text-align: left;
+}
+
+.draft-status {
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    color: #cbd5f5;
+}
+
+.draft-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.draft-actions button {
+    padding: 0.5rem 1rem;
+    background: #1d4ed8;
+    color: #f8fafc;
+    border: none;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.draft-actions button:disabled {
+    background: rgba(148, 163, 184, 0.4);
+    cursor: not-allowed;
+}
+
+.draft-actions button:not(:disabled):hover {
+    background: #2563eb;
+}
+
+.draft-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.draft-roster {
+    flex: 0 0 260px;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.35);
+}
+
+.draft-roster h3 {
+    margin: 0 0 0.75rem;
+    font-size: 1.05rem;
+    color: #f1f5f9;
+}
+
+.draft-roster-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.5rem;
+}
+
+.draft-roster-list li {
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    background: rgba(30, 41, 59, 0.65);
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+    color: #e2e8f0;
+}
+
+.draft-roster-list li.empty-slot {
+    color: rgba(226, 232, 240, 0.55);
+    font-style: italic;
+}
+
+.draft-player-pool {
+    flex: 1 1 320px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.draft-search {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.draft-search input[type="search"] {
+    flex: 1 1 220px;
+    min-width: 0;
+    padding: 0.5rem 0.75rem;
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    border-radius: 0.5rem;
+    color: #f8fafc;
+}
+
+.draft-search select {
+    flex: 0 0 auto;
+    padding: 0.5rem 0.75rem;
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    border-radius: 0.5rem;
+    color: #f8fafc;
+    font-size: 0.9rem;
+}
+
+.draft-search select:focus {
+    outline: 2px solid rgba(94, 234, 212, 0.5);
+    outline-offset: 2px;
+}
+
+.draft-player-list table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(15, 23, 42, 0.6);
+    border-radius: 0.75rem;
+    overflow: hidden;
+}
+
+.draft-player-list th,
+.draft-player-list td {
+    padding: 0.6rem 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.12);
+    font-size: 0.92rem;
+}
+
+.draft-player-list th {
+    background: rgba(30, 41, 59, 0.65);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04rem;
+    font-size: 0.78rem;
+    color: #94a3b8;
+}
+
+.draft-player-list tr:hover td {
+    background: rgba(37, 99, 235, 0.08);
+}
+
+.draft-player-list button {
+    padding: 0.35rem 0.7rem;
+    border-radius: 0.35rem;
+    background: #22c55e;
+    color: #0f172a;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.draft-player-list button:disabled {
+    background: rgba(148, 163, 184, 0.35);
+    color: rgba(15, 23, 42, 0.6);
+    cursor: not-allowed;
+}
+
+.draft-more {
+    display: flex;
+    justify-content: center;
+}
+
+.draft-more button {
+    padding: 0.45rem 1.1rem;
+    border-radius: 999px;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    background: transparent;
+    color: #cbd5f5;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.draft-more button:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.draft-more button:not(:disabled):hover {
+    background: rgba(148, 163, 184, 0.15);
 }

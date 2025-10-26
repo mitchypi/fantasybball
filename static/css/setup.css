@@ -89,3 +89,10 @@
     gap: 0.4rem;
     font-size: 0.85rem;
 }
+/* Inline layout for team name and suggestion button */
+.team-name-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem;
+    align-items: center;
+}

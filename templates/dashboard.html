@@ -30,6 +30,9 @@
             <div class="existing-leagues">
                 <h3>Existing Leagues</h3>
                 <ul id="league-list" class="league-list"></ul>
+                <div class="existing-leagues__actions">
+                    <button type="button" id="delete-all-leagues" class="btn-league-delete">Delete All Leagues</button>
+                </div>
             </div>
 
             <h3>Create a New League</h3>
@@ -45,8 +48,7 @@
                 </label>
 
                 <div class="profile-actions">
-                    <button type="button" id="rename-profile">Rename Preset</button>
-                    <button type="submit" id="save-profile">Save Preset</button>
+                    <button type="submit" id="save-profile">Save Preset As</button>
                     <button type="button" id="delete-profile" class="btn-league-delete">Delete Preset</button>
                 </div>
 
@@ -62,7 +64,10 @@
                     <input type="number" id="roster-size" name="roster_size" min="1" value="13" />
 
                     <label for="team-name">Your Team Name</label>
-                    <input type="text" id="team-name" name="team_name" placeholder="My Championship Squad" />
+                    <div class="team-name-row">
+                        <input type="text" id="team-name" name="team_name" placeholder="My Championship Squad" />
+                        <button type="button" id="suggest-team-name">Suggest Name</button>
+                    </div>
                 </fieldset>
 
                 <div class="setup-actions">
@@ -72,6 +77,36 @@
         </section>
 
         <div id="league-panels" class="layout">
+            <section class="panel hidden" id="draft-panel">
+                <h2>Draft Your Team</h2>
+                <p class="draft-status" id="draft-status">Loading draft…</p>
+                <div class="draft-actions">
+                    <button type="button" id="draft-autopick">Autodraft Pick</button>
+                    <button type="button" id="draft-autopick-rest">Autodraft Rest</button>
+                    <button type="button" id="draft-complete" disabled>Finish Draft</button>
+                </div>
+                <div class="draft-layout">
+                    <div class="draft-roster" aria-live="polite">
+                        <h3>Your Roster</h3>
+                        <ul id="draft-roster-list" class="draft-roster-list"></ul>
+                    </div>
+                    <div class="draft-player-pool">
+                        <div class="draft-search">
+                            <input type="search" id="draft-search" placeholder="Search players…" />
+                            <label for="draft-view" class="sr-only">Stat view</label>
+                            <select id="draft-view">
+                                <option value="averages" selected>Per Game</option>
+                                <option value="totals">Season Totals</option>
+                            </select>
+                        </div>
+                        <div id="draft-player-list" class="draft-player-list"></div>
+                        <div class="draft-more">
+                            <button type="button" id="draft-load-more">Load More</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <section class="panel" id="scoreboard-panel">
                 <h2>NBA Scoreboard</h2>
                 <div class="scoreboard-header">
@@ -79,6 +114,23 @@
                     <input type="date" id="scoreboard-date" disabled />
                 </div>
                 <ul id="scoreboard-list" class="scoreboard-list"></ul>
+                <section class="panel subpanel" id="players-panel">
+                    <h3>Players</h3>
+                    <div class="players-toolbar">
+                        <input type="search" id="players-search" placeholder="Search players…" />
+                        <select id="players-view">
+                            <option value="totals">Totals</option>
+                            <option value="averages">Averages</option>
+                        </select>
+                        <select id="players-filter">
+                            <option value="all">All</option>
+                            <option value="available">Available</option>
+                            <option value="unavailable">Unavailable</option>
+                        </select>
+                        <span id="roster-status" class="roster-status" aria-live="polite"></span>
+                    </div>
+                    <div id="players-list" class="players-list"></div>
+                </section>
             </section>
 
             <section class="panel" id="fantasy-panel">
@@ -92,8 +144,29 @@
                         <span>Scoring Profile:</span>
                         <strong id="league-scoring">—</strong>
                     </div>
+                    <div class="league-actions">
+                        <button type="button" id="autoplay-league" title="Simulate the remainder of the regular season automatically">Auto-Sim Season</button>
+                    </div>
                 </div>
-                <div id="fantasy-results"></div>
+                <div id="fantasy-week-header" class="fantasy-week-header hidden">
+                    <button type="button" id="week-prev" class="week-nav" aria-label="Previous week">&lsaquo;</button>
+                    <select id="week-select" aria-label="Select matchup week"></select>
+                    <button type="button" id="week-next" class="week-nav" aria-label="Next week">&rsaquo;</button>
+                </div>
+                <div id="fantasy-results" class="fantasy-matchups">
+                    <p>Create a league to begin your season replay.</p>
+                </div>
+                <div id="fantasy-standings" class="fantasy-standings hidden"></div>
+                <section id="roster-panel" class="fantasy-roster hidden">
+                    <div class="fantasy-roster__header">
+                        <h3>Team Roster (Daily)</h3>
+                        <div class="fantasy-roster__controls">
+                            <label for="roster-team-select" class="sr-only">Team</label>
+                            <select id="roster-team-select" aria-label="Select fantasy team"></select>
+                        </div>
+                    </div>
+                    <div id="roster-team-view"></div>
+                </section>
             </section>
         </div>
     </main>

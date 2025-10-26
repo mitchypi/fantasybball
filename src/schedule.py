@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import date
-from typing import Dict, Iterable, List
+from typing import Dict, Iterable, List, Optional
 
 import pandas as pd
 
@@ -20,6 +20,9 @@ class GameSummary:
     away_score: int
     period: int
     time: str
+
+    def period_display(self) -> str:
+        return format_period_label(self.status, self.period)
 
     @property
     def winner(self) -> str | None:
@@ -40,9 +43,34 @@ class GameSummary:
             "home_score": self.home_score,
             "away_score": self.away_score,
             "period": self.period,
+            "period_display": self.period_display(),
             "time": self.time,
             "winner": self.winner,
         }
+
+
+def format_period_label(status: Optional[str], period: Optional[int]) -> str:
+    try:
+        period_int = int(period)
+    except (TypeError, ValueError):
+        period_int = 0
+
+    if period_int <= 0:
+        return ""
+
+    status_text = (status or "").lower()
+    if "not played" in status_text or "scheduled" in status_text or "postponed" in status_text:
+        return ""
+
+    if period_int <= 4:
+        if "final" in status_text:
+            return str(period_int)
+        if any(token in status_text for token in ("progress", "quarter", "qtr")):
+            return f"Q{period_int}"
+        return str(period_int)
+
+    overtime = period_int - 4
+    return "OT" if overtime == 1 else f"{overtime}OT"
 
 
 def _build_game_summary(row: pd.Series) -> GameSummary:
