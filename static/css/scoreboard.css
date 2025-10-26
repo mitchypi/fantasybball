@@ -195,12 +195,20 @@
     border: 1px solid rgba(148, 163, 184, 0.1);
     border-radius: 0.65rem;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+#players-panel .players-list .players-table-wrapper {
+    flex: 1 1 auto;
+    overflow-x: auto;
 }
 
 #players-panel .players-list table {
     width: 100%;
     border-collapse: collapse;
     font-size: 0.85rem;
+    min-width: 1200px;
 }
 
 #players-panel th, #players-panel td {
@@ -226,5 +234,74 @@
     justify-self: end;
     align-self: center;
     font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.players-pagination {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1rem;
+    padding: 0.75rem 1rem;
+    border-top: 1px solid rgba(148, 163, 184, 0.1);
+    background: rgba(13, 20, 35, 0.6);
+}
+
+.players-pagination__info {
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.players-pagination__controls {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.players-pagination__controls label {
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+.players-pagination__controls select {
+    background: rgba(15, 23, 42, 0.7);
+    color: var(--text);
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    border-radius: 0.5rem;
+    padding: 0.35rem 0.6rem;
+    font-size: 0.8rem;
+}
+
+.players-pagination__nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.players-pagination__btn {
+    background: rgba(37, 99, 235, 0.2);
+    border: 1px solid rgba(59, 130, 246, 0.35);
+    color: var(--text);
+    border-radius: 0.5rem;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.players-pagination__btn:hover:not(:disabled) {
+    background: rgba(59, 130, 246, 0.3);
+    border-color: rgba(96, 165, 250, 0.6);
+}
+
+.players-pagination__btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.players-pagination__page {
+    font-size: 0.8rem;
     color: var(--muted);
 }

@@ -71,6 +71,10 @@ let playersSortDir = "desc";
 let playersSearchTerm = "";
 let playersViewMode = "totals";
 let playersFilter = "all";
+const PLAYER_PAGE_SIZES = [10, 25, 50, 100];
+let playersPageSize = PLAYER_PAGE_SIZES[1];
+let playersPage = 1;
+let playersTotal = 0;
 let rosterSelectedTeam = null;
 let draftViewMode = draftViewSelect && draftViewSelect.value === "totals" ? "totals" : "averages";
 let draftSummaryState = null;
@@ -2172,6 +2176,7 @@ function initPlayerCardTabs() {
 }
 scoreboardDateInput.addEventListener("change", () => {
     if (scoreboardDateInput.disabled) return;
+    playersPage = 1;
     loadScoreboard(scoreboardDateInput.value);
     loadPlayersPanel({ silent: true });
     loadRosterDaily({ silent: true });
@@ -2252,6 +2257,7 @@ function formatPct(value) {
 function renderPlayersTable(payload) {
     if (!playersListEl) return;
     const rosterInfo = getUserRosterInfo();
+    playersTotal = Number(payload?.count || 0);
     const rows = (payload.results || []).map((p) => {
         let addBtn;
         if (!p.available) {
@@ -2307,6 +2313,7 @@ function renderPlayersTable(payload) {
         { key: "pf", label: "PF" },
         { key: "actions", label: "" },
     ];
+    const totalColumns = headers.length;
     const thead = `
         <thead>
             <tr>
@@ -2322,7 +2329,43 @@ function renderPlayersTable(payload) {
             </tr>
         </thead>
     `;
-    playersListEl.innerHTML = `<table>${thead}<tbody>${rows}</tbody></table>`;
+    const tableBody = rows || `<tr class="empty"><td colspan="${totalColumns}">No players match the current filters.</td></tr>`;
+    const totalPages = Math.max(1, Math.ceil(playersTotal / playersPageSize));
+    const safePage = playersTotal === 0 ? 1 : Math.min(playersPage, totalPages);
+    playersPage = safePage;
+    const rangeStart = playersTotal === 0 ? 0 : (playersPage - 1) * playersPageSize + 1;
+    const rangeEnd = playersTotal === 0 ? 0 : Math.min(playersTotal, playersPage * playersPageSize);
+    const canPrev = playersPage > 1;
+    const canNext = playersPage < totalPages && playersTotal > 0;
+    const pageSizeOptions = PLAYER_PAGE_SIZES.map(
+        (size) => `<option value="${size}"${size === playersPageSize ? " selected" : ""}>${size}</option>`
+    ).join("");
+    const infoText = playersTotal
+        ? `Showing ${rangeStart}&ndash;${rangeEnd} of ${playersTotal}`
+        : "No players to display";
+    const paginationHtml = `
+        <div class="players-pagination">
+            <div class="players-pagination__info">${infoText}</div>
+            <div class="players-pagination__controls">
+                <label for="players-page-size">Rows per page</label>
+                <select id="players-page-size">${pageSizeOptions}</select>
+                <div class="players-pagination__nav">
+                    <button type="button" class="players-pagination__btn players-pagination__prev"${canPrev ? "" : " disabled"}>Previous</button>
+                    <span class="players-pagination__page">Page ${playersTotal ? playersPage : 0} of ${playersTotal ? totalPages : 0}</span>
+                    <button type="button" class="players-pagination__btn players-pagination__next"${canNext ? "" : " disabled"}>Next</button>
+                </div>
+            </div>
+        </div>
+    `;
+    playersListEl.innerHTML = `
+        <div class="players-table-wrapper">
+            <table>
+                ${thead}
+                <tbody>${tableBody}</tbody>
+            </table>
+        </div>
+        ${paginationHtml}
+    `;
     updateRosterStatus();
     // Sort handlers
     playersListEl.querySelectorAll("th.sortable").forEach((th) => {
@@ -2335,6 +2378,7 @@ function renderPlayersTable(payload) {
                 playersSortKey = key;
                 playersSortDir = th.dataset.dir || "asc";
             }
+            playersPage = 1;
             loadPlayersPanel({ silent: true });
         });
     });
@@ -2360,12 +2404,44 @@ function renderPlayersTable(payload) {
             }
         });
     });
+    const pageSizeSelect = playersListEl.querySelector("#players-page-size");
+    if (pageSizeSelect) {
+        pageSizeSelect.addEventListener("change", () => {
+            const nextSize = Number(pageSizeSelect.value) || playersPageSize;
+            if (nextSize && nextSize !== playersPageSize) {
+                playersPageSize = nextSize;
+                playersPage = 1;
+                loadPlayersPanel({ silent: true });
+            }
+        });
+    }
+    const prevBtn = playersListEl.querySelector(".players-pagination__prev");
+    if (prevBtn) {
+        prevBtn.addEventListener("click", () => {
+            if (playersPage > 1) {
+                playersPage -= 1;
+                loadPlayersPanel({ silent: true });
+            }
+        });
+    }
+    const nextBtn = playersListEl.querySelector(".players-pagination__next");
+    if (nextBtn) {
+        nextBtn.addEventListener("click", () => {
+            if (playersPage < totalPages && playersTotal > 0) {
+                playersPage += 1;
+                loadPlayersPanel({ silent: true });
+            }
+        });
+    }
 }
 async function loadPlayersPanel(options = {}) {
     if (!playersPanel || !currentLeagueId) {
         return;
     }
     const silent = options.silent ?? false;
+    if (!Number.isFinite(playersPage) || playersPage < 1) {
+        playersPage = 1;
+    }
     const dateParam = scoreboardDateInput.value || "";
     const params = new URLSearchParams();
     if (dateParam) params.set("date", dateParam);
@@ -2373,9 +2449,19 @@ async function loadPlayersPanel(options = {}) {
     params.set("filter", playersFilter);
     params.set("sort", playersSortKey);
     params.set("order", playersSortDir);
+    const limit = playersPageSize;
+    const offset = Math.max(0, (playersPage - 1) * playersPageSize);
+    params.set("limit", String(limit));
+    params.set("offset", String(offset));
     if (playersSearchTerm) params.set("search", playersSearchTerm);
     try {
         const data = await fetchJSON(`/leagues/${currentLeagueId}/players?${params.toString()}`);
+        const total = Number(data?.count || 0);
+        const totalPages = Math.max(1, Math.ceil(total / playersPageSize));
+        if (total > 0 && playersPage > totalPages) {
+            playersPage = totalPages;
+            return loadPlayersPanel({ silent: true });
+        }
         renderPlayersTable(data);
     } catch (error) {
         if (!silent) {
@@ -2558,18 +2644,21 @@ if (rosterTeamSelect) {
 if (playersSearchInput) {
     playersSearchInput.addEventListener("input", debounce(() => {
         playersSearchTerm = playersSearchInput.value.trim();
+        playersPage = 1;
         loadPlayersPanel({ silent: true });
     }, 250));
 }
 if (playersViewSelect) {
     playersViewSelect.addEventListener("change", () => {
         playersViewMode = playersViewSelect.value;
+        playersPage = 1;
         loadPlayersPanel({ silent: true });
     });
 }
 if (playersFilterSelect) {
     playersFilterSelect.addEventListener("change", () => {
         playersFilter = playersFilterSelect.value;
+        playersPage = 1;
         loadPlayersPanel({ silent: true });
     });
 }
