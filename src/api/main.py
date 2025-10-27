@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 from datetime import datetime, date
 import uuid
 from typing import Any, Dict, Optional, List, Tuple
@@ -16,6 +17,7 @@ from ..data_loader import (
     compute_fantasy_points,
     load_game_schedule,
     load_player_game_logs,
+    load_game_odds,
     player_season_averages,
 )
 from ..league import (
@@ -42,6 +44,9 @@ from ..league import (
     build_playoff_preview,
     _serialize_active_playoffs,
     simulate_until_playoffs,
+    bankroll_summary,
+    place_bet_slip,
+    list_bets,
 )
 from ..schedule import daily_scoreboard, season_dates, format_period_label
 from ..scoring import delete_scoring_profile, rename_scoring_profile, update_scoring_profile
@@ -59,6 +64,8 @@ GAME_LOGS: Optional[pd.DataFrame] = None
 SCHEDULE_BASE: Optional[pd.DataFrame] = None
 PLAYER_IMAGES: Dict[str, str] = {}
 TEAM_LOOKUP: Dict[str, str] = {}
+ODDS_BASE: Dict[int, Dict[str, Any]] = {}
+ODDS_METADATA: Dict[str, Any] = {}
 
 BASE_DIR = DATA_DIR.parent
 templates = Jinja2Templates(directory=str(BASE_DIR / "templates"))
@@ -90,6 +97,17 @@ def _ensure_schedule() -> pd.DataFrame:
             detail="Game schedule is not cached yet. Run `python scripts/download_player_stats.py --season 2024-25` first.",
         )
     return SCHEDULE_BASE
+
+
+def _lookup_odds(game_id: Any) -> Optional[Dict[str, Any]]:
+    try:
+        gid = int(game_id)
+    except (TypeError, ValueError):
+        return None
+    odds = ODDS_BASE.get(gid)
+    if not odds:
+        return None
+    return copy.deepcopy(odds)
 
 
 def _find_history_entry(state, target_date: date) -> Optional[Dict[str, Any]]:
@@ -251,6 +269,8 @@ def load_cached_data() -> None:
     global SCHEDULE_BASE  # pylint: disable=global-statement
     global PLAYER_IMAGES  # pylint: disable=global-statement
     global TEAM_LOOKUP  # pylint: disable=global-statement
+    global ODDS_BASE  # pylint: disable=global-statement
+    global ODDS_METADATA  # pylint: disable=global-statement
     try:
         GAME_LOGS = load_player_game_logs()
     except FileNotFoundError as err:
@@ -273,6 +293,15 @@ def load_cached_data() -> None:
     except Exception as err:  # noqa: BLE001
         PLAYER_IMAGES = {}
         print(f"[startup] Unable to load player images: {err}")  # noqa: T201
+    try:
+        odds_payload = load_game_odds()
+    except Exception as err:  # noqa: BLE001
+        ODDS_BASE = {}
+        ODDS_METADATA = {}
+        print(f"[startup] Unable to load odds: {err}")  # noqa: T201
+    else:
+        ODDS_BASE = {int(game_id): data for game_id, data in odds_payload.get("games", {}).items()}
+        ODDS_METADATA = odds_payload.get("metadata", {})
 
 
 @app.get("/health")
@@ -285,6 +314,7 @@ def healthcheck() -> Dict[str, Any]:
         "games_cached": 0 if SCHEDULE_BASE is None else int(len(SCHEDULE_BASE)),
         "leagues": len(list_leagues()),
         "season": settings.season,
+        "odds_cached": len(ODDS_BASE),
     }
 
 
@@ -476,6 +506,11 @@ def list_games(
                 "period_display",
                 format_period_label(game.get("status"), game.get("period")),
             )
+            if not game.get("odds"):
+                odds_data = _lookup_odds(game.get("game_id"))
+                if odds_data:
+                    game["odds"] = odds_data
+        bet_results = copy.deepcopy(history_entry.get("bet_results") or {})
     else:
         schedule_df = _ensure_schedule()
         games = []
@@ -491,13 +526,18 @@ def list_games(
             entry["away_score"] = None
             entry["period"] = None
             entry["period_display"] = ""
+            odds_data = _lookup_odds(entry["game_id"])
+            if odds_data:
+                entry["odds"] = odds_data
             games.append(entry)
+        bet_results = None
 
     return {
         "date": target_date.isoformat(),
         "games": games,
         "current_date": None if state.current_date is None else state.current_date.isoformat(),
         "awaiting_simulation": bool(state.awaiting_simulation and state.current_date == target_date),
+        "bet_results": bet_results,
     }
 
 
@@ -615,6 +655,7 @@ def simulate_to_playoffs_endpoint(league_id: str) -> Dict[str, Any]:
             game_logs=GAME_LOGS,
             player_stats=PLAYER_BASE,
             schedule_df=SCHEDULE_BASE,
+            odds_lookup=ODDS_BASE,
         )
     except ValueError as err:
         raise HTTPException(status_code=400, detail=str(err)) from err
@@ -649,6 +690,40 @@ def delete_all_leagues() -> Dict[str, Any]:
 def get_league_state_endpoint(league_id: str) -> Dict[str, Any]:
     state = load_league_state(league_id)
     return state.to_dict()
+
+
+@app.get("/leagues/{league_id}/bankroll")
+def get_bankroll_endpoint(league_id: str) -> Dict[str, Any]:
+    state = load_league_state(league_id)
+    summary = bankroll_summary(state)
+    return {"league_id": league_id, "bankroll": summary}
+
+
+@app.get("/leagues/{league_id}/bets")
+def list_bets_endpoint(
+    league_id: str,
+    status: Optional[str] = Query(None, pattern="^(pending|settled)$"),
+) -> Dict[str, Any]:
+    state = load_league_state(league_id)
+    bets = list_bets(state, status)
+    return {"league_id": league_id, **bets}
+
+
+@app.post("/leagues/{league_id}/bets")
+def place_bet_endpoint(league_id: str, payload: Dict[str, Any]) -> Dict[str, Any]:
+    state = load_league_state(league_id)
+    try:
+        slip = place_bet_slip(state, payload, odds_lookup=ODDS_BASE)
+    except ValueError as err:
+        raise HTTPException(status_code=400, detail=str(err)) from err
+    summary = bankroll_summary(state)
+    pending = list_bets(state, status="pending")["pending"]
+    return {
+        "league_id": league_id,
+        "slip": slip.to_dict(),
+        "bankroll": summary,
+        "pending": pending,
+    }
 
 
 @app.get("/leagues/{league_id}/draft")
@@ -1251,6 +1326,7 @@ def simulate_league_day(league_id: str, scoring_profile: Optional[str] = Body(No
             player_stats=PLAYER_BASE,
             scoring_profile_key=scoring_profile,
             schedule_df=SCHEDULE_BASE,
+            odds_lookup=ODDS_BASE,
         )
     except ValueError as err:
         raise HTTPException(status_code=400, detail=str(err)) from err
@@ -1284,6 +1360,7 @@ def autoplay_league(league_id: str) -> Dict[str, Any]:
                     player_stats=PLAYER_BASE,
                     scoring_profile_key=None,
                     schedule_df=SCHEDULE_BASE,
+                    odds_lookup=ODDS_BASE,
                 )
                 simulated_days.append(str(result.get("date")))
             advance_league_day(state)

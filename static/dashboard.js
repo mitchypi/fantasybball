@@ -1,6 +1,25 @@
 ﻿const scoreboardList = document.getElementById("scoreboard-list");
 const scoreboardDateInput = document.getElementById("scoreboard-date");
 const simulateBtn = document.getElementById("simulate-day");
+const bettingPanel = document.getElementById("betting-panel");
+const bankrollAvailableEl = document.getElementById("bankroll-available");
+const bankrollPendingEl = document.getElementById("bankroll-pending");
+const bankrollPotentialEl = document.getElementById("bankroll-potential");
+const betSlipSelectionsEl = document.getElementById("bet-slip-selections");
+const betSlipStakeInput = document.getElementById("bet-slip-stake");
+const betSlipKindLabel = document.getElementById("bet-slip-kind");
+const betSlipPayoutEl = document.getElementById("bet-slip-payout");
+const betSlipOddsWrap = document.getElementById("bet-slip-odds-wrap");
+const betSlipOddsEl = document.getElementById("bet-slip-odds");
+const betSlipProfitWrap = document.getElementById("bet-slip-profit-wrap");
+const betSlipProfitEl = document.getElementById("bet-slip-profit");
+const betSlipPlaceBtn = document.getElementById("bet-slip-place");
+const betSlipClearBtn = document.getElementById("bet-slip-clear");
+const betSlipMessage = document.getElementById("bet-slip-message");
+const pendingBetsList = document.getElementById("pending-bets");
+const settledBetsList = document.getElementById("settled-bets");
+const bettingTabPending = document.getElementById("betting-tab-pending");
+const bettingTabSettled = document.getElementById("betting-tab-settled");
 const resetBtn = document.getElementById("reset-league");
 const leagueDateEl = document.getElementById("league-date");
 const leagueScoringEl = document.getElementById("league-scoring");
@@ -115,6 +134,14 @@ let editPlayoffOptions = null;
 let editPlayoffPhase = "regular";
 let currentPlayoffConfig = null;
 let playoffsData = null;
+let scoreboardBettingEnabled = false;
+let scoreboardActiveDate = "";
+let scoreboardCurrentDate = "";
+let betSlipSelections = [];
+let betSlipKind = "single";
+let bankrollSummary = { available: 0, pending_stake: 0, pending_potential: 0 };
+let pendingBets = [];
+let settledBets = [];
 
 if (playoffsEnabledInput) {
     toggleSetupPlayoffControls(Boolean(playoffsEnabledInput.checked));
@@ -665,6 +692,73 @@ function formatFantasy(value) {
     }
     return num.toFixed(2);
 }
+const currencyFormatter = new Intl.NumberFormat(undefined, {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+});
+function formatCurrency(value) {
+    const numeric = Number(value);
+    if (!Number.isFinite(numeric)) {
+        return currencyFormatter.format(0);
+    }
+    return currencyFormatter.format(numeric);
+}
+function formatAmerican(price) {
+    const numeric = Number(price);
+    if (!Number.isFinite(numeric) || numeric === 0) {
+        return "EVEN";
+    }
+    return numeric > 0 ? `+${numeric}` : `${numeric}`;
+}
+
+function safeDecode(value) {
+    if (!value) return "";
+    try {
+        return decodeURIComponent(value);
+    } catch (_err) {
+        return value;
+    }
+}
+function americanToDecimal(price) {
+    const numeric = Number(price);
+    if (!Number.isFinite(numeric) || numeric === 0) {
+        return 1;
+    }
+    if (numeric > 0) {
+        return 1 + numeric / 100;
+    }
+    return 1 + 100 / Math.abs(numeric);
+}
+function decimalToAmerican(decimal) {
+    const numeric = Number(decimal);
+    if (!Number.isFinite(numeric) || numeric <= 1) {
+        return 0;
+    }
+    if (numeric >= 2) {
+        return Math.round((numeric - 1) * 100);
+    }
+    return Math.round(-100 / (numeric - 1));
+}
+function computeSlipOdds(legs, kind = "single") {
+    if (!Array.isArray(legs) || !legs.length) {
+        return null;
+    }
+    let decimalTotal = 1;
+    for (const leg of legs) {
+        const price = Number(leg.price);
+        if (!Number.isFinite(price)) {
+            return null;
+        }
+        decimalTotal *= americanToDecimal(price);
+    }
+    const american = legs.length > 1 || kind === "parlay" ? decimalToAmerican(decimalTotal) : Number(legs[0].price);
+    return {
+        decimal: decimalTotal,
+        american,
+    };
+}
 function formatShotDisplay(stats, key, hasData) {
     const config = SHOT_COLUMNS[key];
     if (!config || !stats || !hasData) {
@@ -966,6 +1060,11 @@ function renderScoreboard(data) {
     scoreboardList.innerHTML = "";
     currentScoreboardDate = data.date;
     activeGameId = null;
+    scoreboardActiveDate = data.date || "";
+    scoreboardCurrentDate = data.current_date || "";
+    scoreboardBettingEnabled = Boolean(
+        data.awaiting_simulation && scoreboardCurrentDate && scoreboardActiveDate === scoreboardCurrentDate
+    );
     if (!data.games.length) {
         const li = document.createElement("li");
         li.className = "score-card disabled";
@@ -1012,6 +1111,8 @@ function renderScoreboard(data) {
             return "";
         })();
         const periodRow = periodHtml ? `<div>${periodHtml}</div>` : "";
+        const allowBetting = Boolean(scoreboardBettingEnabled && !isSimulated);
+        const oddsBlock = allowBetting ? buildOddsSelection(game) : buildOddsPreview(game);
         summary.innerHTML = `
             <div class="teams">
                 <div class="team-row">
@@ -1028,6 +1129,7 @@ function renderScoreboard(data) {
                 ${timeRow}
                 ${periodRow}
             </div>
+            ${oddsBlock}
         `;
         summary.setAttribute("role", "button");
         summary.setAttribute("tabindex", "0");
@@ -1495,6 +1597,18 @@ function renderLeagueState(state) {
         return;
     }
     exitDraftMode();
+    pendingBets = Array.isArray(state.pending_bets) ? state.pending_bets.slice() : [];
+    settledBets = Array.isArray(state.settled_bets) ? state.settled_bets.slice() : [];
+    bankrollSummary = {
+        available: Number(state.bankroll ?? 0),
+        pending_stake: pendingBets.reduce((sum, slip) => sum + Number(slip.stake || 0), 0),
+        pending_potential: pendingBets.reduce((sum, slip) => sum + Number(slip.potential_payout || 0), 0),
+    };
+    renderPendingBets();
+    renderSettledBets();
+    updateBankrollDisplay();
+    renderBetSlip();
+    refreshBettingPanelVisibility();
     const currentDate = state.current_date;
     const awaiting = Boolean(state.awaiting_simulation && currentDate);
     let dateLabel = "Season complete";
@@ -1521,6 +1635,7 @@ function renderLeagueState(state) {
 
 function enterDraftMode(state) {
     draftIsActive = true;
+    refreshBettingPanelVisibility();
     draftViewMode = draftViewSelect && draftViewSelect.value === "totals" ? "totals" : "averages";
     if (draftPanel && !draftPanelRemoved) draftPanel.classList.remove("hidden");
     if (scoreboardPanel) scoreboardPanel.classList.add("hidden");
@@ -1550,6 +1665,7 @@ function exitDraftMode() {
         return;
     }
     draftIsActive = false;
+    refreshBettingPanelVisibility();
     if (draftPanel && !draftPanelRemoved) draftPanel.classList.add("hidden");
     if (scoreboardPanel) scoreboardPanel.classList.remove("hidden");
     if (fantasyPanel) fantasyPanel.classList.remove("hidden");
@@ -2021,6 +2137,7 @@ function setLeagueUI(hasLeague) {
         currentLeagueId = null;
         showSetupView();
     }
+    refreshBettingPanelVisibility();
 }
 function populateWeightsEditor(weights, stats = []) {
     weightsEditor.innerHTML = "";
@@ -2123,6 +2240,9 @@ async function loadScoreboard(dateValue) {
         }
         const data = await fetchJSON(`/games?${params.toString()}`);
         scoreboardDateInput.value = data.date;
+        if (data.bet_results) {
+            handleBetResultsPayload(data.bet_results, { silent: true });
+        }
         renderScoreboard(data);
     } catch (error) {
         showToast(error.message || "Unable to load scoreboard.", "error");
@@ -2161,6 +2281,7 @@ async function loadLeagueState(leagueId, options = {}) {
             scoreboardDateInput.value = "";
             await loadScoreboard(null);
         }
+        await refreshBettingData({ silent: true });
     } catch (error) {
         if (!suppressToast) {
             showToast(error.message || "Unable to load league.", "error");
@@ -2241,6 +2362,9 @@ async function simulateDay() {
         simulateBtn.disabled = true;
         simulateBtn.textContent = awaiting ? "Simulating…" : "Advancing…";
         const response = await fetchJSON(endpoint, requestOptions);
+        if (awaiting && response && response.bet_results) {
+            handleBetResultsPayload(response.bet_results, { silent: false });
+        }
         let message;
         if (awaiting) {
             message = response && response.date ? `Played ${response.date}` : "Today's games simulated.";
@@ -2998,6 +3122,701 @@ function clearPlayoffs(message = null) {
     consolationBracketEl.innerHTML = "";
     playoffsData = null;
 }
+function refreshBettingPanelVisibility() {
+    if (!bettingPanel) {
+        return;
+    }
+    const shouldShow = Boolean(leagueInitialized && !draftIsActive);
+    bettingPanel.classList.toggle("hidden", !shouldShow);
+}
+function updateBankrollDisplay(summary = bankrollSummary) {
+    if (!bankrollAvailableEl || !bankrollPendingEl || !bankrollPotentialEl) {
+        return;
+    }
+    bankrollSummary = {
+        available: Number(summary.available ?? 0),
+        pending_stake: Number(summary.pending_stake ?? 0),
+        pending_potential: Number(summary.pending_potential ?? 0),
+    };
+    bankrollAvailableEl.textContent = formatCurrency(bankrollSummary.available);
+    bankrollPendingEl.textContent = formatCurrency(bankrollSummary.pending_stake);
+    bankrollPotentialEl.textContent = formatCurrency(bankrollSummary.pending_potential);
+}
+function renderBetSlip() {
+    if (!betSlipSelectionsEl) {
+        return;
+    }
+    betSlipSelectionsEl.innerHTML = "";
+    if (!betSlipSelections.length) {
+        const empty = document.createElement("p");
+        empty.className = "bet-slip__empty";
+        empty.textContent = "Select odds from the scoreboard to build your slip.";
+        betSlipSelectionsEl.appendChild(empty);
+    } else {
+        betSlipSelections.forEach((leg, index) => {
+            const row = document.createElement("div");
+            row.className = "bet-slip__selection";
+            const info = document.createElement("div");
+            info.innerHTML = `<strong>${escapeHtml(leg.label)}</strong><span>${escapeHtml(leg.detail)}</span>`;
+            const removeBtn = document.createElement("button");
+            removeBtn.type = "button";
+            removeBtn.className = "bet-slip__remove";
+            removeBtn.textContent = "Remove";
+            removeBtn.addEventListener("click", () => removeSelectionFromSlip(index));
+            row.append(info, removeBtn);
+            betSlipSelectionsEl.appendChild(row);
+        });
+    }
+    betSlipKind = betSlipSelections.length > 1 ? "parlay" : "single";
+    if (betSlipKindLabel) {
+        betSlipKindLabel.textContent = betSlipKind === "parlay" ? "Parlay" : "Single";
+    }
+    const hasSelections = betSlipSelections.length > 0;
+    const stakeValue = Number(betSlipStakeInput ? betSlipStakeInput.value : 0);
+    const stakeValid = Number.isFinite(stakeValue) && stakeValue > 0;
+    let decimalMultiplier = 1;
+    if (hasSelections) {
+        betSlipSelections.forEach((leg) => {
+            decimalMultiplier *= americanToDecimal(leg.price);
+        });
+    }
+    const payout = hasSelections && stakeValid ? stakeValue * decimalMultiplier : 0;
+    if (betSlipPayoutEl) {
+        betSlipPayoutEl.textContent = formatCurrency(payout);
+    }
+    const isParlay = betSlipSelections.length > 1;
+    if (betSlipOddsWrap) {
+        betSlipOddsWrap.hidden = !isParlay;
+        if (isParlay && betSlipOddsEl) {
+            const american = decimalToAmerican(decimalMultiplier);
+            betSlipOddsEl.textContent = formatAmerican(american);
+        }
+    }
+    if (betSlipProfitWrap) {
+        betSlipProfitWrap.hidden = !isParlay;
+        if (isParlay && betSlipProfitEl) {
+            const profit = payout - (stakeValid ? stakeValue : 0);
+            betSlipProfitEl.textContent = formatCurrency(profit > 0 ? profit : 0);
+        }
+    }
+    const withinBankroll = stakeValue <= (bankrollSummary?.available ?? 0);
+    if (betSlipPlaceBtn) {
+        betSlipPlaceBtn.disabled = !(hasSelections && stakeValid && withinBankroll && currentLeagueId);
+    }
+    if (betSlipMessage) {
+        if (!withinBankroll && stakeValid) {
+            betSlipMessage.textContent = "Stake exceeds available balance.";
+        } else {
+            betSlipMessage.textContent = "";
+        }
+    }
+}
+function addSelectionToSlip(selection) {
+    if (!leagueInitialized || !currentLeagueId) {
+        if (betSlipMessage) {
+            betSlipMessage.textContent = "Join a league before placing bets.";
+        }
+        return;
+    }
+    const key = `${selection.gameId}:${selection.market}:${selection.selection}`;
+    if (betSlipSelections.some((leg) => leg.key === key)) {
+        if (betSlipMessage) {
+            betSlipMessage.textContent = "This selection is already in your slip.";
+        }
+        return;
+    }
+    const sameGameLegs = betSlipSelections.filter((leg) => leg.gameId === selection.gameId);
+    if (sameGameLegs.length) {
+        const conflict = sameGameLegs.find((leg) => {
+            if (leg.market === "moneyline" && selection.market === "spread") return true;
+            if (leg.market === "spread" && selection.market === "moneyline") return true;
+            if (leg.market === "moneyline" && selection.market === "moneyline") return true;
+            if (leg.market === "spread" && selection.market === "spread") return true;
+            if (leg.market === "total" && selection.market === "total") return true;
+            return false;
+        });
+        if (conflict) {
+            if (betSlipMessage) {
+                betSlipMessage.textContent = "Same-game parlays allow only one side and one total per game.";
+            }
+            return;
+        }
+    }
+    betSlipSelections.push({
+        ...selection,
+        key,
+    });
+    if (betSlipMessage) {
+        betSlipMessage.textContent = "Selection added to slip.";
+    }
+    renderBetSlip();
+}
+function removeSelectionFromSlip(index) {
+    if (index < 0 || index >= betSlipSelections.length) {
+        return;
+    }
+    betSlipSelections.splice(index, 1);
+    renderBetSlip();
+}
+function clearBetSlip(message = "") {
+    betSlipSelections = [];
+    renderBetSlip();
+    if (betSlipMessage) {
+        betSlipMessage.textContent = message;
+    }
+}
+function renderBettingList(target, slips, { emptyMessage }) {
+    if (!target) {
+        return;
+    }
+    target.innerHTML = "";
+    if (!slips.length) {
+        const empty = document.createElement("p");
+        empty.className = "empty";
+        empty.textContent = emptyMessage;
+        target.appendChild(empty);
+        return;
+    }
+    slips.forEach((slip) => {
+        const card = document.createElement("article");
+        card.className = "betting-card";
+        if (slip.status && slip.status !== "pending") {
+            card.classList.add(`betting-card--${slip.status}`);
+        }
+        const header = document.createElement("header");
+        const title = document.createElement("strong");
+        title.textContent = slip.kind === "parlay" ? "Parlay" : "Single";
+        header.appendChild(title);
+        const statusEl = document.createElement("span");
+        const statusLabel = (slip.status || "Pending").replace(/\b\w/g, (char) => char.toUpperCase());
+        statusEl.textContent = statusLabel;
+        const headerRight = document.createElement("div");
+        headerRight.className = "betting-card__header-right";
+        const oddsInfo = computeSlipOdds(slip.legs || [], slip.kind);
+        if (oddsInfo && Number.isFinite(oddsInfo.american)) {
+            const oddsEl = document.createElement("span");
+            oddsEl.className = "betting-card__odds";
+            oddsEl.textContent = formatAmerican(oddsInfo.american);
+            headerRight.appendChild(oddsEl);
+        }
+        headerRight.appendChild(statusEl);
+        header.appendChild(headerRight);
+        card.appendChild(header);
+        const legsWrap = document.createElement("div");
+        legsWrap.className = "betting-legs";
+        (slip.legs || []).forEach((leg) => {
+            const legRow = document.createElement("div");
+            legRow.className = "betting-leg";
+            const left = document.createElement("span");
+            left.textContent = leg.label || `${leg.market} ${leg.selection}`;
+            const right = document.createElement("span");
+            const pieces = [];
+            pieces.push(formatAmerican(leg.price));
+            if (leg.result && slip.status !== "pending") {
+                pieces.push(leg.result);
+            }
+            right.textContent = pieces.join(" · ");
+            legRow.append(left, right);
+            legsWrap.appendChild(legRow);
+        });
+        card.appendChild(legsWrap);
+        const footer = document.createElement("footer");
+        const placed = slip.placed_at ? formatDisplayDate(slip.placed_at) : null;
+        const payoutLabel = slip.status && slip.status !== "pending" ? `Payout: ${formatCurrency(slip.payout || 0)}` : `Potential: ${formatCurrency(slip.potential_payout || 0)}`;
+        footer.innerHTML = `<span>Stake: ${formatCurrency(slip.stake || 0)}</span><span>${payoutLabel}</span>`;
+        if (placed) {
+            const dates = document.createElement("span");
+            dates.textContent = `Placed ${placed}`;
+            footer.appendChild(dates);
+        }
+        card.appendChild(footer);
+        target.appendChild(card);
+    });
+}
+function renderPendingBets() {
+    renderBettingList(pendingBetsList, pendingBets, { emptyMessage: "No pending bets." });
+}
+function renderSettledBets() {
+    const ordered = Array.isArray(settledBets)
+        ? settledBets
+              .slice()
+              .sort((a, b) => {
+                  const aDate = a.settled_at || a.placed_at || "";
+                  const bDate = b.settled_at || b.placed_at || "";
+                  const aMs = aDate ? Date.parse(aDate) : 0;
+                  const bMs = bDate ? Date.parse(bDate) : 0;
+                  return bMs - aMs;
+              })
+        : [];
+    renderBettingList(settledBetsList, ordered, { emptyMessage: "No settled bets yet." });
+}
+function setBettingTab(target) {
+    if (!bettingTabPending || !bettingTabSettled || !pendingBetsList || !settledBetsList) {
+        return;
+    }
+    const showSettled = target === "settled";
+    bettingTabPending.classList.toggle("active", !showSettled);
+    bettingTabSettled.classList.toggle("active", showSettled);
+    pendingBetsList.classList.toggle("hidden", showSettled);
+    settledBetsList.classList.toggle("hidden", !showSettled);
+}
+async function refreshBettingData({ silent = false } = {}) {
+    if (!currentLeagueId || !bettingPanel) {
+        return;
+    }
+    try {
+        const [bankrollData, betsData] = await Promise.all([
+            fetchJSON(`/leagues/${currentLeagueId}/bankroll`),
+            fetchJSON(`/leagues/${currentLeagueId}/bets`),
+        ]);
+        if (betsData) {
+            pendingBets = Array.isArray(betsData.pending) ? betsData.pending.slice() : [];
+            settledBets = Array.isArray(betsData.settled) ? betsData.settled.slice() : [];
+            renderPendingBets();
+            renderSettledBets();
+        }
+        const summarySource = bankrollData && bankrollData.bankroll ? bankrollData.bankroll : bankrollSummary;
+        bankrollSummary = {
+            available: Number(summarySource.available ?? bankrollSummary.available ?? 0),
+            pending_stake: pendingBets.reduce((sum, slip) => sum + Number(slip.stake || 0), 0),
+            pending_potential: pendingBets.reduce((sum, slip) => sum + Number(slip.potential_payout || 0), 0),
+        };
+        updateBankrollDisplay(bankrollSummary);
+        refreshBettingPanelVisibility();
+        renderBetSlip();
+    } catch (error) {
+        if (!silent) {
+            showToast(error.message || "Unable to load betting data.", "error");
+        }
+    }
+}
+async function submitBetSlip() {
+    if (!currentLeagueId || !betSlipSelections.length) {
+        return;
+    }
+    const stakeValue = Number(betSlipStakeInput ? betSlipStakeInput.value : 0);
+    if (!Number.isFinite(stakeValue) || stakeValue <= 0) {
+        if (betSlipMessage) {
+            betSlipMessage.textContent = "Enter a valid stake.";
+        }
+        return;
+    }
+    if (stakeValue > (bankrollSummary?.available ?? 0)) {
+        if (betSlipMessage) {
+            betSlipMessage.textContent = "Stake exceeds available balance.";
+        }
+        return;
+    }
+    if (betSlipPlaceBtn) {
+        betSlipPlaceBtn.disabled = true;
+        betSlipPlaceBtn.textContent = "Placing…";
+    }
+    try {
+        const leagueDate = scoreboardActiveDate || scoreboardCurrentDate || "";
+        const payload = {
+            stake: stakeValue,
+            kind: betSlipKind,
+            league_date: leagueDate || undefined,
+            legs: betSlipSelections.map((leg) => ({
+                game_id: leg.gameId,
+                market: leg.market,
+                selection: leg.selection,
+                price: leg.price,
+                point: leg.point,
+                label: leg.label,
+                metadata: {
+                    bookmaker: leg.bookmaker,
+                    game: leg.game,
+                },
+            })),
+        };
+        const response = await fetchJSON(`/leagues/${currentLeagueId}/bets`, {
+            method: "POST",
+            body: JSON.stringify(payload),
+        });
+        if (response.bankroll) {
+            updateBankrollDisplay(response.bankroll);
+        }
+        if (Array.isArray(response.pending)) {
+            pendingBets = response.pending.slice();
+            renderPendingBets();
+        }
+        showToast("Bet placed.", "success");
+        clearBetSlip("Bet placed successfully.");
+        await refreshBettingData({ silent: true });
+    } catch (error) {
+        if (betSlipMessage) {
+            betSlipMessage.textContent = error.message || "Unable to place bet.";
+        }
+    } finally {
+        if (betSlipPlaceBtn) {
+            betSlipPlaceBtn.disabled = false;
+            betSlipPlaceBtn.textContent = "Place Bet";
+        }
+    }
+}
+function handleBetResultsPayload(result, { silent = false } = {}) {
+    if (!result) {
+        return;
+    }
+    if (Array.isArray(result.pending)) {
+        pendingBets = result.pending.slice();
+    }
+    if (Array.isArray(result.settled) && result.settled.length) {
+        settledBets = result.settled.concat(settledBets);
+        const wonCount = result.settled.filter((slip) => slip.status === "won").length;
+        if (wonCount && !silent) {
+            showToast(`You won ${wonCount} bet${wonCount === 1 ? "" : "s"}.`, "success");
+        }
+    }
+    if (typeof result.bankroll_delta === "number") {
+        bankrollSummary.available = (bankrollSummary.available || 0) + Number(result.bankroll_delta);
+    }
+    bankrollSummary.pending_stake = pendingBets.reduce((sum, slip) => sum + Number(slip.stake || 0), 0);
+    bankrollSummary.pending_potential = pendingBets.reduce((sum, slip) => sum + Number(slip.potential_payout || 0), 0);
+    renderPendingBets();
+    renderSettledBets();
+    updateBankrollDisplay();
+}
+function resolveOddsLine(lines, keys) {
+    if (!lines || typeof lines !== "object") {
+        return null;
+    }
+    const searchKeys = Array.isArray(keys) ? keys : [keys];
+    for (const key of searchKeys) {
+        if (key && Object.prototype.hasOwnProperty.call(lines, key)) {
+            const entry = lines[key];
+            if (entry && typeof entry === "object") {
+                return entry;
+            }
+        }
+    }
+    return null;
+}
+
+function buildOddsSelection(game) {
+    const odds = game.odds;
+    if (!odds || !odds.markets) {
+        return "";
+    }
+    const bookmaker = odds.bookmaker || {};
+    const bookmakerTitle = bookmaker.title || bookmaker.key || "Odds";
+    const homeTeam = odds.home_team || {};
+    const awayTeam = odds.away_team || {};
+    const homeName = homeTeam.name || game.home_team;
+    const homeAbbr = homeTeam.abbr || game.home_team;
+    const awayName = awayTeam.name || game.away_team;
+    const awayAbbr = awayTeam.abbr || game.away_team;
+    const commence = odds.commence_time || "";
+
+    const buttons = [];
+
+    const moneyline = odds.markets.moneyline;
+    if (moneyline) {
+        const homeLine = resolveOddsLine(moneyline, [homeName, homeAbbr, game.home_team]);
+        const awayLine = resolveOddsLine(moneyline, [awayName, awayAbbr, game.away_team]);
+        if (homeLine && homeLine.price !== undefined) {
+            buttons.push(
+                buildOddsButton(game, {
+                    label: `${homeAbbr} ML`,
+                    detail: `Moneyline ${formatAmerican(homeLine.price)}`,
+                    market: "moneyline",
+                    selection: "home",
+                    price: homeLine.price,
+                    point: null,
+                    bookmaker,
+                    home: { name: homeName, abbr: homeAbbr },
+                    away: { name: awayName, abbr: awayAbbr },
+                    commence,
+                })
+            );
+        }
+        if (awayLine && awayLine.price !== undefined) {
+            buttons.push(
+                buildOddsButton(game, {
+                    label: `${awayAbbr} ML`,
+                    detail: `Moneyline ${formatAmerican(awayLine.price)}`,
+                    market: "moneyline",
+                    selection: "away",
+                    price: awayLine.price,
+                    point: null,
+                    bookmaker,
+                    home: { name: homeName, abbr: homeAbbr },
+                    away: { name: awayName, abbr: awayAbbr },
+                    commence,
+                })
+            );
+        }
+    }
+
+    const spread = odds.markets.spread;
+    if (spread) {
+        const homeLine = resolveOddsLine(spread, [homeName, homeAbbr, game.home_team]);
+        const awayLine = resolveOddsLine(spread, [awayName, awayAbbr, game.away_team]);
+        if (homeLine && homeLine.price !== undefined && homeLine.point !== undefined) {
+            const formatted = formatSpreadPoint(homeLine.point);
+            buttons.push(
+                buildOddsButton(game, {
+                    label: `${homeAbbr} ${formatted}`,
+                    detail: `Spread ${formatted} (${formatAmerican(homeLine.price)})`,
+                    market: "spread",
+                    selection: "home",
+                    price: homeLine.price,
+                    point: homeLine.point,
+                    bookmaker,
+                    home: { name: homeName, abbr: homeAbbr },
+                    away: { name: awayName, abbr: awayAbbr },
+                    commence,
+                })
+            );
+        }
+        if (awayLine && awayLine.price !== undefined && awayLine.point !== undefined) {
+            const formatted = formatSpreadPoint(awayLine.point);
+            buttons.push(
+                buildOddsButton(game, {
+                    label: `${awayAbbr} ${formatted}`,
+                    detail: `Spread ${formatted} (${formatAmerican(awayLine.price)})`,
+                    market: "spread",
+                    selection: "away",
+                    price: awayLine.price,
+                    point: awayLine.point,
+                    bookmaker,
+                    home: { name: homeName, abbr: homeAbbr },
+                    away: { name: awayName, abbr: awayAbbr },
+                    commence,
+                })
+            );
+        }
+    }
+
+    const total = odds.markets.total;
+    if (total) {
+        const overLine = resolveOddsLine(total, ["Over", "over"]);
+        const underLine = resolveOddsLine(total, ["Under", "under"]);
+        if (overLine && overLine.price !== undefined && overLine.point !== undefined) {
+            const point = overLine.point;
+            const formatted = Number.isFinite(Number(point))
+                ? Number(point) % 1 === 0
+                    ? Number(point).toFixed(0)
+                    : Number(point).toFixed(1)
+                : point;
+            buttons.push(
+                buildOddsButton(game, {
+                    label: `Over ${formatted}`,
+                    detail: `Total Over ${formatted} (${formatAmerican(overLine.price)})`,
+                    market: "total",
+                    selection: "over",
+                    price: overLine.price,
+                    point,
+                    bookmaker,
+                    home: { name: homeName, abbr: homeAbbr },
+                    away: { name: awayName, abbr: awayAbbr },
+                    commence,
+                })
+            );
+        }
+        if (underLine && underLine.price !== undefined && underLine.point !== undefined) {
+            const point = underLine.point;
+            const formatted = Number.isFinite(Number(point))
+                ? Number(point) % 1 === 0
+                    ? Number(point).toFixed(0)
+                    : Number(point).toFixed(1)
+                : point;
+            buttons.push(
+                buildOddsButton(game, {
+                    label: `Under ${formatted}`,
+                    detail: `Total Under ${formatted} (${formatAmerican(underLine.price)})`,
+                    market: "total",
+                    selection: "under",
+                    price: underLine.price,
+                    point,
+                    bookmaker,
+                    home: { name: homeName, abbr: homeAbbr },
+                    away: { name: awayName, abbr: awayAbbr },
+                    commence,
+                })
+            );
+        }
+    }
+
+    if (!buttons.length) {
+        return "";
+    }
+
+    return `
+        <div class="odds-section">
+            <div class="odds-section__header">${escapeHtml(bookmakerTitle)}</div>
+            <div class="odds-options">
+                ${buttons.join("")}
+            </div>
+        </div>
+    `;
+}
+
+function buildOddsButton(game, config) {
+    const {
+        label,
+        detail,
+        market,
+        selection,
+        price,
+        point,
+        bookmaker,
+        home,
+        away,
+        commence,
+    } = config;
+    const pointValue = point === null || point === undefined ? "" : point;
+        const attrs = {
+            "data-game-id": String(game.game_id),
+            "data-market": market,
+            "data-selection": selection,
+            "data-price": String(price),
+            "data-point": pointValue === "" ? "" : String(pointValue),
+            "data-label": encodeURIComponent(label ?? ""),
+            "data-detail": encodeURIComponent(detail ?? ""),
+            "data-bookmaker-key": bookmaker.key || "",
+            "data-bookmaker-title": encodeURIComponent(bookmaker.title || bookmaker.key || ""),
+            "data-home-name": encodeURIComponent(home.name || ""),
+            "data-home-abbr": home.abbr || "",
+            "data-away-name": encodeURIComponent(away.name || ""),
+            "data-away-abbr": away.abbr || "",
+            "data-commence": commence || "",
+        };
+
+    const attrString = Object.entries(attrs)
+        .map(([key, value]) => `${key}="${value}"`)
+        .join(" ");
+
+    return `
+        <button type="button" class="odds-button" ${attrString}>
+            <strong>${escapeHtml(label)}</strong>
+            <span>${escapeHtml(detail)}</span>
+        </button>
+    `;
+}
+
+function buildOddsPreview(game) {
+    const odds = game.odds;
+    if (!odds || !odds.markets) {
+        return "";
+    }
+    const homeInfo = odds.home_team || {};
+    const awayInfo = odds.away_team || {};
+    const homeNames = [homeInfo.name, homeInfo.abbr, game.home_team].filter(Boolean);
+    const awayNames = [awayInfo.name, awayInfo.abbr, game.away_team].filter(Boolean);
+    const markets = odds.markets;
+    const bookmakerTitle = odds.bookmaker?.title || odds.bookmaker?.key || "Odds";
+    const lines = [];
+
+    const moneyline = markets.moneyline;
+    if (moneyline) {
+        const homeMl = resolveOddsLine(moneyline, homeNames);
+        const awayMl = resolveOddsLine(moneyline, awayNames);
+        if (homeMl && awayMl) {
+            lines.push(
+                `ML ${escapeHtml(awayInfo.abbr || awayInfo.name || game.away_team)} ${formatAmerican(awayMl.price)} | ` +
+                    `${escapeHtml(homeInfo.abbr || homeInfo.name || game.home_team)} ${formatAmerican(homeMl.price)}`
+            );
+        }
+    }
+
+    const spread = markets.spread;
+    if (spread) {
+        const homeSp = resolveOddsLine(spread, homeNames);
+        const awaySp = resolveOddsLine(spread, awayNames);
+        if (homeSp && awaySp && homeSp.point !== undefined && awaySp.point !== undefined) {
+            lines.push(
+                `Spread ${escapeHtml(homeInfo.abbr || homeInfo.name || game.home_team)} ${formatSpreadPoint(homeSp.point)} (${formatAmerican(homeSp.price)}) | ` +
+                    `${escapeHtml(awayInfo.abbr || awayInfo.name || game.away_team)} ${formatSpreadPoint(awaySp.point)} (${formatAmerican(awaySp.price)})`
+            );
+        }
+    }
+
+    const total = markets.total;
+    if (total) {
+        const overLine = resolveOddsLine(total, ["Over", "over"]);
+        const underLine = resolveOddsLine(total, ["Under", "under"]);
+        if (overLine && underLine) {
+            const point = overLine.point ?? underLine.point;
+            const formattedPoint =
+                point !== undefined && Number.isFinite(Number(point))
+                    ? Number(point) % 1 === 0
+                        ? Number(point).toFixed(0)
+                        : Number(point).toFixed(1)
+                    : point;
+            lines.push(
+                `Total O ${formattedPoint ?? ""} (${formatAmerican(overLine.price)}) | ` +
+                    `U ${formattedPoint ?? ""} (${formatAmerican(underLine.price)})`
+            );
+        }
+    }
+
+    if (!lines.length) {
+        return "";
+    }
+    return `<div class="odds-preview"><div class="odds-preview__header">${escapeHtml(bookmakerTitle)}</div>${lines
+        .map((line) => `<span>${escapeHtml(line)}</span>`)
+        .join("")}</div>`;
+}
+
+function handleScoreboardOddsClick(event) {
+    const button = event.target.closest(".odds-button");
+    if (!button) {
+        return;
+    }
+    event.preventDefault();
+    event.stopPropagation();
+    if (!scoreboardBettingEnabled) {
+        if (betSlipMessage) {
+            betSlipMessage.textContent = "Bets are only available before today's games are simulated.";
+        }
+        return;
+    }
+    const gameId = Number(button.dataset.gameId);
+    if (!Number.isFinite(gameId)) {
+        return;
+    }
+    const market = button.dataset.market;
+    const selectionKey = button.dataset.selection;
+    const price = Number(button.dataset.price);
+    const pointRaw = button.dataset.point;
+    const point = pointRaw === undefined || pointRaw === "" ? null : Number(pointRaw);
+    const selection = {
+        gameId,
+        market,
+        selection: selectionKey,
+        price,
+        point,
+        label: safeDecode(button.dataset.label || ""),
+        detail: safeDecode(button.dataset.detail || ""),
+        bookmaker: {
+            key: button.dataset.bookmakerKey || "",
+            title: safeDecode(button.dataset.bookmakerTitle || ""),
+        },
+        game: {
+            home: {
+                name: safeDecode(button.dataset.homeName || ""),
+                abbreviation: button.dataset.homeAbbr || "",
+            },
+            away: {
+                name: safeDecode(button.dataset.awayName || ""),
+                abbreviation: button.dataset.awayAbbr || "",
+            },
+            commence_time: button.dataset.commence || "",
+        },
+    };
+    addSelectionToSlip(selection);
+}
+function formatSpreadPoint(point) {
+    const numeric = Number(point);
+    if (!Number.isFinite(numeric)) {
+        return String(point ?? "");
+    }
+    const decimals = Math.abs(numeric % 1) < 0.0001 ? 0 : 1;
+    const formatted = numeric.toFixed(decimals);
+    return numeric > 0 ? `+${formatted}` : formatted;
+}
 
 function renderPlayoffs(data) {
     if (!playoffsPanel) {
@@ -3271,6 +4090,26 @@ if (draftCompleteBtn) {
         }
     });
 }
+if (betSlipStakeInput) {
+    betSlipStakeInput.addEventListener("input", () => renderBetSlip());
+}
+if (betSlipClearBtn) {
+    betSlipClearBtn.addEventListener("click", () => clearBetSlip(""));
+}
+if (betSlipPlaceBtn) {
+    betSlipPlaceBtn.addEventListener("click", submitBetSlip);
+}
+if (bettingTabPending) {
+    bettingTabPending.addEventListener("click", () => setBettingTab("pending"));
+}
+if (bettingTabSettled) {
+    bettingTabSettled.addEventListener("click", () => setBettingTab("settled"));
+}
+if (scoreboardList) {
+    scoreboardList.addEventListener("click", handleScoreboardOddsClick);
+}
+setBettingTab("pending");
+renderBetSlip();
 // Bootstrap
 (async function init() {
     try {

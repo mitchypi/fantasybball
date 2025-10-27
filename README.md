@@ -8,19 +8,23 @@ Replay the full 2024-25 NBA season with perfect information. This project pulls 
 - Points league vs. 9-cat (or entirely custom): tune scoring presets in the setup view, save them for later, and apply them to future leagues.
 - Single-player commissioner mode: auto-draft all teams, own every roster, and advance the fantasy calendar one day at a time.
 - Web dashboard: monitor real NBA scoreboards, view fantasy box scores inline, tweak scoring formulas, and trigger simulations from the browser.
+- Sportsbook mode: optionally cache The Odds API markets, build bet slips from the scoreboard, and let the simulator settle wagers alongside each NBA day.
 
 ## Project layout
 ```
 fantasybball/
 ├── data/                      # Cached datasets + saved leagues
 ├── scripts/
-│   └── download_player_stats.py   # Balldontlie downloader (player logs + game scores)
+│   ├── download_historical_odds.py  # Pull historical pre-game odds for the cached schedule
+│   ├── download_odds.py             # Live odds snapshot for upcoming games
+│   └── download_player_stats.py     # Balldontlie downloader (player logs + game scores)
 ├── src/
 │   ├── api/
 │   │   └── main.py            # FastAPI entry point + dashboard routes
 │   ├── config.py              # Settings, scoring profiles, API key management
 │   ├── data_loader.py         # Loaders/aggregations over cached data
 │   ├── league.py              # League persistence, drafting, simulation
+│   ├── betting.py             # Bet slips, odds helpers, settlement utilities
 │   ├── models.py              # Pydantic domain models for teams and results
 │   ├── player_profile.py      # League-aware player profile payload builder
 │   ├── schedule.py            # Helpers for NBA schedule and scoreboards
@@ -40,10 +44,14 @@ fantasybball/
    pip install -r requirements.txt
    ```
 
-2. **Configure your API key (optional)**
+2. **Configure your API keys (optional)**
    The repo defaults to the provided balldontlie key. To override it, set an environment variable before downloading:
    ```
    set BALLDONTLIE_API_KEY=your-key-here
+   ```
+   For gambling features, export your [The Odds API](https://the-odds-api.com/) key as well:
+   ```
+   set ODDS_API_KEY=your-odds-api-key
    ```
 
 3. **Cache every 2024-25 game log and scoreboard locally**
@@ -53,7 +61,19 @@ fantasybball/
    This walks every balldontlie `stats` and `games` page for the season, respects pagination, and writes `data/player_game_logs_202425.csv` plus `data/games_202425.csv`.
    > **Heads-up:** balldontlie only exposes completed seasons. If the requested season is missing you'll see a friendly error—try `2023-24` until the new data drops.
 
-4. **Run the FastAPI backend and dashboard**
+4. **(Optional) Cache sportsbook odds for the season**
+   - For **historical seasons** (completed games):
+     ```
+     python scripts/download_historical_odds.py --season 2024-25 --bookmaker draftkings --overwrite
+     ```
+     This walks the Odds API historical endpoints day-by-day, matches events to every row in `data/games_202425.csv`, and saves the last pregame snapshot per game to `data/odds_202425.json`.
+   - For **upcoming games** (today/tomorrow):
+     ```
+     python scripts/download_odds.py --season 2024-25 --bookmaker draftkings
+     ```
+   Set `ODDS_API_KEY` (or pass `--api-key`) with your [The Odds API](https://the-odds-api.com/) key before running either command. Both scripts share the same cache file, so re-run with `--overwrite` when you want a fresh pull.
+
+5. **Run the FastAPI backend and dashboard**
    ```
    uvicorn src.api.main:app --reload
    ```
@@ -67,7 +87,7 @@ fantasybball/
 - Draft state enforces uniqueness across the league; you can revisit the draft summary any time via `GET /leagues/{league_id}/draft`.
 - Once the draft is complete, manage your roster directly from the Players tab (Add free agents) or the player modal (Drop from your team). Those buttons call `/leagues/{id}/roster/add` and `/leagues/{id}/roster/drop` respectively.
 
-5. **Try the command-line demo**
+6. **Try the command-line demo**
    ```
    python -m src.simulator
    ```
@@ -165,11 +185,19 @@ All endpoints are served by the FastAPI app in `src/api/main.py`. Most endpoints
 - POST `/leagues/{league_id}/roster/drop`
   - Body: `{ player_id }`
   - Removes a player from the user roster and updates the persisted league state.
+- GET `/leagues/{league_id}/bankroll`
+  - Returns `{ bankroll: { available, pending_stake, pending_potential, pending_count, settled_count } }` for the league's betting wallet.
+- GET `/leagues/{league_id}/bets`
+  - Query: `status` (`pending|settled`, optional)
+  - Lists bet slips for the league, grouped into pending and settled collections.
+- POST `/leagues/{league_id}/bets`
+  - Body: `{ stake, kind: "single"|"parlay", legs: [{ game_id, market, selection, price, point? }] }`
+  - Debits the bankroll, records a new slip (validates against cached odds when available), and returns the refreshed pending list plus bankroll summary.
 
 ### Games and Box Scores
 - GET `/games`
   - Query: `league_id` (required), `date` (YYYY-MM-DD, optional)
-  - Returns NBA scoreboard for the given or effective date with `simulated` flags.
+  - Returns NBA scoreboard for the given or effective date with `simulated` flags and (when present) `bet_results` summarising slips settled on that day.
 - GET `/games/{game_id}/boxscore`
   - Query: `league_id` (required), `date` (YYYY-MM-DD, optional)
   - Returns per-team player lines and stat totals for that simulated game.

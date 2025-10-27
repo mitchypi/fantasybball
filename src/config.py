@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import os
 from pathlib import Path
-from typing import Dict
+from typing import Dict, Optional
 
 from pydantic import BaseModel, Field
 
@@ -32,15 +32,19 @@ class Settings(BaseModel):
             "76648295-5d37-417d-b3b6-99564d506efa",
         )
     )
+    odds_api_key: str = Field(default_factory=lambda: os.getenv("ODDS_API_KEY", ""))
+    odds_default_bookmaker: str = Field(default_factory=lambda: os.getenv("ODDS_BOOKMAKER", "draftkings"))
+    odds_regions: str = Field(default_factory=lambda: os.getenv("ODDS_REGIONS", "us"))
+    odds_markets: str = Field(default_factory=lambda: os.getenv("ODDS_MARKETS", "h2h,spreads,totals"))
     default_scoring_profile: str = "points_league"
     scoring_profiles: Dict[str, ScoringProfile] = {
         "points_league": ScoringProfile(
             name="Points league (balanced)",
             weights={
                 "PTS": 1.0,
-                "OREB": 1.2,
-                "DREB": 1.0,
-                "TREB": 0.0,
+                "OREB": 0.0,
+                "DREB": 0.0,
+                "TREB": 1.2,
                 "AST": 1.5,
                 "STL": 3.0,
                 "BLK": 3.0,
@@ -53,8 +57,8 @@ class Settings(BaseModel):
                 "FTM": 1.0,
                 "FTA": -0.75,
                 "FT_MISS": 0.0,
-                "TO": -1.0,
-                "DD": 3.0,
+                "TO": -1.5,
+                "DD": 2.5,
                 "TD": 5.0,
                 "PF": 0.0,
             },
@@ -108,6 +112,10 @@ class Settings(BaseModel):
     def games_path(self, season: str | None = None) -> Path:
         slug = self.season_slug(season)
         return DATA_DIR / f"games_{slug}.csv"
+
+    def odds_path(self, season: Optional[str] = None) -> Path:
+        slug = self.season_slug(season)
+        return DATA_DIR / f"odds_{slug}.json"
 
 
 settings = Settings()

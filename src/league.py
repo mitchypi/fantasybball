@@ -3,8 +3,9 @@ from __future__ import annotations
 import json
 import random
 import uuid
+import copy
 from dataclasses import dataclass, field
-from datetime import date, datetime, timedelta
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
@@ -13,6 +14,11 @@ import pandas as pd
 from .config import DATA_DIR, settings, ScoringProfile
 from .data_loader import compute_fantasy_points, load_player_game_logs, player_season_averages
 from .schedule import daily_scoreboard, season_dates
+from .betting import (
+    BetLeg,
+    BetSlip,
+    evaluate_slip_with_scoreboards,
+)
 
 LEAGUE_DIR = DATA_DIR / "leagues"
 
@@ -105,6 +111,9 @@ class LeagueState:
     phase: str = "regular"
     playoffs_config: PlayoffConfig = field(default_factory=PlayoffConfig)
     playoffs: Optional[Dict[str, Any]] = None
+    bankroll: float = 100.0
+    pending_bets: List[Dict[str, Any]] = field(default_factory=list)
+    settled_bets: List[Dict[str, Any]] = field(default_factory=list)
 
     @property
     def current_date(self) -> Optional[date]:
@@ -136,6 +145,9 @@ class LeagueState:
             "phase": self.phase,
             "playoffs": self.playoffs,
             "playoffs_config": self.playoffs_config.to_dict(),
+            "bankroll": self.bankroll,
+            "pending_bets": self.pending_bets,
+            "settled_bets": self.settled_bets,
         }
 
     @classmethod
@@ -161,6 +173,9 @@ class LeagueState:
             phase=str(raw.get("phase", "regular")),
             playoffs_config=PlayoffConfig.from_dict(raw.get("playoffs_config")),
             playoffs=dict(raw.get("playoffs") or {}) or None,
+            bankroll=float(raw.get("bankroll", 100.0) or 0.0),
+            pending_bets=[dict(item) for item in raw.get("pending_bets", []) or []],
+            settled_bets=[dict(item) for item in raw.get("settled_bets", []) or []],
         )
         awaiting = raw.get("awaiting_simulation")
         if awaiting is None:
@@ -205,6 +220,302 @@ class LeagueState:
                 if record.get("week_index") is None:
                     record["week_index"] = week.get("index")
         return state
+
+
+def _pending_slips(state: LeagueState) -> List[BetSlip]:
+    slips: List[BetSlip] = []
+    for entry in state.pending_bets or []:
+        try:
+            slips.append(BetSlip.from_dict(entry))
+        except Exception:
+            continue
+    return slips
+
+
+def _settled_slips(state: LeagueState) -> List[BetSlip]:
+    slips: List[BetSlip] = []
+    for entry in state.settled_bets or []:
+        try:
+            slips.append(BetSlip.from_dict(entry))
+        except Exception:
+            continue
+    return slips
+
+
+def _serialize_slips(slips: List[BetSlip]) -> List[Dict[str, Any]]:
+    return [slip.to_dict() for slip in slips]
+
+
+def bankroll_summary(state: LeagueState) -> Dict[str, Any]:
+    pending_slips = _pending_slips(state)
+    pending_stake = sum(slip.stake for slip in pending_slips)
+    pending_potential = sum(slip.potential_payout for slip in pending_slips)
+    return {
+        "available": round(float(state.bankroll), 2),
+        "pending_stake": round(float(pending_stake), 2),
+        "pending_potential": round(float(pending_potential), 2),
+        "pending_count": len(pending_slips),
+        "settled_count": len(state.settled_bets or []),
+    }
+
+
+def _build_scoreboard_lookup(
+    state: LeagueState,
+    extra_games: Optional[List[Dict[str, Any]]] = None,
+) -> Dict[int, Dict[str, Any]]:
+    lookup: Dict[int, Dict[str, Any]] = {}
+    for record in state.history:
+        for game in record.get("nba_scoreboard", []) or []:
+            try:
+                gid = int(game.get("game_id"))
+            except (TypeError, ValueError):
+                continue
+            lookup[gid] = game
+    for game in extra_games or []:
+        try:
+            gid = int(game.get("game_id"))
+        except (TypeError, ValueError):
+            continue
+        lookup[gid] = game
+    return lookup
+
+
+def _resolve_market_line(odds_payload: Dict[str, Any], market: str, selection: str) -> Optional[Dict[str, Any]]:
+    markets = (odds_payload.get("markets") or {}).get(market)
+    if not isinstance(markets, dict):
+        return None
+    selection_lower = selection.lower()
+    if market in {"moneyline", "spread"}:
+        home_name = (odds_payload.get("home_team") or {}).get("full_name")
+        away_name = (odds_payload.get("away_team") or {}).get("full_name")
+        if selection_lower.startswith("home") and home_name:
+            return markets.get(home_name)
+        if selection_lower.startswith("away") and away_name:
+            return markets.get(away_name)
+        for name, line in markets.items():
+            if isinstance(name, str) and name.lower() == selection_lower:
+                return line
+        return None
+    if market == "total":
+        if selection_lower.startswith("over"):
+            return markets.get("Over") or markets.get("over")
+        if selection_lower.startswith("under"):
+            return markets.get("Under") or markets.get("under")
+    return None
+
+
+def _team_display(team_payload: Optional[Dict[str, Any]]) -> str:
+    if not team_payload:
+        return ""
+    # Odds feeds vary between abbreviation/full_name vs. abbr/name keys.
+    return (
+        team_payload.get("abbreviation")
+        or team_payload.get("abbr")
+        or team_payload.get("full_name")
+        or team_payload.get("name")
+        or ""
+    )
+
+
+def _leg_label(odds_payload: Dict[str, Any], market: str, selection: str, point: Optional[float]) -> str:
+    home_abbr = _team_display(odds_payload.get("home_team")) or "Home"
+    away_abbr = _team_display(odds_payload.get("away_team")) or "Away"
+    market_lower = market.lower()
+    selection_lower = selection.lower()
+    if market_lower == "moneyline":
+        if selection_lower.startswith("home"):
+            return f"{home_abbr} ML"
+        if selection_lower.startswith("away"):
+            return f"{away_abbr} ML"
+    if market_lower == "spread":
+        if point is None:
+            return f"{selection.title()} spread"
+        formatted_point = f"{point:+g}"
+        if selection_lower.startswith("home"):
+            return f"{home_abbr} {formatted_point}"
+        if selection_lower.startswith("away"):
+            return f"{away_abbr} {formatted_point}"
+    if market_lower == "total":
+        if point is None:
+            return selection.title()
+        prefix = "Over" if selection_lower.startswith("over") else "Under"
+        return f"{prefix} {point:g}"
+    return selection.title()
+
+
+def place_bet_slip(
+    state: LeagueState,
+    payload: Dict[str, Any],
+    odds_lookup: Optional[Dict[int, Dict[str, Any]]] = None,
+) -> BetSlip:
+    stake = float(payload.get("stake", 0.0) or 0.0)
+    if stake <= 0:
+        raise ValueError("Stake must be greater than zero.")
+    if stake > state.bankroll:
+        raise ValueError("Insufficient bankroll for this stake.")
+
+    kind = str(payload.get("kind", "single")).lower()
+    if kind not in {"single", "parlay"}:
+        raise ValueError("Bet kind must be 'single' or 'parlay'.")
+
+    legs_data = payload.get("legs") or []
+    if not legs_data:
+        raise ValueError("Provide at least one leg for the bet slip.")
+    if kind == "single" and len(legs_data) != 1:
+        raise ValueError("Single bets must contain exactly one leg.")
+    if kind == "parlay" and len(legs_data) < 2:
+        raise ValueError("Parlays must contain at least two legs.")
+
+    legs: List[BetLeg] = []
+    for leg_payload in legs_data:
+        try:
+            game_id = int(leg_payload.get("game_id"))
+        except (TypeError, ValueError):
+            raise ValueError("Each leg must include a valid game_id.") from None
+        market = str(leg_payload.get("market", "")).lower()
+        selection = str(leg_payload.get("selection", "")).lower()
+        if market not in {"moneyline", "spread", "total"}:
+            raise ValueError("Unsupported market type for leg.")
+        if market in {"moneyline", "spread"} and selection not in {"home", "away"}:
+            raise ValueError("Moneyline and spread selections must be 'home' or 'away'.")
+        if market == "total" and selection not in {"over", "under"}:
+            raise ValueError("Totals selections must be 'over' or 'under'.")
+
+        try:
+            price = int(leg_payload.get("price"))
+        except (TypeError, ValueError):
+            raise ValueError("Each leg must include a valid American price.") from None
+        point_value = leg_payload.get("point")
+        point = float(point_value) if point_value is not None else None
+
+        odds_payload = odds_lookup.get(game_id) if odds_lookup else None
+        if odds_payload:
+            line_info = _resolve_market_line(odds_payload, market, selection)
+            if line_info and int(line_info.get("price")) != price:
+                raise ValueError("Odds have changed. Refresh the scoreboard and try again.")
+            label = _leg_label(odds_payload, market, selection, point)
+            market_snapshot = dict(line_info or {})
+            market_snapshot.setdefault("price", price)
+            if point is not None:
+                market_snapshot.setdefault("point", point)
+            metadata = {
+                "bookmaker": odds_payload.get("bookmaker"),
+                "game": {
+                    "home": odds_payload.get("home_team"),
+                    "away": odds_payload.get("away_team"),
+                    "commence_time": odds_payload.get("commence_time"),
+                },
+                "market": market_snapshot,
+            }
+        else:
+            label = leg_payload.get("label") or f"{market} {selection}"
+            metadata = dict(leg_payload.get("metadata") or {})
+            market_snapshot = dict(metadata.get("market") or {})
+            market_snapshot.setdefault("price", price)
+            if point is not None:
+                market_snapshot.setdefault("point", point)
+            metadata["market"] = market_snapshot
+
+        leg = BetLeg(
+            game_id=game_id,
+            market=market,
+            selection=selection,
+            price=price,
+            point=point,
+            label=label,
+            metadata=metadata,
+        )
+        legs.append(leg)
+
+    league_date_raw = payload.get("league_date") or payload.get("bet_date")
+    placed_at_iso: Optional[str]
+    if league_date_raw:
+        try:
+            league_date_obj = date.fromisoformat(str(league_date_raw))
+        except ValueError as exc:  # noqa: BLE001
+            raise ValueError("Invalid league date provided for bet placement.") from exc
+        placed_at_iso = league_date_obj.isoformat()
+    elif state.current_date:
+        placed_at_iso = state.current_date.isoformat()
+    else:
+        placed_at_iso = datetime.now(timezone.utc).date().isoformat()
+
+    for leg in legs:
+        leg.metadata.setdefault("league_date", placed_at_iso)
+
+    slip = BetSlip(
+        slip_id=str(uuid.uuid4().hex),
+        stake=round(stake, 2),
+        kind=kind,
+        legs=legs,
+        placed_at=placed_at_iso,
+    )
+    slip.potential_payout = round(slip.gross_payout(), 2)
+    slip.payout = 0.0
+    slip.winnings = 0.0
+
+    state.bankroll = round(state.bankroll - slip.stake, 2)
+    pending = _pending_slips(state)
+    pending.append(slip)
+    state.pending_bets = _serialize_slips(pending)
+    save_league_state(state)
+    return slip
+
+
+def list_bets(state: LeagueState, status: Optional[str] = None) -> Dict[str, Any]:
+    status = status.lower() if status else None
+    pending = _pending_slips(state)
+    settled = _settled_slips(state)
+    if status == "pending":
+        return {
+            "pending": _serialize_slips(pending),
+            "settled": [],
+        }
+    if status == "settled":
+        return {
+            "pending": [],
+            "settled": _serialize_slips(settled),
+        }
+    return {
+        "pending": _serialize_slips(pending),
+        "settled": _serialize_slips(settled),
+    }
+
+
+def settle_bets_after_scoreboard(
+    state: LeagueState,
+    scoreboard_entries: List[Dict[str, Any]],
+) -> Dict[str, Any]:
+    pending_slips = _pending_slips(state)
+    if not pending_slips:
+        return {"settled": [], "pending": [], "bankroll_delta": 0.0}
+
+    lookup = _build_scoreboard_lookup(state, extra_games=scoreboard_entries)
+    settled: List[BetSlip] = []
+    remaining: List[BetSlip] = []
+
+    for slip in pending_slips:
+        evaluated, complete = evaluate_slip_with_scoreboards(slip, lookup)
+        if complete:
+            settled.append(evaluated)
+        else:
+            remaining.append(evaluated)
+
+    bankroll_delta = 0.0
+    for slip in settled:
+        bankroll_delta += float(slip.payout)
+
+    state.bankroll = round(state.bankroll + bankroll_delta, 2)
+    state.pending_bets = _serialize_slips(remaining)
+    settled_history = _settled_slips(state)
+    settled_history.extend(settled)
+    state.settled_bets = _serialize_slips(settled_history)
+
+    return {
+        "settled": _serialize_slips(settled),
+        "pending": _serialize_slips(remaining),
+        "bankroll_delta": round(bankroll_delta, 2),
+    }
 
 
 def _auto_draft_teams(
@@ -1262,6 +1573,7 @@ def simulate_until_playoffs(
     game_logs: pd.DataFrame,
     player_stats: pd.DataFrame,
     schedule_df: pd.DataFrame | None = None,
+    odds_lookup: Optional[Dict[int, Dict[str, Any]]] = None,
 ) -> Dict[str, Any]:
     if not state.playoffs_config.is_enabled:
         raise ValueError("Enable playoffs before simulating to their start.")
@@ -1295,6 +1607,7 @@ def simulate_until_playoffs(
                 player_stats=player_stats,
                 scoring_profile_key=None,
                 schedule_df=schedule_df,
+                odds_lookup=odds_lookup,
             )
             simulated_days.append(str(result.get("date")))
         else:
@@ -2098,6 +2411,7 @@ def simulate_day(
     player_stats: pd.DataFrame,
     scoring_profile_key: Optional[str] = None,
     schedule_df: pd.DataFrame | None = None,
+    odds_lookup: Optional[Dict[int, Dict[str, Any]]] = None,
 ) -> Dict[str, object]:
     current_date = state.current_date
     if current_date is None:
@@ -2158,7 +2472,13 @@ def simulate_day(
     for game in daily_scoreboard(current_date, schedule_df=schedule_df):
         entry = game.to_dict()
         entry["simulated"] = True
+        if odds_lookup:
+            odds = odds_lookup.get(int(game.game_id))
+            if odds:
+                entry["odds"] = copy.deepcopy(odds)
         scoreboard.append(entry)
+
+    bet_results = settle_bets_after_scoreboard(state, scoreboard)
 
     day_record = {
         "date": current_date.isoformat(),
@@ -2166,6 +2486,7 @@ def simulate_day(
         "week_index": int(week.get("index", 0)) if week else None,
         "team_results": [result.to_dict() for result in team_results],
         "nba_scoreboard": scoreboard,
+        "bet_results": bet_results,
     }
 
     iso_date = current_date.isoformat()
@@ -2187,6 +2508,9 @@ def reset_league_state(state: LeagueState, game_logs: Optional[pd.DataFrame] = N
     state.history = []
     state.awaiting_simulation = True
     state.weeks, state.weekly_results = _initialize_week_structures(state.calendar, state.team_names)
+    state.bankroll = 100.0
+    state.pending_bets = []
+    state.settled_bets = []
     try:
         state.playoffs_config = validate_playoff_config(state.team_count, state.weeks, state.playoffs_config.to_dict())
     except ValueError:

@@ -1,7 +1,8 @@
 from __future__ import annotations
 
+import json
 from collections import Counter
-from typing import Sequence
+from typing import Any, Dict, Sequence
 
 import pandas as pd
 
@@ -66,6 +67,30 @@ def load_game_schedule(season: str | None = None) -> pd.DataFrame:
     df.columns = [col.upper() for col in df.columns]
     _attach_alias_columns(df)
     return df
+
+
+def load_game_odds(season: str | None = None) -> Dict[str, Any]:
+    """Load cached odds for NBA games keyed by GAME_ID."""
+    season = season or settings.season
+    path = settings.odds_path(season)
+    if not path.exists():
+        return {"metadata": {}, "games": {}}
+    with path.open("r", encoding="utf-8") as f:
+        payload: Dict[str, Any] = json.load(f)
+
+    games_payload = payload.get("games") or {}
+    normalized_games: Dict[int, Any] = {}
+    for key, value in games_payload.items():
+        try:
+            game_id = int(key)
+        except (TypeError, ValueError):
+            continue
+        normalized_games[game_id] = value
+
+    payload["games"] = normalized_games
+    if "metadata" not in payload or not isinstance(payload["metadata"], dict):
+        payload["metadata"] = {}
+    return payload
 
 
 def _most_common(value_series: pd.Series) -> str:

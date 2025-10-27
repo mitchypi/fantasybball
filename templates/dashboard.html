@@ -140,6 +140,42 @@
                     <input type="date" id="scoreboard-date" disabled />
                 </div>
                 <ul id="scoreboard-list" class="scoreboard-list"></ul>
+                <section class="panel subpanel" id="betting-panel">
+                    <h3>Betting Slip</h3>
+                    <div class="bankroll-overview" aria-live="polite">
+                        <div><span>Balance</span><strong id="bankroll-available">$0.00</strong></div>
+                        <div><span>Pending</span><strong id="bankroll-pending">$0.00</strong></div>
+                        <div><span>Potential</span><strong id="bankroll-potential">$0.00</strong></div>
+                    </div>
+                <div class="bet-slip" id="bet-slip">
+                    <div class="bet-slip__selections" id="bet-slip-selections">
+                        <p class="bet-slip__empty">Select odds from the scoreboard to build your slip.</p>
+                    </div>
+                    <div class="bet-slip__controls">
+                        <label for="bet-slip-stake">Stake</label>
+                        <input type="number" id="bet-slip-stake" min="1" step="1" value="10" />
+                        <div class="bet-slip__summary">
+                            <span>Type: <strong id="bet-slip-kind">Single</strong></span>
+                            <span>Potential Payout: <strong id="bet-slip-payout">$0.00</strong></span>
+                            <span id="bet-slip-odds-wrap" hidden>Parlay Odds: <strong id="bet-slip-odds">+0</strong></span>
+                            <span id="bet-slip-profit-wrap" hidden>Potential Profit: <strong id="bet-slip-profit">$0.00</strong></span>
+                        </div>
+                        <div class="bet-slip__actions">
+                            <button type="button" id="bet-slip-place" disabled>Place Bet</button>
+                            <button type="button" id="bet-slip-clear" class="btn-secondary">Clear</button>
+                        </div>
+                            <p id="bet-slip-message" class="bet-slip__message" aria-live="polite"></p>
+                        </div>
+                    </div>
+                    <div class="betting-tabs" role="tablist">
+                        <button type="button" id="betting-tab-pending" class="active" role="tab">Pending</button>
+                        <button type="button" id="betting-tab-settled" role="tab">Settled</button>
+                    </div>
+                    <div class="betting-lists">
+                        <div id="pending-bets" class="betting-list"></div>
+                        <div id="settled-bets" class="betting-list hidden"></div>
+                    </div>
+                </section>
                 <section class="panel subpanel" id="players-panel">
                     <h3>Players</h3>
                     <div class="players-toolbar">
