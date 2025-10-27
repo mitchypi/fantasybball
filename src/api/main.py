@@ -36,6 +36,12 @@ from ..league import (
     draft_autodraft_rest,
     finalize_draft,
     remove_player_from_roster,
+    compute_playoff_options,
+    playoff_options_for_team_count,
+    validate_playoff_config,
+    build_playoff_preview,
+    _serialize_active_playoffs,
+    simulate_until_playoffs,
 )
 from ..schedule import daily_scoreboard, season_dates, format_period_label
 from ..scoring import delete_scoring_profile, rename_scoring_profile, update_scoring_profile
@@ -522,6 +528,7 @@ def create_league_endpoint(payload: Dict[str, Any]) -> Dict[str, Any]:
     scoring_profile_key = payload.get("scoring_profile") or settings.default_scoring_profile
     user_team_name = payload.get("user_team_name") or None
     team_names = payload.get("team_names") or []
+    playoffs_payload = payload.get("playoffs") or payload.get("playoffs_config")
     if isinstance(team_names, str):
         team_names = [team_names]
     normalized_name = league_name.strip().lower()
@@ -531,15 +538,87 @@ def create_league_endpoint(payload: Dict[str, Any]) -> Dict[str, Any]:
     }
     if normalized_name and normalized_name in existing_names:
         raise HTTPException(status_code=400, detail=f"A league named '{league_name}' already exists.")
-    state = initialize_league(
-        league_name=league_name,
-        team_count=team_count,
-        roster_size=roster_size,
-        scoring_profile_key=scoring_profile_key,
-        user_team_name=user_team_name,
-        team_names=team_names,
-    )
+    try:
+        state = initialize_league(
+            league_name=league_name,
+            team_count=team_count,
+            roster_size=roster_size,
+            scoring_profile_key=scoring_profile_key,
+            user_team_name=user_team_name,
+            team_names=team_names,
+            playoffs_config=playoffs_payload,
+        )
+    except ValueError as err:
+        raise HTTPException(status_code=400, detail=str(err)) from err
     return {"league_id": state.league_id, "state": state.to_dict()}
+
+
+@app.get("/playoffs/options")
+def list_playoff_options(team_count: int = Query(..., ge=2, le=30)) -> Dict[str, Any]:
+    schedule_df = _ensure_schedule()
+    calendar = list(season_dates(schedule_df=schedule_df))
+    return playoff_options_for_team_count(team_count, calendar=calendar)
+
+
+@app.get("/leagues/{league_id}/playoffs/config")
+def get_league_playoff_config(league_id: str) -> Dict[str, Any]:
+    state = load_league_state(league_id)
+    options = compute_playoff_options(state.team_count, state.weeks)
+    return {
+        "league_id": league_id,
+        "phase": state.phase,
+        "config": state.playoffs_config.to_dict(),
+        "options": options,
+    }
+
+
+@app.patch("/leagues/{league_id}/playoffs/config")
+def update_league_playoff_config(league_id: str, payload: Dict[str, Any]) -> Dict[str, Any]:
+    state = load_league_state(league_id)
+    if state.phase != "regular":
+        raise HTTPException(status_code=400, detail="Playoff settings can only be updated before playoffs begin.")
+    try:
+        config = validate_playoff_config(state.team_count, state.weeks, payload or {})
+    except ValueError as err:
+        raise HTTPException(status_code=400, detail=str(err)) from err
+    state.playoffs_config = config
+    save_league_state(state)
+    options = compute_playoff_options(state.team_count, state.weeks)
+    return {
+        "league_id": league_id,
+        "phase": state.phase,
+        "config": state.playoffs_config.to_dict(),
+        "options": options,
+    }
+
+
+@app.get("/leagues/{league_id}/playoffs")
+def get_league_playoffs(league_id: str) -> Dict[str, Any]:
+    state = load_league_state(league_id)
+    if state.playoffs and state.playoffs.get("started"):
+        return _serialize_active_playoffs(state)
+    try:
+        preview = build_playoff_preview(state)
+    except ValueError as err:
+        raise HTTPException(status_code=400, detail=str(err)) from err
+    return preview
+
+
+@app.post("/leagues/{league_id}/playoffs/simulate")
+def simulate_to_playoffs_endpoint(league_id: str) -> Dict[str, Any]:
+    state = load_league_state(league_id)
+    if GAME_LOGS is None or PLAYER_BASE is None or SCHEDULE_BASE is None:
+        raise HTTPException(status_code=503, detail="Cached data not ready. Run the data download script first.")
+    try:
+        result = simulate_until_playoffs(
+            state,
+            game_logs=GAME_LOGS,
+            player_stats=PLAYER_BASE,
+            schedule_df=SCHEDULE_BASE,
+        )
+    except ValueError as err:
+        raise HTTPException(status_code=400, detail=str(err)) from err
+    return result
 
 
 @app.delete("/leagues/{league_id}", status_code=204)

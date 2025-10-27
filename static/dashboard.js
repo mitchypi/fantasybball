@@ -53,6 +53,30 @@ const draftCompleteBtn = document.getElementById("draft-complete");
 const draftViewSelect = document.getElementById("draft-view");
 const scoreboardPanel = document.getElementById("scoreboard-panel");
 const fantasyPanel = document.getElementById("fantasy-panel");
+const playoffsEnabledInput = document.getElementById("playoffs-enabled");
+const playoffsControls = document.getElementById("playoff-controls");
+const playoffsTeamSelect = document.getElementById("playoffs-team-count");
+const playoffsWeekSelect = document.getElementById("playoffs-week-range");
+const playoffsReseedInput = document.getElementById("playoffs-reseed");
+const playoffsConsolationInput = document.getElementById("playoffs-consolation");
+const playoffsHint = document.getElementById("playoffs-hint");
+const playoffsPanel = document.getElementById("playoffs-panel");
+const playoffsConfigEl = document.getElementById("playoffs-config");
+const playoffBracketEl = document.getElementById("playoff-bracket");
+const playoffPlacementsEl = document.getElementById("playoff-placements");
+const consolationBracketEl = document.getElementById("consolation-bracket");
+const openPlayoffConfigBtn = document.getElementById("open-playoff-config");
+const playoffConfigEditor = document.getElementById("playoff-config-editor");
+const editPlayoffsEnabled = document.getElementById("edit-playoffs-enabled");
+const editPlayoffControls = document.getElementById("edit-playoff-controls");
+const editPlayoffsTeamSelect = document.getElementById("edit-playoffs-team-count");
+const editPlayoffsWeekSelect = document.getElementById("edit-playoffs-week-range");
+const editPlayoffsReseed = document.getElementById("edit-playoffs-reseed");
+const editPlayoffsConsolation = document.getElementById("edit-playoffs-consolation");
+const editPlayoffsHint = document.getElementById("edit-playoffs-hint");
+const savePlayoffConfigBtn = document.getElementById("save-playoff-config");
+const cancelPlayoffConfigBtn = document.getElementById("cancel-playoff-config");
+const simulateToPlayoffsBtn = document.getElementById("simulate-to-playoffs");
 let scoringProfiles = {};
 let availableStats = [];
 let activeProfileKey = "";
@@ -85,8 +109,20 @@ let draftSearchTerm = "";
 let draftIsActive = false;
 let draftLoading = false;
 const DRAFT_PAGE_SIZE = 25;
-
 let draftPanelRemoved = false;
+let setupPlayoffOptions = null;
+let editPlayoffOptions = null;
+let editPlayoffPhase = "regular";
+let currentPlayoffConfig = null;
+let playoffsData = null;
+
+if (playoffsEnabledInput) {
+    toggleSetupPlayoffControls(Boolean(playoffsEnabledInput.checked));
+    if (!playoffsEnabledInput.checked && playoffsHint) {
+        playoffsHint.textContent = "Playoffs disabled.";
+    }
+}
+
 function destroyDraftPanel() {
     try {
         if (!draftPanelRemoved && draftPanel && draftPanel.parentElement) {
@@ -118,6 +154,304 @@ function ensureDraftCompleteForTransactions() {
         return false;
     }
     return true;
+}
+
+async function fetchPlayoffOptions(teamCount) {
+    if (!Number.isFinite(teamCount) || teamCount < 2) {
+        throw new Error("Invalid team count for playoffs.");
+    }
+    return fetchJSON(`/playoffs/options?team_count=${Number(teamCount)}`);
+}
+
+function populatePlayoffWeekSelect(selectEl, weeks, selectedWeeks) {
+    if (!selectEl) return;
+    selectEl.innerHTML = "";
+    if (!Array.isArray(weeks) || !weeks.length) {
+        return;
+    }
+    weeks.forEach((entry, index) => {
+        const option = document.createElement("option");
+        option.value = (entry.weeks || []).join(",");
+        option.textContent = entry.label || `Week ${entry.weeks.join(", ")}`;
+        if (
+            Array.isArray(selectedWeeks) &&
+            selectedWeeks.length === (entry.weeks || []).length &&
+            selectedWeeks.every((num, idx) => num === (entry.weeks || [])[idx])
+        ) {
+            option.selected = true;
+        } else if (!selectedWeeks && index === 0) {
+            option.selected = true;
+        }
+        selectEl.appendChild(option);
+    });
+}
+
+function populatePlayoffTeamSelect(selectEl, options, selectedTeams) {
+    if (!selectEl) return;
+    selectEl.innerHTML = "";
+    if (!Array.isArray(options) || !options.length) {
+        return;
+    }
+    options.forEach((entry, index) => {
+        const option = document.createElement("option");
+        option.value = String(entry.teams);
+        const rounds = entry.rounds === 1 ? "1 round" : `${entry.rounds} rounds`;
+        option.textContent = `${entry.teams} teams · ${rounds}`;
+        if (selectedTeams && Number(selectedTeams) === Number(entry.teams)) {
+            option.selected = true;
+        } else if (!selectedTeams && index === 0) {
+            option.selected = true;
+        }
+        selectEl.appendChild(option);
+    });
+}
+
+function handleSetupPlayoffOptionsLoaded(data, preset) {
+    setupPlayoffOptions = data || null;
+    if (!playoffsTeamSelect) return;
+    if (!setupPlayoffOptions || !Array.isArray(setupPlayoffOptions.options) || !setupPlayoffOptions.options.length) {
+        playoffsHint.textContent = "No valid playoff options for the current team count.";
+        playoffsTeamSelect.innerHTML = "";
+        playoffsWeekSelect.innerHTML = "";
+        return;
+    }
+    const selectedTeams = preset?.teams;
+    populatePlayoffTeamSelect(playoffsTeamSelect, setupPlayoffOptions.options, selectedTeams);
+    const currentTeamValue = playoffsTeamSelect.value;
+    const selectedOption = setupPlayoffOptions.options.find((item) => String(item.teams) === currentTeamValue);
+    if (selectedOption) {
+        populatePlayoffWeekSelect(playoffsWeekSelect, selectedOption.weeks, preset?.weeks);
+    } else {
+        playoffsWeekSelect.innerHTML = "";
+    }
+    updatePlayoffHint(playoffsHint, selectedOption);
+}
+
+async function refreshSetupPlayoffOptions(teamCount, preset = null) {
+    if (!playoffsHint) return;
+    playoffsHint.textContent = "Loading playoff options…";
+    try {
+        const data = await fetchPlayoffOptions(teamCount);
+        handleSetupPlayoffOptionsLoaded(data, preset);
+    } catch (error) {
+        playoffsHint.textContent = error.message || "Unable to load playoff options.";
+        setupPlayoffOptions = null;
+        if (playoffsTeamSelect) playoffsTeamSelect.innerHTML = "";
+        if (playoffsWeekSelect) playoffsWeekSelect.innerHTML = "";
+    }
+}
+
+function toggleSetupPlayoffControls(enabled) {
+    if (!playoffsControls) return;
+    if (enabled) {
+        playoffsControls.classList.remove("hidden");
+    } else {
+        playoffsControls.classList.add("hidden");
+    }
+}
+
+function getSelectedSetupPlayoffConfig() {
+    if (!playoffsEnabledInput || !playoffsEnabledInput.checked) {
+        return null;
+    }
+    if (!setupPlayoffOptions || !Array.isArray(setupPlayoffOptions.options) || !setupPlayoffOptions.options.length) {
+        return null;
+    }
+    const teamCount = Number(playoffsTeamSelect.value);
+    if (!Number.isFinite(teamCount) || teamCount <= 0) {
+        playoffsHint.textContent = "Select a playoff team count.";
+        return null;
+    }
+    const weeksValue = playoffsWeekSelect.value;
+    if (!weeksValue) {
+        playoffsHint.textContent = "Select a playoff week window.";
+        return null;
+    }
+    const weeks = weeksValue
+        .split(",")
+        .map((value) => Number(value.trim()))
+        .filter((value) => Number.isFinite(value) && value > 0);
+    if (!weeks.length) {
+        playoffsHint.textContent = "Invalid week selection.";
+        return null;
+    }
+    return {
+        enabled: true,
+        teams: teamCount,
+        weeks,
+        reseed: Boolean(playoffsReseedInput && playoffsReseedInput.checked),
+        consolation: Boolean(playoffsConsolationInput && playoffsConsolationInput.checked),
+    };
+}
+
+function updatePlayoffHint(target, option) {
+    if (!target) return;
+    if (!option) {
+        target.textContent = "";
+        return;
+    }
+    const rounds = option.rounds === 1 ? "1 round" : `${option.rounds} rounds`;
+    target.textContent = `${option.teams}-team bracket · ${rounds}`;
+}
+
+function toggleEditPlayoffControls(enabled) {
+    if (!editPlayoffControls) return;
+    if (enabled) {
+        editPlayoffControls.classList.remove("hidden");
+    } else {
+        editPlayoffControls.classList.add("hidden");
+    }
+}
+
+function populateEditPlayoffOptions(options, config) {
+    editPlayoffOptions = options || null;
+    currentPlayoffConfig = config || { enabled: false, weeks: [] };
+    if (!editPlayoffsTeamSelect || !editPlayoffsWeekSelect) return;
+
+    if (!editPlayoffOptions || !Array.isArray(editPlayoffOptions.options) || !editPlayoffOptions.options.length) {
+        editPlayoffsTeamSelect.innerHTML = "";
+        editPlayoffsWeekSelect.innerHTML = "";
+        editPlayoffsHint.textContent = "No playoff options available for this league.";
+        return;
+    }
+    populatePlayoffTeamSelect(editPlayoffsTeamSelect, editPlayoffOptions.options, config?.teams);
+    const selected = editPlayoffOptions.options.find((item) => String(item.teams) === String(config?.teams || "") ) ||
+        editPlayoffOptions.options[0];
+    populatePlayoffWeekSelect(editPlayoffsWeekSelect, selected?.weeks || [], config?.weeks);
+    updatePlayoffHint(editPlayoffsHint, selected);
+    if (editPlayoffsReseed) editPlayoffsReseed.checked = Boolean(config?.reseed);
+    if (editPlayoffsConsolation) editPlayoffsConsolation.checked = Boolean(config?.consolation);
+}
+
+function getEditPlayoffPayload() {
+    if (!editPlayoffsEnabled || !editPlayoffsEnabled.checked) {
+        return { enabled: false };
+    }
+    if (!editPlayoffOptions || !Array.isArray(editPlayoffOptions.options) || !editPlayoffOptions.options.length) {
+        editPlayoffsHint.textContent = "No valid playoff options.";
+        throw new Error("No playoff options available.");
+    }
+    const teamValue = Number(editPlayoffsTeamSelect.value);
+    if (!Number.isFinite(teamValue) || teamValue <= 0) {
+        editPlayoffsHint.textContent = "Choose a playoff team count.";
+        throw new Error("Invalid playoff team count.");
+    }
+    const weekValue = (editPlayoffsWeekSelect.value || "")
+        .split(",")
+        .map((value) => Number(value.trim()))
+        .filter((value) => Number.isFinite(value) && value > 0);
+    if (!weekValue.length) {
+        editPlayoffsHint.textContent = "Select a playoff week window.";
+        throw new Error("Invalid playoff week selection.");
+    }
+    return {
+        enabled: true,
+        teams: teamValue,
+        weeks: weekValue,
+        reseed: Boolean(editPlayoffsReseed && editPlayoffsReseed.checked),
+        consolation: Boolean(editPlayoffsConsolation && editPlayoffsConsolation.checked),
+    };
+}
+
+function applyPlayoffConfigUI(configResponse) {
+    if (!configResponse) {
+        return;
+    }
+    editPlayoffPhase = configResponse.phase || "regular";
+    const config = configResponse.config || {};
+    populateEditPlayoffOptions(configResponse.options || [], config);
+    if (editPlayoffsEnabled) {
+        const enabled = Boolean(config.enabled && Array.isArray(config.weeks) && config.weeks.length);
+        editPlayoffsEnabled.checked = enabled;
+        toggleEditPlayoffControls(enabled);
+    }
+    if (playoffConfigEditor) {
+        playoffConfigEditor.classList.add("hidden");
+    }
+    const canEdit = editPlayoffPhase === "regular";
+    if (openPlayoffConfigBtn) {
+        openPlayoffConfigBtn.classList.toggle("hidden", !canEdit);
+    }
+    if (savePlayoffConfigBtn) {
+        savePlayoffConfigBtn.disabled = !canEdit;
+    }
+    if (cancelPlayoffConfigBtn) {
+        cancelPlayoffConfigBtn.disabled = !canEdit;
+    }
+    const playoffsActive = config.enabled && canEdit;
+    if (simulateToPlayoffsBtn) {
+        simulateToPlayoffsBtn.classList.toggle("hidden", !playoffsActive);
+        simulateToPlayoffsBtn.disabled = !playoffsActive;
+    }
+}
+
+function findSetupOptionByTeams(teamCount) {
+    if (!setupPlayoffOptions || !Array.isArray(setupPlayoffOptions.options)) {
+        return null;
+    }
+    return setupPlayoffOptions.options.find((entry) => Number(entry.teams) === Number(teamCount)) || null;
+}
+
+function findEditOptionByTeams(teamCount) {
+    if (!editPlayoffOptions || !Array.isArray(editPlayoffOptions.options)) {
+        return null;
+    }
+    return editPlayoffOptions.options.find((entry) => Number(entry.teams) === Number(teamCount)) || null;
+}
+
+async function savePlayoffConfigChanges() {
+    if (!currentLeagueId) {
+        showToast("Select a league first.", "error");
+        return;
+    }
+    let payload;
+    try {
+        payload = getEditPlayoffPayload();
+    } catch (error) {
+        showToast(error.message || "Unable to prepare playoff settings.", "error");
+        return;
+    }
+    savePlayoffConfigBtn.disabled = true;
+    savePlayoffConfigBtn.textContent = "Saving…";
+    try {
+        const response = await fetchJSON(`/leagues/${currentLeagueId}/playoffs/config`, {
+            method: "PATCH",
+            body: JSON.stringify(payload),
+        });
+        showToast("Playoff settings saved.", "success");
+        playoffConfigEditor.classList.add("hidden");
+        applyPlayoffConfigUI(response);
+        await loadPlayoffs(currentLeagueId);
+    } catch (error) {
+        showToast(error.message || "Unable to save playoff settings.", "error");
+    } finally {
+        savePlayoffConfigBtn.disabled = false;
+        savePlayoffConfigBtn.textContent = "Save";
+    }
+}
+
+async function handleSimulateToPlayoffs() {
+    if (!currentLeagueId) {
+        showToast("Select a league first.", "error");
+        return;
+    }
+    if (!simulateToPlayoffsBtn) {
+        return;
+    }
+    simulateToPlayoffsBtn.disabled = true;
+    const original = simulateToPlayoffsBtn.textContent;
+    simulateToPlayoffsBtn.textContent = "Simulating…";
+    try {
+        await fetchJSON(`/leagues/${currentLeagueId}/playoffs/simulate`, { method: "POST" });
+        showToast("Advanced to playoff start.", "success");
+        await loadLeagueState(currentLeagueId, { suppressToast: true, maintainWeekSelection: true });
+        await loadPlayoffs(currentLeagueId);
+    } catch (error) {
+        showToast(error.message || "Unable to simulate to playoffs.", "error");
+    } finally {
+        simulateToPlayoffsBtn.textContent = original || "Sim to Playoffs";
+        simulateToPlayoffsBtn.disabled = false;
+    }
 }
 
 async function addPlayerToRoster(playerId) {
@@ -1565,6 +1899,7 @@ function showSetupView() {
     scoreboardDateInput.disabled = true;
     scoreboardDateInput.value = "";
     if (!leagueInitialized) {
+    clearPlayoffs();
         scoreboardList.innerHTML = `
             <li class="score-card disabled">
                 <div class="teams"><div class="team-row"><span>No simulated games yet.</span></div></div>
@@ -1808,6 +2143,7 @@ async function loadLeagueState(leagueId, options = {}) {
         await loadLeagueWeeks(leagueId, { maintainSelection: options.maintainWeekSelection ?? true, silent: true });
         setupRosterPanel(state);
         updateRosterStatus();
+        await loadPlayoffs(leagueId);
         if (draftActive) {
             scoreboardDateInput.value = "";
             if (autoplayBtn) autoplayBtn.disabled = true;
@@ -1855,6 +2191,13 @@ async function createLeague() {
             user_team_name: userTeamName || null,
             team_names: teamNames,
         };
+        if (playoffsEnabledInput && playoffsEnabledInput.checked) {
+            const playoffConfig = getSelectedSetupPlayoffConfig();
+            if (!playoffConfig) {
+                throw new Error("Select a valid playoff configuration before creating the league.");
+            }
+            payload.playoffs = playoffConfig;
+        }
         const data = await fetchJSON("/leagues", {
             method: "POST",
             body: JSON.stringify(payload),
@@ -2635,6 +2978,136 @@ function setupRosterPanel(state) {
         rosterTeamSelect.value = rosterSelectedTeam;
     }
 }
+function clearPlayoffs(message = null) {
+    if (!playoffsPanel) {
+        return;
+    }
+    if (message === null) {
+        playoffsPanel.classList.add("hidden");
+        playoffsConfigEl.innerHTML = "";
+        playoffBracketEl.innerHTML = "";
+        if (playoffPlacementsEl) playoffPlacementsEl.innerHTML = "";
+        consolationBracketEl.innerHTML = "";
+        playoffsData = null;
+        return;
+    }
+    playoffsPanel.classList.remove("hidden");
+    playoffsConfigEl.innerHTML = `<p>${escapeHtml(message)}</p>`;
+    playoffBracketEl.innerHTML = "";
+    if (playoffPlacementsEl) playoffPlacementsEl.innerHTML = "";
+    consolationBracketEl.innerHTML = "";
+    playoffsData = null;
+}
+
+function renderPlayoffs(data) {
+    if (!playoffsPanel) {
+        return;
+    }
+    playoffsData = data || null;
+    const config = (data && data.config) || {};
+    const enabled = Boolean(config.enabled && config.teams && Array.isArray(config.weeks) && config.weeks.length);
+    playoffsPanel.classList.remove("hidden");
+    if (!enabled) {
+        const message =
+            data && data.message
+                ? data.message
+                : "Playoffs are currently disabled for this league. Configure them in the league settings to preview the bracket.";
+        playoffsConfigEl.innerHTML = `<p>${escapeHtml(message)}</p>`;
+        playoffBracketEl.innerHTML = "";
+        consolationBracketEl.innerHTML = "";
+        return;
+    }
+    const weeksLabel = config.weeks.map((week) => `Week ${week}`).join(', ');
+    const summary = [
+        `Teams: ${config.teams}`,
+        `Weeks: ${weeksLabel}`,
+        `Reseeding: ${config.reseed ? "On" : "Off"}`,
+        `Consolation: ${config.consolation ? "Enabled" : "Disabled"}`,
+    ];
+    playoffsConfigEl.innerHTML = `<ul>${summary.map((line) => `<li>${escapeHtml(line)}</li>`).join('')}</ul>`;
+
+    const rounds = data && data.bracket && Array.isArray(data.bracket.rounds) ? data.bracket.rounds : [];
+    if (!rounds.length) {
+        playoffBracketEl.innerHTML = "<p>No bracket available yet.</p>";
+    } else {
+        const roundsHtml = rounds
+            .map((round) => {
+                const matchups = Array.isArray(round.matchups)
+                    ? round.matchups
+                          .map((match) => {
+                              const note = match.note || (match.reseed ? "Reseeding may adjust opponents." : "");
+                              return `<li class="playoff-matchup"><strong>${escapeHtml(
+                                  match.description || "Matchup"
+                              )}</strong>${note ? `<small>${escapeHtml(note)}</small>` : ""}</li>`;
+                          })
+                          .join('')
+                    : '';
+                return `<div class="playoff-round">
+                    <h4>${escapeHtml(round.name || `Round ${round.index}`)}</h4>
+                    <p class="playoff-week">Week ${escapeHtml(String(round.week_index || ''))}</p>
+                    <ul>${matchups || '<li class="playoff-matchup">TBD</li>'}</ul>
+                </div>`;
+            })
+            .join('');
+        playoffBracketEl.innerHTML = roundsHtml;
+    }
+
+    if (playoffPlacementsEl) {
+        if (data && Array.isArray(data.placements) && data.placements.length) {
+            const items = data.placements
+                .map((entry) => `<li><strong>${escapeHtml(String(entry.placement))}.</strong> ${escapeHtml(entry.team || "Team")}</li>`)
+                .join("");
+            playoffPlacementsEl.innerHTML = `<h4>Final Placements</h4><ul>${items}</ul>`;
+            playoffPlacementsEl.classList.remove("hidden");
+        } else {
+            playoffPlacementsEl.classList.add("hidden");
+            playoffPlacementsEl.innerHTML = "";
+        }
+    }
+
+    if (data && data.consolation && data.consolation.enabled) {
+        const teams = Array.isArray(data.consolation.teams) ? data.consolation.teams : [];
+        const items = teams.length
+            ? teams
+                  .map((team) => {
+                      const rank = team.rank ? ` (rank ${team.rank})` : '';
+                      return `<li>${escapeHtml(team.team || 'Team')}${rank}</li>`;
+                  })
+                  .join('')
+            : '<li>TBD</li>';
+        consolationBracketEl.innerHTML = `<h4>Consolation Teams</h4><ul>${items}</ul>`;
+    } else {
+        consolationBracketEl.innerHTML = '';
+    }
+
+    if (simulateToPlayoffsBtn) {
+        const configEnabled = Boolean(config && config.enabled && Array.isArray(config.weeks) && config.weeks.length);
+        const playoffsStarted = data && data.preview === false;
+        const playoffsFinished = data && data.status === "completed";
+        const canSim = configEnabled && !playoffsStarted && editPlayoffPhase === "regular" && !playoffsFinished;
+        simulateToPlayoffsBtn.classList.toggle("hidden", !canSim);
+        simulateToPlayoffsBtn.disabled = !canSim;
+    }
+}
+
+async function loadPlayoffs(leagueId) {
+    if (!leagueId || !playoffsPanel) {
+        return;
+    }
+    try {
+        const [configResponse, bracketResponse] = await Promise.all([
+            fetchJSON(`/leagues/${leagueId}/playoffs/config`),
+            fetchJSON(`/leagues/${leagueId}/playoffs`),
+        ]);
+        applyPlayoffConfigUI(configResponse);
+        renderPlayoffs(bracketResponse);
+    } catch (error) {
+        console.error("Unable to load playoffs preview", error);
+        clearPlayoffs(error.message || "Playoff data unavailable.");
+    }
+}
+
+
 if (rosterTeamSelect) {
     rosterTeamSelect.addEventListener("change", () => {
         rosterSelectedTeam = rosterTeamSelect.value || null;
@@ -2660,6 +3133,92 @@ if (playersFilterSelect) {
         playersFilter = playersFilterSelect.value;
         playersPage = 1;
         loadPlayersPanel({ silent: true });
+    });
+}
+if (teamCountInput) {
+    teamCountInput.addEventListener("change", () => {
+        const value = Math.max(2, Number(teamCountInput.value) || 0);
+        if (playoffsEnabledInput && playoffsEnabledInput.checked) {
+            refreshSetupPlayoffOptions(value);
+        } else {
+            playoffsHint.textContent = "";
+        }
+    });
+}
+if (playoffsEnabledInput) {
+    playoffsEnabledInput.addEventListener("change", () => {
+        const enabled = playoffsEnabledInput.checked;
+        toggleSetupPlayoffControls(enabled);
+        if (enabled) {
+            const value = Math.max(2, Number(teamCountInput.value) || 0);
+            refreshSetupPlayoffOptions(value);
+        } else {
+            playoffsHint.textContent = "Playoffs disabled.";
+        }
+    });
+}
+if (playoffsTeamSelect) {
+    playoffsTeamSelect.addEventListener("change", () => {
+        const option = findSetupOptionByTeams(Number(playoffsTeamSelect.value));
+        if (option) {
+            populatePlayoffWeekSelect(playoffsWeekSelect, option.weeks || [], null);
+        }
+        updatePlayoffHint(playoffsHint, option);
+    });
+}
+if (editPlayoffsEnabled) {
+    editPlayoffsEnabled.addEventListener("change", () => {
+        const enabled = editPlayoffsEnabled.checked;
+        toggleEditPlayoffControls(enabled);
+        if (enabled) {
+            const option = findEditOptionByTeams(Number(editPlayoffsTeamSelect.value));
+            if (option) {
+                populatePlayoffWeekSelect(editPlayoffsWeekSelect, option.weeks || [], currentPlayoffConfig?.weeks);
+            }
+            updatePlayoffHint(editPlayoffsHint, option);
+        } else {
+            updatePlayoffHint(editPlayoffsHint, null);
+            if (editPlayoffsHint) {
+                editPlayoffsHint.textContent = "Playoffs disabled.";
+            }
+        }
+    });
+}
+if (editPlayoffsTeamSelect) {
+    editPlayoffsTeamSelect.addEventListener("change", () => {
+        const option = findEditOptionByTeams(Number(editPlayoffsTeamSelect.value));
+        populatePlayoffWeekSelect(editPlayoffsWeekSelect, option?.weeks || [], null);
+        updatePlayoffHint(editPlayoffsHint, option);
+    });
+}
+if (openPlayoffConfigBtn) {
+    openPlayoffConfigBtn.addEventListener("click", () => {
+        if (!playoffConfigEditor) return;
+        playoffConfigEditor.classList.toggle("hidden");
+        if (!playoffConfigEditor.classList.contains("hidden")) {
+            const option = findEditOptionByTeams(Number(editPlayoffsTeamSelect.value || currentPlayoffConfig?.teams || 0));
+            updatePlayoffHint(editPlayoffsHint, option);
+        }
+    });
+}
+if (cancelPlayoffConfigBtn) {
+    cancelPlayoffConfigBtn.addEventListener("click", () => {
+        playoffConfigEditor.classList.add("hidden");
+        if (currentPlayoffConfig) {
+            populateEditPlayoffOptions(editPlayoffOptions, currentPlayoffConfig);
+            editPlayoffsEnabled.checked = Boolean(currentPlayoffConfig.enabled);
+            toggleEditPlayoffControls(editPlayoffsEnabled.checked);
+        }
+    });
+}
+if (savePlayoffConfigBtn) {
+    savePlayoffConfigBtn.addEventListener("click", () => {
+        savePlayoffConfigChanges();
+    });
+}
+if (simulateToPlayoffsBtn) {
+    simulateToPlayoffsBtn.addEventListener("click", () => {
+        handleSimulateToPlayoffs();
     });
 }
 if (draftSearchInput) {

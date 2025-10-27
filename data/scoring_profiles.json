@@ -1,5 +1,5 @@
 {
-  "default": "default_points_league_copy",
+  "default": "mypoints2_copy",
   "profiles": {
     "default_points_league": {
       "name": "Default Points League",
@@ -109,6 +109,33 @@
         "TRIPLE_DOUBLE": 0.0
       }
     },
+    "mypoints2_copy": {
+      "name": "MYPOINTS2 Copy",
+      "weights": {
+        "3PA": 0.0,
+        "3PM": 1.0,
+        "AST": 1.5,
+        "BLK": 3.0,
+        "DD": 2.5,
+        "DOUBLE_DOUBLE": 0.0,
+        "DREB": 0.0,
+        "FGA": -1.0,
+        "FGM": 2.0,
+        "FG_MISS": 0.0,
+        "FTA": -0.75,
+        "FTM": 1.0,
+        "FT_MISS": 0.0,
+        "MPG": 0.0,
+        "OREB": 0.0,
+        "PF": 0.0,
+        "PTS": 1.0,
+        "STL": 3.0,
+        "TD": 5.0,
+        "TO": -1.5,
+        "TREB": 1.2,
+        "TRIPLE_DOUBLE": 0.0
+      }
+    },
     "mypoints_copy": {
       "name": "MYPOINTS Copy",
       "weights": {
@@ -133,6 +160,62 @@
         "TD": 5.0,
         "TO": -1.0,
         "TREB": 1.2,
+        "TRIPLE_DOUBLE": 0.0
+      }
+    },
+    "nine_cat": {
+      "name": "Nine category rotisserie",
+      "weights": {
+        "3PA": 0.0,
+        "3PM": 1.0,
+        "AST": 1.0,
+        "BLK": 1.0,
+        "DD": 0.0,
+        "DOUBLE_DOUBLE": 0.0,
+        "DREB": 0.0,
+        "FGA": 0.0,
+        "FGM": 0.0,
+        "FG_MISS": 0.0,
+        "FG_PCT": 1.0,
+        "FTA": 0.0,
+        "FTM": 0.0,
+        "FT_MISS": 0.0,
+        "FT_PCT": 1.0,
+        "MPG": 0.0,
+        "OREB": 0.0,
+        "PF": 0.0,
+        "PTS": 1.0,
+        "STL": 1.0,
+        "TD": 0.0,
+        "TO": -1.0,
+        "TREB": 1.0,
+        "TRIPLE_DOUBLE": 0.0
+      }
+    },
+    "points_league": {
+      "name": "Points league (balanced)",
+      "weights": {
+        "3PA": 0.0,
+        "3PM": 1.0,
+        "AST": 1.5,
+        "BLK": 3.0,
+        "DD": 3.0,
+        "DOUBLE_DOUBLE": 0.0,
+        "DREB": 1.0,
+        "FGA": -0.45,
+        "FGM": 1.0,
+        "FG_MISS": 0.0,
+        "FTA": -0.75,
+        "FTM": 1.0,
+        "FT_MISS": 0.0,
+        "MPG": 0.0,
+        "OREB": 1.2,
+        "PF": 0.0,
+        "PTS": 1.0,
+        "STL": 3.0,
+        "TD": 5.0,
+        "TO": -1.0,
+        "TREB": 0.0,
         "TRIPLE_DOUBLE": 0.0
       }
     }

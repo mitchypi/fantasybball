@@ -96,3 +96,28 @@
     gap: 0.5rem;
     align-items: center;
 }
+
+.playoff-settings {
+    margin-top: 1rem;
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    border-radius: 0.75rem;
+    padding: 0.75rem;
+    display: grid;
+    gap: 0.65rem;
+}
+
+.playoff-controls {
+    display: grid;
+    gap: 0.55rem;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+}
+
+.playoff-controls.hidden {
+    display: none;
+}
+
+.playoff-hint {
+    margin: 0;
+    font-size: 0.8rem;
+    color: rgba(148, 163, 184, 0.9);
+}

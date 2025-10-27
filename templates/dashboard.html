@@ -70,6 +70,32 @@
                     </div>
                 </fieldset>
 
+                <fieldset class="playoff-settings">
+                    <legend>Playoffs</legend>
+                    <label class="checkbox">
+                        <input type="checkbox" id="playoffs-enabled" />
+                        <span>Enable playoffs</span>
+                    </label>
+                    <div id="playoff-controls" class="playoff-controls hidden">
+                        <label for="playoffs-team-count">Teams</label>
+                        <select id="playoffs-team-count"></select>
+
+                        <label for="playoffs-week-range">Week Window</label>
+                        <select id="playoffs-week-range"></select>
+
+                        <label class="checkbox">
+                            <input type="checkbox" id="playoffs-reseed" />
+                            <span>Reseed each round</span>
+                        </label>
+
+                        <label class="checkbox">
+                            <input type="checkbox" id="playoffs-consolation" />
+                            <span>Enable consolation bracket</span>
+                        </label>
+                    </div>
+                    <p id="playoffs-hint" class="playoff-hint"></p>
+                </fieldset>
+
                 <div class="setup-actions">
                     <button type="button" id="create-league">Create League</button>
                 </div>
@@ -157,6 +183,47 @@
                     <p>Create a league to begin your season replay.</p>
                 </div>
                 <div id="fantasy-standings" class="fantasy-standings hidden"></div>
+                <section id="playoffs-panel" class="fantasy-playoffs hidden" aria-live="polite">
+                    <h3>Playoffs</h3>
+                    <div class="playoff-panel-actions">
+                        <button type="button" id="simulate-to-playoffs" class="btn-secondary hidden">Sim to Playoffs</button>
+                        <button type="button" id="open-playoff-config" class="btn-secondary hidden">Edit Playoff Settings</button>
+                    </div>
+                    <div id="playoff-config-editor" class="playoff-config-editor hidden">
+                        <div class="editor-row">
+                            <label class="checkbox">
+                                <input type="checkbox" id="edit-playoffs-enabled" />
+                                <span>Enable playoffs</span>
+                            </label>
+                        </div>
+                        <div class="editor-grid hidden" id="edit-playoff-controls">
+                            <label for="edit-playoffs-team-count">Teams</label>
+                            <select id="edit-playoffs-team-count"></select>
+
+                            <label for="edit-playoffs-week-range">Week Window</label>
+                            <select id="edit-playoffs-week-range"></select>
+
+                            <label class="checkbox">
+                                <input type="checkbox" id="edit-playoffs-reseed" />
+                                <span>Reseed each round</span>
+                            </label>
+
+                            <label class="checkbox">
+                                <input type="checkbox" id="edit-playoffs-consolation" />
+                                <span>Enable consolation bracket</span>
+                            </label>
+                        </div>
+                        <div class="editor-actions">
+                            <button type="button" id="save-playoff-config" class="btn-primary">Save</button>
+                            <button type="button" id="cancel-playoff-config" class="btn-secondary">Cancel</button>
+                        </div>
+                        <p id="edit-playoffs-hint" class="playoff-hint"></p>
+                    </div>
+                    <div id="playoffs-config" class="playoff-config-summary"></div>
+                    <div id="playoff-bracket" class="playoff-bracket"></div>
+                    <div id="playoff-placements" class="playoff-placements"></div>
+                    <div id="consolation-bracket" class="playoff-consolation"></div>
+                </section>
                 <section id="roster-panel" class="fantasy-roster hidden">
                     <div class="fantasy-roster__header">
                         <h3>Team Roster (Daily)</h3>

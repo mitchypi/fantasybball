@@ -101,10 +101,22 @@ All endpoints are served by the FastAPI app in `src/api/main.py`. Most endpoints
 - GET `/leagues`
   - Returns `{ leagues: [{ id, league_name, team_count, roster_size, scoring_profile, scoring_profile_key, latest_completed_date, created_at }] }`
 - POST `/leagues`
-  - Body: `{ league_name?, team_count?, roster_size?, scoring_profile?, user_team_name?, team_names?[] }`
+  - Body: `{ league_name?, team_count?, roster_size?, scoring_profile?, user_team_name?, team_names?[], playoffs?{ enabled?, teams?, weeks?[], reseed?, consolation? } }`
   - Creates a new league, auto-drafts all teams, and persists to `data/leagues/{id}.json`.
   - Rejects duplicate league names (case-insensitive) to prevent collisions.
   - Returns `{ league_id, state }` (see Data Model for state shape)
+- GET `/playoffs/options`
+  - Query: `team_count` (2–30)
+  - Returns valid playoff presets for the season calendar (team counts, week ranges, round counts).
+- GET `/leagues/{league_id}/playoffs/config`
+  - Returns the saved playoff configuration plus the valid options for that league’s calendar.
+- PATCH `/leagues/{league_id}/playoffs/config`
+  - Body: `{ enabled?, teams?, weeks?[], reseed?, consolation? }`
+  - Updates playoff settings while the league is still in the regular season.
+- POST `/leagues/{league_id}/playoffs/simulate`
+  - Simulates day-by-day until the configured playoff window begins (fails if playoffs are disabled or already started).
+- GET `/leagues/{league_id}/playoffs`
+  - Returns the current playoff bracket (or preview if playoffs have not begun yet). Once the finals complete the payload includes `placements` (champion, runner-up, remaining finishers) and `finalized_at` (ISO date).
 - GET `/leagues/{league_id}`
   - Returns the full serialized state for the league.
 - GET `/leagues/{league_id}/draft`
@@ -219,9 +231,14 @@ Emitted by `GET /leagues/{league_id}` and after mutations such as advance/reset.
       "nba_scoreboard": [ { "game_id": 123, "home_team": "GSW", "away_team": "LAL", "status": "Final", "home_score": 110, "away_score": 104, "date": "2024-10-22", "simulated": true } ]
     }
   ],
-  "awaiting_simulation": true
+  "awaiting_simulation": true,
+  "phase": "regular",
+  "playoffs_config": { "enabled": false, "teams": null, "weeks": [], "reseed": false, "consolation": false },
+  "playoffs": null
 }
 ```
+
+When playoffs have finished, `phase` is `"finished"`, `playoffs` contains the completed bracket, and simulation/advance endpoints return an error if called.
 
 ### Week Overview and Standings
 Emitted by `GET /leagues/{league_id}/weeks`.
