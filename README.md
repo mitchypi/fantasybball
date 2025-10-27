@@ -18,8 +18,6 @@ git clone git@github.com:mitchypi/fantasybball.git
 cd fantasybball
 ```
 
-> Replace `<your-org>` with the actual GitHub owner name if you forked the project.
-
 ## 2. Create & activate a virtual environment (recommended)
 
 ```bash
