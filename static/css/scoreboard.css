@@ -74,21 +74,28 @@
 }
 
 .score-card .odds-preview {
-    margin-top: 0.5rem;
-    font-size: 0.78rem;
+    margin-top: 0.6rem;
+    font-size: 0.8rem;
     text-align: left;
-    color: rgba(226, 232, 240, 0.9);
+    color: rgba(241, 245, 249, 0.95);
+    background: rgba(51, 65, 85, 0.55);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 0.5rem;
+    padding: 0.55rem 0.6rem;
 }
 
 .score-card .odds-preview__header {
     font-weight: 600;
-    color: rgba(148, 163, 184, 0.9);
-    margin-bottom: 0.25rem;
+    color: rgba(226, 232, 240, 0.9);
+    margin-bottom: 0.35rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 0.72rem;
 }
 
 .score-card .odds-preview span {
     display: block;
-    color: rgba(226, 232, 240, 0.82);
+    color: rgba(248, 250, 252, 0.9);
 }
 
 .score-card .status-final {
@@ -162,34 +169,37 @@
     gap: 0.4rem;
 }
 
+
 .score-card .odds-button {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 0.25rem;
-    padding: 0.6rem 0.65rem;
+    padding: 0.65rem 0.75rem;
     border-radius: 0.6rem;
-    border: 1px solid rgba(148, 163, 184, 0.25);
-    background: rgba(30, 41, 59, 0.75);
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    background: rgba(59, 72, 99, 0.88);
     font-size: 0.85rem;
     cursor: pointer;
-    transition: border-color 0.15s ease, background 0.15s ease;
+    transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+    box-shadow: 0 6px 14px rgba(15, 23, 42, 0.35);
 }
 
 .score-card .odds-button:hover {
-    border-color: rgba(59, 130, 246, 0.5);
-    background: rgba(37, 99, 235, 0.2);
+    border-color: rgba(96, 165, 250, 0.7);
+    background: rgba(96, 165, 250, 0.25);
+    transform: translateY(-1px);
 }
 
 .score-card .odds-button strong {
     font-weight: 700;
     font-size: 0.95rem;
-    color: rgba(226, 232, 240, 0.95);
+    color: rgba(241, 245, 249, 0.98);
 }
 
 .score-card .odds-button span {
     font-size: 0.75rem;
-    color: var(--muted);
+    color: rgba(226, 232, 240, 0.84);
 }
 
 .score-card .odds-closed {

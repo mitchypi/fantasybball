@@ -5,5 +5,6 @@
 
 ## Agent Instructions
 - Read AGENTS.md before taking an action
+- Check design.md for technical documentation to formulate a plan, and make sure to modify it if the architecture changes
 
 
