@@ -5,6 +5,47 @@
     margin-bottom: 1rem;
 }
 
+.scoreboard-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: flex-start;
+    width: 100%;
+    grid-column: 1 / -1;
+}
+
+.scoreboard-layout #scoreboard-panel {
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.betslip-panel {
+    flex: 0 0 340px;
+    max-width: 380px;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: sticky;
+    top: 5.5rem;
+}
+
+@media (max-width: 1100px) {
+    .scoreboard-layout {
+        flex-direction: column;
+    }
+
+    .betslip-panel {
+        position: static;
+        max-width: none;
+        flex: 1 1 auto;
+        width: 100%;
+    }
+}
+
 .scoreboard-header input {
     background: rgba(15, 23, 42, 0.7);
     color: var(--text);
@@ -311,10 +352,9 @@
 }
 
 .bet-slip {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(220px, 260px);
+    display: flex;
+    flex-direction: column;
     gap: 1rem;
-    align-items: stretch;
 }
 
 .bet-slip__selections {
@@ -364,6 +404,10 @@
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    border-radius: 0.65rem;
+    padding: 0.75rem;
 }
 
 .bet-slip__controls input[type="number"] {
@@ -374,6 +418,11 @@
     padding: 0.45rem 0.5rem;
 }
 
+.bet-slip__controls label {
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
 .bet-slip__summary {
     display: flex;
     flex-direction: column;
@@ -381,9 +430,16 @@
     font-size: 0.85rem;
 }
 
+.bet-slip__matchup {
+    font-size: 0.8rem;
+    color: var(--muted);
+    display: block;
+}
+
 .bet-slip__actions {
     display: flex;
     gap: 0.5rem;
+    flex-wrap: wrap;
 }
 
 .bet-slip__actions button {
@@ -477,7 +533,23 @@
     color: rgba(226, 232, 240, 0.9);
 }
 
-.betting-card .betting-leg span:last-child {
+.betting-leg__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.betting-leg__label {
+    font-weight: 600;
+    color: rgba(226, 232, 240, 0.95);
+}
+
+.betting-leg__matchup {
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+
+.betting-leg__price {
     color: var(--muted);
 }
 
@@ -495,9 +567,20 @@
 
 .betting-card footer {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    gap: 0.35rem;
     font-size: 0.8rem;
     color: var(--muted);
+}
+
+.betting-card__footer-line {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+.betting-card__footer-line span:last-child {
+    color: rgba(226, 232, 240, 0.9);
 }
 
 .betting-list .empty {
@@ -507,8 +590,9 @@
 }
 
 @media (max-width: 960px) {
-    .bet-slip {
-        grid-template-columns: 1fr;
+    .bet-slip__controls,
+    .bet-slip__selections {
+        padding: 0.65rem;
     }
 }
 

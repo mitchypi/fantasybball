@@ -53,6 +53,7 @@ const toast = document.getElementById("toast");
 const playerModal = document.getElementById("player-modal");
 const playerModalBody = document.getElementById("player-modal-body");
 const playerModalClose = playerModal ? playerModal.querySelector(".player-modal__close") : null;
+const gamblingOnlyMode = Boolean(document.body && document.body.dataset && document.body.dataset.mode === "gambling");
 // Players panel controls
 const playersPanel = document.getElementById("players-panel");
 const playersListEl = document.getElementById("players-list");
@@ -1309,7 +1310,9 @@ function resetFantasyView(message = "") {
     if (weekNextBtn) {
         weekNextBtn.disabled = true;
     }
-    fantasyResultsEl.innerHTML = message ? `<p>${escapeHtml(message)}</p>` : "";
+    if (fantasyResultsEl) {
+        fantasyResultsEl.innerHTML = message ? `<p>${escapeHtml(message)}</p>` : "";
+    }
     if (fantasyStandingsEl) {
         fantasyStandingsEl.classList.add("hidden");
         fantasyStandingsEl.innerHTML = "";
@@ -1347,6 +1350,9 @@ function updateWeekControls() {
     }
 }
 function renderMatchups() {
+    if (!fantasyResultsEl) {
+        return;
+    }
     fantasyResultsEl.innerHTML = "";
     const weeks = weekOverviewData.weeks || [];
     if (!weeks.length) {
@@ -1580,8 +1586,8 @@ async function loadLeagueWeeks(leagueId, options = {}) {
 function renderLeagueState(state) {
     currentLeagueState = state || null;
     if (!state) {
-        leagueDateEl.textContent = "—";
-        leagueScoringEl.textContent = "—";
+        if (leagueDateEl) leagueDateEl.textContent = "—";
+        if (leagueScoringEl) leagueScoringEl.textContent = "—";
         weekOverviewData = { weeks: [], standings: [], current_week_index: null };
         activeWeekIndex = null;
         lastSuggestedWeekIndex = null;
@@ -1625,12 +1631,18 @@ function renderLeagueState(state) {
         simulateBtn.textContent = "Season complete";
         simulateBtn.dataset.action = "complete";
     }
-    leagueDateEl.textContent = dateLabel;
-    leagueScoringEl.textContent = state.scoring_profile;
+    if (leagueDateEl) {
+        leagueDateEl.textContent = dateLabel;
+    }
+    if (leagueScoringEl) {
+        leagueScoringEl.textContent = state.scoring_profile;
+    }
     if (!currentDate) {
         simulateBtn.disabled = true;
     }
-    fantasyResultsEl.innerHTML = "<p>Loading weekly matchups…</p>";
+    if (fantasyResultsEl) {
+        fantasyResultsEl.innerHTML = "<p>Loading weekly matchups…</p>";
+    }
 }
 
 function enterDraftMode(state) {
@@ -2003,10 +2015,29 @@ async function draftComplete() {
         }
     }
 }
+function hideSetupPanelForGambling() {
+    if (!gamblingOnlyMode) {
+        return;
+    }
+    if (setupPanel) {
+        setupPanel.classList.add("hidden");
+    }
+    if (deleteAllLeaguesBtn) {
+        deleteAllLeaguesBtn.classList.add("hidden");
+    }
+    if (navMenuBtn) {
+        navMenuBtn.classList.add("hidden");
+        navMenuBtn.disabled = true;
+    }
+}
 function showSetupView() {
     currentLeagueState = null;
-    setupPanel.classList.remove("hidden");
-    leaguePanels.classList.remove("active");
+    if (!gamblingOnlyMode && setupPanel && leaguePanels) {
+        setupPanel.classList.remove("hidden");
+        leaguePanels.classList.remove("active");
+    } else {
+        hideSetupPanelForGambling();
+    }
     renderLeagueList(leaguesCache);
     navMenuBtn.classList.add("hidden");
     navMenuBtn.disabled = true;
@@ -2024,7 +2055,8 @@ function showSetupView() {
         weekOverviewData = { weeks: [], standings: [], current_week_index: null };
         activeWeekIndex = null;
         lastSuggestedWeekIndex = null;
-        resetFantasyView("Create a league to begin your season replay.");
+        const placeholder = gamblingOnlyMode ? "Loading sportsbook session…" : "Create a league to begin your season replay.";
+        resetFantasyView(placeholder);
         activeGameId = null;
     }
 }
@@ -2032,10 +2064,19 @@ function showDashboardView() {
     if (!leagueInitialized || !currentLeagueId) {
         return;
     }
-    setupPanel.classList.add("hidden");
-    leaguePanels.classList.add("active");
-    navMenuBtn.classList.remove("hidden");
-    navMenuBtn.disabled = false;
+    if (setupPanel) {
+        setupPanel.classList.add("hidden");
+    }
+    if (leaguePanels) {
+        leaguePanels.classList.add("active");
+    }
+    if (!gamblingOnlyMode) {
+        navMenuBtn.classList.remove("hidden");
+        navMenuBtn.disabled = false;
+    } else {
+        navMenuBtn.classList.add("hidden");
+        navMenuBtn.disabled = true;
+    }
     simulateBtn.classList.remove("hidden");
     resetBtn.classList.remove("hidden");
     scoreboardDateInput.disabled = false;
@@ -2049,6 +2090,9 @@ function showDashboardView() {
 }
 function renderLeagueList(leagues) {
     leagueListEl.innerHTML = "";
+    if (gamblingOnlyMode) {
+        return;
+    }
     if (!leagues || !leagues.length) {
         leagueListEl.innerHTML = `<li class="empty">No leagues yet. Create one below.</li>`;
         return;
@@ -2097,7 +2141,8 @@ function renderLeagueList(leagues) {
         leagueListEl.appendChild(li);
     });
 }
-async function loadLeaguesList() {
+async function loadLeaguesList(options = {}) {
+    const skipEnsure = Boolean(options.skipEnsure);
     try {
         const data = await fetchJSON("/leagues");
         leaguesCache = data.leagues || [];
@@ -2105,15 +2150,71 @@ async function loadLeaguesList() {
         // active league temporarily disappears from the listing (race conditions
         // while writing files can cause brief gaps). Keep the current view.
         renderLeagueList(leaguesCache);
-        if (deleteAllLeaguesBtn) {
+        if (deleteAllLeaguesBtn && !gamblingOnlyMode) {
             deleteAllLeaguesBtn.disabled = !leaguesCache.length;
+        }
+        if (gamblingOnlyMode && !skipEnsure) {
+            await ensureGamblingSession();
         }
     } catch (error) {
         renderLeagueList([]);
-        if (deleteAllLeaguesBtn) {
+        if (deleteAllLeaguesBtn && !gamblingOnlyMode) {
             deleteAllLeaguesBtn.disabled = true;
         }
         showToast(error.message || "Unable to load leagues.", "error");
+    }
+}
+async function ensureGamblingSession() {
+    if (!gamblingOnlyMode) {
+        return;
+    }
+    if (currentLeagueId) {
+        hideSetupPanelForGambling();
+        return;
+    }
+    if (leaguesCache.length) {
+        const league = leaguesCache[0];
+        await enterLeague(league.id);
+        hideSetupPanelForGambling();
+        return;
+    }
+    const payload = {
+        league_name: "Sportsbook Season",
+        scoring_profile: activeProfileKey || scoringSelect?.value || null,
+        team_count: 2,
+        roster_size: 13,
+        user_team_name: null,
+        team_names: [],
+    };
+    try {
+        const response = await fetchJSON("/leagues", {
+            method: "POST",
+            body: JSON.stringify(payload),
+        });
+        await loadLeaguesList({ skipEnsure: true });
+        await enterLeague(response.league_id);
+    } catch (error) {
+        console.error(error);
+        showToast(error.message || "Unable to start gambling session.", "error");
+    } finally {
+        hideSetupPanelForGambling();
+    }
+}
+async function ensureDraftCompleteForGambling(leagueId, state) {
+    if (!gamblingOnlyMode) {
+        return state;
+    }
+    if (!state?.draft_state || state.draft_state.status === "completed") {
+        return state;
+    }
+    try {
+        await fetchJSON(`/leagues/${leagueId}/draft/autopick/rest?view=${draftViewMode}`, { method: "POST" });
+        await fetchJSON(`/leagues/${leagueId}/draft/complete?view=${draftViewMode}`, { method: "POST" });
+        const refreshed = await fetchJSON(`/leagues/${leagueId}`);
+        return refreshed;
+    } catch (error) {
+        console.error("Failed to auto-complete draft for gambling mode:", error);
+        return state;
     }
 }
 async function enterLeague(leagueId) {
@@ -2126,7 +2227,7 @@ async function enterLeague(leagueId) {
     } catch (error) {
         console.error(error);
     } finally {
-        await loadLeaguesList();
+        await loadLeaguesList({ skipEnsure: gamblingOnlyMode });
     }
 }
 function setLeagueUI(hasLeague) {
@@ -2254,7 +2355,8 @@ async function loadLeagueState(leagueId, options = {}) {
     }
     const suppressToast = options.suppressToast ?? false;
     try {
-        const state = await fetchJSON(`/leagues/${leagueId}`);
+        let state = await fetchJSON(`/leagues/${leagueId}`);
+        state = await ensureDraftCompleteForGambling(leagueId, state);
         currentLeagueId = leagueId;
         renderLeagueState(state);
         setLeagueUI(true);
@@ -3142,6 +3244,32 @@ function updateBankrollDisplay(summary = bankrollSummary) {
     bankrollPendingEl.textContent = formatCurrency(bankrollSummary.pending_stake);
     bankrollPotentialEl.textContent = formatCurrency(bankrollSummary.pending_potential);
 }
+function formatBetSlipMatchup(leg) {
+    if (!leg || !leg.game) {
+        return "";
+    }
+    const home = leg.game.home || {};
+    const away = leg.game.away || {};
+    const homeLabel = (home.abbreviation || "").toUpperCase() || home.name || "Home";
+    const awayLabel = (away.abbreviation || "").toUpperCase() || away.name || "Away";
+    const base = `${awayLabel} @ ${homeLabel}`;
+    const commence = leg.game.commence_time;
+    if (!commence) {
+        return base;
+    }
+    const dateObj = new Date(commence);
+    if (Number.isNaN(dateObj.getTime())) {
+        return base;
+    }
+    const formatter = new Intl.DateTimeFormat(undefined, {
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+    });
+    const display = formatter.format(dateObj);
+    return `${base} · ${display}`;
+}
 function renderBetSlip() {
     if (!betSlipSelectionsEl) {
         return;
@@ -3157,7 +3285,9 @@ function renderBetSlip() {
             const row = document.createElement("div");
             row.className = "bet-slip__selection";
             const info = document.createElement("div");
-            info.innerHTML = `<strong>${escapeHtml(leg.label)}</strong><span>${escapeHtml(leg.detail)}</span>`;
+            const matchup = formatBetSlipMatchup(leg);
+            const matchupHtml = matchup ? `<span class="bet-slip__matchup">${escapeHtml(matchup)}</span>` : "";
+            info.innerHTML = `<strong>${escapeHtml(leg.label)}</strong>${matchupHtml}<span>${escapeHtml(leg.detail)}</span>`;
             const removeBtn = document.createElement("button");
             removeBtn.type = "button";
             removeBtn.className = "bet-slip__remove";
@@ -3307,28 +3437,62 @@ function renderBettingList(target, slips, { emptyMessage }) {
         (slip.legs || []).forEach((leg) => {
             const legRow = document.createElement("div");
             legRow.className = "betting-leg";
-            const left = document.createElement("span");
-            left.textContent = leg.label || `${leg.market} ${leg.selection}`;
+            const leftWrap = document.createElement("div");
+            leftWrap.className = "betting-leg__info";
+            const labelEl = document.createElement("span");
+            labelEl.className = "betting-leg__label";
+            labelEl.textContent = leg.label || `${leg.market} ${leg.selection}`;
+            const metadataMatchup =
+                (leg.metadata &&
+                    leg.metadata.game &&
+                    formatBetSlipMatchup({
+                        game: leg.metadata.game,
+                    })) ||
+                "";
+            leftWrap.appendChild(labelEl);
+            if (metadataMatchup) {
+                const matchupEl = document.createElement("span");
+                matchupEl.className = "betting-leg__matchup";
+                matchupEl.textContent = metadataMatchup;
+                leftWrap.appendChild(matchupEl);
+            }
             const right = document.createElement("span");
+            right.className = "betting-leg__price";
             const pieces = [];
             pieces.push(formatAmerican(leg.price));
             if (leg.result && slip.status !== "pending") {
                 pieces.push(leg.result);
             }
             right.textContent = pieces.join(" · ");
-            legRow.append(left, right);
+            legRow.append(leftWrap, right);
             legsWrap.appendChild(legRow);
         });
         card.appendChild(legsWrap);
         const footer = document.createElement("footer");
+        const footerLines = [];
+        footerLines.push({
+            label: "Stake",
+            value: formatCurrency(slip.stake || 0),
+        });
+        footerLines.push({
+            label: slip.status && slip.status !== "pending" ? "Payout" : "Potential",
+            value: formatCurrency(
+                slip.status && slip.status !== "pending" ? slip.payout || 0 : slip.potential_payout || 0
+            ),
+        });
         const placed = slip.placed_at ? formatDisplayDate(slip.placed_at) : null;
-        const payoutLabel = slip.status && slip.status !== "pending" ? `Payout: ${formatCurrency(slip.payout || 0)}` : `Potential: ${formatCurrency(slip.potential_payout || 0)}`;
-        footer.innerHTML = `<span>Stake: ${formatCurrency(slip.stake || 0)}</span><span>${payoutLabel}</span>`;
         if (placed) {
-            const dates = document.createElement("span");
-            dates.textContent = `Placed ${placed}`;
-            footer.appendChild(dates);
+            footerLines.push({
+                label: "Placed",
+                value: placed,
+            });
         }
+        footerLines.forEach(({ label, value }) => {
+            const line = document.createElement("div");
+            line.className = "betting-card__footer-line";
+            line.innerHTML = `<span>${escapeHtml(String(label))}:</span><span>${escapeHtml(String(value))}</span>`;
+            footer.appendChild(line);
+        });
         card.appendChild(footer);
         target.appendChild(card);
     });

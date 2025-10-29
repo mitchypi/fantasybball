@@ -9,6 +9,8 @@ Replay the full 2024-25 NBA season with perfect information. This project pulls 
 - Single-player commissioner mode: auto-draft all teams, own every roster, and advance the fantasy calendar one day at a time.
 - Web dashboard: monitor real NBA scoreboards, view fantasy box scores inline, tweak scoring formulas, and trigger simulations from the browser.
 - Sportsbook mode: optionally cache The Odds API markets, build bet slips from the scoreboard, and let the simulator settle wagers alongside each NBA day.
+- Gambling-only boot path: the dashboard auto-creates a default sportsbook session so users can jump straight into betting without touching fantasy league setup.
+- Gambling mode hides fantasy and player-search panels so the UI focuses entirely on sportsbook actions.
 
 ## Project layout
 ```

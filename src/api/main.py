@@ -1623,5 +1623,6 @@ def dashboard(request: Request) -> HTMLResponse:
         {
             "request": request,
             "season": settings.season,
+            "mode": "gambling",
         },
     )
