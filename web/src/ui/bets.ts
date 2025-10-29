@@ -9,9 +9,11 @@ export interface BetUIDeps {
 export function renderBetSlip(
   root: HTMLElement,
   deps: BetUIDeps,
+  oddsFormat: 'american' | 'decimal',
   onChangeStake: (value: number) => void,
   onPlace: () => void,
   onClear: () => void,
+  onRemoveSelection: (index: number) => void,
 ) {
   const { selections, bankroll } = deps;
   const stakeInput = root.querySelector<HTMLInputElement>('#bet-slip-stake')!;
@@ -37,15 +39,25 @@ export function renderBetSlip(
   } else {
     const card = document.createElement('div');
     card.className = 'bet-card bet-card--slip';
-    const combinedPrice = combinedAmericanOdds(selections);
+    const combinedLabel = formatCombinedOdds(selections, oddsFormat);
+    const primaryLegPrice = formatOdds(selections[0].price, oddsFormat);
     const header = `
       <div class="bet-card__header">
         <div class="bet-card__kind">${escapeHtml(isParlay ? 'Parlay' : 'Single')}</div>
-        <div class="bet-card__price">${combinedPrice ? formatAmericanOdds(combinedPrice) : formatAmericanOdds(selections[0].price)}</div>
+        <div class="bet-card__price">${escapeHtml(isParlay ? combinedLabel : primaryLegPrice)}</div>
         <div class="bet-card__status muted">Pending</div>
       </div>`;
-    const legs = selections.map(renderLegLine).join('');
+    const legs = selections
+      .map((leg, idx) => renderLegLine(leg, oddsFormat, idx, true))
+      .join('');
     card.innerHTML = `${header}<div class="bet-card__legs">${legs}</div>`;
+    card.querySelectorAll<HTMLButtonElement>('.bet-card__leg-remove').forEach((btn) => {
+      btn.addEventListener('click', (evt) => {
+        evt.stopPropagation();
+        const idx = Number(btn.dataset.index);
+        if (Number.isInteger(idx)) onRemoveSelection(idx);
+      });
+    });
     selectionsEl.appendChild(card);
   }
 
@@ -56,8 +68,7 @@ export function renderBetSlip(
   oddsWrap.classList.toggle('hidden', !isParlay);
   profitWrap.classList.toggle('hidden', !isParlay);
   if (isParlay) {
-    const american = decimalToAmerican(multiplier);
-    oddsEl.textContent = `${american >= 0 ? '+' : ''}${american}`;
+    oddsEl.textContent = formatParlayOdds(multiplier, oddsFormat);
     profitEl.textContent = formatCurrency(Math.max(0, payout - stake));
   }
   placeBtn.disabled = !(selections.length && stake > 0 && stake <= (bankroll.available || 0));
@@ -77,9 +88,15 @@ export function renderBankroll(header: HTMLElement, data: { available: number; p
   potentialEl.textContent = formatCurrency(data.pending_potential);
 }
 
-export function renderBetLists(pendingRoot: HTMLElement, settledRoot: HTMLElement, pending: BetSlip[], settled: BetSlip[]) {
-  pendingRoot.innerHTML = buildBetCards(pending, 'No pending bets.', false);
-  settledRoot.innerHTML = buildBetCards(settled, 'No settled bets.', true);
+export function renderBetLists(
+  pendingRoot: HTMLElement,
+  settledRoot: HTMLElement,
+  pending: BetSlip[],
+  settled: BetSlip[],
+  oddsFormat: 'american' | 'decimal',
+) {
+  pendingRoot.innerHTML = buildBetCards(pending, 'No pending bets.', false, oddsFormat);
+  settledRoot.innerHTML = buildBetCards(settled, 'No settled bets.', true, oddsFormat);
 }
 
 function describeLeg(leg: BetLeg) {
@@ -93,11 +110,6 @@ function describeLeg(leg: BetLeg) {
     default:
       return leg.label || 'Selection';
   }
-}
-
-function formatAmericanOdds(price: number) {
-  if (!Number.isFinite(price)) return '—';
-  return price > 0 ? `+${price}` : `${price}`;
 }
 
 function formatSpreadPoint(point?: number) {
@@ -115,28 +127,39 @@ function capitalize(value: string) {
   return value.charAt(0).toUpperCase() + value.slice(1);
 }
 
-function combinedAmericanOdds(legs: BetLeg[]) {
-  if (!legs.length) return null;
-  const decimal = legs.reduce((acc, leg) => acc * americanToDecimal(leg.price), 1);
-  return decimalToAmerican(decimal);
-}
-
-function renderLegLine(leg: BetLeg) {
+function renderLegLine(leg: BetLeg, oddsFormat: 'american' | 'decimal', index?: number, removable = false) {
   const label = leg.label || describeLeg(leg);
-  const price = formatAmericanOdds(leg.price);
+  const price = formatOdds(leg.price, oddsFormat);
   const context = formatLegContext(leg);
   const result = formatLegResult(leg);
-  return `
-    <div class="bet-card__leg">
-      <div>
-        <strong>${escapeHtml(label)}</strong>
-        ${context ? `<div class="bet-card__context">${escapeHtml(context)}</div>` : ''}
-      </div>
-      <div class="bet-card__leg-meta">
-        <span class="bet-card__leg-price">${price}</span>
-        ${result ? `<span class="bet-card__leg-result ${result.toLowerCase()}">${escapeHtml(result)}</span>` : ''}
-      </div>
-    </div>`;
+  const wrapper = document.createElement('div');
+  wrapper.className = 'bet-card__leg';
+
+  const info = document.createElement('div');
+  info.innerHTML = `
+    <strong>${escapeHtml(label)}</strong>
+    ${context ? `<div class="bet-card__context">${escapeHtml(context)}</div>` : ''}`;
+  wrapper.appendChild(info);
+
+  const meta = document.createElement('div');
+  meta.className = 'bet-card__leg-meta';
+  meta.innerHTML = `
+    <span class="bet-card__leg-price">${escapeHtml(price)}</span>
+    ${result ? `<span class="bet-card__leg-result ${result.toLowerCase()}">${escapeHtml(result)}</span>` : ''}`;
+  wrapper.appendChild(meta);
+
+  if (removable && Number.isInteger(index)) {
+    const removeBtn = document.createElement('button');
+    removeBtn.type = 'button';
+    removeBtn.className = 'bet-card__leg-remove';
+    removeBtn.textContent = 'Remove';
+    removeBtn.dataset.index = String(index);
+    wrapper.appendChild(removeBtn);
+  }
+
+  const container = document.createElement('div');
+  container.appendChild(wrapper);
+  return container.innerHTML;
 }
 
 function formatLegContext(leg: BetLeg) {
@@ -166,22 +189,24 @@ function formatLegResult(leg: BetLeg) {
   return value.charAt(0).toUpperCase() + value.slice(1);
 }
 
-function buildBetCards(slips: BetSlip[], empty: string, newestFirst: boolean) {
+function buildBetCards(slips: BetSlip[], empty: string, newestFirst: boolean, oddsFormat: 'american' | 'decimal') {
   if (!slips.length) return `<p class="muted">${escapeHtml(empty)}</p>`;
   const sorted = slips.slice().sort((a, b) => {
     const ta = new Date(a.placed_at).getTime();
     const tb = new Date(b.placed_at).getTime();
     return newestFirst ? (tb - ta) : (ta - tb);
   });
-  return sorted.map(buildBetCard).join('');
+  return sorted.map((slip) => buildBetCard(slip, oddsFormat)).join('');
 }
 
-function buildBetCard(slip: BetSlip) {
-  const combined = combinedAmericanOdds(slip.legs);
-  const priceLabel = combined != null ? formatAmericanOdds(combined) : formatAmericanOdds(slip.legs[0]?.price ?? 0);
+function buildBetCard(slip: BetSlip, oddsFormat: 'american' | 'decimal') {
+  const combined = computeCombinedDecimal(slip.legs);
+  const priceLabel = combined != null && slip.legs.length > 1
+    ? formatParlayOdds(combined, oddsFormat)
+    : formatOdds(slip.legs[0]?.price ?? 0, oddsFormat);
   const statusText = formatSlipStatus(slip.status);
   const statusClass = `bet-card bet-card--${slip.status}`;
-  const legs = slip.legs.map(renderLegLine).join('');
+  const legs = slip.legs.map((leg) => renderLegLine(leg, oddsFormat)).join('');
   const payoutLabel = slip.status === 'pending' ? 'Potential' : 'Payout';
   const payoutValue = formatCurrency(slip.payout ?? 0);
   const placed = formatPlacedDate(slip.placed_at);
@@ -189,7 +214,7 @@ function buildBetCard(slip: BetSlip) {
     <div class="${statusClass}">
       <div class="bet-card__header">
         <div class="bet-card__kind">${escapeHtml(capitalize(slip.kind))}</div>
-        <div class="bet-card__price">${priceLabel}</div>
+        <div class="bet-card__price">${escapeHtml(priceLabel)}</div>
         <div class="bet-card__status">${escapeHtml(statusText)}</div>
       </div>
       <div class="bet-card__legs">${legs}</div>
@@ -214,4 +239,33 @@ function formatPlacedDate(value: string) {
   const date = new Date(value);
   if (Number.isNaN(date.getTime())) return value;
   return date.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+}
+
+function computeCombinedDecimal(legs: BetLeg[]) {
+  if (!legs.length) return null;
+  return legs.reduce((acc, leg) => acc * americanToDecimal(leg.price), 1);
+}
+
+function formatCombinedOdds(legs: BetLeg[], format: 'american' | 'decimal') {
+  const combined = computeCombinedDecimal(legs);
+  if (combined == null) return '—';
+  return formatParlayOdds(combined, format);
+}
+
+function formatParlayOdds(decimalMultiplier: number, format: 'american' | 'decimal') {
+  if (!Number.isFinite(decimalMultiplier) || decimalMultiplier <= 0) return '—';
+  if (format === 'decimal') {
+    return decimalMultiplier.toFixed(2);
+  }
+  const american = decimalToAmerican(decimalMultiplier);
+  return american > 0 ? `+${american}` : `${american}`;
+}
+
+function formatOdds(price: number, format: 'american' | 'decimal') {
+  if (!Number.isFinite(price)) return '—';
+  if (format === 'decimal') {
+    const dec = americanToDecimal(price);
+    return dec.toFixed(2);
+  }
+  return price > 0 ? `+${price}` : `${price}`;
 }

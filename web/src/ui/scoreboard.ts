@@ -1,11 +1,12 @@
-import type { BoxscorePayload, ScoreboardGame, ScoreboardPayload } from '../types';
-import { escapeHtml } from '../utils';
+import type { BetMarket, BetSelection, BoxscorePayload, ScoreboardGame, ScoreboardPayload } from '../types';
+import { americanToDecimal, escapeHtml } from '../utils';
 
 interface OddsSelectionPayload {
   game_id: string | number;
-  market: 'moneyline';
-  selection: 'home' | 'away';
+  market: BetMarket;
+  selection: BetSelection;
   price: number;
+  point?: number;
   label: string;
   game: ScoreboardGame;
 }
@@ -14,6 +15,7 @@ interface RenderOptions {
   onOddsSelected?: (leg: OddsSelectionPayload) => void;
   onRequestBoxscore?: (gameId: string | number, date: string) => Promise<BoxscorePayload | undefined>;
   showFinalScores?: boolean;
+  oddsFormat?: 'american' | 'decimal';
 }
 
 export function renderScoreboard(
@@ -60,7 +62,7 @@ export function renderScoreboard(
     `;
 
     li.appendChild(summary);
-    const oddsWrap = buildOddsPreview(game, options.onOddsSelected);
+    const oddsWrap = buildOddsPreview(game, options.oddsFormat ?? 'american', options.onOddsSelected);
     if (oddsWrap) li.appendChild(oddsWrap);
 
     if (options.onRequestBoxscore && scoresVisible) {
@@ -103,7 +105,7 @@ export function renderScoreboard(
   });
 }
 
-function buildOddsPreview(game: ScoreboardGame, onSelect?: RenderOptions['onOddsSelected']) {
+function buildOddsPreview(game: ScoreboardGame, format: 'american' | 'decimal', onSelect?: RenderOptions['onOddsSelected']) {
   const odds = game?.odds;
   if (!odds || !odds.markets) return null;
   const wrap = document.createElement('div');
@@ -111,13 +113,13 @@ function buildOddsPreview(game: ScoreboardGame, onSelect?: RenderOptions['onOdds
 
   const markets = odds.markets;
   if (markets.moneyline) {
-    wrap.appendChild(buildMarketBlock('Moneyline', buildMoneylineChips(game, markets.moneyline, odds, onSelect)));
+    wrap.appendChild(buildMarketBlock('Moneyline', buildMoneylineChips(game, markets.moneyline, odds, format, onSelect)));
   }
   if (markets.spread) {
-    wrap.appendChild(buildMarketBlock('Spread', buildSpreadChips(game, markets.spread, odds, onSelect)));
+    wrap.appendChild(buildMarketBlock('Spread', buildSpreadChips(game, markets.spread, odds, format, onSelect)));
   }
   if (markets.total) {
-    wrap.appendChild(buildMarketBlock('Total', buildTotalChips(game, markets.total, onSelect)));
+    wrap.appendChild(buildMarketBlock('Total', buildTotalChips(game, markets.total, format, onSelect)));
   }
   if (!wrap.childNodes.length) return null;
   return wrap;
@@ -141,6 +143,7 @@ function buildMoneylineChips(
   game: ScoreboardGame,
   market: Record<string, { price: number }>,
   oddsSnapshot: ScoreboardGame['odds'],
+  format: 'american' | 'decimal',
   onSelect?: RenderOptions['onOddsSelected'],
 ) {
   const chips: HTMLElement[] = [];
@@ -148,8 +151,8 @@ function buildMoneylineChips(
   const awayName = oddsSnapshot?.away_team?.full_name || game.away_team;
   const homeEntry = homeName ? market?.[homeName] : undefined;
   const awayEntry = awayName ? market?.[awayName] : undefined;
-  if (awayEntry) chips.push(createChip(game, 'moneyline', 'away', awayEntry.price, `${awayName || game.away_team} ML`, undefined, onSelect));
-  if (homeEntry) chips.push(createChip(game, 'moneyline', 'home', homeEntry.price, `${homeName || game.home_team} ML`, undefined, onSelect));
+  if (awayEntry) chips.push(createChip(game, 'moneyline', 'away', awayEntry.price, `${awayName || game.away_team} ML`, undefined, format, onSelect));
+  if (homeEntry) chips.push(createChip(game, 'moneyline', 'home', homeEntry.price, `${homeName || game.home_team} ML`, undefined, format, onSelect));
   return chips;
 }
 
@@ -157,6 +160,7 @@ function buildSpreadChips(
   game: ScoreboardGame,
   market: Record<string, { price: number; point: number }>,
   oddsSnapshot: ScoreboardGame['odds'],
+  format: 'american' | 'decimal',
   onSelect?: RenderOptions['onOddsSelected'],
 ) {
   const chips: HTMLElement[] = [];
@@ -166,11 +170,11 @@ function buildSpreadChips(
   const awayEntry = awayName ? market?.[awayName] : undefined;
   if (awayEntry) {
     const point = awayEntry.point;
-    chips.push(createChip(game, 'spread', 'away', awayEntry.price, `${awayName || game.away_team} ${formatSpreadPoint(point)}`, point, onSelect));
+    chips.push(createChip(game, 'spread', 'away', awayEntry.price, `${awayName || game.away_team} ${formatSpreadPoint(point)}`, point, format, onSelect));
   }
   if (homeEntry) {
     const point = homeEntry.point;
-    chips.push(createChip(game, 'spread', 'home', homeEntry.price, `${homeName || game.home_team} ${formatSpreadPoint(point)}`, point, onSelect));
+    chips.push(createChip(game, 'spread', 'home', homeEntry.price, `${homeName || game.home_team} ${formatSpreadPoint(point)}`, point, format, onSelect));
   }
   return chips;
 }
@@ -178,13 +182,14 @@ function buildSpreadChips(
 function buildTotalChips(
   game: ScoreboardGame,
   market: Record<string, { price: number; point: number }>,
+  format: 'american' | 'decimal',
   onSelect?: RenderOptions['onOddsSelected'],
 ) {
   const chips: HTMLElement[] = [];
   Object.entries(market).forEach(([rawLabel, entry]) => {
     const selection = rawLabel.toLowerCase() === 'over' ? 'over' : 'under';
     const label = `${rawLabel} ${formatTotalPoint(entry.point)}`;
-    chips.push(createChip(game, 'total', selection, entry.price, label, entry.point, onSelect));
+    chips.push(createChip(game, 'total', selection, entry.price, label, entry.point, format, onSelect));
   });
   return chips;
 }
@@ -196,12 +201,13 @@ function createChip(
   price: number,
   label: string,
   point: number | undefined,
+  format: 'american' | 'decimal',
   onSelect?: RenderOptions['onOddsSelected'],
 ) {
   const btn = document.createElement('button');
   btn.type = 'button';
   btn.className = 'odds-chip';
-  btn.innerHTML = `${escapeHtml(label)} <span>${escapeHtml(formatPrice(price))}</span>`;
+  btn.innerHTML = `${escapeHtml(label)} <span>${escapeHtml(formatOdds(price, format))}</span>`;
   const payload = {
     game_id: game.game_id,
     label,
@@ -307,7 +313,11 @@ function formatTotalPoint(point: number) {
   return point % 1 === 0 ? point.toFixed(0) : point.toString();
 }
 
-function formatPrice(price: number) {
-  if (!Number.isFinite(price)) return '0';
+function formatOdds(price: number, format: 'american' | 'decimal') {
+  if (!Number.isFinite(price)) return '—';
+  if (format === 'decimal') {
+    const dec = americanToDecimal(price);
+    return dec.toFixed(2);
+  }
   return price > 0 ? `+${price}` : `${price}`;
 }

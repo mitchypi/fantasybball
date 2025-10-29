@@ -19,6 +19,8 @@ async function boot() {
   const settledRoot = document.getElementById('settled-bets') as HTMLElement;
   const pendingToggle = document.getElementById('bets-toggle-pending') as HTMLButtonElement;
   const settledToggle = document.getElementById('bets-toggle-settled') as HTMLButtonElement;
+  const oddsAmericanBtn = document.getElementById('odds-format-american') as HTMLButtonElement;
+  const oddsDecimalBtn = document.getElementById('odds-format-decimal') as HTMLButtonElement;
 
   const manifest = await safeFetchManifest();
   let system = await getSystem();
@@ -45,6 +47,7 @@ async function boot() {
   let settled: BetSlip[] = [];
   let bankroll = { available: system.bankroll, pending_stake: system.pendingStake, pending_potential: system.pendingPotential };
   let activeBetTab: 'pending' | 'settled' = 'pending';
+  let oddsFormat: 'american' | 'decimal' = 'american';
 
   function setDate(d: string) {
     const currentDate = system.currentDate;
@@ -120,6 +123,7 @@ async function boot() {
     const hasGames = currentScoreboard.games.length > 0;
     renderScoreboard(scoreboardList, currentScoreboard, {
       showFinalScores: currentSimulated,
+      oddsFormat,
       onOddsSelected: currentSimulated ? undefined : (sel) => {
         selections.push(sel);
         render();
@@ -176,8 +180,8 @@ async function boot() {
 
   function render() {
     renderBankroll(header, bankroll);
-    renderBetSlip(aside, { selections, bankroll }, (_value) => render(), placeBet, clearSlip);
-    renderBetLists(pendingRoot, settledRoot, pending, settled);
+    renderBetSlip(aside, { selections, bankroll }, oddsFormat, (_value) => render(), placeBet, clearSlip, removeSelection);
+    renderBetLists(pendingRoot, settledRoot, pending, settled, oddsFormat);
     activateBetTab(activeBetTab);
   }
 
@@ -212,6 +216,11 @@ async function boot() {
 
   function clearSlip() { selections = []; render(); }
 
+  function removeSelection(index: number) {
+    selections.splice(index, 1);
+    render();
+  }
+
   async function simulateCurrentDay() {
     if (!currentScoreboard || currentSimulated) return;
     const date = system.currentDate;
@@ -234,6 +243,8 @@ async function boot() {
   if (resetBtn) resetBtn.onclick = () => resetToStart(start).catch(console.error);
   if (pendingToggle) pendingToggle.onclick = () => activateBetTab('pending');
   if (settledToggle) settledToggle.onclick = () => activateBetTab('settled');
+  if (oddsAmericanBtn) oddsAmericanBtn.onclick = () => changeOddsFormat('american');
+  if (oddsDecimalBtn) oddsDecimalBtn.onclick = () => changeOddsFormat('decimal');
   await loadScoreboard(start);
 
   function stepDate(deltaDays: number) {
@@ -260,6 +271,7 @@ async function boot() {
     pending = [];
     settled = [];
     bankroll = { available: initial, pending_stake: 0, pending_potential: 0 };
+    activeBetTab = 'pending';
     render();
     await clearBets();
     await clearSimulations();
@@ -275,6 +287,15 @@ async function boot() {
     if (settledToggle) settledToggle.classList.toggle('active', tab === 'settled');
     if (pendingRoot) pendingRoot.classList.toggle('hidden', tab !== 'pending');
     if (settledRoot) settledRoot.classList.toggle('hidden', tab !== 'settled');
+  }
+
+  function changeOddsFormat(format: 'american' | 'decimal') {
+    if (oddsFormat === format) return;
+    oddsFormat = format;
+    if (oddsAmericanBtn) oddsAmericanBtn.classList.toggle('active', format === 'american');
+    if (oddsDecimalBtn) oddsDecimalBtn.classList.toggle('active', format === 'decimal');
+    presentScoreboard();
+    render();
   }
 }
 

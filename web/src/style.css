@@ -342,6 +342,43 @@ button:disabled {
   gap: 0.6rem;
 }
 
+.odds-format {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.odds-format__buttons {
+  display: inline-flex;
+  gap: 0.35rem;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 999px;
+  padding: 0.25rem;
+}
+
+.odds-format__buttons button {
+  background: transparent;
+  border: none;
+  color: rgba(226, 232, 240, 0.75);
+  font-weight: 600;
+  font-size: 0.8rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.odds-format__buttons button.active {
+  background: rgba(37, 99, 235, 0.45);
+  color: #f8fafc;
+}
+
+.odds-format__buttons button:not(.active):hover {
+  background: rgba(37, 99, 235, 0.2);
+}
+
 .bet-item {
   border: 1px dashed rgba(148, 163, 184, 0.35);
   border-radius: 0.75rem;
@@ -503,6 +540,24 @@ button:disabled {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
+  align-items: center;
+}
+
+.bet-card__leg-remove {
+  margin-left: 0.75rem;
+  border: none;
+  background: rgba(248, 113, 113, 0.2);
+  color: rgba(248, 250, 252, 0.9);
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.bet-card__leg-remove:hover {
+  background: rgba(248, 113, 113, 0.35);
 }
 
 .bet-card__leg strong {
