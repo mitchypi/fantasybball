@@ -1,0 +1,208 @@
+{
+  "date": "2025-02-02",
+  "games": [
+    {
+      "game_id": 15908132,
+      "date": "2025-02-02",
+      "home_team": "DET",
+      "away_team": "CHI",
+      "home_score": 127,
+      "away_score": 119,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Detroit Pistons"
+        },
+        "away_team": {
+          "full_name": "Chicago Bulls"
+        },
+        "markets": {
+          "moneyline": {
+            "Chicago Bulls": {
+              "price": 190
+            },
+            "Detroit Pistons": {
+              "price": -230
+            }
+          },
+          "spread": {
+            "Chicago Bulls": {
+              "price": -112,
+              "point": 6.0
+            },
+            "Detroit Pistons": {
+              "price": -108,
+              "point": -6.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 233.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 233.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908133,
+      "date": "2025-02-02",
+      "home_team": "CLE",
+      "away_team": "DAL",
+      "home_score": 144,
+      "away_score": 101,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Cleveland Cavaliers"
+        },
+        "away_team": {
+          "full_name": "Dallas Mavericks"
+        },
+        "markets": {
+          "moneyline": {
+            "Cleveland Cavaliers": {
+              "price": -800
+            },
+            "Dallas Mavericks": {
+              "price": 550
+            }
+          },
+          "spread": {
+            "Cleveland Cavaliers": {
+              "price": -108,
+              "point": -13.0
+            },
+            "Dallas Mavericks": {
+              "price": -112,
+              "point": 13.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 236.0
+            },
+            "Under": {
+              "price": -112,
+              "point": 236.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908134,
+      "date": "2025-02-02",
+      "home_team": "TOR",
+      "away_team": "LAC",
+      "home_score": 115,
+      "away_score": 108,
+      "status": "Final",
+      "simulated": true,
+      "odds": null
+    },
+    {
+      "game_id": 15908135,
+      "date": "2025-02-02",
+      "home_team": "PHI",
+      "away_team": "BOS",
+      "home_score": 110,
+      "away_score": 118,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Philadelphia 76ers"
+        },
+        "away_team": {
+          "full_name": "Boston Celtics"
+        },
+        "markets": {
+          "moneyline": {
+            "Boston Celtics": {
+              "price": -550
+            },
+            "Philadelphia 76ers": {
+              "price": 410
+            }
+          },
+          "spread": {
+            "Boston Celtics": {
+              "price": -110,
+              "point": -11.0
+            },
+            "Philadelphia 76ers": {
+              "price": -110,
+              "point": 11.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 224.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 224.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908136,
+      "date": "2025-02-02",
+      "home_team": "MIL",
+      "away_team": "MEM",
+      "home_score": 119,
+      "away_score": 132,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Milwaukee Bucks"
+        },
+        "away_team": {
+          "full_name": "Memphis Grizzlies"
+        },
+        "markets": {
+          "moneyline": {
+            "Memphis Grizzlies": {
+              "price": 124
+            },
+            "Milwaukee Bucks": {
+              "price": -148
+            }
+          },
+          "spread": {
+            "Memphis Grizzlies": {
+              "price": -112,
+              "point": 3.0
+            },
+            "Milwaukee Bucks": {
+              "price": -108,
+              "point": -3.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 246.5
+            },
+            "Under": {
+              "price": -108,
+              "point": 246.5
+            }
+          }
+        }
+      }
+    }
+  ]
+}

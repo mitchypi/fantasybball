@@ -1,0 +1,149 @@
+{
+  "date": "2025-01-24",
+  "games": [
+    {
+      "game_id": 15908067,
+      "date": "2025-01-24",
+      "home_team": "CHA",
+      "away_team": "POR",
+      "home_score": 97,
+      "away_score": 102,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Charlotte Hornets"
+        },
+        "away_team": {
+          "full_name": "Portland Trail Blazers"
+        },
+        "markets": {
+          "moneyline": {
+            "Charlotte Hornets": {
+              "price": -218
+            },
+            "Portland Trail Blazers": {
+              "price": 180
+            }
+          },
+          "spread": {
+            "Charlotte Hornets": {
+              "price": -110,
+              "point": -5.5
+            },
+            "Portland Trail Blazers": {
+              "price": -110,
+              "point": 5.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 220.0
+            },
+            "Under": {
+              "price": -112,
+              "point": 220.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908068,
+      "date": "2025-01-24",
+      "home_team": "PHI",
+      "away_team": "CLE",
+      "home_score": 132,
+      "away_score": 129,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Philadelphia 76ers"
+        },
+        "away_team": {
+          "full_name": "Cleveland Cavaliers"
+        },
+        "markets": {
+          "moneyline": {
+            "Cleveland Cavaliers": {
+              "price": -535
+            },
+            "Philadelphia 76ers": {
+              "price": 400
+            }
+          },
+          "spread": {
+            "Cleveland Cavaliers": {
+              "price": -108,
+              "point": -10.5
+            },
+            "Philadelphia 76ers": {
+              "price": -112,
+              "point": 10.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 228.5
+            },
+            "Under": {
+              "price": -108,
+              "point": 228.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908069,
+      "date": "2025-01-24",
+      "home_team": "MEM",
+      "away_team": "NOP",
+      "home_score": 139,
+      "away_score": 126,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Memphis Grizzlies"
+        },
+        "away_team": {
+          "full_name": "New Orleans Pelicans"
+        },
+        "markets": {
+          "moneyline": {
+            "Memphis Grizzlies": {
+              "price": -600
+            },
+            "New Orleans Pelicans": {
+              "price": 440
+            }
+          },
+          "spread": {
+            "Memphis Grizzlies": {
+              "price": -112,
+              "point": -11.0
+            },
+            "New Orleans Pelicans": {
+              "price": -108,
+              "point": 11.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 243.5
+            },
+            "Under": {
+              "price": -110,
+              "point": 243.5
+            }
+          }
+        }
+      }
+    }
+  ]
+}

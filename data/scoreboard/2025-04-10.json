@@ -1,0 +1,245 @@
+{
+  "date": "2025-04-10",
+  "games": [
+    {
+      "game_id": 15908892,
+      "date": "2025-04-10",
+      "home_team": "MIL",
+      "away_team": "NOP",
+      "home_score": 136,
+      "away_score": 111,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Milwaukee Bucks"
+        },
+        "away_team": {
+          "full_name": "New Orleans Pelicans"
+        },
+        "markets": {
+          "moneyline": {
+            "Milwaukee Bucks": {
+              "price": -950
+            },
+            "New Orleans Pelicans": {
+              "price": 625
+            }
+          },
+          "spread": {
+            "Milwaukee Bucks": {
+              "price": -110,
+              "point": -14.0
+            },
+            "New Orleans Pelicans": {
+              "price": -110,
+              "point": 14.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 221.0
+            },
+            "Under": {
+              "price": -110,
+              "point": 221.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908898,
+      "date": "2025-04-10",
+      "home_team": "DET",
+      "away_team": "NYK",
+      "home_score": 115,
+      "away_score": 106,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Detroit Pistons"
+        },
+        "away_team": {
+          "full_name": "New York Knicks"
+        },
+        "markets": {
+          "moneyline": {
+            "Detroit Pistons": {
+              "price": -162
+            },
+            "New York Knicks": {
+              "price": 136
+            }
+          },
+          "spread": {
+            "Detroit Pistons": {
+              "price": -112,
+              "point": -3.5
+            },
+            "New York Knicks": {
+              "price": -108,
+              "point": 3.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 229.0
+            },
+            "Under": {
+              "price": -110,
+              "point": 229.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908899,
+      "date": "2025-04-10",
+      "home_team": "IND",
+      "away_team": "CLE",
+      "home_score": 114,
+      "away_score": 112,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Indiana Pacers"
+        },
+        "away_team": {
+          "full_name": "Cleveland Cavaliers"
+        },
+        "markets": {
+          "moneyline": {
+            "Cleveland Cavaliers": {
+              "price": 340
+            },
+            "Indiana Pacers": {
+              "price": -440
+            }
+          },
+          "spread": {
+            "Cleveland Cavaliers": {
+              "price": -115,
+              "point": 10.0
+            },
+            "Indiana Pacers": {
+              "price": -105,
+              "point": -10.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 233.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 233.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908900,
+      "date": "2025-04-10",
+      "home_team": "BKN",
+      "away_team": "ATL",
+      "home_score": 109,
+      "away_score": 133,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Brooklyn Nets"
+        },
+        "away_team": {
+          "full_name": "Atlanta Hawks"
+        },
+        "markets": {
+          "moneyline": {
+            "Atlanta Hawks": {
+              "price": -950
+            },
+            "Brooklyn Nets": {
+              "price": 625
+            }
+          },
+          "spread": {
+            "Atlanta Hawks": {
+              "price": -108,
+              "point": -14.0
+            },
+            "Brooklyn Nets": {
+              "price": -112,
+              "point": 14.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 233.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 233.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908901,
+      "date": "2025-04-10",
+      "home_team": "MEM",
+      "away_team": "MIN",
+      "home_score": 125,
+      "away_score": 141,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Memphis Grizzlies"
+        },
+        "away_team": {
+          "full_name": "Minnesota Timberwolves"
+        },
+        "markets": {
+          "moneyline": {
+            "Memphis Grizzlies": {
+              "price": 105
+            },
+            "Minnesota Timberwolves": {
+              "price": -125
+            }
+          },
+          "spread": {
+            "Memphis Grizzlies": {
+              "price": -110,
+              "point": 2.0
+            },
+            "Minnesota Timberwolves": {
+              "price": -110,
+              "point": -2.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 231.0
+            },
+            "Under": {
+              "price": -110,
+              "point": 231.0
+            }
+          }
+        }
+      }
+    }
+  ]
+}

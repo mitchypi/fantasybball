@@ -1,0 +1,304 @@
+{
+  "date": "2025-01-19",
+  "games": [
+    {
+      "game_id": 15908029,
+      "date": "2025-01-19",
+      "home_team": "MIA",
+      "away_team": "SAS",
+      "home_score": 128,
+      "away_score": 107,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Miami Heat"
+        },
+        "away_team": {
+          "full_name": "San Antonio Spurs"
+        },
+        "markets": {
+          "moneyline": {
+            "Miami Heat": {
+              "price": -155
+            },
+            "San Antonio Spurs": {
+              "price": 130
+            }
+          },
+          "spread": {
+            "Miami Heat": {
+              "price": -112,
+              "point": -3.0
+            },
+            "San Antonio Spurs": {
+              "price": -108,
+              "point": 3.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 219.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 219.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908030,
+      "date": "2025-01-19",
+      "home_team": "ORL",
+      "away_team": "DEN",
+      "home_score": 100,
+      "away_score": 113,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Orlando Magic"
+        },
+        "away_team": {
+          "full_name": "Denver Nuggets"
+        },
+        "markets": {
+          "moneyline": {
+            "Denver Nuggets": {
+              "price": -325
+            },
+            "Orlando Magic": {
+              "price": 260
+            }
+          },
+          "spread": {
+            "Denver Nuggets": {
+              "price": -108,
+              "point": -8.0
+            },
+            "Orlando Magic": {
+              "price": -112,
+              "point": 8.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 223.0
+            },
+            "Under": {
+              "price": -110,
+              "point": 223.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908031,
+      "date": "2025-01-19",
+      "home_team": "MIL",
+      "away_team": "PHI",
+      "home_score": 123,
+      "away_score": 109,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Milwaukee Bucks"
+        },
+        "away_team": {
+          "full_name": "Philadelphia 76ers"
+        },
+        "markets": {
+          "moneyline": {
+            "Milwaukee Bucks": {
+              "price": -800
+            },
+            "Philadelphia 76ers": {
+              "price": 550
+            }
+          },
+          "spread": {
+            "Milwaukee Bucks": {
+              "price": -112,
+              "point": -12.5
+            },
+            "Philadelphia 76ers": {
+              "price": -108,
+              "point": 12.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 223.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 223.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908032,
+      "date": "2025-01-19",
+      "home_team": "OKC",
+      "away_team": "BKN",
+      "home_score": 127,
+      "away_score": 101,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Oklahoma City Thunder"
+        },
+        "away_team": {
+          "full_name": "Brooklyn Nets"
+        },
+        "markets": {
+          "moneyline": {
+            "Brooklyn Nets": {
+              "price": 850
+            },
+            "Oklahoma City Thunder": {
+              "price": -1450
+            }
+          },
+          "spread": {
+            "Brooklyn Nets": {
+              "price": -112,
+              "point": 16.5
+            },
+            "Oklahoma City Thunder": {
+              "price": -108,
+              "point": -16.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 216.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 216.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908033,
+      "date": "2025-01-19",
+      "home_team": "LAC",
+      "away_team": "LAL",
+      "home_score": 116,
+      "away_score": 102,
+      "status": "Final",
+      "simulated": true,
+      "odds": null
+    },
+    {
+      "game_id": 15908034,
+      "date": "2025-01-19",
+      "home_team": "POR",
+      "away_team": "CHI",
+      "home_score": 113,
+      "away_score": 102,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Portland Trail Blazers"
+        },
+        "away_team": {
+          "full_name": "Chicago Bulls"
+        },
+        "markets": {
+          "moneyline": {
+            "Chicago Bulls": {
+              "price": -265
+            },
+            "Portland Trail Blazers": {
+              "price": 215
+            }
+          },
+          "spread": {
+            "Chicago Bulls": {
+              "price": -112,
+              "point": -6.5
+            },
+            "Portland Trail Blazers": {
+              "price": -108,
+              "point": 6.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 237.5
+            },
+            "Under": {
+              "price": -110,
+              "point": 237.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908035,
+      "date": "2025-01-19",
+      "home_team": "SAC",
+      "away_team": "WAS",
+      "home_score": 123,
+      "away_score": 100,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Sacramento Kings"
+        },
+        "away_team": {
+          "full_name": "Washington Wizards"
+        },
+        "markets": {
+          "moneyline": {
+            "Sacramento Kings": {
+              "price": -1600
+            },
+            "Washington Wizards": {
+              "price": 900
+            }
+          },
+          "spread": {
+            "Sacramento Kings": {
+              "price": -112,
+              "point": -17.0
+            },
+            "Washington Wizards": {
+              "price": -108,
+              "point": 17.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 235.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 235.5
+            }
+          }
+        }
+      }
+    }
+  ]
+}

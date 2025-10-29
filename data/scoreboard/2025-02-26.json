@@ -1,0 +1,400 @@
+{
+  "date": "2025-02-26",
+  "games": [
+    {
+      "game_id": 15908567,
+      "date": "2025-02-26",
+      "home_team": "DET",
+      "away_team": "BOS",
+      "home_score": 117,
+      "away_score": 97,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Detroit Pistons"
+        },
+        "away_team": {
+          "full_name": "Boston Celtics"
+        },
+        "markets": {
+          "moneyline": {
+            "Boston Celtics": {
+              "price": -180
+            },
+            "Detroit Pistons": {
+              "price": 150
+            }
+          },
+          "spread": {
+            "Boston Celtics": {
+              "price": -112,
+              "point": -4.5
+            },
+            "Detroit Pistons": {
+              "price": -108,
+              "point": 4.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 227.5
+            },
+            "Under": {
+              "price": -110,
+              "point": 227.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908568,
+      "date": "2025-02-26",
+      "home_team": "IND",
+      "away_team": "TOR",
+      "home_score": 111,
+      "away_score": 91,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Indiana Pacers"
+        },
+        "away_team": {
+          "full_name": "Toronto Raptors"
+        },
+        "markets": {
+          "moneyline": {
+            "Indiana Pacers": {
+              "price": -520
+            },
+            "Toronto Raptors": {
+              "price": 390
+            }
+          },
+          "spread": {
+            "Indiana Pacers": {
+              "price": -112,
+              "point": -11.0
+            },
+            "Toronto Raptors": {
+              "price": -108,
+              "point": 11.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 233.5
+            },
+            "Under": {
+              "price": -108,
+              "point": 233.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908569,
+      "date": "2025-02-26",
+      "home_team": "NYK",
+      "away_team": "PHI",
+      "home_score": 110,
+      "away_score": 105,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "New York Knicks"
+        },
+        "away_team": {
+          "full_name": "Philadelphia 76ers"
+        },
+        "markets": {
+          "moneyline": {
+            "New York Knicks": {
+              "price": -455
+            },
+            "Philadelphia 76ers": {
+              "price": 350
+            }
+          },
+          "spread": {
+            "New York Knicks": {
+              "price": -112,
+              "point": -10.0
+            },
+            "Philadelphia 76ers": {
+              "price": -108,
+              "point": 10.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 231.0
+            },
+            "Under": {
+              "price": -112,
+              "point": 231.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908570,
+      "date": "2025-02-26",
+      "home_team": "WAS",
+      "away_team": "POR",
+      "home_score": 121,
+      "away_score": 129,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Washington Wizards"
+        },
+        "away_team": {
+          "full_name": "Portland Trail Blazers"
+        },
+        "markets": {
+          "moneyline": {
+            "Portland Trail Blazers": {
+              "price": -245
+            },
+            "Washington Wizards": {
+              "price": 200
+            }
+          },
+          "spread": {
+            "Portland Trail Blazers": {
+              "price": -108,
+              "point": -6.5
+            },
+            "Washington Wizards": {
+              "price": -112,
+              "point": 6.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 233.5
+            },
+            "Under": {
+              "price": -108,
+              "point": 233.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908571,
+      "date": "2025-02-26",
+      "home_team": "BKN",
+      "away_team": "OKC",
+      "home_score": 121,
+      "away_score": 129,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Brooklyn Nets"
+        },
+        "away_team": {
+          "full_name": "Oklahoma City Thunder"
+        },
+        "markets": {
+          "moneyline": {
+            "Brooklyn Nets": {
+              "price": 900
+            },
+            "Oklahoma City Thunder": {
+              "price": -1600
+            }
+          },
+          "spread": {
+            "Brooklyn Nets": {
+              "price": -110,
+              "point": 17.0
+            },
+            "Oklahoma City Thunder": {
+              "price": -110,
+              "point": -17.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 216.0
+            },
+            "Under": {
+              "price": -112,
+              "point": 216.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908572,
+      "date": "2025-02-26",
+      "home_team": "MIA",
+      "away_team": "ATL",
+      "home_score": 131,
+      "away_score": 109,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Miami Heat"
+        },
+        "away_team": {
+          "full_name": "Atlanta Hawks"
+        },
+        "markets": {
+          "moneyline": {
+            "Atlanta Hawks": {
+              "price": 120
+            },
+            "Miami Heat": {
+              "price": -142
+            }
+          },
+          "spread": {
+            "Atlanta Hawks": {
+              "price": -110,
+              "point": 2.5
+            },
+            "Miami Heat": {
+              "price": -110,
+              "point": -2.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 232.0
+            },
+            "Under": {
+              "price": -110,
+              "point": 232.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908573,
+      "date": "2025-02-26",
+      "home_team": "CHI",
+      "away_team": "LAC",
+      "home_score": 117,
+      "away_score": 122,
+      "status": "Final",
+      "simulated": true,
+      "odds": null
+    },
+    {
+      "game_id": 15908574,
+      "date": "2025-02-26",
+      "home_team": "UTA",
+      "away_team": "SAC",
+      "home_score": 101,
+      "away_score": 118,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Utah Jazz"
+        },
+        "away_team": {
+          "full_name": "Sacramento Kings"
+        },
+        "markets": {
+          "moneyline": {
+            "Sacramento Kings": {
+              "price": -440
+            },
+            "Utah Jazz": {
+              "price": 340
+            }
+          },
+          "spread": {
+            "Sacramento Kings": {
+              "price": -110,
+              "point": -10.0
+            },
+            "Utah Jazz": {
+              "price": -110,
+              "point": 10.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 237.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 237.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908575,
+      "date": "2025-02-26",
+      "home_team": "HOU",
+      "away_team": "SAS",
+      "home_score": 118,
+      "away_score": 106,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Houston Rockets"
+        },
+        "away_team": {
+          "full_name": "San Antonio Spurs"
+        },
+        "markets": {
+          "moneyline": {
+            "Houston Rockets": {
+              "price": -380
+            },
+            "San Antonio Spurs": {
+              "price": 300
+            }
+          },
+          "spread": {
+            "Houston Rockets": {
+              "price": -108,
+              "point": -9.0
+            },
+            "San Antonio Spurs": {
+              "price": -112,
+              "point": 9.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 228.5
+            },
+            "Under": {
+              "price": -108,
+              "point": 228.5
+            }
+          }
+        }
+      }
+    }
+  ]
+}

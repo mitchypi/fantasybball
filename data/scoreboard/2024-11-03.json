@@ -1,0 +1,149 @@
+{
+  "date": "2024-11-03",
+  "games": [
+    {
+      "game_id": 15907528,
+      "date": "2024-11-03",
+      "home_team": "BKN",
+      "away_team": "DET",
+      "home_score": 92,
+      "away_score": 106,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Brooklyn Nets"
+        },
+        "away_team": {
+          "full_name": "Detroit Pistons"
+        },
+        "markets": {
+          "moneyline": {
+            "Brooklyn Nets": {
+              "price": -142
+            },
+            "Detroit Pistons": {
+              "price": 120
+            }
+          },
+          "spread": {
+            "Brooklyn Nets": {
+              "price": -110,
+              "point": -2.5
+            },
+            "Detroit Pistons": {
+              "price": -110,
+              "point": 2.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 219.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 219.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907529,
+      "date": "2024-11-03",
+      "home_team": "NOP",
+      "away_team": "ATL",
+      "home_score": 111,
+      "away_score": 126,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "New Orleans Pelicans"
+        },
+        "away_team": {
+          "full_name": "Atlanta Hawks"
+        },
+        "markets": {
+          "moneyline": {
+            "Atlanta Hawks": {
+              "price": 142
+            },
+            "New Orleans Pelicans": {
+              "price": -170
+            }
+          },
+          "spread": {
+            "Atlanta Hawks": {
+              "price": -108,
+              "point": 3.5
+            },
+            "New Orleans Pelicans": {
+              "price": -112,
+              "point": -3.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 230.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 230.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907530,
+      "date": "2024-11-03",
+      "home_team": "DAL",
+      "away_team": "ORL",
+      "home_score": 108,
+      "away_score": 85,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Dallas Mavericks"
+        },
+        "away_team": {
+          "full_name": "Orlando Magic"
+        },
+        "markets": {
+          "moneyline": {
+            "Dallas Mavericks": {
+              "price": -258
+            },
+            "Orlando Magic": {
+              "price": 210
+            }
+          },
+          "spread": {
+            "Dallas Mavericks": {
+              "price": -112,
+              "point": -6.5
+            },
+            "Orlando Magic": {
+              "price": -108,
+              "point": 6.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 220.0
+            },
+            "Under": {
+              "price": -110,
+              "point": 220.0
+            }
+          }
+        }
+      }
+    }
+  ]
+}

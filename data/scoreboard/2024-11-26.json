@@ -1,0 +1,245 @@
+{
+  "date": "2024-11-26",
+  "games": [
+    {
+      "game_id": 15907697,
+      "date": "2024-11-26",
+      "home_team": "WAS",
+      "away_team": "CHI",
+      "home_score": 108,
+      "away_score": 127,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Washington Wizards"
+        },
+        "away_team": {
+          "full_name": "Chicago Bulls"
+        },
+        "markets": {
+          "moneyline": {
+            "Chicago Bulls": {
+              "price": -205
+            },
+            "Washington Wizards": {
+              "price": 170
+            }
+          },
+          "spread": {
+            "Chicago Bulls": {
+              "price": -105,
+              "point": -5.0
+            },
+            "Washington Wizards": {
+              "price": -115,
+              "point": 5.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 245.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 245.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907698,
+      "date": "2024-11-26",
+      "home_team": "MIA",
+      "away_team": "MIL",
+      "home_score": 103,
+      "away_score": 106,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Miami Heat"
+        },
+        "away_team": {
+          "full_name": "Milwaukee Bucks"
+        },
+        "markets": {
+          "moneyline": {
+            "Miami Heat": {
+              "price": -135
+            },
+            "Milwaukee Bucks": {
+              "price": 114
+            }
+          },
+          "spread": {
+            "Miami Heat": {
+              "price": -112,
+              "point": -2.0
+            },
+            "Milwaukee Bucks": {
+              "price": -108,
+              "point": 2.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 223.0
+            },
+            "Under": {
+              "price": -112,
+              "point": 223.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907699,
+      "date": "2024-11-26",
+      "home_team": "MIN",
+      "away_team": "HOU",
+      "home_score": 111,
+      "away_score": 117,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Minnesota Timberwolves"
+        },
+        "away_team": {
+          "full_name": "Houston Rockets"
+        },
+        "markets": {
+          "moneyline": {
+            "Houston Rockets": {
+              "price": 136
+            },
+            "Minnesota Timberwolves": {
+              "price": -162
+            }
+          },
+          "spread": {
+            "Houston Rockets": {
+              "price": -108,
+              "point": 3.5
+            },
+            "Minnesota Timberwolves": {
+              "price": -112,
+              "point": -3.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 220.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 220.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907700,
+      "date": "2024-11-26",
+      "home_team": "UTA",
+      "away_team": "SAS",
+      "home_score": 115,
+      "away_score": 128,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Utah Jazz"
+        },
+        "away_team": {
+          "full_name": "San Antonio Spurs"
+        },
+        "markets": {
+          "moneyline": {
+            "San Antonio Spurs": {
+              "price": -135
+            },
+            "Utah Jazz": {
+              "price": 114
+            }
+          },
+          "spread": {
+            "San Antonio Spurs": {
+              "price": -108,
+              "point": -2.5
+            },
+            "Utah Jazz": {
+              "price": -112,
+              "point": 2.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 225.5
+            },
+            "Under": {
+              "price": -108,
+              "point": 225.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907701,
+      "date": "2024-11-26",
+      "home_team": "PHX",
+      "away_team": "LAL",
+      "home_score": 127,
+      "away_score": 100,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Phoenix Suns"
+        },
+        "away_team": {
+          "full_name": "Los Angeles Lakers"
+        },
+        "markets": {
+          "moneyline": {
+            "Los Angeles Lakers": {
+              "price": 114
+            },
+            "Phoenix Suns": {
+              "price": -135
+            }
+          },
+          "spread": {
+            "Los Angeles Lakers": {
+              "price": -112,
+              "point": 2.5
+            },
+            "Phoenix Suns": {
+              "price": -108,
+              "point": -2.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 234.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 234.5
+            }
+          }
+        }
+      }
+    }
+  ]
+}

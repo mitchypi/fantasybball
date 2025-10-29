@@ -1,0 +1,341 @@
+{
+  "date": "2025-01-09",
+  "games": [
+    {
+      "game_id": 15907954,
+      "date": "2025-01-09",
+      "home_team": "CLE",
+      "away_team": "TOR",
+      "home_score": 132,
+      "away_score": 126,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Cleveland Cavaliers"
+        },
+        "away_team": {
+          "full_name": "Toronto Raptors"
+        },
+        "markets": {
+          "moneyline": {
+            "Cleveland Cavaliers": {
+              "price": -1350
+            },
+            "Toronto Raptors": {
+              "price": 800
+            }
+          },
+          "spread": {
+            "Cleveland Cavaliers": {
+              "price": -108,
+              "point": -15.5
+            },
+            "Toronto Raptors": {
+              "price": -112,
+              "point": 15.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 235.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 235.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907955,
+      "date": "2025-01-09",
+      "home_team": "DET",
+      "away_team": "GSW",
+      "home_score": 104,
+      "away_score": 107,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Detroit Pistons"
+        },
+        "away_team": {
+          "full_name": "Golden State Warriors"
+        },
+        "markets": {
+          "moneyline": {
+            "Detroit Pistons": {
+              "price": -130
+            },
+            "Golden State Warriors": {
+              "price": 110
+            }
+          },
+          "spread": {
+            "Detroit Pistons": {
+              "price": -102,
+              "point": -2.5
+            },
+            "Golden State Warriors": {
+              "price": -118,
+              "point": 2.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 220.0
+            },
+            "Under": {
+              "price": -112,
+              "point": 220.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907956,
+      "date": "2025-01-09",
+      "home_team": "ORL",
+      "away_team": "MIN",
+      "home_score": 89,
+      "away_score": 104,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Orlando Magic"
+        },
+        "away_team": {
+          "full_name": "Minnesota Timberwolves"
+        },
+        "markets": {
+          "moneyline": {
+            "Minnesota Timberwolves": {
+              "price": -245
+            },
+            "Orlando Magic": {
+              "price": 200
+            }
+          },
+          "spread": {
+            "Minnesota Timberwolves": {
+              "price": -108,
+              "point": -7.0
+            },
+            "Orlando Magic": {
+              "price": -112,
+              "point": 7.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 199.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 199.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907957,
+      "date": "2025-01-09",
+      "home_team": "MEM",
+      "away_team": "HOU",
+      "home_score": 115,
+      "away_score": 119,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Memphis Grizzlies"
+        },
+        "away_team": {
+          "full_name": "Houston Rockets"
+        },
+        "markets": {
+          "moneyline": {
+            "Houston Rockets": {
+              "price": -112
+            },
+            "Memphis Grizzlies": {
+              "price": -108
+            }
+          },
+          "spread": {
+            "Houston Rockets": {
+              "price": -105,
+              "point": -1.0
+            },
+            "Memphis Grizzlies": {
+              "price": -115,
+              "point": 1.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 234.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 234.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907958,
+      "date": "2025-01-09",
+      "home_team": "DAL",
+      "away_team": "POR",
+      "home_score": 117,
+      "away_score": 111,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Dallas Mavericks"
+        },
+        "away_team": {
+          "full_name": "Portland Trail Blazers"
+        },
+        "markets": {
+          "moneyline": {
+            "Dallas Mavericks": {
+              "price": -310
+            },
+            "Portland Trail Blazers": {
+              "price": 250
+            }
+          },
+          "spread": {
+            "Dallas Mavericks": {
+              "price": -105,
+              "point": -8.0
+            },
+            "Portland Trail Blazers": {
+              "price": -115,
+              "point": 8.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 220.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 220.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907959,
+      "date": "2025-01-09",
+      "home_team": "PHX",
+      "away_team": "ATL",
+      "home_score": 123,
+      "away_score": 115,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Phoenix Suns"
+        },
+        "away_team": {
+          "full_name": "Atlanta Hawks"
+        },
+        "markets": {
+          "moneyline": {
+            "Atlanta Hawks": {
+              "price": 185
+            },
+            "Phoenix Suns": {
+              "price": -225
+            }
+          },
+          "spread": {
+            "Atlanta Hawks": {
+              "price": -108,
+              "point": 6.0
+            },
+            "Phoenix Suns": {
+              "price": -112,
+              "point": -6.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 238.5
+            },
+            "Under": {
+              "price": -108,
+              "point": 238.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907960,
+      "date": "2025-01-09",
+      "home_team": "UTA",
+      "away_team": "MIA",
+      "home_score": 92,
+      "away_score": 97,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Utah Jazz"
+        },
+        "away_team": {
+          "full_name": "Miami Heat"
+        },
+        "markets": {
+          "moneyline": {
+            "Miami Heat": {
+              "price": -218
+            },
+            "Utah Jazz": {
+              "price": 180
+            }
+          },
+          "spread": {
+            "Miami Heat": {
+              "price": -108,
+              "point": -5.5
+            },
+            "Utah Jazz": {
+              "price": -112,
+              "point": 5.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -105,
+              "point": 222.0
+            },
+            "Under": {
+              "price": -115,
+              "point": 222.0
+            }
+          }
+        }
+      }
+    }
+  ]
+}

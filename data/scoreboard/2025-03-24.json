@@ -1,0 +1,389 @@
+{
+  "date": "2025-03-24",
+  "games": [
+    {
+      "game_id": 15908768,
+      "date": "2025-03-24",
+      "home_team": "IND",
+      "away_team": "MIN",
+      "home_score": 119,
+      "away_score": 103,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Indiana Pacers"
+        },
+        "away_team": {
+          "full_name": "Minnesota Timberwolves"
+        },
+        "markets": {
+          "moneyline": {
+            "Indiana Pacers": {
+              "price": -130
+            },
+            "Minnesota Timberwolves": {
+              "price": 110
+            }
+          },
+          "spread": {
+            "Indiana Pacers": {
+              "price": -112,
+              "point": -2.5
+            },
+            "Minnesota Timberwolves": {
+              "price": -108,
+              "point": 2.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 229.5
+            },
+            "Under": {
+              "price": -108,
+              "point": 229.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908769,
+      "date": "2025-03-24",
+      "home_team": "ORL",
+      "away_team": "LAL",
+      "home_score": 118,
+      "away_score": 106,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Orlando Magic"
+        },
+        "away_team": {
+          "full_name": "Los Angeles Lakers"
+        },
+        "markets": {
+          "moneyline": {
+            "Los Angeles Lakers": {
+              "price": -175
+            },
+            "Orlando Magic": {
+              "price": 145
+            }
+          },
+          "spread": {
+            "Los Angeles Lakers": {
+              "price": -108,
+              "point": -4.0
+            },
+            "Orlando Magic": {
+              "price": -112,
+              "point": 4.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 214.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 214.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908770,
+      "date": "2025-03-24",
+      "home_team": "WAS",
+      "away_team": "TOR",
+      "home_score": 104,
+      "away_score": 112,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Washington Wizards"
+        },
+        "away_team": {
+          "full_name": "Toronto Raptors"
+        },
+        "markets": {
+          "moneyline": {
+            "Toronto Raptors": {
+              "price": 105
+            },
+            "Washington Wizards": {
+              "price": -125
+            }
+          },
+          "spread": {
+            "Toronto Raptors": {
+              "price": -112,
+              "point": 2.0
+            },
+            "Washington Wizards": {
+              "price": -108,
+              "point": -2.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 227.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 227.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908771,
+      "date": "2025-03-24",
+      "home_team": "BKN",
+      "away_team": "DAL",
+      "home_score": 101,
+      "away_score": 120,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Brooklyn Nets"
+        },
+        "away_team": {
+          "full_name": "Dallas Mavericks"
+        },
+        "markets": {
+          "moneyline": {
+            "Brooklyn Nets": {
+              "price": 110
+            },
+            "Dallas Mavericks": {
+              "price": -130
+            }
+          },
+          "spread": {
+            "Brooklyn Nets": {
+              "price": -112,
+              "point": 2.5
+            },
+            "Dallas Mavericks": {
+              "price": -108,
+              "point": -2.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 218.5
+            },
+            "Under": {
+              "price": -110,
+              "point": 218.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908772,
+      "date": "2025-03-24",
+      "home_team": "NOP",
+      "away_team": "PHI",
+      "home_score": 112,
+      "away_score": 99,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "New Orleans Pelicans"
+        },
+        "away_team": {
+          "full_name": "Philadelphia 76ers"
+        },
+        "markets": {
+          "moneyline": {
+            "New Orleans Pelicans": {
+              "price": -175
+            },
+            "Philadelphia 76ers": {
+              "price": 145
+            }
+          },
+          "spread": {
+            "New Orleans Pelicans": {
+              "price": -110,
+              "point": -4.0
+            },
+            "Philadelphia 76ers": {
+              "price": -110,
+              "point": 4.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 228.0
+            },
+            "Under": {
+              "price": -110,
+              "point": 228.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908773,
+      "date": "2025-03-24",
+      "home_team": "DEN",
+      "away_team": "CHI",
+      "home_score": 119,
+      "away_score": 129,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Denver Nuggets"
+        },
+        "away_team": {
+          "full_name": "Chicago Bulls"
+        },
+        "markets": {
+          "moneyline": {
+            "Chicago Bulls": {
+              "price": 130
+            },
+            "Denver Nuggets": {
+              "price": -155
+            }
+          },
+          "spread": {
+            "Chicago Bulls": {
+              "price": -112,
+              "point": 3.5
+            },
+            "Denver Nuggets": {
+              "price": -108,
+              "point": -3.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 238.5
+            },
+            "Under": {
+              "price": -110,
+              "point": 238.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908774,
+      "date": "2025-03-24",
+      "home_team": "PHX",
+      "away_team": "MIL",
+      "home_score": 108,
+      "away_score": 106,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Phoenix Suns"
+        },
+        "away_team": {
+          "full_name": "Milwaukee Bucks"
+        },
+        "markets": {
+          "moneyline": {
+            "Milwaukee Bucks": {
+              "price": 130
+            },
+            "Phoenix Suns": {
+              "price": -155
+            }
+          },
+          "spread": {
+            "Milwaukee Bucks": {
+              "price": -112,
+              "point": 3.0
+            },
+            "Phoenix Suns": {
+              "price": -108,
+              "point": -3.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 223.0
+            },
+            "Under": {
+              "price": -110,
+              "point": 223.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908775,
+      "date": "2025-03-24",
+      "home_team": "SAC",
+      "away_team": "BOS",
+      "home_score": 95,
+      "away_score": 113,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Sacramento Kings"
+        },
+        "away_team": {
+          "full_name": "Boston Celtics"
+        },
+        "markets": {
+          "moneyline": {
+            "Boston Celtics": {
+              "price": -162
+            },
+            "Sacramento Kings": {
+              "price": 136
+            }
+          },
+          "spread": {
+            "Boston Celtics": {
+              "price": -105,
+              "point": -3.5
+            },
+            "Sacramento Kings": {
+              "price": -115,
+              "point": 3.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 222.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 222.0
+            }
+          }
+        }
+      }
+    }
+  ]
+}

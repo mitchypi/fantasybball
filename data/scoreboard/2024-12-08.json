@@ -1,0 +1,544 @@
+{
+  "date": "2024-12-08",
+  "games": [
+    {
+      "game_id": 15907784,
+      "date": "2024-12-08",
+      "home_team": "CHI",
+      "away_team": "PHI",
+      "home_score": 100,
+      "away_score": 108,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Chicago Bulls"
+        },
+        "away_team": {
+          "full_name": "Philadelphia 76ers"
+        },
+        "markets": {
+          "moneyline": {
+            "Chicago Bulls": {
+              "price": 130
+            },
+            "Philadelphia 76ers": {
+              "price": -155
+            }
+          },
+          "spread": {
+            "Chicago Bulls": {
+              "price": -110,
+              "point": 3.0
+            },
+            "Philadelphia 76ers": {
+              "price": -110,
+              "point": -3.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 237.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 237.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907785,
+      "date": "2024-12-08",
+      "home_team": "BKN",
+      "away_team": "MIL",
+      "home_score": 113,
+      "away_score": 118,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Brooklyn Nets"
+        },
+        "away_team": {
+          "full_name": "Milwaukee Bucks"
+        },
+        "markets": {
+          "moneyline": {
+            "Brooklyn Nets": {
+              "price": 200
+            },
+            "Milwaukee Bucks": {
+              "price": -245
+            }
+          },
+          "spread": {
+            "Brooklyn Nets": {
+              "price": -108,
+              "point": 5.5
+            },
+            "Milwaukee Bucks": {
+              "price": -112,
+              "point": -5.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 216.5
+            },
+            "Under": {
+              "price": -108,
+              "point": 216.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907786,
+      "date": "2024-12-08",
+      "home_team": "IND",
+      "away_team": "CHA",
+      "home_score": 109,
+      "away_score": 113,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Indiana Pacers"
+        },
+        "away_team": {
+          "full_name": "Charlotte Hornets"
+        },
+        "markets": {
+          "moneyline": {
+            "Charlotte Hornets": {
+              "price": 470
+            },
+            "Indiana Pacers": {
+              "price": -650
+            }
+          },
+          "spread": {
+            "Charlotte Hornets": {
+              "price": -115,
+              "point": 11.5
+            },
+            "Indiana Pacers": {
+              "price": -105,
+              "point": -11.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 221.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 221.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907787,
+      "date": "2024-12-08",
+      "home_team": "ATL",
+      "away_team": "DEN",
+      "home_score": 111,
+      "away_score": 141,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Atlanta Hawks"
+        },
+        "away_team": {
+          "full_name": "Denver Nuggets"
+        },
+        "markets": {
+          "moneyline": {
+            "Atlanta Hawks": {
+              "price": -142
+            },
+            "Denver Nuggets": {
+              "price": 120
+            }
+          },
+          "spread": {
+            "Atlanta Hawks": {
+              "price": -115,
+              "point": -2.5
+            },
+            "Denver Nuggets": {
+              "price": -105,
+              "point": 2.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 242.5
+            },
+            "Under": {
+              "price": -110,
+              "point": 242.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907788,
+      "date": "2024-12-08",
+      "home_team": "MIA",
+      "away_team": "CLE",
+      "home_score": 122,
+      "away_score": 113,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Miami Heat"
+        },
+        "away_team": {
+          "full_name": "Cleveland Cavaliers"
+        },
+        "markets": {
+          "moneyline": {
+            "Cleveland Cavaliers": {
+              "price": -148
+            },
+            "Miami Heat": {
+              "price": 124
+            }
+          },
+          "spread": {
+            "Cleveland Cavaliers": {
+              "price": -108,
+              "point": -3.0
+            },
+            "Miami Heat": {
+              "price": -112,
+              "point": 3.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 223.0
+            },
+            "Under": {
+              "price": -112,
+              "point": 223.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907789,
+      "date": "2024-12-08",
+      "home_team": "ORL",
+      "away_team": "PHX",
+      "home_score": 115,
+      "away_score": 110,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Orlando Magic"
+        },
+        "away_team": {
+          "full_name": "Phoenix Suns"
+        },
+        "markets": {
+          "moneyline": {
+            "Orlando Magic": {
+              "price": -130
+            },
+            "Phoenix Suns": {
+              "price": 110
+            }
+          },
+          "spread": {
+            "Orlando Magic": {
+              "price": -110,
+              "point": -2.0
+            },
+            "Phoenix Suns": {
+              "price": -110,
+              "point": 2.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 211.5
+            },
+            "Under": {
+              "price": -108,
+              "point": 211.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907790,
+      "date": "2024-12-08",
+      "home_team": "WAS",
+      "away_team": "MEM",
+      "home_score": 112,
+      "away_score": 140,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Washington Wizards"
+        },
+        "away_team": {
+          "full_name": "Memphis Grizzlies"
+        },
+        "markets": {
+          "moneyline": {
+            "Memphis Grizzlies": {
+              "price": -650
+            },
+            "Washington Wizards": {
+              "price": 470
+            }
+          },
+          "spread": {
+            "Memphis Grizzlies": {
+              "price": -108,
+              "point": -12.0
+            },
+            "Washington Wizards": {
+              "price": -112,
+              "point": 12.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 240.5
+            },
+            "Under": {
+              "price": -108,
+              "point": 240.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907791,
+      "date": "2024-12-08",
+      "home_team": "SAS",
+      "away_team": "NOP",
+      "home_score": 121,
+      "away_score": 116,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "San Antonio Spurs"
+        },
+        "away_team": {
+          "full_name": "New Orleans Pelicans"
+        },
+        "markets": {
+          "moneyline": {
+            "New Orleans Pelicans": {
+              "price": 190
+            },
+            "San Antonio Spurs": {
+              "price": -230
+            }
+          },
+          "spread": {
+            "New Orleans Pelicans": {
+              "price": -112,
+              "point": 6.0
+            },
+            "San Antonio Spurs": {
+              "price": -108,
+              "point": -6.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -102,
+              "point": 225.5
+            },
+            "Under": {
+              "price": -118,
+              "point": 225.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907792,
+      "date": "2024-12-08",
+      "home_team": "GSW",
+      "away_team": "MIN",
+      "home_score": 114,
+      "away_score": 106,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Golden State Warriors"
+        },
+        "away_team": {
+          "full_name": "Minnesota Timberwolves"
+        },
+        "markets": {
+          "moneyline": {
+            "Golden State Warriors": {
+              "price": -115
+            },
+            "Minnesota Timberwolves": {
+              "price": -105
+            }
+          },
+          "spread": {
+            "Golden State Warriors": {
+              "price": -108,
+              "point": -1.0
+            },
+            "Minnesota Timberwolves": {
+              "price": -112,
+              "point": 1.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 216.5
+            },
+            "Under": {
+              "price": -108,
+              "point": 216.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907793,
+      "date": "2024-12-08",
+      "home_team": "LAC",
+      "away_team": "HOU",
+      "home_score": 106,
+      "away_score": 117,
+      "status": "Final",
+      "simulated": true,
+      "odds": null
+    },
+    {
+      "game_id": 15907794,
+      "date": "2024-12-08",
+      "home_team": "SAC",
+      "away_team": "UTA",
+      "home_score": 141,
+      "away_score": 97,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Sacramento Kings"
+        },
+        "away_team": {
+          "full_name": "Utah Jazz"
+        },
+        "markets": {
+          "moneyline": {
+            "Sacramento Kings": {
+              "price": -700
+            },
+            "Utah Jazz": {
+              "price": 500
+            }
+          },
+          "spread": {
+            "Sacramento Kings": {
+              "price": -110,
+              "point": -12.0
+            },
+            "Utah Jazz": {
+              "price": -110,
+              "point": 12.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 233.0
+            },
+            "Under": {
+              "price": -112,
+              "point": 233.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907795,
+      "date": "2024-12-08",
+      "home_team": "LAL",
+      "away_team": "POR",
+      "home_score": 107,
+      "away_score": 98,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Los Angeles Lakers"
+        },
+        "away_team": {
+          "full_name": "Portland Trail Blazers"
+        },
+        "markets": {
+          "moneyline": {
+            "Los Angeles Lakers": {
+              "price": -440
+            },
+            "Portland Trail Blazers": {
+              "price": 340
+            }
+          },
+          "spread": {
+            "Los Angeles Lakers": {
+              "price": -108,
+              "point": -9.5
+            },
+            "Portland Trail Blazers": {
+              "price": -112,
+              "point": 9.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 225.0
+            },
+            "Under": {
+              "price": -110,
+              "point": 225.0
+            }
+          }
+        }
+      }
+    }
+  ]
+}
