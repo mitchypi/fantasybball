@@ -1,0 +1,437 @@
+{
+  "date": "2025-01-12",
+  "games": [
+    {
+      "game_id": 15907976,
+      "date": "2025-01-12",
+      "home_team": "NYK",
+      "away_team": "MIL",
+      "home_score": 140,
+      "away_score": 106,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "New York Knicks"
+        },
+        "away_team": {
+          "full_name": "Milwaukee Bucks"
+        },
+        "markets": {
+          "moneyline": {
+            "Milwaukee Bucks": {
+              "price": 154
+            },
+            "New York Knicks": {
+              "price": -185
+            }
+          },
+          "spread": {
+            "Milwaukee Bucks": {
+              "price": -108,
+              "point": 4.5
+            },
+            "New York Knicks": {
+              "price": -112,
+              "point": -4.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 229.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 229.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907977,
+      "date": "2025-01-12",
+      "home_team": "DAL",
+      "away_team": "DEN",
+      "home_score": 101,
+      "away_score": 112,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Dallas Mavericks"
+        },
+        "away_team": {
+          "full_name": "Denver Nuggets"
+        },
+        "markets": {
+          "moneyline": {
+            "Dallas Mavericks": {
+              "price": 205
+            },
+            "Denver Nuggets": {
+              "price": -250
+            }
+          },
+          "spread": {
+            "Dallas Mavericks": {
+              "price": -110,
+              "point": 6.5
+            },
+            "Denver Nuggets": {
+              "price": -110,
+              "point": -6.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 230.5
+            },
+            "Under": {
+              "price": -108,
+              "point": 230.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907978,
+      "date": "2025-01-12",
+      "home_team": "CHI",
+      "away_team": "SAC",
+      "home_score": 119,
+      "away_score": 124,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Chicago Bulls"
+        },
+        "away_team": {
+          "full_name": "Sacramento Kings"
+        },
+        "markets": {
+          "moneyline": {
+            "Chicago Bulls": {
+              "price": 145
+            },
+            "Sacramento Kings": {
+              "price": -175
+            }
+          },
+          "spread": {
+            "Chicago Bulls": {
+              "price": -108,
+              "point": 4.0
+            },
+            "Sacramento Kings": {
+              "price": -112,
+              "point": -4.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 237.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 237.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907979,
+      "date": "2025-01-12",
+      "home_team": "BOS",
+      "away_team": "NOP",
+      "home_score": 120,
+      "away_score": 119,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Boston Celtics"
+        },
+        "away_team": {
+          "full_name": "New Orleans Pelicans"
+        },
+        "markets": {
+          "moneyline": {
+            "Boston Celtics": {
+              "price": -1350
+            },
+            "New Orleans Pelicans": {
+              "price": 800
+            }
+          },
+          "spread": {
+            "Boston Celtics": {
+              "price": -108,
+              "point": -15.5
+            },
+            "New Orleans Pelicans": {
+              "price": -112,
+              "point": 15.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 230.0
+            },
+            "Under": {
+              "price": -110,
+              "point": 230.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907980,
+      "date": "2025-01-12",
+      "home_team": "CLE",
+      "away_team": "IND",
+      "home_score": 93,
+      "away_score": 108,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Cleveland Cavaliers"
+        },
+        "away_team": {
+          "full_name": "Indiana Pacers"
+        },
+        "markets": {
+          "moneyline": {
+            "Cleveland Cavaliers": {
+              "price": -425
+            },
+            "Indiana Pacers": {
+              "price": 330
+            }
+          },
+          "spread": {
+            "Cleveland Cavaliers": {
+              "price": -108,
+              "point": -9.0
+            },
+            "Indiana Pacers": {
+              "price": -112,
+              "point": 9.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 241.0
+            },
+            "Under": {
+              "price": -112,
+              "point": 241.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907981,
+      "date": "2025-01-12",
+      "home_team": "ORL",
+      "away_team": "PHI",
+      "home_score": 104,
+      "away_score": 99,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Orlando Magic"
+        },
+        "away_team": {
+          "full_name": "Philadelphia 76ers"
+        },
+        "markets": {
+          "moneyline": {
+            "Orlando Magic": {
+              "price": -115
+            },
+            "Philadelphia 76ers": {
+              "price": -105
+            }
+          },
+          "spread": {
+            "Orlando Magic": {
+              "price": -110,
+              "point": -1.0
+            },
+            "Philadelphia 76ers": {
+              "price": -110,
+              "point": 1.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 205.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 205.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907982,
+      "date": "2025-01-12",
+      "home_team": "WAS",
+      "away_team": "OKC",
+      "home_score": 95,
+      "away_score": 136,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Washington Wizards"
+        },
+        "away_team": {
+          "full_name": "Oklahoma City Thunder"
+        },
+        "markets": {
+          "moneyline": {
+            "Oklahoma City Thunder": {
+              "price": -1450
+            },
+            "Washington Wizards": {
+              "price": 850
+            }
+          },
+          "spread": {
+            "Oklahoma City Thunder": {
+              "price": -105,
+              "point": -16.5
+            },
+            "Washington Wizards": {
+              "price": -115,
+              "point": 16.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 231.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 231.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907983,
+      "date": "2025-01-12",
+      "home_team": "UTA",
+      "away_team": "BKN",
+      "home_score": 112,
+      "away_score": 111,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Utah Jazz"
+        },
+        "away_team": {
+          "full_name": "Brooklyn Nets"
+        },
+        "markets": {
+          "moneyline": {
+            "Brooklyn Nets": {
+              "price": 154
+            },
+            "Utah Jazz": {
+              "price": -185
+            }
+          },
+          "spread": {
+            "Brooklyn Nets": {
+              "price": -108,
+              "point": 4.5
+            },
+            "Utah Jazz": {
+              "price": -112,
+              "point": -4.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 215.0
+            },
+            "Under": {
+              "price": -110,
+              "point": 215.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907984,
+      "date": "2025-01-12",
+      "home_team": "PHX",
+      "away_team": "CHA",
+      "home_score": 120,
+      "away_score": 113,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Phoenix Suns"
+        },
+        "away_team": {
+          "full_name": "Charlotte Hornets"
+        },
+        "markets": {
+          "moneyline": {
+            "Charlotte Hornets": {
+              "price": 235
+            },
+            "Phoenix Suns": {
+              "price": -290
+            }
+          },
+          "spread": {
+            "Charlotte Hornets": {
+              "price": -115,
+              "point": 7.5
+            },
+            "Phoenix Suns": {
+              "price": -105,
+              "point": -7.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 225.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 225.5
+            }
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,245 @@
+{
+  "date": "2025-03-13",
+  "games": [
+    {
+      "game_id": 15908685,
+      "date": "2025-03-13",
+      "home_team": "DET",
+      "away_team": "WAS",
+      "home_score": 125,
+      "away_score": 129,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Detroit Pistons"
+        },
+        "away_team": {
+          "full_name": "Washington Wizards"
+        },
+        "markets": {
+          "moneyline": {
+            "Detroit Pistons": {
+              "price": -850
+            },
+            "Washington Wizards": {
+              "price": 575
+            }
+          },
+          "spread": {
+            "Detroit Pistons": {
+              "price": -112,
+              "point": -13.5
+            },
+            "Washington Wizards": {
+              "price": -108,
+              "point": 13.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 236.5
+            },
+            "Under": {
+              "price": -110,
+              "point": 236.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908686,
+      "date": "2025-03-13",
+      "home_team": "MIL",
+      "away_team": "LAL",
+      "home_score": 126,
+      "away_score": 106,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Milwaukee Bucks"
+        },
+        "away_team": {
+          "full_name": "Los Angeles Lakers"
+        },
+        "markets": {
+          "moneyline": {
+            "Los Angeles Lakers": {
+              "price": 215
+            },
+            "Milwaukee Bucks": {
+              "price": -265
+            }
+          },
+          "spread": {
+            "Los Angeles Lakers": {
+              "price": -112,
+              "point": 7.0
+            },
+            "Milwaukee Bucks": {
+              "price": -108,
+              "point": -7.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 224.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 224.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908687,
+      "date": "2025-03-13",
+      "home_team": "CHI",
+      "away_team": "BKN",
+      "home_score": 116,
+      "away_score": 110,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Chicago Bulls"
+        },
+        "away_team": {
+          "full_name": "Brooklyn Nets"
+        },
+        "markets": {
+          "moneyline": {
+            "Brooklyn Nets": {
+              "price": 110
+            },
+            "Chicago Bulls": {
+              "price": -130
+            }
+          },
+          "spread": {
+            "Brooklyn Nets": {
+              "price": -112,
+              "point": 2.0
+            },
+            "Chicago Bulls": {
+              "price": -108,
+              "point": -2.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 230.0
+            },
+            "Under": {
+              "price": -110,
+              "point": 230.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908688,
+      "date": "2025-03-13",
+      "home_team": "GSW",
+      "away_team": "SAC",
+      "home_score": 130,
+      "away_score": 104,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Golden State Warriors"
+        },
+        "away_team": {
+          "full_name": "Sacramento Kings"
+        },
+        "markets": {
+          "moneyline": {
+            "Golden State Warriors": {
+              "price": -285
+            },
+            "Sacramento Kings": {
+              "price": 230
+            }
+          },
+          "spread": {
+            "Golden State Warriors": {
+              "price": -108,
+              "point": -7.5
+            },
+            "Sacramento Kings": {
+              "price": -112,
+              "point": 7.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 234.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 234.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908872,
+      "date": "2025-03-13",
+      "home_team": "NOP",
+      "away_team": "ORL",
+      "home_score": 93,
+      "away_score": 113,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "New Orleans Pelicans"
+        },
+        "away_team": {
+          "full_name": "Orlando Magic"
+        },
+        "markets": {
+          "moneyline": {
+            "New Orleans Pelicans": {
+              "price": 124
+            },
+            "Orlando Magic": {
+              "price": -148
+            }
+          },
+          "spread": {
+            "New Orleans Pelicans": {
+              "price": -112,
+              "point": 3.0
+            },
+            "Orlando Magic": {
+              "price": -108,
+              "point": -3.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 217.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 217.5
+            }
+          }
+        }
+      }
+    }
+  ]
+}

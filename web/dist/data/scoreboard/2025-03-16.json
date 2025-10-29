@@ -1,0 +1,352 @@
+{
+  "date": "2025-03-16",
+  "games": [
+    {
+      "game_id": 15907975,
+      "date": "2025-03-16",
+      "home_team": "LAC",
+      "away_team": "CHA",
+      "home_score": 123,
+      "away_score": 88,
+      "status": "Final",
+      "simulated": true,
+      "odds": null
+    },
+    {
+      "game_id": 15908707,
+      "date": "2025-03-16",
+      "home_team": "DAL",
+      "away_team": "PHI",
+      "home_score": 125,
+      "away_score": 130,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Dallas Mavericks"
+        },
+        "away_team": {
+          "full_name": "Philadelphia 76ers"
+        },
+        "markets": {
+          "moneyline": {
+            "Dallas Mavericks": {
+              "price": -720
+            },
+            "Philadelphia 76ers": {
+              "price": 450
+            }
+          },
+          "spread": {
+            "Dallas Mavericks": {
+              "price": -120,
+              "point": -9.5
+            },
+            "Philadelphia 76ers": {
+              "price": -110,
+              "point": 9.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -120,
+              "point": 231.5
+            },
+            "Under": {
+              "price": -110,
+              "point": 231.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908708,
+      "date": "2025-03-16",
+      "home_team": "LAL",
+      "away_team": "PHX",
+      "home_score": 107,
+      "away_score": 96,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Los Angeles Lakers"
+        },
+        "away_team": {
+          "full_name": "Phoenix Suns"
+        },
+        "markets": {
+          "moneyline": {
+            "Los Angeles Lakers": {
+              "price": -135
+            },
+            "Phoenix Suns": {
+              "price": 114
+            }
+          },
+          "spread": {
+            "Los Angeles Lakers": {
+              "price": -110,
+              "point": -2.5
+            },
+            "Phoenix Suns": {
+              "price": -110,
+              "point": 2.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 227.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 227.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908709,
+      "date": "2025-03-16",
+      "home_team": "BKN",
+      "away_team": "ATL",
+      "home_score": 122,
+      "away_score": 114,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Brooklyn Nets"
+        },
+        "away_team": {
+          "full_name": "Atlanta Hawks"
+        },
+        "markets": {
+          "moneyline": {
+            "Atlanta Hawks": {
+              "price": -250
+            },
+            "Brooklyn Nets": {
+              "price": 205
+            }
+          },
+          "spread": {
+            "Atlanta Hawks": {
+              "price": -112,
+              "point": -6.5
+            },
+            "Brooklyn Nets": {
+              "price": -108,
+              "point": 6.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 228.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 228.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908710,
+      "date": "2025-03-16",
+      "home_team": "CLE",
+      "away_team": "ORL",
+      "home_score": 103,
+      "away_score": 108,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Cleveland Cavaliers"
+        },
+        "away_team": {
+          "full_name": "Orlando Magic"
+        },
+        "markets": {
+          "moneyline": {
+            "Cleveland Cavaliers": {
+              "price": -520
+            },
+            "Orlando Magic": {
+              "price": 350
+            }
+          },
+          "spread": {
+            "Cleveland Cavaliers": {
+              "price": -110,
+              "point": -9.5
+            },
+            "Orlando Magic": {
+              "price": -120,
+              "point": 9.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -115,
+              "point": 216.5
+            },
+            "Under": {
+              "price": -115,
+              "point": 216.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908711,
+      "date": "2025-03-16",
+      "home_team": "POR",
+      "away_team": "TOR",
+      "home_score": 105,
+      "away_score": 102,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Portland Trail Blazers"
+        },
+        "away_team": {
+          "full_name": "Toronto Raptors"
+        },
+        "markets": {
+          "moneyline": {
+            "Portland Trail Blazers": {
+              "price": -245
+            },
+            "Toronto Raptors": {
+              "price": 200
+            }
+          },
+          "spread": {
+            "Portland Trail Blazers": {
+              "price": -108,
+              "point": -6.5
+            },
+            "Toronto Raptors": {
+              "price": -112,
+              "point": 6.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 228.0
+            },
+            "Under": {
+              "price": -112,
+              "point": 228.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908712,
+      "date": "2025-03-16",
+      "home_team": "MIN",
+      "away_team": "UTA",
+      "home_score": 128,
+      "away_score": 102,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Minnesota Timberwolves"
+        },
+        "away_team": {
+          "full_name": "Utah Jazz"
+        },
+        "markets": {
+          "moneyline": {
+            "Minnesota Timberwolves": {
+              "price": -900
+            },
+            "Utah Jazz": {
+              "price": 600
+            }
+          },
+          "spread": {
+            "Minnesota Timberwolves": {
+              "price": -110,
+              "point": -13.5
+            },
+            "Utah Jazz": {
+              "price": -110,
+              "point": 13.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 234.5
+            },
+            "Under": {
+              "price": -110,
+              "point": 234.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908713,
+      "date": "2025-03-16",
+      "home_team": "MIL",
+      "away_team": "OKC",
+      "home_score": 105,
+      "away_score": 121,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Milwaukee Bucks"
+        },
+        "away_team": {
+          "full_name": "Oklahoma City Thunder"
+        },
+        "markets": {
+          "moneyline": {
+            "Milwaukee Bucks": {
+              "price": 170
+            },
+            "Oklahoma City Thunder": {
+              "price": -205
+            }
+          },
+          "spread": {
+            "Milwaukee Bucks": {
+              "price": -110,
+              "point": 5.5
+            },
+            "Oklahoma City Thunder": {
+              "price": -110,
+              "point": -5.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 232.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 232.5
+            }
+          }
+        }
+      }
+    }
+  ]
+}

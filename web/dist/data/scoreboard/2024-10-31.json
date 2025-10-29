@@ -1,0 +1,160 @@
+{
+  "date": "2024-10-31",
+  "games": [
+    {
+      "game_id": 15907505,
+      "date": "2024-10-31",
+      "home_team": "MEM",
+      "away_team": "MIL",
+      "home_score": 122,
+      "away_score": 99,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Memphis Grizzlies"
+        },
+        "away_team": {
+          "full_name": "Milwaukee Bucks"
+        },
+        "markets": {
+          "moneyline": {
+            "Memphis Grizzlies": {
+              "price": 210
+            },
+            "Milwaukee Bucks": {
+              "price": -258
+            }
+          },
+          "spread": {
+            "Memphis Grizzlies": {
+              "price": -108,
+              "point": 6.5
+            },
+            "Milwaukee Bucks": {
+              "price": -112,
+              "point": -6.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 232.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 232.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907506,
+      "date": "2024-10-31",
+      "home_team": "DAL",
+      "away_team": "HOU",
+      "home_score": 102,
+      "away_score": 108,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Dallas Mavericks"
+        },
+        "away_team": {
+          "full_name": "Houston Rockets"
+        },
+        "markets": {
+          "moneyline": {
+            "Dallas Mavericks": {
+              "price": -250
+            },
+            "Houston Rockets": {
+              "price": 205
+            }
+          },
+          "spread": {
+            "Dallas Mavericks": {
+              "price": -110,
+              "point": -6.5
+            },
+            "Houston Rockets": {
+              "price": -110,
+              "point": 6.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 227.0
+            },
+            "Under": {
+              "price": -110,
+              "point": 227.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907507,
+      "date": "2024-10-31",
+      "home_team": "UTA",
+      "away_team": "SAS",
+      "home_score": 88,
+      "away_score": 106,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Utah Jazz"
+        },
+        "away_team": {
+          "full_name": "San Antonio Spurs"
+        },
+        "markets": {
+          "moneyline": {
+            "San Antonio Spurs": {
+              "price": 110
+            },
+            "Utah Jazz": {
+              "price": -130
+            }
+          },
+          "spread": {
+            "San Antonio Spurs": {
+              "price": -112,
+              "point": 2.0
+            },
+            "Utah Jazz": {
+              "price": -108,
+              "point": -2.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 222.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 222.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907508,
+      "date": "2024-10-31",
+      "home_team": "LAC",
+      "away_team": "PHX",
+      "home_score": 119,
+      "away_score": 125,
+      "status": "Final",
+      "simulated": true,
+      "odds": null
+    }
+  ]
+}

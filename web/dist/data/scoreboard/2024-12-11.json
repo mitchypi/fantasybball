@@ -1,0 +1,101 @@
+{
+  "date": "2024-12-11",
+  "games": [
+    {
+      "game_id": 16968272,
+      "date": "2024-12-11",
+      "home_team": "NYK",
+      "away_team": "ATL",
+      "home_score": 100,
+      "away_score": 108,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "New York Knicks"
+        },
+        "away_team": {
+          "full_name": "Atlanta Hawks"
+        },
+        "markets": {
+          "moneyline": {
+            "Atlanta Hawks": {
+              "price": 280
+            },
+            "New York Knicks": {
+              "price": -355
+            }
+          },
+          "spread": {
+            "Atlanta Hawks": {
+              "price": -108,
+              "point": 8.0
+            },
+            "New York Knicks": {
+              "price": -112,
+              "point": -8.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 237.5
+            },
+            "Under": {
+              "price": -110,
+              "point": 237.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 16968273,
+      "date": "2024-12-11",
+      "home_team": "HOU",
+      "away_team": "GSW",
+      "home_score": 91,
+      "away_score": 90,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Houston Rockets"
+        },
+        "away_team": {
+          "full_name": "Golden State Warriors"
+        },
+        "markets": {
+          "moneyline": {
+            "Golden State Warriors": {
+              "price": 102
+            },
+            "Houston Rockets": {
+              "price": -122
+            }
+          },
+          "spread": {
+            "Golden State Warriors": {
+              "price": -108,
+              "point": 2.0
+            },
+            "Houston Rockets": {
+              "price": -112,
+              "point": -2.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 221.5
+            },
+            "Under": {
+              "price": -108,
+              "point": 221.5
+            }
+          }
+        }
+      }
+    }
+  ]
+}

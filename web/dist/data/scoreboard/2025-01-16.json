@@ -1,0 +1,208 @@
+{
+  "date": "2025-01-16",
+  "games": [
+    {
+      "game_id": 15908009,
+      "date": "2025-01-16",
+      "home_team": "DET",
+      "away_team": "IND",
+      "home_score": 100,
+      "away_score": 111,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Detroit Pistons"
+        },
+        "away_team": {
+          "full_name": "Indiana Pacers"
+        },
+        "markets": {
+          "moneyline": {
+            "Detroit Pistons": {
+              "price": -125
+            },
+            "Indiana Pacers": {
+              "price": 105
+            }
+          },
+          "spread": {
+            "Detroit Pistons": {
+              "price": -112,
+              "point": -1.5
+            },
+            "Indiana Pacers": {
+              "price": -108,
+              "point": 1.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 229.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 229.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908010,
+      "date": "2025-01-16",
+      "home_team": "WAS",
+      "away_team": "PHX",
+      "home_score": 123,
+      "away_score": 130,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Washington Wizards"
+        },
+        "away_team": {
+          "full_name": "Phoenix Suns"
+        },
+        "markets": {
+          "moneyline": {
+            "Phoenix Suns": {
+              "price": -650
+            },
+            "Washington Wizards": {
+              "price": 470
+            }
+          },
+          "spread": {
+            "Phoenix Suns": {
+              "price": -110,
+              "point": -11.5
+            },
+            "Washington Wizards": {
+              "price": -110,
+              "point": 11.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 231.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 231.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908011,
+      "date": "2025-01-16",
+      "home_team": "OKC",
+      "away_team": "CLE",
+      "home_score": 134,
+      "away_score": 114,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Oklahoma City Thunder"
+        },
+        "away_team": {
+          "full_name": "Cleveland Cavaliers"
+        },
+        "markets": {
+          "moneyline": {
+            "Cleveland Cavaliers": {
+              "price": 110
+            },
+            "Oklahoma City Thunder": {
+              "price": -130
+            }
+          },
+          "spread": {
+            "Cleveland Cavaliers": {
+              "price": -112,
+              "point": 2.0
+            },
+            "Oklahoma City Thunder": {
+              "price": -108,
+              "point": -2.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 233.0
+            },
+            "Under": {
+              "price": -112,
+              "point": 233.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908012,
+      "date": "2025-01-16",
+      "home_team": "POR",
+      "away_team": "LAC",
+      "home_score": 89,
+      "away_score": 118,
+      "status": "Final",
+      "simulated": true,
+      "odds": null
+    },
+    {
+      "game_id": 15908013,
+      "date": "2025-01-16",
+      "home_team": "SAC",
+      "away_team": "HOU",
+      "home_score": 132,
+      "away_score": 127,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Sacramento Kings"
+        },
+        "away_team": {
+          "full_name": "Houston Rockets"
+        },
+        "markets": {
+          "moneyline": {
+            "Houston Rockets": {
+              "price": 150
+            },
+            "Sacramento Kings": {
+              "price": -180
+            }
+          },
+          "spread": {
+            "Houston Rockets": {
+              "price": -115,
+              "point": 4.5
+            },
+            "Sacramento Kings": {
+              "price": -105,
+              "point": -4.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 226.0
+            },
+            "Under": {
+              "price": -110,
+              "point": 226.0
+            }
+          }
+        }
+      }
+    }
+  ]
+}

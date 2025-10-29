@@ -22,6 +22,10 @@
       <div class="scoreboard-layout">
         <section id="scoreboard-panel" class="panel">
           <h2>Scoreboard</h2>
+          <div class="scoreboard-date-label">
+            <span class="muted">Current Day</span>
+            <strong id="scoreboard-current-date">Oct 22, 2024</strong>
+          </div>
           <div class="scoreboard-header">
             <label for="scoreboard-date">Date <input id="scoreboard-date" type="date" /></label>
             <button id="date-prev" type="button">Previous</button>
@@ -30,6 +34,58 @@
             <button id="reset-game" type="button">Reset</button>
           </div>
           <ul id="scoreboard-list" class="scoreboard-list"></ul>
+          <div class="mini-games">
+            <section class="mini-game" id="blackjack-module">
+              <div class="mini-game__header">
+                <h3>Blackjack</h3>
+                <span class="muted">Blackjack pays 3:2. Double & Split supported.</span>
+              </div>
+              <div id="blackjack-status" class="mini-game__status muted">Select a stake and deal.</div>
+              <div class="mini-game__controls">
+                <label>Stake <input id="blackjack-stake" type="number" min="1" step="1" value="10" /></label>
+                <div class="mini-game__actions">
+                  <button id="blackjack-deal" type="button">Deal</button>
+                  <button id="blackjack-hit" type="button" disabled>Hit</button>
+                  <button id="blackjack-stand" type="button" disabled>Stand</button>
+                  <button id="blackjack-double" type="button" disabled>Double</button>
+                  <button id="blackjack-split" type="button" disabled>Split</button>
+                </div>
+              </div>
+              <div id="blackjack-table" class="blackjack-block">
+                <div class="blackjack-block__section">
+                  <h4>Dealer</h4>
+                  <div id="blackjack-dealer" class="blackjack-hand">
+                    <div id="blackjack-dealer-cards" class="blackjack-cards">—</div>
+                    <div id="blackjack-dealer-meta" class="blackjack-hand-meta muted"></div>
+                  </div>
+                </div>
+                <div class="blackjack-block__section">
+                  <h4>Your Hands</h4>
+                  <div id="blackjack-player-hands" class="blackjack-hands"></div>
+                </div>
+                <div id="blackjack-message" class="blackjack-message muted"></div>
+              </div>
+            </section>
+            <section class="mini-game" id="roulette-module">
+              <div class="mini-game__header">
+                <h3>Roulette</h3>
+                <span class="muted">Pick a color, win 1x stake.</span>
+              </div>
+              <div id="roulette-status" class="mini-game__status muted">Choose a color and spin.</div>
+              <div class="mini-game__controls">
+                <label>Stake <input id="roulette-stake" type="number" min="1" step="1" value="10" /></label>
+                <label>
+                  Pick
+                  <select id="roulette-choice">
+                    <option value="red">Red</option>
+                    <option value="black">Black</option>
+                    <option value="green">Green (35x)</option>
+                  </select>
+                </label>
+                <button id="roulette-spin" type="button">Spin</button>
+              </div>
+            </section>
+          </div>
         </section>
         <aside id="betting-panel" class="panel betslip-panel">
           <h2>Bet Slip</h2>

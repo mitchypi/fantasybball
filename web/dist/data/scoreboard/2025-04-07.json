@@ -1,0 +1,101 @@
+{
+  "date": "2025-04-07",
+  "games": [
+    {
+      "game_id": 15908875,
+      "date": "2025-04-07",
+      "home_team": "DET",
+      "away_team": "SAC",
+      "home_score": 117,
+      "away_score": 127,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Detroit Pistons"
+        },
+        "away_team": {
+          "full_name": "Sacramento Kings"
+        },
+        "markets": {
+          "moneyline": {
+            "Detroit Pistons": {
+              "price": -258
+            },
+            "Sacramento Kings": {
+              "price": 210
+            }
+          },
+          "spread": {
+            "Detroit Pistons": {
+              "price": -112,
+              "point": -6.5
+            },
+            "Sacramento Kings": {
+              "price": -108,
+              "point": 6.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 229.5
+            },
+            "Under": {
+              "price": -110,
+              "point": 229.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908876,
+      "date": "2025-04-07",
+      "home_team": "MIA",
+      "away_team": "PHI",
+      "home_score": 117,
+      "away_score": 105,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Miami Heat"
+        },
+        "away_team": {
+          "full_name": "Philadelphia 76ers"
+        },
+        "markets": {
+          "moneyline": {
+            "Miami Heat": {
+              "price": -800
+            },
+            "Philadelphia 76ers": {
+              "price": 550
+            }
+          },
+          "spread": {
+            "Miami Heat": {
+              "price": -112,
+              "point": -13.0
+            },
+            "Philadelphia 76ers": {
+              "price": -108,
+              "point": 13.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 213.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 213.0
+            }
+          }
+        }
+      }
+    }
+  ]
+}

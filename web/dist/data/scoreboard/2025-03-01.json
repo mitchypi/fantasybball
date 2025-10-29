@@ -1,0 +1,293 @@
+{
+  "date": "2025-03-01",
+  "games": [
+    {
+      "game_id": 15908591,
+      "date": "2025-03-01",
+      "home_team": "CHA",
+      "away_team": "WAS",
+      "home_score": 100,
+      "away_score": 113,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Charlotte Hornets"
+        },
+        "away_team": {
+          "full_name": "Washington Wizards"
+        },
+        "markets": {
+          "moneyline": {
+            "Charlotte Hornets": {
+              "price": -166
+            },
+            "Washington Wizards": {
+              "price": 140
+            }
+          },
+          "spread": {
+            "Charlotte Hornets": {
+              "price": -112,
+              "point": -3.5
+            },
+            "Washington Wizards": {
+              "price": -108,
+              "point": 3.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 219.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 219.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908592,
+      "date": "2025-03-01",
+      "home_team": "DET",
+      "away_team": "BKN",
+      "home_score": 115,
+      "away_score": 94,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Detroit Pistons"
+        },
+        "away_team": {
+          "full_name": "Brooklyn Nets"
+        },
+        "markets": {
+          "moneyline": {
+            "Brooklyn Nets": {
+              "price": 410
+            },
+            "Detroit Pistons": {
+              "price": -550
+            }
+          },
+          "spread": {
+            "Brooklyn Nets": {
+              "price": -108,
+              "point": 11.0
+            },
+            "Detroit Pistons": {
+              "price": -112,
+              "point": -11.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 216.5
+            },
+            "Under": {
+              "price": -108,
+              "point": 216.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908593,
+      "date": "2025-03-01",
+      "home_team": "HOU",
+      "away_team": "SAC",
+      "home_score": 103,
+      "away_score": 113,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Houston Rockets"
+        },
+        "away_team": {
+          "full_name": "Sacramento Kings"
+        },
+        "markets": {
+          "moneyline": {
+            "Houston Rockets": {
+              "price": -198
+            },
+            "Sacramento Kings": {
+              "price": 164
+            }
+          },
+          "spread": {
+            "Houston Rockets": {
+              "price": -110,
+              "point": -5.0
+            },
+            "Sacramento Kings": {
+              "price": -110,
+              "point": 5.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 231.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 231.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908594,
+      "date": "2025-03-01",
+      "home_team": "MEM",
+      "away_team": "SAS",
+      "home_score": 128,
+      "away_score": 130,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Memphis Grizzlies"
+        },
+        "away_team": {
+          "full_name": "San Antonio Spurs"
+        },
+        "markets": {
+          "moneyline": {
+            "Memphis Grizzlies": {
+              "price": -380
+            },
+            "San Antonio Spurs": {
+              "price": 300
+            }
+          },
+          "spread": {
+            "Memphis Grizzlies": {
+              "price": -108,
+              "point": -9.0
+            },
+            "San Antonio Spurs": {
+              "price": -112,
+              "point": 9.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 244.0
+            },
+            "Under": {
+              "price": -110,
+              "point": 244.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908595,
+      "date": "2025-03-01",
+      "home_team": "PHI",
+      "away_team": "GSW",
+      "home_score": 126,
+      "away_score": 119,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Philadelphia 76ers"
+        },
+        "away_team": {
+          "full_name": "Golden State Warriors"
+        },
+        "markets": {
+          "moneyline": {
+            "Golden State Warriors": {
+              "price": -340
+            },
+            "Philadelphia 76ers": {
+              "price": 270
+            }
+          },
+          "spread": {
+            "Golden State Warriors": {
+              "price": -105,
+              "point": -8.5
+            },
+            "Philadelphia 76ers": {
+              "price": -115,
+              "point": 8.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 227.5
+            },
+            "Under": {
+              "price": -110,
+              "point": 227.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908596,
+      "date": "2025-03-01",
+      "home_team": "DAL",
+      "away_team": "MIL",
+      "home_score": 117,
+      "away_score": 132,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Dallas Mavericks"
+        },
+        "away_team": {
+          "full_name": "Milwaukee Bucks"
+        },
+        "markets": {
+          "moneyline": {
+            "Dallas Mavericks": {
+              "price": 136
+            },
+            "Milwaukee Bucks": {
+              "price": -162
+            }
+          },
+          "spread": {
+            "Dallas Mavericks": {
+              "price": -108,
+              "point": 3.5
+            },
+            "Milwaukee Bucks": {
+              "price": -112,
+              "point": -3.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 228.0
+            },
+            "Under": {
+              "price": -110,
+              "point": 228.0
+            }
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,197 @@
+{
+  "date": "2024-10-24",
+  "games": [
+    {
+      "game_id": 15907450,
+      "date": "2024-10-24",
+      "home_team": "WAS",
+      "away_team": "BOS",
+      "home_score": 102,
+      "away_score": 122,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Washington Wizards"
+        },
+        "away_team": {
+          "full_name": "Boston Celtics"
+        },
+        "markets": {
+          "moneyline": {
+            "Boston Celtics": {
+              "price": -1050
+            },
+            "Washington Wizards": {
+              "price": 675
+            }
+          },
+          "spread": {
+            "Boston Celtics": {
+              "price": -110,
+              "point": -14.0
+            },
+            "Washington Wizards": {
+              "price": -110,
+              "point": 14.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 232.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 232.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907451,
+      "date": "2024-10-24",
+      "home_team": "DAL",
+      "away_team": "SAS",
+      "home_score": 120,
+      "away_score": 109,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Dallas Mavericks"
+        },
+        "away_team": {
+          "full_name": "San Antonio Spurs"
+        },
+        "markets": {
+          "moneyline": {
+            "Dallas Mavericks": {
+              "price": -395
+            },
+            "San Antonio Spurs": {
+              "price": 310
+            }
+          },
+          "spread": {
+            "Dallas Mavericks": {
+              "price": -112,
+              "point": -9.0
+            },
+            "San Antonio Spurs": {
+              "price": -108,
+              "point": 9.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 229.0
+            },
+            "Under": {
+              "price": -112,
+              "point": 229.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907452,
+      "date": "2024-10-24",
+      "home_team": "DEN",
+      "away_team": "OKC",
+      "home_score": 87,
+      "away_score": 102,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Denver Nuggets"
+        },
+        "away_team": {
+          "full_name": "Oklahoma City Thunder"
+        },
+        "markets": {
+          "moneyline": {
+            "Denver Nuggets": {
+              "price": -130
+            },
+            "Oklahoma City Thunder": {
+              "price": 110
+            }
+          },
+          "spread": {
+            "Denver Nuggets": {
+              "price": -108,
+              "point": -2.0
+            },
+            "Oklahoma City Thunder": {
+              "price": -112,
+              "point": 2.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 227.5
+            },
+            "Under": {
+              "price": -108,
+              "point": 227.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907453,
+      "date": "2024-10-24",
+      "home_team": "SAC",
+      "away_team": "MIN",
+      "home_score": 115,
+      "away_score": 117,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Sacramento Kings"
+        },
+        "away_team": {
+          "full_name": "Minnesota Timberwolves"
+        },
+        "markets": {
+          "moneyline": {
+            "Minnesota Timberwolves": {
+              "price": -115
+            },
+            "Sacramento Kings": {
+              "price": -105
+            }
+          },
+          "spread": {
+            "Minnesota Timberwolves": {
+              "price": -110,
+              "point": -1.0
+            },
+            "Sacramento Kings": {
+              "price": -110,
+              "point": 1.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 221.5
+            },
+            "Under": {
+              "price": -110,
+              "point": 221.5
+            }
+          }
+        }
+      }
+    }
+  ]
+}

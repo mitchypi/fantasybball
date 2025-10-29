@@ -1,0 +1,448 @@
+{
+  "date": "2025-03-21",
+  "games": [
+    {
+      "game_id": 15908745,
+      "date": "2025-03-21",
+      "home_team": "WAS",
+      "away_team": "ORL",
+      "home_score": 105,
+      "away_score": 120,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Washington Wizards"
+        },
+        "away_team": {
+          "full_name": "Orlando Magic"
+        },
+        "markets": {
+          "moneyline": {
+            "Orlando Magic": {
+              "price": -345
+            },
+            "Washington Wizards": {
+              "price": 275
+            }
+          },
+          "spread": {
+            "Orlando Magic": {
+              "price": -112,
+              "point": -8.5
+            },
+            "Washington Wizards": {
+              "price": -108,
+              "point": 8.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 215.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 215.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908746,
+      "date": "2025-03-21",
+      "home_team": "MIA",
+      "away_team": "HOU",
+      "home_score": 98,
+      "away_score": 102,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Miami Heat"
+        },
+        "away_team": {
+          "full_name": "Houston Rockets"
+        },
+        "markets": {
+          "moneyline": {
+            "Houston Rockets": {
+              "price": -185
+            },
+            "Miami Heat": {
+              "price": 154
+            }
+          },
+          "spread": {
+            "Houston Rockets": {
+              "price": -112,
+              "point": -4.5
+            },
+            "Miami Heat": {
+              "price": -108,
+              "point": 4.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 213.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 213.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908747,
+      "date": "2025-03-21",
+      "home_team": "MIN",
+      "away_team": "NOP",
+      "home_score": 134,
+      "away_score": 93,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Minnesota Timberwolves"
+        },
+        "away_team": {
+          "full_name": "New Orleans Pelicans"
+        },
+        "markets": {
+          "moneyline": {
+            "Minnesota Timberwolves": {
+              "price": -1200
+            },
+            "New Orleans Pelicans": {
+              "price": 750
+            }
+          },
+          "spread": {
+            "Minnesota Timberwolves": {
+              "price": -112,
+              "point": -14.5
+            },
+            "New Orleans Pelicans": {
+              "price": -108,
+              "point": 14.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 223.0
+            },
+            "Under": {
+              "price": -112,
+              "point": 223.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908748,
+      "date": "2025-03-21",
+      "home_team": "OKC",
+      "away_team": "CHA",
+      "home_score": 141,
+      "away_score": 106,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Oklahoma City Thunder"
+        },
+        "away_team": {
+          "full_name": "Charlotte Hornets"
+        },
+        "markets": {
+          "moneyline": {
+            "Charlotte Hornets": {
+              "price": 1200
+            },
+            "Oklahoma City Thunder": {
+              "price": -2400
+            }
+          },
+          "spread": {
+            "Charlotte Hornets": {
+              "price": -110,
+              "point": 20.0
+            },
+            "Oklahoma City Thunder": {
+              "price": -110,
+              "point": -20.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 221.5
+            },
+            "Under": {
+              "price": -110,
+              "point": 221.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908749,
+      "date": "2025-03-21",
+      "home_team": "SAS",
+      "away_team": "PHI",
+      "home_score": 128,
+      "away_score": 120,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "San Antonio Spurs"
+        },
+        "away_team": {
+          "full_name": "Philadelphia 76ers"
+        },
+        "markets": {
+          "moneyline": {
+            "Philadelphia 76ers": {
+              "price": 190
+            },
+            "San Antonio Spurs": {
+              "price": -230
+            }
+          },
+          "spread": {
+            "Philadelphia 76ers": {
+              "price": -108,
+              "point": 6.0
+            },
+            "San Antonio Spurs": {
+              "price": -112,
+              "point": -6.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 235.0
+            },
+            "Under": {
+              "price": -112,
+              "point": 235.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908750,
+      "date": "2025-03-21",
+      "home_team": "DAL",
+      "away_team": "DET",
+      "home_score": 123,
+      "away_score": 117,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Dallas Mavericks"
+        },
+        "away_team": {
+          "full_name": "Detroit Pistons"
+        },
+        "markets": {
+          "moneyline": {
+            "Dallas Mavericks": {
+              "price": 310
+            },
+            "Detroit Pistons": {
+              "price": -395
+            }
+          },
+          "spread": {
+            "Dallas Mavericks": {
+              "price": -108,
+              "point": 9.0
+            },
+            "Detroit Pistons": {
+              "price": -112,
+              "point": -9.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 232.5
+            },
+            "Under": {
+              "price": -108,
+              "point": 232.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908751,
+      "date": "2025-03-21",
+      "home_team": "UTA",
+      "away_team": "BOS",
+      "home_score": 99,
+      "away_score": 121,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Utah Jazz"
+        },
+        "away_team": {
+          "full_name": "Boston Celtics"
+        },
+        "markets": {
+          "moneyline": {
+            "Boston Celtics": {
+              "price": -1050
+            },
+            "Utah Jazz": {
+              "price": 675
+            }
+          },
+          "spread": {
+            "Boston Celtics": {
+              "price": -108,
+              "point": -14.5
+            },
+            "Utah Jazz": {
+              "price": -112,
+              "point": 14.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 227.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 227.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908752,
+      "date": "2025-03-21",
+      "home_team": "PHX",
+      "away_team": "CLE",
+      "home_score": 123,
+      "away_score": 112,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Phoenix Suns"
+        },
+        "away_team": {
+          "full_name": "Cleveland Cavaliers"
+        },
+        "markets": {
+          "moneyline": {
+            "Cleveland Cavaliers": {
+              "price": -340
+            },
+            "Phoenix Suns": {
+              "price": 270
+            }
+          },
+          "spread": {
+            "Cleveland Cavaliers": {
+              "price": -108,
+              "point": -8.5
+            },
+            "Phoenix Suns": {
+              "price": -112,
+              "point": 8.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 234.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 234.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908753,
+      "date": "2025-03-21",
+      "home_team": "POR",
+      "away_team": "DEN",
+      "home_score": 128,
+      "away_score": 109,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Portland Trail Blazers"
+        },
+        "away_team": {
+          "full_name": "Denver Nuggets"
+        },
+        "markets": {
+          "moneyline": {
+            "Denver Nuggets": {
+              "price": 105
+            },
+            "Portland Trail Blazers": {
+              "price": -125
+            }
+          },
+          "spread": {
+            "Denver Nuggets": {
+              "price": -112,
+              "point": 2.0
+            },
+            "Portland Trail Blazers": {
+              "price": -108,
+              "point": -2.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 227.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 227.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908754,
+      "date": "2025-03-21",
+      "home_team": "LAC",
+      "away_team": "MEM",
+      "home_score": 128,
+      "away_score": 108,
+      "status": "Final",
+      "simulated": true,
+      "odds": null
+    }
+  ]
+}

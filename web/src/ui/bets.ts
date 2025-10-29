@@ -10,6 +10,7 @@ export function renderBetSlip(
   root: HTMLElement,
   deps: BetUIDeps,
   oddsFormat: 'american' | 'decimal',
+  message: string,
   onChangeStake: (value: number) => void,
   onPlace: () => void,
   onClear: () => void,
@@ -72,7 +73,8 @@ export function renderBetSlip(
     profitEl.textContent = formatCurrency(Math.max(0, payout - stake));
   }
   placeBtn.disabled = !(selections.length && stake > 0 && stake <= (bankroll.available || 0));
-  messageEl.textContent = stake > (bankroll.available || 0) ? 'Stake exceeds available balance.' : '';
+  const stakeError = stake > (bankroll.available || 0) ? 'Stake exceeds available balance.' : '';
+  messageEl.textContent = stakeError || message;
 
   stakeInput.oninput = () => onChangeStake(Number(stakeInput.value || 0));
   placeBtn.onclick = onPlace;

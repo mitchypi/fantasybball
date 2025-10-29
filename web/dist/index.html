@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fantasy Replay – Gambling Mode</title>
+    <link rel="icon" href="data:," />
+    <script type="module" crossorigin src="./assets/index-C4mgrjsb.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CCNaa8Xz.css">
+  </head>
+  <body>
+    <header class="top-bar">
+      <div class="brand">
+        <h1>Fantasy Replay</h1>
+        <span class="season">Gambling Mode</span>
+      </div>
+      <div id="bankroll">
+        <span>Available: <strong id="bankroll-available">$0.00</strong></span>
+        <span>Pending: <strong id="bankroll-pending">$0.00</strong></span>
+        <span>Potential: <strong id="bankroll-potential">$0.00</strong></span>
+      </div>
+    </header>
+    <main class="dashboard-main">
+      <div class="scoreboard-layout">
+        <section id="scoreboard-panel" class="panel">
+          <h2>Scoreboard</h2>
+          <div class="scoreboard-date-label">
+            <span class="muted">Current Day</span>
+            <strong id="scoreboard-current-date">Oct 22, 2024</strong>
+          </div>
+          <div class="scoreboard-header">
+            <label for="scoreboard-date">Date <input id="scoreboard-date" type="date" /></label>
+            <button id="date-prev" type="button">Previous</button>
+            <button id="date-next" type="button">Next</button>
+            <button id="simulate-day" type="button">Simulate Day</button>
+            <button id="reset-game" type="button">Reset</button>
+          </div>
+          <ul id="scoreboard-list" class="scoreboard-list"></ul>
+          <div class="mini-games">
+            <section class="mini-game" id="blackjack-module">
+              <div class="mini-game__header">
+                <h3>Blackjack</h3>
+                <span class="muted">Blackjack pays 3:2. Double & Split supported.</span>
+              </div>
+              <div id="blackjack-status" class="mini-game__status muted">Select a stake and deal.</div>
+              <div class="mini-game__controls">
+                <label>Stake <input id="blackjack-stake" type="number" min="1" step="1" value="10" /></label>
+                <div class="mini-game__actions">
+                  <button id="blackjack-deal" type="button">Deal</button>
+                  <button id="blackjack-hit" type="button" disabled>Hit</button>
+                  <button id="blackjack-stand" type="button" disabled>Stand</button>
+                  <button id="blackjack-double" type="button" disabled>Double</button>
+                  <button id="blackjack-split" type="button" disabled>Split</button>
+                </div>
+              </div>
+              <div id="blackjack-table" class="blackjack-block">
+                <div class="blackjack-block__section">
+                  <h4>Dealer</h4>
+                  <div id="blackjack-dealer" class="blackjack-hand">
+                    <div id="blackjack-dealer-cards" class="blackjack-cards">—</div>
+                    <div id="blackjack-dealer-meta" class="blackjack-hand-meta muted"></div>
+                  </div>
+                </div>
+                <div class="blackjack-block__section">
+                  <h4>Your Hands</h4>
+                  <div id="blackjack-player-hands" class="blackjack-hands"></div>
+                </div>
+                <div id="blackjack-message" class="blackjack-message muted"></div>
+              </div>
+            </section>
+            <section class="mini-game" id="roulette-module">
+              <div class="mini-game__header">
+                <h3>Roulette</h3>
+                <span class="muted">Pick a color, win 1x stake.</span>
+              </div>
+              <div id="roulette-status" class="mini-game__status muted">Choose a color and spin.</div>
+              <div class="mini-game__controls">
+                <label>Stake <input id="roulette-stake" type="number" min="1" step="1" value="10" /></label>
+                <label>
+                  Pick
+                  <select id="roulette-choice">
+                    <option value="red">Red</option>
+                    <option value="black">Black</option>
+                    <option value="green">Green (35x)</option>
+                  </select>
+                </label>
+                <button id="roulette-spin" type="button">Spin</button>
+              </div>
+            </section>
+          </div>
+        </section>
+        <aside id="betting-panel" class="panel betslip-panel">
+          <h2>Bet Slip</h2>
+          <div class="odds-format">
+            <span class="muted">Odds</span>
+            <div class="odds-format__buttons">
+              <button id="odds-format-american" type="button" class="active">American</button>
+              <button id="odds-format-decimal" type="button">Decimal</button>
+            </div>
+          </div>
+          <div id="bet-slip-selections" class="bet-slip__selections"></div>
+          <div class="betting-summary">
+            <label for="bet-slip-stake">Stake</label>
+            <input id="bet-slip-stake" type="number" min="0" step="1" value="0" />
+          </div>
+          <div class="betting-summary">
+            <span class="muted">Slip Type</span>
+            <strong id="bet-slip-kind">Single</strong>
+          </div>
+          <div class="betting-summary">
+            <span class="muted">Parlay Odds</span>
+            <strong id="bet-slip-odds-wrap" class="hidden"><span id="bet-slip-odds"></span></strong>
+          </div>
+          <div class="betting-summary">
+            <span class="muted">Payout</span>
+            <strong id="bet-slip-payout">$0.00</strong>
+          </div>
+          <div class="betting-summary">
+            <span class="muted">Profit</span>
+            <strong id="bet-slip-profit-wrap" class="hidden"><span id="bet-slip-profit">$0.00</span></strong>
+          </div>
+          <div class="betting-summary">
+            <button id="bet-slip-place" type="button">Place Bet</button>
+            <button id="bet-slip-clear" type="button">Clear</button>
+          </div>
+          <p id="bet-slip-message" class="muted"></p>
+          <div class="bet-history">
+            <div class="bet-history__tabs">
+              <button id="bets-toggle-pending" type="button" class="active">Pending</button>
+              <button id="bets-toggle-settled" type="button">Settled</button>
+            </div>
+            <div id="pending-bets" class="bet-history__list"></div>
+            <div id="settled-bets" class="bet-history__list hidden"></div>
+          </div>
+        </aside>
+      </div>
+    </main>
+  </body>
+</html>

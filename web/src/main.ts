@@ -5,6 +5,31 @@ import { renderScoreboard } from './ui/scoreboard';
 import { renderBetSlip, renderBankroll, renderBetLists } from './ui/bets';
 import type { BetLeg, BetSlip, BoxscorePayload, ScoreboardPayload } from './types';
 import { settleSlip } from './settlement';
+import { formatCurrency } from './utils';
+
+interface BlackjackHand {
+  cards: string[];
+  bet: number;
+  status: 'playing' | 'stood' | 'bust' | 'blackjack' | 'settled';
+  doubled?: boolean;
+  split?: boolean;
+  result?: 'win' | 'lose' | 'push';
+}
+
+interface BlackjackRound {
+  hands: BlackjackHand[];
+  activeHand: number;
+  dealer: string[];
+  stake: number;
+  inRound: boolean;
+  settled: boolean;
+  message: string;
+}
+
+const BJ_SUITS = ['♠', '♥', '♦', '♣'];
+const BJ_RANKS = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+let blackjackShoe: string[] = [];
+let blackjackHandsSinceShuffle = 0;
 
 async function boot() {
   const scoreboardList = document.getElementById('scoreboard-list') as HTMLElement;
@@ -13,6 +38,7 @@ async function boot() {
   const dateNextBtn = document.getElementById('date-next') as HTMLButtonElement;
   const simulateBtn = document.getElementById('simulate-day') as HTMLButtonElement;
   const resetBtn = document.getElementById('reset-game') as HTMLButtonElement;
+  const currentDateLabel = document.getElementById('scoreboard-current-date') as HTMLElement;
   const header = document.querySelector('header') as HTMLElement;
   const aside = document.querySelector('aside') as HTMLElement;
   const pendingRoot = document.getElementById('pending-bets') as HTMLElement;
@@ -21,6 +47,17 @@ async function boot() {
   const settledToggle = document.getElementById('bets-toggle-settled') as HTMLButtonElement;
   const oddsAmericanBtn = document.getElementById('odds-format-american') as HTMLButtonElement;
   const oddsDecimalBtn = document.getElementById('odds-format-decimal') as HTMLButtonElement;
+  const blackjackStakeInput = document.getElementById('blackjack-stake') as HTMLInputElement;
+  const blackjackDealBtn = document.getElementById('blackjack-deal') as HTMLButtonElement;
+  const blackjackHitBtn = document.getElementById('blackjack-hit') as HTMLButtonElement;
+  const blackjackStandBtn = document.getElementById('blackjack-stand') as HTMLButtonElement;
+  const blackjackDoubleBtn = document.getElementById('blackjack-double') as HTMLButtonElement;
+  const blackjackSplitBtn = document.getElementById('blackjack-split') as HTMLButtonElement;
+  const blackjackStatus = document.getElementById('blackjack-status') as HTMLElement;
+  const rouletteStakeInput = document.getElementById('roulette-stake') as HTMLInputElement;
+  const rouletteChoice = document.getElementById('roulette-choice') as HTMLSelectElement;
+  const rouletteBtn = document.getElementById('roulette-spin') as HTMLButtonElement;
+  const rouletteStatus = document.getElementById('roulette-status') as HTMLElement;
 
   const manifest = await safeFetchManifest();
   let system = await getSystem();
@@ -48,6 +85,9 @@ async function boot() {
   let bankroll = { available: system.bankroll, pending_stake: system.pendingStake, pending_potential: system.pendingPotential };
   let activeBetTab: 'pending' | 'settled' = 'pending';
   let oddsFormat: 'american' | 'decimal' = 'american';
+  let betSlipMessage = '';
+  let blackjackState: BlackjackRound | null = null;
+  let latestPendingDate: string | undefined = manifest?.start_date || system.currentDate;
 
   function setDate(d: string) {
     const currentDate = system.currentDate;
@@ -64,6 +104,7 @@ async function boot() {
     setSystem({ currentDate: d });
     scoreboardDateInput.value = d;
     selections = [];
+    betSlipMessage = '';
     render();
     loadScoreboard(d).catch(console.error);
   }
@@ -97,6 +138,7 @@ async function boot() {
       await refreshBets();
     }
 
+    await refreshLatestPendingDate();
     presentScoreboard();
   }
 
@@ -124,10 +166,7 @@ async function boot() {
     renderScoreboard(scoreboardList, currentScoreboard, {
       showFinalScores: currentSimulated,
       oddsFormat,
-      onOddsSelected: currentSimulated ? undefined : (sel) => {
-        selections.push(sel);
-        render();
-      },
+      onOddsSelected: currentSimulated ? undefined : addSelection,
       onRequestBoxscore: currentSimulated ? loadBoxscore : undefined,
     });
     updateSimulationControls(system.currentDate, currentSimulated, hasGames);
@@ -180,9 +219,10 @@ async function boot() {
 
   function render() {
     renderBankroll(header, bankroll);
-    renderBetSlip(aside, { selections, bankroll }, oddsFormat, (_value) => render(), placeBet, clearSlip, removeSelection);
+    renderBetSlip(aside, { selections, bankroll }, oddsFormat, betSlipMessage, (_value) => render(), placeBet, clearSlip, removeSelection);
     renderBetLists(pendingRoot, settledRoot, pending, settled, oddsFormat);
     activateBetTab(activeBetTab);
+    renderBlackjack();
   }
 
   async function placeBet() {
@@ -211,14 +251,56 @@ async function boot() {
     (slip as any).payout = +(stake * multiplier).toFixed(2);
     await addBet(slip);
     selections = [];
+    betSlipMessage = '';
     await refreshBets();
   }
 
-  function clearSlip() { selections = []; render(); }
+  function clearSlip() {
+    selections = [];
+    betSlipMessage = '';
+    render();
+  }
 
   function removeSelection(index: number) {
     selections.splice(index, 1);
+    betSlipMessage = '';
     render();
+  }
+
+  function addSelection(sel: BetLeg) {
+    const gameKey = String(sel.game_id);
+    const sameGame = selections.filter(s => String(s.game_id) === gameKey);
+    if (sel.market === 'total') {
+      if (sameGame.some(s => s.market === 'total')) {
+        betSlipMessage = 'Only one total selection per game.';
+        render();
+        return;
+      }
+    } else {
+      if (sameGame.some(s => s.market === 'moneyline' || s.market === 'spread')) {
+        betSlipMessage = 'Only one moneyline or spread selection per game.';
+        render();
+        return;
+      }
+    }
+    if (selections.some(s => s.game_id === sel.game_id && s.market === sel.market && s.selection === sel.selection && (s.point ?? null) === (sel.point ?? null))) {
+      betSlipMessage = 'Selection already added.';
+      render();
+      return;
+    }
+    betSlipMessage = '';
+    selections.push(sel);
+    render();
+  }
+
+  function adjustBankroll(delta: number) {
+    if (!Number.isFinite(delta) || delta === 0) return;
+    bankroll.available = Math.max(0, bankroll.available + delta);
+    setSystem({ bankroll: bankroll.available }).then((next) => {
+      system = { ...system, bankroll: next.bankroll };
+    }).catch(() => {
+      /* noop */
+    });
   }
 
   async function simulateCurrentDay() {
@@ -226,10 +308,12 @@ async function boot() {
     const date = system.currentDate;
     if (!date) return;
     selections = [];
+    betSlipMessage = '';
     render();
     currentSimulated = true;
     await setSimulationState(date, { date, simulated: true, simulatedAt: new Date().toISOString() });
     await autoSettle(currentScoreboard);
+    await refreshLatestPendingDate();
     presentScoreboard();
   }
 
@@ -245,7 +329,15 @@ async function boot() {
   if (settledToggle) settledToggle.onclick = () => activateBetTab('settled');
   if (oddsAmericanBtn) oddsAmericanBtn.onclick = () => changeOddsFormat('american');
   if (oddsDecimalBtn) oddsDecimalBtn.onclick = () => changeOddsFormat('decimal');
+  if (blackjackDealBtn) blackjackDealBtn.onclick = () => startBlackjack();
+  if (blackjackHitBtn) blackjackHitBtn.onclick = () => playerHit();
+  if (blackjackStandBtn) blackjackStandBtn.onclick = () => playerStand();
+  if (blackjackDoubleBtn) blackjackDoubleBtn.onclick = () => playerDouble();
+  if (blackjackSplitBtn) blackjackSplitBtn.onclick = () => playerSplit();
+  if (rouletteBtn) rouletteBtn.onclick = () => playRoulette();
   await loadScoreboard(start);
+  if (blackjackStatus) blackjackStatus.textContent = 'Select a stake and deal.';
+  if (rouletteStatus) rouletteStatus.textContent = 'Choose a color and spin.';
 
   function stepDate(deltaDays: number) {
     if (deltaDays > 0 && !currentSimulated && (currentScoreboard?.games.length || 0) > 0) {
@@ -261,8 +353,8 @@ async function boot() {
   async function resetToStart(startDate: string) {
     const confirmed = window.confirm('Reset to season start? Current progress will remain but you will jump back to the first day.');
     if (!confirmed) return;
-    const initial = system.initialBankroll ?? 1000;
-    system = await setSystem({ currentDate: startDate, bankroll: initial, pendingStake: 0, pendingPotential: 0 });
+    const initial = 1000;
+    system = await setSystem({ currentDate: startDate, bankroll: initial, initialBankroll: initial, pendingStake: 0, pendingPotential: 0 });
     scoreboardDateInput.value = startDate;
     selections = [];
     currentSimulated = false;
@@ -272,6 +364,14 @@ async function boot() {
     settled = [];
     bankroll = { available: initial, pending_stake: 0, pending_potential: 0 };
     activeBetTab = 'pending';
+    betSlipMessage = '';
+    blackjackState = null;
+    blackjackShoe = [];
+    blackjackHandsSinceShuffle = 0;
+    if (blackjackStatus) blackjackStatus.textContent = 'Select a stake and deal.';
+    if (blackjackStakeInput) blackjackStakeInput.value = '10';
+    if (rouletteStatus) rouletteStatus.textContent = 'Choose a color and spin.';
+    if (rouletteStakeInput) rouletteStakeInput.value = '10';
     render();
     await clearBets();
     await clearSimulations();
@@ -296,6 +396,508 @@ async function boot() {
     if (oddsDecimalBtn) oddsDecimalBtn.classList.toggle('active', format === 'decimal');
     presentScoreboard();
     render();
+  }
+
+  function updateDateLabel(dateString?: string) {
+    if (!dateString) dateString = latestPendingDate;
+    if (!currentDateLabel) return;
+    if (!dateString) {
+      currentDateLabel.textContent = '';
+      return;
+    }
+    const date = new Date(`${dateString}T00:00:00`);
+    if (Number.isNaN(date.getTime())) {
+      currentDateLabel.textContent = dateString;
+    } else {
+      currentDateLabel.textContent = date.toLocaleDateString(undefined, {
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+      });
+    }
+  }
+
+  async function refreshLatestPendingDate() {
+    if (!manifest?.dates || !manifest.dates.length) {
+      latestPendingDate = system.currentDate;
+      updateDateLabel(latestPendingDate);
+      return;
+    }
+    const ordered = [...manifest.dates as string[]].sort();
+    for (const date of ordered) {
+      const state = await getSimulationState(date);
+      if (!state?.simulated) {
+        latestPendingDate = date;
+        updateDateLabel(latestPendingDate);
+        return;
+      }
+    }
+    latestPendingDate = ordered[ordered.length - 1];
+    updateDateLabel(latestPendingDate);
+  }
+
+  function startBlackjack() {
+    if (!blackjackStakeInput || !blackjackStatus || !blackjackDealBtn) return;
+    const stake = Math.floor(Number(blackjackStakeInput.value || 0));
+    if (!(stake > 0)) {
+      blackjackStatus.textContent = 'Enter a valid stake.';
+      return;
+    }
+    if (stake > bankroll.available) {
+      blackjackStatus.textContent = 'Stake exceeds available balance.';
+      return;
+    }
+    if (!blackjackShoe.length || blackjackHandsSinceShuffle >= 6 || blackjackShoe.length < 52) {
+      blackjackShoe = createShoe();
+      blackjackHandsSinceShuffle = 0;
+    }
+    adjustBankroll(-stake);
+    renderBankroll(header, bankroll);
+
+    const playerCards = [drawCard(), drawCard()];
+    const dealerCards = [drawCard(), drawCard()];
+    const playerHand: BlackjackHand = {
+      cards: playerCards,
+      bet: stake,
+      status: 'playing',
+      doubled: false,
+      split: false,
+    };
+
+    blackjackState = {
+      hands: [playerHand],
+      activeHand: 0,
+      dealer: dealerCards,
+      stake,
+      inRound: true,
+      settled: false,
+      message: 'Hit, Stand, Double, or Split when available.',
+    };
+
+    const playerVal = calculateBlackjackValue(playerHand.cards);
+    const dealerVal = calculateBlackjackValue(dealerCards);
+
+    if (playerVal.isBlackjack) {
+      blackjackState.inRound = false;
+      blackjackState.settled = true;
+      if (dealerVal.isBlackjack) {
+        playerHand.status = 'settled';
+        playerHand.result = 'push';
+        blackjackState.message = 'Both you and the dealer have blackjack. Push.';
+        adjustBankroll(stake);
+      } else {
+        playerHand.status = 'blackjack';
+        playerHand.result = 'win';
+        blackjackState.message = 'Blackjack! Paid 3:2.';
+        adjustBankroll(stake * 2.5);
+      }
+      renderBankroll(header, bankroll);
+      blackjackHandsSinceShuffle += 1;
+      renderBlackjack();
+      return;
+    }
+
+    if (dealerVal.isBlackjack) {
+      blackjackState.inRound = false;
+      blackjackState.settled = true;
+      playerHand.status = 'settled';
+      playerHand.result = 'lose';
+      blackjackState.message = 'Dealer has blackjack.';
+      blackjackHandsSinceShuffle += 1;
+      renderBlackjack();
+      return;
+    }
+
+    renderBlackjack();
+  }
+
+  function playerHit() {
+    if (!blackjackState || !blackjackState.inRound) return;
+    const hand = getActiveHand();
+    if (!hand) return;
+    hand.cards.push(drawCard());
+    const value = calculateBlackjackValue(hand.cards);
+    if (value.total > 21) {
+      hand.status = 'bust';
+      hand.result = 'lose';
+      blackjackState.message = `Hand ${blackjackState.activeHand + 1} busts with ${value.total}.`;
+      moveToNextHand();
+    } else if (value.total === 21) {
+      hand.status = 'stood';
+      blackjackState.message = `Hand ${blackjackState.activeHand + 1} shows 21.`;
+      moveToNextHand();
+    } else {
+      blackjackState.message = `Hand ${blackjackState.activeHand + 1} totals ${value.total}.`;
+    }
+    renderBlackjack();
+  }
+
+  function playerStand() {
+    if (!blackjackState || !blackjackState.inRound) return;
+    const hand = getActiveHand();
+    if (!hand) return;
+    const value = calculateBlackjackValue(hand.cards);
+    hand.status = 'stood';
+    blackjackState.message = `Hand ${blackjackState.activeHand + 1} stands at ${value.total}.`;
+    moveToNextHand();
+    renderBlackjack();
+  }
+
+  function playerDouble() {
+    if (!blackjackState || !blackjackState.inRound) return;
+    const hand = getActiveHand();
+    if (!hand || !canDouble(hand)) return;
+    adjustBankroll(-hand.bet);
+    renderBankroll(header, bankroll);
+    hand.bet *= 2;
+    hand.doubled = true;
+    hand.cards.push(drawCard());
+    const value = calculateBlackjackValue(hand.cards);
+    if (value.total > 21) {
+      hand.status = 'bust';
+      hand.result = 'lose';
+      blackjackState.message = `Hand ${blackjackState.activeHand + 1} busts with ${value.total}.`;
+    } else {
+      hand.status = 'stood';
+      blackjackState.message = `Hand ${blackjackState.activeHand + 1} doubles to ${value.total}.`;
+    }
+    moveToNextHand();
+    renderBlackjack();
+  }
+
+  function playerSplit() {
+    if (!blackjackState || !blackjackState.inRound) return;
+    const hand = getActiveHand();
+    if (!hand || !canSplit(hand)) return;
+    if (hand.bet > bankroll.available) {
+      blackjackState.message = 'Insufficient bankroll to split.';
+      renderBlackjack();
+      return;
+    }
+    adjustBankroll(-hand.bet);
+    renderBankroll(header, bankroll);
+    const [firstCard, secondCard] = hand.cards;
+    hand.cards = [firstCard, drawCard()];
+    hand.status = 'playing';
+    hand.split = true;
+    const newHand: BlackjackHand = {
+      cards: [secondCard, drawCard()],
+      bet: hand.bet,
+      status: 'playing',
+      doubled: false,
+      split: true,
+    };
+    blackjackState.hands.splice(blackjackState.activeHand + 1, 0, newHand);
+    blackjackState.message = 'Hands split. Play the first hand.';
+    renderBlackjack();
+  }
+
+  function moveToNextHand() {
+    if (!blackjackState) return;
+    const state = blackjackState;
+    const currentIndex = state.activeHand;
+    const nextIndex = state.hands.findIndex((hand, idx) => idx > currentIndex && hand.status === 'playing');
+    if (nextIndex !== -1) {
+      state.activeHand = nextIndex;
+      return;
+    }
+    const firstActive = state.hands.findIndex((hand) => hand.status === 'playing');
+    if (firstActive !== -1) {
+      state.activeHand = firstActive;
+      return;
+    }
+    state.inRound = false;
+    dealerPlay();
+  }
+
+  function dealerPlay() {
+    if (!blackjackState) return;
+    const state = blackjackState;
+    const activeHands = state.hands.filter((hand) => hand.status !== 'bust');
+    if (!activeHands.length) {
+      finalizeBlackjackRound();
+      return;
+    }
+    let dealerValue = calculateBlackjackValue(state.dealer);
+    while (dealerValue.total < 17 || (dealerValue.total === 17 && dealerValue.isSoft)) {
+      state.dealer.push(drawCard());
+      dealerValue = calculateBlackjackValue(state.dealer);
+    }
+    finalizeBlackjackRound();
+  }
+
+  function finalizeBlackjackRound() {
+    if (!blackjackState) return;
+    const state = blackjackState;
+    const dealerValue = calculateBlackjackValue(state.dealer);
+    const messages: string[] = [];
+    let totalDelta = 0;
+
+    state.hands.forEach((hand, idx) => {
+      const value = calculateBlackjackValue(hand.cards);
+      if (hand.status === 'bust') {
+        hand.result = 'lose';
+        hand.status = 'settled';
+        messages.push(`Hand ${idx + 1} busts (${value.total}).`);
+        return;
+      }
+
+      const naturalWin = !hand.split && hand.cards.length === 2 && value.isBlackjack;
+      if (dealerValue.total > 21) {
+        hand.result = 'win';
+        hand.status = naturalWin ? 'blackjack' : 'settled';
+        if (naturalWin) {
+          messages.push(`Hand ${idx + 1} blackjack! Dealer busts. Paid 3:2.`);
+        } else {
+          messages.push(`Hand ${idx + 1} wins ${value.total} vs dealer bust.`);
+        }
+        totalDelta += hand.bet * (naturalWin ? 2.5 : 2);
+        return;
+      }
+
+      if (value.total > dealerValue.total) {
+        hand.result = 'win';
+        hand.status = naturalWin ? 'blackjack' : 'settled';
+        if (naturalWin) {
+          messages.push(`Hand ${idx + 1} blackjack beats dealer ${dealerValue.total}. Paid 3:2.`);
+        } else {
+          messages.push(`Hand ${idx + 1} wins ${value.total} to ${dealerValue.total}.`);
+        }
+        totalDelta += hand.bet * (naturalWin ? 2.5 : 2);
+      } else if (value.total < dealerValue.total) {
+        hand.result = 'lose';
+        hand.status = 'settled';
+        messages.push(`Hand ${idx + 1} loses ${value.total} to ${dealerValue.total}.`);
+      } else {
+        hand.result = 'push';
+        hand.status = 'settled';
+        messages.push(`Hand ${idx + 1} pushes at ${value.total}.`);
+        totalDelta += hand.bet;
+      }
+    });
+
+    blackjackState.message = messages.join('<br/>');
+    blackjackState.settled = true;
+    blackjackState.inRound = false;
+    blackjackState.activeHand = -1;
+    blackjackHandsSinceShuffle += 1;
+    if (blackjackHandsSinceShuffle >= 6) {
+      blackjackShoe = [];
+      blackjackHandsSinceShuffle = 0;
+    }
+    if (totalDelta !== 0) {
+      adjustBankroll(totalDelta);
+      renderBankroll(header, bankroll);
+    }
+    renderBlackjack();
+  }
+
+  function renderBlackjack() {
+    if (!blackjackStatus || !blackjackDealBtn || !blackjackHitBtn || !blackjackStandBtn || !blackjackDoubleBtn || !blackjackSplitBtn) return;
+    const dealerCardsEl = document.getElementById('blackjack-dealer-cards') as HTMLElement | null;
+    const dealerMetaEl = document.getElementById('blackjack-dealer-meta') as HTMLElement | null;
+    const playerHandsRoot = document.getElementById('blackjack-player-hands') as HTMLElement | null;
+    const messageEl = document.getElementById('blackjack-message') as HTMLElement | null;
+
+    if (!blackjackState) {
+      blackjackStatus.textContent = 'Select a stake and deal.';
+      blackjackDealBtn.disabled = false;
+      blackjackHitBtn.disabled = true;
+      blackjackStandBtn.disabled = true;
+      blackjackDoubleBtn.disabled = true;
+      blackjackSplitBtn.disabled = true;
+      if (dealerCardsEl) dealerCardsEl.textContent = '—';
+      if (dealerMetaEl) dealerMetaEl.textContent = '';
+      if (playerHandsRoot) playerHandsRoot.innerHTML = '<p class="muted">No active hands.</p>';
+      if (messageEl) {
+        messageEl.textContent = '';
+        messageEl.classList.add('muted');
+      }
+      return;
+    }
+
+    const activeHand = getActiveHand();
+    const canAct = Boolean(blackjackState.inRound && activeHand);
+    blackjackDealBtn.disabled = blackjackState.inRound;
+    blackjackHitBtn.disabled = !canAct;
+    blackjackStandBtn.disabled = !canAct;
+    blackjackDoubleBtn.disabled = !canAct || !activeHand || !canDouble(activeHand);
+    blackjackSplitBtn.disabled = !canAct || !activeHand || !canSplit(activeHand);
+
+    const revealDealer = !blackjackState.inRound || blackjackState.settled;
+    const dealerValue = calculateBlackjackValue(blackjackState.dealer);
+    if (dealerCardsEl) dealerCardsEl.textContent = formatBlackjackHand(blackjackState.dealer, revealDealer);
+    if (dealerMetaEl) {
+      dealerMetaEl.textContent = revealDealer
+        ? `Total: ${dealerValue.total}${dealerValue.isSoft ? ' (soft)' : ''}`
+        : 'Total: ?';
+      dealerMetaEl.classList.toggle('muted', !revealDealer);
+    }
+
+    if (playerHandsRoot) {
+      playerHandsRoot.innerHTML = '';
+      blackjackState.hands.forEach((hand, idx) => {
+        const wrapper = document.createElement('div');
+        const classes = ['blackjack-hand'];
+        if (blackjackState.activeHand === idx && blackjackState.inRound) classes.push('active');
+        if (hand.status === 'bust') classes.push('bust');
+        wrapper.className = classes.join(' ');
+
+        const cardsEl = document.createElement('div');
+        cardsEl.className = 'blackjack-cards';
+        cardsEl.textContent = formatBlackjackHand(hand.cards, true);
+        wrapper.appendChild(cardsEl);
+
+        const metaEl = document.createElement('div');
+        metaEl.className = 'blackjack-hand-meta';
+        const value = calculateBlackjackValue(hand.cards);
+        const tags = [
+          `Total: ${value.total}`,
+          value.isSoft ? 'Soft' : '',
+          hand.doubled ? 'Doubled' : '',
+          hand.split ? 'Split' : '',
+        ].filter(Boolean);
+        metaEl.textContent = tags.join(' • ');
+        wrapper.appendChild(metaEl);
+
+        if (hand.result || hand.status === 'blackjack') {
+          const resultEl = document.createElement('div');
+          const resultKey = hand.status === 'blackjack' ? 'blackjack' : (hand.result ?? 'win');
+          resultEl.className = `blackjack-hand-result ${resultKey}`;
+          resultEl.textContent = hand.status === 'blackjack' ? 'BLACKJACK' : resultKey.toUpperCase();
+          wrapper.appendChild(resultEl);
+        }
+
+        playerHandsRoot.appendChild(wrapper);
+      });
+    }
+
+    blackjackStatus.textContent = blackjackState.inRound ? 'Your move.' : 'Round complete.';
+    if (messageEl) {
+      if (blackjackState.message) {
+        messageEl.innerHTML = blackjackState.message;
+        messageEl.classList.remove('muted');
+      } else {
+        messageEl.textContent = '';
+        messageEl.classList.add('muted');
+      }
+    }
+  }
+
+  function playRoulette() {
+    if (!rouletteStakeInput || !rouletteChoice || !rouletteStatus) return;
+    const stake = Number(rouletteStakeInput.value || 0);
+    if (!(stake > 0)) {
+      rouletteStatus.textContent = 'Enter a valid stake.';
+      return;
+    }
+    if (stake > bankroll.available) {
+      rouletteStatus.textContent = 'Stake exceeds available balance.';
+      return;
+    }
+    const choice = (rouletteChoice.value || 'red') as 'red' | 'black' | 'green';
+    const spin = Math.floor(Math.random() * 37);
+    const color = spin === 0 ? 'green' : (spin % 2 === 0 ? 'black' : 'red');
+    if (choice === color) {
+      const multiplier = choice === 'green' ? 35 : 1;
+      const winnings = stake * multiplier;
+      rouletteStatus.textContent = `Ball landed ${color.toUpperCase()} (${spin}). You win ${formatCurrency(winnings)}!`;
+      adjustBankroll(winnings);
+    } else {
+      rouletteStatus.textContent = `Ball landed ${color.toUpperCase()} (${spin}). You lose ${formatCurrency(stake)}.`;
+      adjustBankroll(-stake);
+    }
+    renderBankroll(header, bankroll);
+  }
+
+  function getActiveHand(): BlackjackHand | null {
+    if (!blackjackState) return null;
+    const idx = blackjackState.activeHand;
+    if (idx < 0 || idx >= blackjackState.hands.length) return null;
+    return blackjackState.hands[idx];
+  }
+
+  function canDouble(hand: BlackjackHand) {
+    if (!blackjackState?.inRound) return false;
+    if (hand.status !== 'playing') return false;
+    if (hand.cards.length !== 2) return false;
+    if (hand.doubled) return false;
+    if (bankroll.available < hand.bet) return false;
+    return true;
+  }
+
+  function canSplit(hand: BlackjackHand) {
+    if (!blackjackState?.inRound) return false;
+    if (hand.status !== 'playing') return false;
+    if (hand.cards.length !== 2) return false;
+    if (hand.split) return false;
+    if (bankroll.available < hand.bet) return false;
+    const [first, second] = hand.cards;
+    return getCardRank(first) === getCardRank(second);
+  }
+
+  function getCardRank(card: string) {
+    if (!card) return '';
+    if (card.startsWith('10')) return '10';
+    return card.charAt(0);
+  }
+
+  function createShoe(decks = 6) {
+    const shoe: string[] = [];
+    for (let i = 0; i < decks; i += 1) {
+      shoe.push(...createDeck());
+    }
+    for (let i = shoe.length - 1; i > 0; i -= 1) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shoe[i], shoe[j]] = [shoe[j], shoe[i]];
+    }
+    return shoe;
+  }
+
+  function createDeck() {
+    const deck: string[] = [];
+    for (const rank of BJ_RANKS) {
+      for (const suit of BJ_SUITS) deck.push(`${rank}${suit}`);
+    }
+    return deck;
+  }
+
+  function drawCard() {
+    if (!blackjackShoe.length) {
+      blackjackShoe = createShoe();
+    }
+    const card = blackjackShoe.pop();
+    return card ?? '??';
+  }
+
+  function calculateBlackjackValue(hand: string[]) {
+    let total = 0;
+    let aces = 0;
+    for (const card of hand) {
+      const rank = card.startsWith('10') ? '10' : card.charAt(0);
+      if (rank === 'A') {
+        aces += 1;
+        total += 11;
+      } else if (['K', 'Q', 'J'].includes(rank) || rank === '10') {
+        total += 10;
+      } else {
+        total += Number(rank);
+      }
+    }
+    let adjustableAces = aces;
+    while (total > 21 && adjustableAces > 0) {
+      total -= 10;
+      adjustableAces -= 1;
+    }
+    const isBlackjack = hand.length === 2 && total === 21;
+    return { total, isSoft: aces > adjustableAces, bust: total > 21, isBlackjack };
+  }
+
+  function formatBlackjackHand(hand: string[], revealAll: boolean) {
+    if (!hand.length) return '';
+    if (revealAll) return hand.join(' ');
+    return `${hand[0]} ??`;
   }
 }
 
