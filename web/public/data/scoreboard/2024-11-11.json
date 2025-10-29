@@ -1,0 +1,208 @@
+{
+  "date": "2024-11-11",
+  "games": [
+    {
+      "game_id": 15907589,
+      "date": "2024-11-11",
+      "home_team": "CHI",
+      "away_team": "CLE",
+      "home_score": 113,
+      "away_score": 119,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Chicago Bulls"
+        },
+        "away_team": {
+          "full_name": "Cleveland Cavaliers"
+        },
+        "markets": {
+          "moneyline": {
+            "Chicago Bulls": {
+              "price": 270
+            },
+            "Cleveland Cavaliers": {
+              "price": -340
+            }
+          },
+          "spread": {
+            "Chicago Bulls": {
+              "price": -108,
+              "point": 8.0
+            },
+            "Cleveland Cavaliers": {
+              "price": -112,
+              "point": -8.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 237.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 237.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907590,
+      "date": "2024-11-11",
+      "home_team": "HOU",
+      "away_team": "WAS",
+      "home_score": 107,
+      "away_score": 92,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Houston Rockets"
+        },
+        "away_team": {
+          "full_name": "Washington Wizards"
+        },
+        "markets": {
+          "moneyline": {
+            "Houston Rockets": {
+              "price": -900
+            },
+            "Washington Wizards": {
+              "price": 600
+            }
+          },
+          "spread": {
+            "Houston Rockets": {
+              "price": -112,
+              "point": -13.0
+            },
+            "Washington Wizards": {
+              "price": -108,
+              "point": 13.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 228.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 228.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907591,
+      "date": "2024-11-11",
+      "home_team": "NOP",
+      "away_team": "BKN",
+      "home_score": 105,
+      "away_score": 107,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "New Orleans Pelicans"
+        },
+        "away_team": {
+          "full_name": "Brooklyn Nets"
+        },
+        "markets": {
+          "moneyline": {
+            "Brooklyn Nets": {
+              "price": -125
+            },
+            "New Orleans Pelicans": {
+              "price": 105
+            }
+          },
+          "spread": {
+            "Brooklyn Nets": {
+              "price": -110,
+              "point": -1.5
+            },
+            "New Orleans Pelicans": {
+              "price": -110,
+              "point": 1.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 210.5
+            },
+            "Under": {
+              "price": -108,
+              "point": 210.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907592,
+      "date": "2024-11-11",
+      "home_team": "OKC",
+      "away_team": "LAC",
+      "home_score": 134,
+      "away_score": 128,
+      "status": "Final",
+      "simulated": true,
+      "odds": null
+    },
+    {
+      "game_id": 15907593,
+      "date": "2024-11-11",
+      "home_team": "SAS",
+      "away_team": "SAC",
+      "home_score": 116,
+      "away_score": 96,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "San Antonio Spurs"
+        },
+        "away_team": {
+          "full_name": "Sacramento Kings"
+        },
+        "markets": {
+          "moneyline": {
+            "Sacramento Kings": {
+              "price": -112
+            },
+            "San Antonio Spurs": {
+              "price": -108
+            }
+          },
+          "spread": {
+            "Sacramento Kings": {
+              "price": -105,
+              "point": -1.0
+            },
+            "San Antonio Spurs": {
+              "price": -115,
+              "point": 1.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 221.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 221.0
+            }
+          }
+        }
+      }
+    }
+  ]
+}

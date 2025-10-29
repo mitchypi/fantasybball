@@ -1,0 +1,245 @@
+{
+  "date": "2024-11-16",
+  "games": [
+    {
+      "game_id": 15907626,
+      "date": "2024-11-16",
+      "home_team": "CHA",
+      "away_team": "MIL",
+      "home_score": 115,
+      "away_score": 114,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Charlotte Hornets"
+        },
+        "away_team": {
+          "full_name": "Milwaukee Bucks"
+        },
+        "markets": {
+          "moneyline": {
+            "Charlotte Hornets": {
+              "price": 142
+            },
+            "Milwaukee Bucks": {
+              "price": -170
+            }
+          },
+          "spread": {
+            "Charlotte Hornets": {
+              "price": -108,
+              "point": 3.5
+            },
+            "Milwaukee Bucks": {
+              "price": -112,
+              "point": -3.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 217.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 217.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907627,
+      "date": "2024-11-16",
+      "home_team": "BOS",
+      "away_team": "TOR",
+      "home_score": 126,
+      "away_score": 123,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Boston Celtics"
+        },
+        "away_team": {
+          "full_name": "Toronto Raptors"
+        },
+        "markets": {
+          "moneyline": {
+            "Boston Celtics": {
+              "price": -1650
+            },
+            "Toronto Raptors": {
+              "price": 950
+            }
+          },
+          "spread": {
+            "Boston Celtics": {
+              "price": -110,
+              "point": -17.0
+            },
+            "Toronto Raptors": {
+              "price": -110,
+              "point": 17.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 229.5
+            },
+            "Under": {
+              "price": -108,
+              "point": 229.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907628,
+      "date": "2024-11-16",
+      "home_team": "NOP",
+      "away_team": "LAL",
+      "home_score": 99,
+      "away_score": 104,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "New Orleans Pelicans"
+        },
+        "away_team": {
+          "full_name": "Los Angeles Lakers"
+        },
+        "markets": {
+          "moneyline": {
+            "Los Angeles Lakers": {
+              "price": -270
+            },
+            "New Orleans Pelicans": {
+              "price": 220
+            }
+          },
+          "spread": {
+            "Los Angeles Lakers": {
+              "price": -105,
+              "point": -7.0
+            },
+            "New Orleans Pelicans": {
+              "price": -115,
+              "point": 7.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 219.0
+            },
+            "Under": {
+              "price": -110,
+              "point": 219.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907629,
+      "date": "2024-11-16",
+      "home_team": "DAL",
+      "away_team": "SAS",
+      "home_score": 110,
+      "away_score": 93,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Dallas Mavericks"
+        },
+        "away_team": {
+          "full_name": "San Antonio Spurs"
+        },
+        "markets": {
+          "moneyline": {
+            "Dallas Mavericks": {
+              "price": -520
+            },
+            "San Antonio Spurs": {
+              "price": 390
+            }
+          },
+          "spread": {
+            "Dallas Mavericks": {
+              "price": -112,
+              "point": -10.5
+            },
+            "San Antonio Spurs": {
+              "price": -108,
+              "point": 10.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 229.0
+            },
+            "Under": {
+              "price": -110,
+              "point": 229.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907630,
+      "date": "2024-11-16",
+      "home_team": "SAC",
+      "away_team": "UTA",
+      "home_score": 121,
+      "away_score": 117,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Sacramento Kings"
+        },
+        "away_team": {
+          "full_name": "Utah Jazz"
+        },
+        "markets": {
+          "moneyline": {
+            "Sacramento Kings": {
+              "price": -500
+            },
+            "Utah Jazz": {
+              "price": 380
+            }
+          },
+          "spread": {
+            "Sacramento Kings": {
+              "price": -108,
+              "point": -11.0
+            },
+            "Utah Jazz": {
+              "price": -112,
+              "point": 11.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 230.0
+            },
+            "Under": {
+              "price": -110,
+              "point": 230.0
+            }
+          }
+        }
+      }
+    }
+  ]
+}

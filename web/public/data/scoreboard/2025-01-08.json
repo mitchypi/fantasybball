@@ -1,0 +1,352 @@
+{
+  "date": "2025-01-08",
+  "games": [
+    {
+      "game_id": 15907946,
+      "date": "2025-01-08",
+      "home_team": "CLE",
+      "away_team": "OKC",
+      "home_score": 129,
+      "away_score": 122,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Cleveland Cavaliers"
+        },
+        "away_team": {
+          "full_name": "Oklahoma City Thunder"
+        },
+        "markets": {
+          "moneyline": {
+            "Cleveland Cavaliers": {
+              "price": -142
+            },
+            "Oklahoma City Thunder": {
+              "price": 120
+            }
+          },
+          "spread": {
+            "Cleveland Cavaliers": {
+              "price": -105,
+              "point": -2.5
+            },
+            "Oklahoma City Thunder": {
+              "price": -115,
+              "point": 2.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 230.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 230.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907947,
+      "date": "2025-01-08",
+      "home_team": "IND",
+      "away_team": "CHI",
+      "home_score": 129,
+      "away_score": 113,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Indiana Pacers"
+        },
+        "away_team": {
+          "full_name": "Chicago Bulls"
+        },
+        "markets": {
+          "moneyline": {
+            "Chicago Bulls": {
+              "price": 200
+            },
+            "Indiana Pacers": {
+              "price": -245
+            }
+          },
+          "spread": {
+            "Chicago Bulls": {
+              "price": -105,
+              "point": 6.0
+            },
+            "Indiana Pacers": {
+              "price": -115,
+              "point": -6.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 242.5
+            },
+            "Under": {
+              "price": -108,
+              "point": 242.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907948,
+      "date": "2025-01-08",
+      "home_team": "NYK",
+      "away_team": "TOR",
+      "home_score": 112,
+      "away_score": 98,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "New York Knicks"
+        },
+        "away_team": {
+          "full_name": "Toronto Raptors"
+        },
+        "markets": {
+          "moneyline": {
+            "New York Knicks": {
+              "price": -700
+            },
+            "Toronto Raptors": {
+              "price": 500
+            }
+          },
+          "spread": {
+            "New York Knicks": {
+              "price": -112,
+              "point": -12.0
+            },
+            "Toronto Raptors": {
+              "price": -108,
+              "point": 12.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -105,
+              "point": 231.5
+            },
+            "Under": {
+              "price": -115,
+              "point": 231.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907949,
+      "date": "2025-01-08",
+      "home_team": "PHI",
+      "away_team": "WAS",
+      "home_score": 109,
+      "away_score": 103,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Philadelphia 76ers"
+        },
+        "away_team": {
+          "full_name": "Washington Wizards"
+        },
+        "markets": {
+          "moneyline": {
+            "Philadelphia 76ers": {
+              "price": -550
+            },
+            "Washington Wizards": {
+              "price": 410
+            }
+          },
+          "spread": {
+            "Philadelphia 76ers": {
+              "price": -105,
+              "point": -11.0
+            },
+            "Washington Wizards": {
+              "price": -115,
+              "point": 11.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 222.0
+            },
+            "Under": {
+              "price": -112,
+              "point": 222.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907950,
+      "date": "2025-01-08",
+      "home_team": "BKN",
+      "away_team": "DET",
+      "home_score": 98,
+      "away_score": 113,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Brooklyn Nets"
+        },
+        "away_team": {
+          "full_name": "Detroit Pistons"
+        },
+        "markets": {
+          "moneyline": {
+            "Brooklyn Nets": {
+              "price": 280
+            },
+            "Detroit Pistons": {
+              "price": -355
+            }
+          },
+          "spread": {
+            "Brooklyn Nets": {
+              "price": -108,
+              "point": 8.5
+            },
+            "Detroit Pistons": {
+              "price": -112,
+              "point": -8.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 212.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 212.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907951,
+      "date": "2025-01-08",
+      "home_team": "NOP",
+      "away_team": "POR",
+      "home_score": 100,
+      "away_score": 119,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "New Orleans Pelicans"
+        },
+        "away_team": {
+          "full_name": "Portland Trail Blazers"
+        },
+        "markets": {
+          "moneyline": {
+            "New Orleans Pelicans": {
+              "price": -130
+            },
+            "Portland Trail Blazers": {
+              "price": 110
+            }
+          },
+          "spread": {
+            "New Orleans Pelicans": {
+              "price": -115,
+              "point": -1.5
+            },
+            "Portland Trail Blazers": {
+              "price": -105,
+              "point": 1.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 225.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 225.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907952,
+      "date": "2025-01-08",
+      "home_team": "DEN",
+      "away_team": "LAC",
+      "home_score": 126,
+      "away_score": 103,
+      "status": "Final",
+      "simulated": true,
+      "odds": null
+    },
+    {
+      "game_id": 15907953,
+      "date": "2025-01-08",
+      "home_team": "MIL",
+      "away_team": "SAS",
+      "home_score": 121,
+      "away_score": 105,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Milwaukee Bucks"
+        },
+        "away_team": {
+          "full_name": "San Antonio Spurs"
+        },
+        "markets": {
+          "moneyline": {
+            "Milwaukee Bucks": {
+              "price": -198
+            },
+            "San Antonio Spurs": {
+              "price": 164
+            }
+          },
+          "spread": {
+            "Milwaukee Bucks": {
+              "price": -108,
+              "point": -5.0
+            },
+            "San Antonio Spurs": {
+              "price": -112,
+              "point": 5.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 226.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 226.5
+            }
+          }
+        }
+      }
+    }
+  ]
+}

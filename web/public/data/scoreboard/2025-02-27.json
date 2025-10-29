@@ -1,0 +1,208 @@
+{
+  "date": "2025-02-27",
+  "games": [
+    {
+      "game_id": 15908576,
+      "date": "2025-02-27",
+      "home_team": "ORL",
+      "away_team": "GSW",
+      "home_score": 115,
+      "away_score": 121,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Orlando Magic"
+        },
+        "away_team": {
+          "full_name": "Golden State Warriors"
+        },
+        "markets": {
+          "moneyline": {
+            "Golden State Warriors": {
+              "price": -198
+            },
+            "Orlando Magic": {
+              "price": 164
+            }
+          },
+          "spread": {
+            "Golden State Warriors": {
+              "price": -112,
+              "point": -4.5
+            },
+            "Orlando Magic": {
+              "price": -108,
+              "point": 4.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 212.0
+            },
+            "Under": {
+              "price": -112,
+              "point": 212.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908577,
+      "date": "2025-02-27",
+      "home_team": "MIL",
+      "away_team": "DEN",
+      "home_score": 121,
+      "away_score": 112,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Milwaukee Bucks"
+        },
+        "away_team": {
+          "full_name": "Denver Nuggets"
+        },
+        "markets": {
+          "moneyline": {
+            "Denver Nuggets": {
+              "price": -170
+            },
+            "Milwaukee Bucks": {
+              "price": 142
+            }
+          },
+          "spread": {
+            "Denver Nuggets": {
+              "price": -110,
+              "point": -4.0
+            },
+            "Milwaukee Bucks": {
+              "price": -110,
+              "point": 4.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 240.5
+            },
+            "Under": {
+              "price": -110,
+              "point": 240.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908578,
+      "date": "2025-02-27",
+      "home_team": "DAL",
+      "away_team": "CHA",
+      "home_score": 103,
+      "away_score": 96,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Dallas Mavericks"
+        },
+        "away_team": {
+          "full_name": "Charlotte Hornets"
+        },
+        "markets": {
+          "moneyline": {
+            "Charlotte Hornets": {
+              "price": 320
+            },
+            "Dallas Mavericks": {
+              "price": -410
+            }
+          },
+          "spread": {
+            "Charlotte Hornets": {
+              "price": -105,
+              "point": 9.0
+            },
+            "Dallas Mavericks": {
+              "price": -115,
+              "point": -9.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 225.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 225.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908579,
+      "date": "2025-02-27",
+      "home_team": "PHX",
+      "away_team": "NOP",
+      "home_score": 116,
+      "away_score": 124,
+      "status": "Final",
+      "simulated": true,
+      "odds": null
+    },
+    {
+      "game_id": 15908580,
+      "date": "2025-02-27",
+      "home_team": "LAL",
+      "away_team": "MIN",
+      "home_score": 111,
+      "away_score": 102,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Los Angeles Lakers"
+        },
+        "away_team": {
+          "full_name": "Minnesota Timberwolves"
+        },
+        "markets": {
+          "moneyline": {
+            "Los Angeles Lakers": {
+              "price": -250
+            },
+            "Minnesota Timberwolves": {
+              "price": 205
+            }
+          },
+          "spread": {
+            "Los Angeles Lakers": {
+              "price": -108,
+              "point": -6.5
+            },
+            "Minnesota Timberwolves": {
+              "price": -112,
+              "point": 6.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 229.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 229.0
+            }
+          }
+        }
+      }
+    }
+  ]
+}

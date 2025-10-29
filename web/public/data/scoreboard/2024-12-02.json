@@ -1,0 +1,197 @@
+{
+  "date": "2024-12-02",
+  "games": [
+    {
+      "game_id": 15907741,
+      "date": "2024-12-02",
+      "home_team": "ATL",
+      "away_team": "NOP",
+      "home_score": 124,
+      "away_score": 112,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Atlanta Hawks"
+        },
+        "away_team": {
+          "full_name": "New Orleans Pelicans"
+        },
+        "markets": {
+          "moneyline": {
+            "Atlanta Hawks": {
+              "price": -485
+            },
+            "New Orleans Pelicans": {
+              "price": 370
+            }
+          },
+          "spread": {
+            "Atlanta Hawks": {
+              "price": -110,
+              "point": -10.0
+            },
+            "New Orleans Pelicans": {
+              "price": -110,
+              "point": 10.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 229.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 229.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907742,
+      "date": "2024-12-02",
+      "home_team": "BOS",
+      "away_team": "MIA",
+      "home_score": 108,
+      "away_score": 89,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Boston Celtics"
+        },
+        "away_team": {
+          "full_name": "Miami Heat"
+        },
+        "markets": {
+          "moneyline": {
+            "Boston Celtics": {
+              "price": -470
+            },
+            "Miami Heat": {
+              "price": 360
+            }
+          },
+          "spread": {
+            "Boston Celtics": {
+              "price": -105,
+              "point": -10.0
+            },
+            "Miami Heat": {
+              "price": -115,
+              "point": 10.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 220.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 220.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907743,
+      "date": "2024-12-02",
+      "home_team": "CHI",
+      "away_team": "BKN",
+      "home_score": 128,
+      "away_score": 102,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Chicago Bulls"
+        },
+        "away_team": {
+          "full_name": "Brooklyn Nets"
+        },
+        "markets": {
+          "moneyline": {
+            "Brooklyn Nets": {
+              "price": 270
+            },
+            "Chicago Bulls": {
+              "price": -340
+            }
+          },
+          "spread": {
+            "Brooklyn Nets": {
+              "price": -108,
+              "point": 7.5
+            },
+            "Chicago Bulls": {
+              "price": -112,
+              "point": -7.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 233.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 233.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15907744,
+      "date": "2024-12-02",
+      "home_team": "MIN",
+      "away_team": "LAL",
+      "home_score": 109,
+      "away_score": 80,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Minnesota Timberwolves"
+        },
+        "away_team": {
+          "full_name": "Los Angeles Lakers"
+        },
+        "markets": {
+          "moneyline": {
+            "Los Angeles Lakers": {
+              "price": 270
+            },
+            "Minnesota Timberwolves": {
+              "price": -340
+            }
+          },
+          "spread": {
+            "Los Angeles Lakers": {
+              "price": -108,
+              "point": 8.0
+            },
+            "Minnesota Timberwolves": {
+              "price": -112,
+              "point": -8.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 219.0
+            },
+            "Under": {
+              "price": -112,
+              "point": 219.0
+            }
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,352 @@
+{
+  "date": "2025-02-24",
+  "games": [
+    {
+      "game_id": 15908552,
+      "date": "2025-02-24",
+      "home_team": "DET",
+      "away_team": "LAC",
+      "home_score": 106,
+      "away_score": 97,
+      "status": "Final",
+      "simulated": true,
+      "odds": null
+    },
+    {
+      "game_id": 15908553,
+      "date": "2025-02-24",
+      "home_team": "IND",
+      "away_team": "DEN",
+      "home_score": 116,
+      "away_score": 125,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Indiana Pacers"
+        },
+        "away_team": {
+          "full_name": "Denver Nuggets"
+        },
+        "markets": {
+          "moneyline": {
+            "Denver Nuggets": {
+              "price": -192
+            },
+            "Indiana Pacers": {
+              "price": 160
+            }
+          },
+          "spread": {
+            "Denver Nuggets": {
+              "price": -110,
+              "point": -5.0
+            },
+            "Indiana Pacers": {
+              "price": -110,
+              "point": 5.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 245.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 245.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908554,
+      "date": "2025-02-24",
+      "home_team": "PHI",
+      "away_team": "CHI",
+      "home_score": 110,
+      "away_score": 142,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Philadelphia 76ers"
+        },
+        "away_team": {
+          "full_name": "Chicago Bulls"
+        },
+        "markets": {
+          "moneyline": {
+            "Chicago Bulls": {
+              "price": 154
+            },
+            "Philadelphia 76ers": {
+              "price": -185
+            }
+          },
+          "spread": {
+            "Chicago Bulls": {
+              "price": -108,
+              "point": 4.5
+            },
+            "Philadelphia 76ers": {
+              "price": -112,
+              "point": -4.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 233.0
+            },
+            "Under": {
+              "price": -112,
+              "point": 233.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908555,
+      "date": "2025-02-24",
+      "home_team": "WAS",
+      "away_team": "BKN",
+      "home_score": 107,
+      "away_score": 99,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Washington Wizards"
+        },
+        "away_team": {
+          "full_name": "Brooklyn Nets"
+        },
+        "markets": {
+          "moneyline": {
+            "Brooklyn Nets": {
+              "price": -155
+            },
+            "Washington Wizards": {
+              "price": 130
+            }
+          },
+          "spread": {
+            "Brooklyn Nets": {
+              "price": -112,
+              "point": -3.0
+            },
+            "Washington Wizards": {
+              "price": -108,
+              "point": 3.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 217.0
+            },
+            "Under": {
+              "price": -110,
+              "point": 217.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908556,
+      "date": "2025-02-24",
+      "home_team": "ATL",
+      "away_team": "MIA",
+      "home_score": 98,
+      "away_score": 86,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Atlanta Hawks"
+        },
+        "away_team": {
+          "full_name": "Miami Heat"
+        },
+        "markets": {
+          "moneyline": {
+            "Atlanta Hawks": {
+              "price": -105
+            },
+            "Miami Heat": {
+              "price": -115
+            }
+          },
+          "spread": {
+            "Atlanta Hawks": {
+              "price": -108,
+              "point": 1.0
+            },
+            "Miami Heat": {
+              "price": -112,
+              "point": -1.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 230.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 230.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908557,
+      "date": "2025-02-24",
+      "home_team": "OKC",
+      "away_team": "MIN",
+      "home_score": 128,
+      "away_score": 131,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Oklahoma City Thunder"
+        },
+        "away_team": {
+          "full_name": "Minnesota Timberwolves"
+        },
+        "markets": {
+          "moneyline": {
+            "Minnesota Timberwolves": {
+              "price": 500
+            },
+            "Oklahoma City Thunder": {
+              "price": -700
+            }
+          },
+          "spread": {
+            "Minnesota Timberwolves": {
+              "price": -108,
+              "point": 12.0
+            },
+            "Oklahoma City Thunder": {
+              "price": -112,
+              "point": -12.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 229.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 229.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908558,
+      "date": "2025-02-24",
+      "home_team": "UTA",
+      "away_team": "POR",
+      "home_score": 112,
+      "away_score": 114,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Utah Jazz"
+        },
+        "away_team": {
+          "full_name": "Portland Trail Blazers"
+        },
+        "markets": {
+          "moneyline": {
+            "Portland Trail Blazers": {
+              "price": -205
+            },
+            "Utah Jazz": {
+              "price": 170
+            }
+          },
+          "spread": {
+            "Portland Trail Blazers": {
+              "price": -110,
+              "point": -5.5
+            },
+            "Utah Jazz": {
+              "price": -110,
+              "point": 5.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 233.5
+            },
+            "Under": {
+              "price": -110,
+              "point": 233.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908559,
+      "date": "2025-02-24",
+      "home_team": "SAC",
+      "away_team": "CHA",
+      "home_score": 130,
+      "away_score": 88,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Sacramento Kings"
+        },
+        "away_team": {
+          "full_name": "Charlotte Hornets"
+        },
+        "markets": {
+          "moneyline": {
+            "Charlotte Hornets": {
+              "price": 410
+            },
+            "Sacramento Kings": {
+              "price": -550
+            }
+          },
+          "spread": {
+            "Charlotte Hornets": {
+              "price": -108,
+              "point": 11.0
+            },
+            "Sacramento Kings": {
+              "price": -112,
+              "point": -11.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 232.0
+            },
+            "Under": {
+              "price": -110,
+              "point": 232.0
+            }
+          }
+        }
+      }
+    }
+  ]
+}

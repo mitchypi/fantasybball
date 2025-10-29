@@ -1,0 +1,208 @@
+{
+  "date": "2025-04-05",
+  "games": [
+    {
+      "game_id": 15908859,
+      "date": "2025-04-05",
+      "home_team": "ATL",
+      "away_team": "NYK",
+      "home_score": 105,
+      "away_score": 121,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Atlanta Hawks"
+        },
+        "away_team": {
+          "full_name": "New York Knicks"
+        },
+        "markets": {
+          "moneyline": {
+            "Atlanta Hawks": {
+              "price": 124
+            },
+            "New York Knicks": {
+              "price": -148
+            }
+          },
+          "spread": {
+            "Atlanta Hawks": {
+              "price": -105,
+              "point": 2.5
+            },
+            "New York Knicks": {
+              "price": -115,
+              "point": -2.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 236.0
+            },
+            "Under": {
+              "price": -110,
+              "point": 236.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908860,
+      "date": "2025-04-05",
+      "home_team": "DET",
+      "away_team": "MEM",
+      "home_score": 103,
+      "away_score": 109,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Detroit Pistons"
+        },
+        "away_team": {
+          "full_name": "Memphis Grizzlies"
+        },
+        "markets": {
+          "moneyline": {
+            "Detroit Pistons": {
+              "price": 105
+            },
+            "Memphis Grizzlies": {
+              "price": -125
+            }
+          },
+          "spread": {
+            "Detroit Pistons": {
+              "price": -108,
+              "point": 1.5
+            },
+            "Memphis Grizzlies": {
+              "price": -112,
+              "point": -1.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 242.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 242.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908861,
+      "date": "2025-04-05",
+      "home_team": "PHI",
+      "away_team": "MIN",
+      "home_score": 109,
+      "away_score": 114,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Philadelphia 76ers"
+        },
+        "away_team": {
+          "full_name": "Minnesota Timberwolves"
+        },
+        "markets": {
+          "moneyline": {
+            "Minnesota Timberwolves": {
+              "price": -1350
+            },
+            "Philadelphia 76ers": {
+              "price": 800
+            }
+          },
+          "spread": {
+            "Minnesota Timberwolves": {
+              "price": -112,
+              "point": -16.0
+            },
+            "Philadelphia 76ers": {
+              "price": -108,
+              "point": 16.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -110,
+              "point": 224.5
+            },
+            "Under": {
+              "price": -110,
+              "point": 224.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908862,
+      "date": "2025-04-05",
+      "home_team": "MIA",
+      "away_team": "MIL",
+      "home_score": 115,
+      "away_score": 121,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Miami Heat"
+        },
+        "away_team": {
+          "full_name": "Milwaukee Bucks"
+        },
+        "markets": {
+          "moneyline": {
+            "Miami Heat": {
+              "price": -115
+            },
+            "Milwaukee Bucks": {
+              "price": -105
+            }
+          },
+          "spread": {
+            "Miami Heat": {
+              "price": -108,
+              "point": -1.0
+            },
+            "Milwaukee Bucks": {
+              "price": -112,
+              "point": 1.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 213.5
+            },
+            "Under": {
+              "price": -112,
+              "point": 213.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908863,
+      "date": "2025-04-05",
+      "home_team": "LAC",
+      "away_team": "DAL",
+      "home_score": 135,
+      "away_score": 104,
+      "status": "Final",
+      "simulated": true,
+      "odds": null
+    }
+  ]
+}

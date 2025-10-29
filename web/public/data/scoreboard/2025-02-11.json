@@ -1,0 +1,160 @@
+{
+  "date": "2025-02-11",
+  "games": [
+    {
+      "game_id": 15908495,
+      "date": "2025-02-11",
+      "home_team": "PHI",
+      "away_team": "TOR",
+      "home_score": 103,
+      "away_score": 106,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Philadelphia 76ers"
+        },
+        "away_team": {
+          "full_name": "Toronto Raptors"
+        },
+        "markets": {
+          "moneyline": {
+            "Philadelphia 76ers": {
+              "price": -410
+            },
+            "Toronto Raptors": {
+              "price": 320
+            }
+          },
+          "spread": {
+            "Philadelphia 76ers": {
+              "price": -110,
+              "point": -9.0
+            },
+            "Toronto Raptors": {
+              "price": -110,
+              "point": 9.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 225.0
+            },
+            "Under": {
+              "price": -108,
+              "point": 225.0
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908496,
+      "date": "2025-02-11",
+      "home_team": "IND",
+      "away_team": "NYK",
+      "home_score": 115,
+      "away_score": 128,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Indiana Pacers"
+        },
+        "away_team": {
+          "full_name": "New York Knicks"
+        },
+        "markets": {
+          "moneyline": {
+            "Indiana Pacers": {
+              "price": 114
+            },
+            "New York Knicks": {
+              "price": -135
+            }
+          },
+          "spread": {
+            "Indiana Pacers": {
+              "price": -110,
+              "point": 2.5
+            },
+            "New York Knicks": {
+              "price": -110,
+              "point": -2.5
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -112,
+              "point": 239.5
+            },
+            "Under": {
+              "price": -108,
+              "point": 239.5
+            }
+          }
+        }
+      }
+    },
+    {
+      "game_id": 15908497,
+      "date": "2025-02-11",
+      "home_team": "CHI",
+      "away_team": "DET",
+      "home_score": 92,
+      "away_score": 132,
+      "status": "Final",
+      "simulated": true,
+      "odds": null
+    },
+    {
+      "game_id": 15908498,
+      "date": "2025-02-11",
+      "home_team": "PHX",
+      "away_team": "MEM",
+      "home_score": 112,
+      "away_score": 119,
+      "status": "Final",
+      "simulated": true,
+      "odds": {
+        "home_team": {
+          "full_name": "Phoenix Suns"
+        },
+        "away_team": {
+          "full_name": "Memphis Grizzlies"
+        },
+        "markets": {
+          "moneyline": {
+            "Memphis Grizzlies": {
+              "price": -175
+            },
+            "Phoenix Suns": {
+              "price": 145
+            }
+          },
+          "spread": {
+            "Memphis Grizzlies": {
+              "price": -108,
+              "point": -4.0
+            },
+            "Phoenix Suns": {
+              "price": -112,
+              "point": 4.0
+            }
+          },
+          "total": {
+            "Over": {
+              "price": -108,
+              "point": 245.0
+            },
+            "Under": {
+              "price": -112,
+              "point": 245.0
+            }
+          }
+        }
+      }
+    }
+  ]
+}

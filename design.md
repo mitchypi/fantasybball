@@ -2,6 +2,75 @@
 
 Replay the full 2024-25 NBA season with perfect information. This project pulls every player game log and final scoreboard from balldontlie once, stores it locally, and powers a Yahoo-style dashboard plus a FastAPI backend so you can manage every team in the league offline.
 
+## Client-Side SPA (Gambling Mode Only)
+- Scope: convert to a TypeScript SPA that runs entirely in the browser, keeping only the sportsbook features (scoreboard + odds chips, bet slip, bankroll, pending/settled lists, date navigation, optional box scores). Fantasy league setup, drafts, rosters, standings, and playoffs are not part of this mode.
+- Hosting: Vite builds a static bundle under `web/dist/`; any static host can serve it (GitHub Pages, Netlify, S3, Nginx). No FastAPI endpoints are required at runtime.
+- Data: scoreboard and (optionally) box score data are static JSON files shipped in `web/public/data/`. The browser fetches them relative to `import.meta.env.BASE_URL`.
+- Persistence: all user state (bankroll, bets, cached scoreboards/boxscores) is stored in IndexedDB using the `idb` library.
+
+### SPA Layout
+```
+web/
+├── index.html               # Minimal layout (scoreboard + bet slip)
+├── package.json             # Vite + TypeScript + idb
+├── tsconfig.json
+├── vite.config.ts           # base: './' for relative assets
+├── public/
+│   └── data/
+│       ├── manifest.json
+│       ├── scoreboard/<YYYY-MM-DD>.json
+│       └── boxscores/<GAME_ID>.json (optional)
+└── src/
+    ├── api.ts              # fetch manifest/scoreboards/boxscores
+    ├── db.ts               # IndexedDB (system, bets, cache)
+    ├── settlement.ts       # bet settlement from final scores
+    ├── types.ts            # shared types
+    ├── utils.ts            # formatting + odds helpers
+    ├── style.css           # ported styles from static CSS (top-bar, scoreboard, bet slip)
+    └── ui/
+        ├── scoreboard.ts   # render scoreboard + odds chips
+        └── bets.ts         # render bet slip, bankroll, lists
+```
+
+### Static Data Formats
+- `public/data/manifest.json`:
+  - `{ start_date, end_date, dates: string[], teams: Record<string, any> }`
+- `public/data/scoreboard/<YYYY-MM-DD>.json`:
+  - `{ date, games: [ { game_id, away_team, home_team, away_score?, home_score?, status?, period_display?, time?, simulated?, odds? } ] }`
+  - `odds.markets` includes `moneyline`, `spread`, and `total` maps (full team names for lookup, plus Over/Under for totals); `odds.{home_team,away_team}.full_name` powers the UI labels.
+- `public/data/boxscores/<GAME_ID>.json`:
+  - `{ date, away_team: { name, abbreviation, score, players: [...] }, home_team: { ... } }` with per-player stat totals (minutes, shooting splits, counting stats, plus/minus) sourced from `player_game_logs_<season>.csv`.
+
+### IndexedDB Schema (DB v2)
+- `system` — key `system`; `{ currentDate, bankroll, pendingStake, pendingPotential }`
+- `bets` — auto id; `{ placed_at, status: pending|won|lost|void, kind: single|parlay, stake, payout?, legs[] }`
+- `scoreboards` — key: date; value: scoreboard payload
+- `boxscores` — key: game_id; value: box score payload
+
+### Client Behavior
+- Startup: load `manifest.json` (if present) and last `system.currentDate`; fetch `scoreboard/<date>.json` with fallback to cache; render and wire odds chips to the bet slip.
+- Daily flow: the scoreboard initially hides final scores and disables boxscores until the user clicks **Simulate Day**, which settles bets, persists the simulation flag in IndexedDB, and unlocks the **Next** navigation.
+- Box scores: clicking a scoreboard card fetches `boxscores/<game_id>.json`, renders home/away player tables, and caches the payload in IndexedDB for offline viewing.
+- Place Bet: validate bankroll; compute potential payout from American odds; persist slip to `bets`; update `system.pending*`.
+- Settlement: when viewing a date, attempt to settle pending bets whose games have final scores using in-browser rules (`settlement.ts`). Update bankroll: `available = initial + settledDelta - pendingStake`.
+- Odds markets: moneyline, spread, and total chips are rendered per game; spreads/totals include their point values, and chips disable automatically once the day is simulated.
+- Offline: once a scoreboard is fetched, it is cached in IDB; the app works offline for previously viewed dates.
+
+### Data Build Pipeline
+- Script: `scripts/build_web_data.py --season 202425 --emit-static`
+- Reads `data/games_<season>.csv`, merges odds from `data/odds_<season>.json` (moneyline + spread + total), and writes `manifest.json`, per-day `scoreboard/<date>.json`, and per-game `boxscores/<game_id>.json` generated from `player_game_logs_<season>.csv`. Falls back to a small example dataset when inputs are missing.
+
+### Migration Plan (Summary)
+1. Create SPA under `web/` (Vite + TS) — complete.
+2. Define static data formats and IDB schema — complete.
+3. Port scoreboard + betting UI with odds chips — initial version complete.
+4. Implement bet placing and settlement (moneyline) — initial version complete.
+5. Author build script to emit static JSON — scaffold complete.
+6. Trim server-only fantasy UI from SPA — gambling-only layout used.
+7. Validate offline behavior and date navigation — pending real data.
+8. Host `web/dist/` on static host — build with `npm run build` in `web/`.
+
+
 ## Core ideas
 - Offline-first cache: player game logs and game scores are saved to `data/` and reused for every simulation run.
 - Multiple leagues: the menu dashboard lists every saved league; create as many "what-if" universes as you like and jump between them.
