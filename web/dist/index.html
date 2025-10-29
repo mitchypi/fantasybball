@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fantasy Replay – Gambling Mode</title>
     <link rel="icon" href="data:," />
-    <script type="module" crossorigin src="./assets/index-C4mgrjsb.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-CCNaa8Xz.css">
+    <script type="module" crossorigin src="./assets/index-DZ4cWICS.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-C3wg7dbm.css">
   </head>
   <body>
     <header class="top-bar">
@@ -21,21 +21,22 @@
       </div>
     </header>
     <main class="dashboard-main">
-      <div class="scoreboard-layout">
-        <section id="scoreboard-panel" class="panel">
-          <h2>Scoreboard</h2>
-          <div class="scoreboard-date-label">
-            <span class="muted">Current Day</span>
-            <strong id="scoreboard-current-date">Oct 22, 2024</strong>
-          </div>
-          <div class="scoreboard-header">
-            <label for="scoreboard-date">Date <input id="scoreboard-date" type="date" /></label>
-            <button id="date-prev" type="button">Previous</button>
-            <button id="date-next" type="button">Next</button>
-            <button id="simulate-day" type="button">Simulate Day</button>
-            <button id="reset-game" type="button">Reset</button>
-          </div>
-          <ul id="scoreboard-list" class="scoreboard-list"></ul>
+      <section id="scoreboard-panel" class="panel">
+        <h2>Scoreboard</h2>
+        <div class="scoreboard-date-label">
+          <span class="muted">Current Day</span>
+          <strong id="scoreboard-current-date">Oct 22, 2024</strong>
+        </div>
+        <div class="scoreboard-header">
+          <label for="scoreboard-date">Date <input id="scoreboard-date" type="date" /></label>
+          <button id="date-prev" type="button">Previous</button>
+          <button id="date-next" type="button">Next</button>
+          <button id="simulate-day" type="button">Simulate Day</button>
+          <button id="reset-game" type="button">Reset</button>
+        </div>
+        <ul id="scoreboard-list" class="scoreboard-list"></ul>
+        <section id="casino-floor" class="panel sub-panel">
+          <h2>Casino Floor</h2>
           <div class="mini-games">
             <section class="mini-game" id="blackjack-module">
               <div class="mini-game__header">
@@ -71,26 +72,48 @@
             <section class="mini-game" id="roulette-module">
               <div class="mini-game__header">
                 <h3>Roulette</h3>
-                <span class="muted">Pick a color, win 1x stake.</span>
+                <span class="muted">Select a chip and click numbers to place bets.</span>
               </div>
-              <div id="roulette-status" class="mini-game__status muted">Choose a color and spin.</div>
-              <div class="mini-game__controls">
-                <label>Stake <input id="roulette-stake" type="number" min="1" step="1" value="10" /></label>
-                <label>
-                  Pick
-                  <select id="roulette-choice">
-                    <option value="red">Red</option>
-                    <option value="black">Black</option>
-                    <option value="green">Green (35x)</option>
-                  </select>
-                </label>
-                <button id="roulette-spin" type="button">Spin</button>
+              <div id="roulette-status" class="mini-game__status muted">Choose a chip, then tap the board.</div>
+              <div class="mini-game__controls roulette-controls">
+                <label>Total Stake <input id="roulette-stake" type="number" min="0" step="1" value="0" readonly /></label>
+                <div class="roulette-denoms">
+                  <button type="button" class="roulette-chip denom" data-amount="1">1</button>
+                  <button type="button" class="roulette-chip denom" data-amount="5">5</button>
+                  <button type="button" class="roulette-chip denom" data-amount="25">25</button>
+                  <button type="button" class="roulette-chip denom" data-amount="100">100</button>
+                  <button type="button" class="roulette-chip denom" data-amount="500">500</button>
+                  <button type="button" class="roulette-chip denom" data-amount="1000">1K</button>
+                  <button type="button" class="roulette-chip denom" data-amount="10000">10K</button>
+                  <button type="button" class="roulette-chip denom" data-amount="100000">100K</button>
+                </div>
+                <div class="roulette-actions">
+                  <button id="roulette-clear" type="button" class="roulette-clear">Clear Bets</button>
+                  <button id="roulette-spin" type="button">Spin</button>
+                </div>
+              </div>
+              <div class="roulette-visuals">
+                <div class="roulette-wheel-wrap">
+                  <div id="roulette-wheel" class="roulette-wheel">
+                    <div id="roulette-ball" class="roulette-ball"></div>
+                  </div>
+                  <div class="roulette-pointer"></div>
+                </div>
+                <div id="roulette-board" class="roulette-board"></div>
               </div>
             </section>
           </div>
         </section>
-        <aside id="betting-panel" class="panel betslip-panel">
-          <h2>Bet Slip</h2>
+      </section>
+      <aside id="betting-panel" class="panel betslip-panel">
+          <div class="bet-panel-header">
+            <h2>Betting</h2>
+            <div class="bet-panel-toggle">
+              <button id="bet-panel-slip" type="button" class="active">Slip</button>
+              <button id="bet-panel-history" type="button">My Bets</button>
+            </div>
+          </div>
+          <div id="bet-panel-slip-view">
           <div class="odds-format">
             <span class="muted">Odds</span>
             <div class="odds-format__buttons">
@@ -124,6 +147,8 @@
             <button id="bet-slip-clear" type="button">Clear</button>
           </div>
           <p id="bet-slip-message" class="muted"></p>
+          </div>
+          <div id="bet-panel-history-view" class="hidden">
           <div class="bet-history">
             <div class="bet-history__tabs">
               <button id="bets-toggle-pending" type="button" class="active">Pending</button>
@@ -131,6 +156,7 @@
             </div>
             <div id="pending-bets" class="bet-history__list"></div>
             <div id="settled-bets" class="bet-history__list hidden"></div>
+          </div>
           </div>
         </aside>
       </div>
