@@ -17,6 +17,8 @@ async function boot() {
   const aside = document.querySelector('aside') as HTMLElement;
   const pendingRoot = document.getElementById('pending-bets') as HTMLElement;
   const settledRoot = document.getElementById('settled-bets') as HTMLElement;
+  const pendingToggle = document.getElementById('bets-toggle-pending') as HTMLButtonElement;
+  const settledToggle = document.getElementById('bets-toggle-settled') as HTMLButtonElement;
 
   const manifest = await safeFetchManifest();
   let system = await getSystem();
@@ -42,6 +44,7 @@ async function boot() {
   let pending: BetSlip[] = [];
   let settled: BetSlip[] = [];
   let bankroll = { available: system.bankroll, pending_stake: system.pendingStake, pending_potential: system.pendingPotential };
+  let activeBetTab: 'pending' | 'settled' = 'pending';
 
   function setDate(d: string) {
     const currentDate = system.currentDate;
@@ -124,6 +127,7 @@ async function boot() {
       onRequestBoxscore: currentSimulated ? loadBoxscore : undefined,
     });
     updateSimulationControls(system.currentDate, currentSimulated, hasGames);
+    activateBetTab(activeBetTab);
   }
 
   async function loadBoxscore(gameId: string | number) {
@@ -174,6 +178,7 @@ async function boot() {
     renderBankroll(header, bankroll);
     renderBetSlip(aside, { selections, bankroll }, (_value) => render(), placeBet, clearSlip);
     renderBetLists(pendingRoot, settledRoot, pending, settled);
+    activateBetTab(activeBetTab);
   }
 
   async function placeBet() {
@@ -227,6 +232,8 @@ async function boot() {
   dateNextBtn.onclick = () => stepDate(1);
   if (simulateBtn) simulateBtn.onclick = () => simulateCurrentDay().catch(console.error);
   if (resetBtn) resetBtn.onclick = () => resetToStart(start).catch(console.error);
+  if (pendingToggle) pendingToggle.onclick = () => activateBetTab('pending');
+  if (settledToggle) settledToggle.onclick = () => activateBetTab('settled');
   await loadScoreboard(start);
 
   function stepDate(deltaDays: number) {
@@ -260,6 +267,14 @@ async function boot() {
     await clearBoxscoreCache();
     presentScoreboard();
     await loadScoreboard(startDate);
+  }
+
+  function activateBetTab(tab: 'pending' | 'settled') {
+    activeBetTab = tab;
+    if (pendingToggle) pendingToggle.classList.toggle('active', tab === 'pending');
+    if (settledToggle) settledToggle.classList.toggle('active', tab === 'settled');
+    if (pendingRoot) pendingRoot.classList.toggle('hidden', tab !== 'pending');
+    if (settledRoot) settledRoot.classList.toggle('hidden', tab !== 'settled');
   }
 }
 

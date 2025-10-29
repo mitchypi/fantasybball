@@ -59,10 +59,14 @@
             <button id="bet-slip-clear" type="button">Clear</button>
           </div>
           <p id="bet-slip-message" class="muted"></p>
-          <h3>Pending</h3>
-          <div id="pending-bets"></div>
-          <h3>Settled</h3>
-          <div id="settled-bets"></div>
+          <div class="bet-history">
+            <div class="bet-history__tabs">
+              <button id="bets-toggle-pending" type="button" class="active">Pending</button>
+              <button id="bets-toggle-settled" type="button">Settled</button>
+            </div>
+            <div id="pending-bets" class="bet-history__list"></div>
+            <div id="settled-bets" class="bet-history__list hidden"></div>
+          </div>
         </aside>
       </div>
     </main>
