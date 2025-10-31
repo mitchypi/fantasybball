@@ -3,37 +3,52 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fantasy Replay – Gambling Mode</title>
+    <title>GET YO MONEY UP !!!</title>
     <link rel="icon" href="data:," />
   </head>
   <body>
     <header class="top-bar">
       <div class="brand">
-        <h1>Fantasy Replay</h1>
+        <h1>GET YO MONEY UP !!!</h1>
         <span class="season">Gambling Mode</span>
       </div>
       <div id="bankroll">
-        <span>Available: <strong id="bankroll-available">$0.00</strong></span>
-        <span>Pending: <strong id="bankroll-pending">$0.00</strong></span>
-        <span>Potential: <strong id="bankroll-potential">$0.00</strong></span>
+        <div class="bankroll-group">
+          <span class="bankroll-label">Bankroll</span>
+          <span>Available: <strong id="bankroll-available">$0.00</strong></span>
+          <span>Pending: <strong id="bankroll-pending">$0.00</strong></span>
+          <span>Potential: <strong id="bankroll-potential">$0.00</strong></span>
+        </div>
+        <div class="bankroll-group">
+          <span class="bankroll-label">Sportsbook</span>
+          <span>Wagered: <strong id="sportsbook-wagered">$0.00</strong></span>
+          <span>P/L: <strong id="sportsbook-profit">$0.00</strong></span>
+        </div>
+        <div class="bankroll-group">
+          <span class="bankroll-label">Casino</span>
+          <span>Wagered: <strong id="casino-wagered">$0.00</strong></span>
+          <span>P/L: <strong id="casino-profit">$0.00</strong></span>
+        </div>
       </div>
     </header>
     <main class="dashboard-main">
-      <section id="scoreboard-panel" class="panel">
-        <h2>Scoreboard</h2>
-        <div class="scoreboard-date-label">
-          <span class="muted">Current Day</span>
-          <strong id="scoreboard-current-date">Oct 22, 2024</strong>
-        </div>
-        <div class="scoreboard-header">
-          <label for="scoreboard-date">Date <input id="scoreboard-date" type="date" /></label>
-          <button id="date-prev" type="button">Previous</button>
-          <button id="date-next" type="button">Next</button>
-          <button id="simulate-day" type="button">Simulate Day</button>
-          <button id="reset-game" type="button">Reset</button>
-        </div>
-        <ul id="scoreboard-list" class="scoreboard-list"></ul>
-        <section id="casino-floor" class="panel sub-panel">
+      <div class="main-grid">
+        <section id="scoreboard-panel" class="panel">
+          <h2>Scoreboard</h2>
+          <div class="scoreboard-date-label">
+            <span class="muted">Current Day</span>
+            <strong id="scoreboard-current-date">Oct 22, 2024</strong>
+          </div>
+          <div class="scoreboard-header">
+            <label for="scoreboard-date">Date <input id="scoreboard-date" type="date" /></label>
+            <button id="date-prev" type="button">Previous</button>
+            <button id="date-next" type="button">Next</button>
+            <button id="simulate-day" type="button">Simulate Day</button>
+            <button id="reset-game" type="button">Reset</button>
+          </div>
+          <ul id="scoreboard-list" class="scoreboard-list"></ul>
+        </section>
+        <section id="casino-floor" class="panel">
           <h2>Casino Floor</h2>
           <div class="mini-games">
             <section class="mini-game" id="blackjack-module">
@@ -68,33 +83,57 @@
               </div>
             </section>
             <section class="mini-game" id="roulette-module">
-              <div class="mini-game__header">
-                <h3>Roulette</h3>
-                <span class="muted">Select a chip and click numbers to place bets.</span>
+            <div class="mini-game__header">
+              <h3>Roulette</h3>
+              <span class="muted">Enter a stake and click numbers to place bets.</span>
+            </div>
+            <div id="roulette-status" class="mini-game__status muted">Enter a stake, then tap the board.</div>
+            <div class="mini-game__controls roulette-controls">
+              <label>Stake <input id="roulette-stake" type="number" min="1" step="1" value="10" /></label>
+              <label>Inside Bet
+                <select id="roulette-inside-type">
+                  <option value="straight">Straight (1)</option>
+                  <option value="split">Split (2)</option>
+                  <option value="street">Street (3)</option>
+                  <option value="corner">Corner (4)</option>
+                  <option value="sixline">Six Line (6)</option>
+                </select>
+              </label>
+              <button id="roulette-top-line" type="button" class="roulette-special">Basket (0,1,2,3)</button>
+              <div class="roulette-actions">
+                <button id="roulette-clear" type="button" class="roulette-clear">Clear Bets</button>
+                <button id="roulette-spin" type="button">Spin</button>
               </div>
-              <div id="roulette-status" class="mini-game__status muted">Choose a chip, then tap the board.</div>
-              <div class="mini-game__controls roulette-controls">
-                <label>Total Stake <input id="roulette-stake" type="number" min="0" step="1" value="0" readonly /></label>
-                <div class="roulette-denoms">
-                  <button type="button" class="roulette-chip denom" data-amount="1">1</button>
-                  <button type="button" class="roulette-chip denom" data-amount="5">5</button>
-                  <button type="button" class="roulette-chip denom" data-amount="25">25</button>
-                  <button type="button" class="roulette-chip denom" data-amount="100">100</button>
-                  <button type="button" class="roulette-chip denom" data-amount="500">500</button>
-                  <button type="button" class="roulette-chip denom" data-amount="1000">1K</button>
-                  <button type="button" class="roulette-chip denom" data-amount="10000">10K</button>
-                  <button type="button" class="roulette-chip denom" data-amount="100000">100K</button>
-                </div>
-                <div class="roulette-actions">
-                  <button id="roulette-clear" type="button" class="roulette-clear">Clear Bets</button>
-                  <button id="roulette-spin" type="button">Spin</button>
+            </div>
+            <div class="roulette-outside">
+              <div class="roulette-outside-group">
+                <span class="muted">Even Money</span>
+                <div class="roulette-outside-buttons">
+                  <button type="button" data-outside-bet="red">Red</button>
+                  <button type="button" data-outside-bet="black">Black</button>
+                  <button type="button" data-outside-bet="odd">Odd</button>
+                  <button type="button" data-outside-bet="even">Even</button>
+                  <button type="button" data-outside-bet="low">Low (1-18)</button>
+                  <button type="button" data-outside-bet="high">High (19-36)</button>
                 </div>
               </div>
-              <div class="roulette-visuals">
-                <div class="roulette-wheel-wrap">
-                  <div id="roulette-wheel" class="roulette-wheel">
-                    <div id="roulette-ball" class="roulette-ball"></div>
-                  </div>
+              <div class="roulette-outside-group">
+                <span class="muted">2 to 1</span>
+                <div class="roulette-outside-buttons">
+                  <button type="button" data-outside-bet="dozen1">1st 12</button>
+                  <button type="button" data-outside-bet="dozen2">2nd 12</button>
+                  <button type="button" data-outside-bet="dozen3">3rd 12</button>
+                  <button type="button" data-outside-bet="column1">Column 1</button>
+                  <button type="button" data-outside-bet="column2">Column 2</button>
+                  <button type="button" data-outside-bet="column3">Column 3</button>
+                </div>
+              </div>
+            </div>
+            <div class="roulette-visuals">
+              <div class="roulette-wheel-wrap">
+                <div id="roulette-wheel" class="roulette-wheel">
+                  <div id="roulette-ball" class="roulette-ball"></div>
+                </div>
                   <div class="roulette-pointer"></div>
                 </div>
                 <div id="roulette-board" class="roulette-board"></div>
@@ -102,8 +141,7 @@
             </section>
           </div>
         </section>
-      </section>
-      <aside id="betting-panel" class="panel betslip-panel">
+        <aside id="betting-panel" class="panel betslip-panel">
           <div class="bet-panel-header">
             <h2>Betting</h2>
             <div class="bet-panel-toggle">

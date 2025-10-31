@@ -6,6 +6,16 @@ export interface BetUIDeps {
   selections: BetLeg[];
 }
 
+export interface WagerTotals {
+  wagered: number;
+  profit: number;
+}
+
+function applyProfitClass(el: HTMLElement, amount: number) {
+  el.classList.toggle('value-positive', amount > 0);
+  el.classList.toggle('value-negative', amount < 0);
+}
+
 export function renderBetSlip(
   root: HTMLElement,
   deps: BetUIDeps,
@@ -81,13 +91,32 @@ export function renderBetSlip(
   clearBtn.onclick = onClear;
 }
 
-export function renderBankroll(header: HTMLElement, data: { available: number; pending_stake: number; pending_potential: number }) {
+export function renderBankroll(
+  header: HTMLElement,
+  data: { available: number; pending_stake: number; pending_potential: number },
+  sportsbook: WagerTotals,
+  casino: WagerTotals,
+) {
   const availableEl = header.querySelector('#bankroll-available')!;
   const pendingEl = header.querySelector('#bankroll-pending')!;
   const potentialEl = header.querySelector('#bankroll-potential')!;
+  const sportsbookWagerEl = header.querySelector('#sportsbook-wagered');
+  const sportsbookProfitEl = header.querySelector('#sportsbook-profit');
+  const casinoWagerEl = header.querySelector('#casino-wagered');
+  const casinoProfitEl = header.querySelector('#casino-profit');
   availableEl.textContent = formatCurrency(data.available);
   pendingEl.textContent = formatCurrency(data.pending_stake);
   potentialEl.textContent = formatCurrency(data.pending_potential);
+  if (sportsbookWagerEl) sportsbookWagerEl.textContent = formatCurrency(sportsbook.wagered);
+  if (sportsbookProfitEl) {
+    sportsbookProfitEl.textContent = formatCurrency(sportsbook.profit);
+    applyProfitClass(sportsbookProfitEl, sportsbook.profit);
+  }
+  if (casinoWagerEl) casinoWagerEl.textContent = formatCurrency(casino.wagered);
+  if (casinoProfitEl) {
+    casinoProfitEl.textContent = formatCurrency(casino.profit);
+    applyProfitClass(casinoProfitEl, casino.profit);
+  }
 }
 
 export function renderBetLists(

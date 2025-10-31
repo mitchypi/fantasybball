@@ -20,7 +20,18 @@ export function getDB() {
       upgrade(db) {
         if (!db.objectStoreNames.contains('system')) {
           const store = db.createObjectStore('system', { keyPath: 'key' });
-          store.put({ key: 'system', currentDate: new Date().toISOString().slice(0, 10), bankroll: 1000, initialBankroll: 1000, pendingStake: 0, pendingPotential: 0 } satisfies SystemState);
+          store.put({
+            key: 'system',
+            currentDate: new Date().toISOString().slice(0, 10),
+            bankroll: 1000,
+            initialBankroll: 1000,
+            pendingStake: 0,
+            pendingPotential: 0,
+            sportsbookWagered: 0,
+            sportsbookProfit: 0,
+            casinoWagered: 0,
+            casinoProfit: 0,
+          } satisfies SystemState);
         }
         if (!db.objectStoreNames.contains('bets')) {
           db.createObjectStore('bets', { keyPath: 'id', autoIncrement: true });
@@ -42,8 +53,34 @@ export function getDB() {
 
 export async function getSystem(): Promise<SystemState> {
   const db = await getDB();
-  const val = await db.get('system', 'system');
-  return val as SystemState;
+  const val = (await db.get('system', 'system')) as SystemState | undefined;
+  if (!val) {
+    const placeholder: SystemState = {
+      key: 'system',
+      currentDate: new Date().toISOString().slice(0, 10),
+      bankroll: 1000,
+      initialBankroll: 1000,
+      pendingStake: 0,
+      pendingPotential: 0,
+      sportsbookWagered: 0,
+      sportsbookProfit: 0,
+      casinoWagered: 0,
+      casinoProfit: 0,
+    };
+    await db.put('system', placeholder);
+    return placeholder;
+  }
+  const patch: Partial<SystemState> = {};
+  if (val.sportsbookWagered == null) patch.sportsbookWagered = 0;
+  if (val.sportsbookProfit == null) patch.sportsbookProfit = 0;
+  if (val.casinoWagered == null) patch.casinoWagered = 0;
+  if (val.casinoProfit == null) patch.casinoProfit = 0;
+  if (Object.keys(patch).length) {
+    const next = { ...val, ...patch } as SystemState;
+    await db.put('system', next);
+    return next;
+  }
+  return val;
 }
 
 export async function setSystem(patch: Partial<SystemState>) {

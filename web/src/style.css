@@ -9,6 +9,7 @@
   --accent: #2563eb;
   --accent-soft: rgba(37, 99, 235, 0.15);
   --success: #22c55e;
+  --danger: #ef4444;
   font-family: 'Segoe UI', Tahoma, sans-serif;
 }
 
@@ -54,21 +55,56 @@ header.top-bar {
 
 #bankroll {
   display: flex;
-  gap: 1.25rem;
+  gap: 1.5rem;
   font-size: 0.9rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
 
-#bankroll span strong {
+.bankroll-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 140px;
+}
+
+.bankroll-group span {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  white-space: nowrap;
+}
+
+.bankroll-group strong {
   font-weight: 700;
+}
+
+.bankroll-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.value-positive {
+  color: var(--success);
+}
+
+.value-negative {
+  color: var(--danger);
 }
 
 .dashboard-main {
   padding: 2rem;
   min-height: calc(100vh - 4.5rem);
+}
+
+.main-grid {
   display: grid;
-  grid-template-columns: minmax(0, 3fr) minmax(320px, 1fr);
+  grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr);
+  grid-template-rows: auto auto;
   gap: 1.75rem;
-  align-items: stretch;
+  align-items: start;
 }
 
 .panel {
@@ -86,6 +122,8 @@ header.top-bar {
   gap: 1.25rem;
   min-height: 0;
   flex: 1 1 auto;
+  grid-column: 1;
+  grid-row: 1;
 }
 
 .betslip-panel {
@@ -94,7 +132,9 @@ header.top-bar {
   gap: 1rem;
   height: calc(100vh - 8.5rem);
   overflow-y: auto;
-  align-self: flex-start;
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: stretch;
   padding-bottom: 2rem;
 }
 
@@ -158,25 +198,19 @@ header.top-bar {
   overflow-y: auto;
 }
 
-.sub-panel {
-  background: rgba(15, 23, 42, 0.5);
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  border-radius: 0.9rem;
-  padding: 1.25rem;
-  box-shadow: none;
-  margin-top: 0.5rem;
-}
-
-.sub-panel h2 {
-  margin: 0 0 1rem;
-  font-size: 1.1rem;
-  letter-spacing: 0.03em;
+.content-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr);
+  gap: 1.5rem;
+  align-self: stretch;
 }
 
 #casino-floor {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  grid-column: 1;
+  grid-row: 2;
 }
 
 .scoreboard-header {
@@ -260,49 +294,14 @@ header.top-bar {
   padding: 0.35rem 0.6rem;
 }
 
-.roulette-denoms {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  align-items: center;
+.roulette-special {
+  background: rgba(251, 191, 36, 0.25);
+  border: 1px solid rgba(250, 204, 21, 0.45);
+  color: rgba(250, 204, 21, 0.9);
 }
 
-.roulette-chip {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: 2px solid rgba(15, 23, 42, 0.85);
-  color: #0f172a;
-  font-weight: 700;
-  font-size: 0.8rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.roulette-chip::after {
-  content: '';
-  position: absolute;
-  inset: 6px;
-  border-radius: 50%;
-  border: 2px solid rgba(15, 23, 42, 0.55);
-}
-.roulette-chip.denom {
-  background: radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 0.85), rgba(29, 78, 216, 0.95));
-  color: #f8fafc;
-}
-
-.roulette-chip.selected {
-  box-shadow: 0 0 0 3px rgba(191, 219, 254, 0.6);
-  transform: translateY(-3px);
-}
-
-.roulette-chip:disabled {
-  opacity: 0.4;
-  transform: none;
-  cursor: not-allowed;
+.roulette-special:hover {
+  background: rgba(250, 204, 21, 0.35);
 }
 
 .roulette-actions {
@@ -320,6 +319,37 @@ header.top-bar {
 
 .roulette-clear:hover {
   background: rgba(148, 163, 184, 0.35);
+}
+
+.roulette-outside {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.roulette-outside-group {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.roulette-outside-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.roulette-outside-buttons button {
+  background: rgba(37, 99, 235, 0.3);
+  border: 1px solid rgba(37, 99, 235, 0.45);
+  color: #f8fafc;
+  border-radius: 0.6rem;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.roulette-outside-buttons button:hover {
+  background: rgba(37, 99, 235, 0.45);
 }
 
 .mini-game__actions {
@@ -559,9 +589,17 @@ header.top-bar {
 
 .roulette-board {
   display: grid;
-  grid-template-columns: minmax(70px, auto) 1fr;
-  gap: 0.75rem;
+  grid-template-columns: minmax(60px, auto) 1fr;
+  gap: 0.35rem;
+  align-items: start;
+}
+
+.roulette-zero-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
   align-items: stretch;
+  grid-column: 1;
 }
 
 .roulette-zero,
@@ -587,6 +625,7 @@ header.top-bar {
   display: grid;
   grid-template-columns: repeat(3, minmax(60px, 1fr));
   gap: 0.4rem;
+  grid-column: 2;
 }
 
 .roulette-row {
@@ -1005,10 +1044,6 @@ button:disabled {
   .mini-game__controls {
     flex-direction: column;
     align-items: flex-start;
-  }
-
-  .roulette-denoms {
-    flex-wrap: wrap;
   }
 }
 

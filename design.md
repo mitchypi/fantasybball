@@ -42,7 +42,7 @@ web/
   - `{ date, away_team: { name, abbreviation, score, players: [...] }, home_team: { ... } }` with per-player stat totals (minutes, shooting splits, counting stats, plus/minus) sourced from `player_game_logs_<season>.csv`.
 
 ### IndexedDB Schema (DB v2)
-- `system` — key `system`; `{ currentDate, bankroll, pendingStake, pendingPotential }`
+- `system` — key `system`; `{ currentDate, bankroll, pendingStake, pendingPotential, sportsbookWagered, sportsbookProfit, casinoWagered, casinoProfit }`
 - `bets` — auto id; `{ placed_at, status: pending|won|lost|void, kind: single|parlay, stake, payout?, legs[] }`
 - `scoreboards` — key: date; value: scoreboard payload
 - `boxscores` — key: game_id; value: box score payload
@@ -53,6 +53,7 @@ web/
 - Box scores: clicking a scoreboard card fetches `boxscores/<game_id>.json`, renders home/away player tables, and caches the payload in IndexedDB for offline viewing.
 - Place Bet: validate bankroll; compute potential payout from American odds; persist slip to `bets`; update `system.pending*`.
 - Settlement: when viewing a date, attempt to settle pending bets whose games have final scores using in-browser rules (`settlement.ts`). Update bankroll: `available = initial + settledDelta - pendingStake`.
+- Sportsbook and casino widgets maintain lifetime wager/profit totals in `system`, surfacing them in the top-bar for quick tracking across sessions.
 - Odds markets: moneyline, spread, and total chips are rendered per game; spreads/totals include their point values, and chips disable automatically once the day is simulated.
 - Offline: once a scoreboard is fetched, it is cached in IDB; the app works offline for previously viewed dates.
 

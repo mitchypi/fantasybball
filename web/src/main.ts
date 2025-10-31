@@ -3,7 +3,7 @@ import { fetchBoxscore, fetchManifest, fetchScoreboard } from './api';
 import { getSystem, setSystem, addBet, listBets, updateBet, cacheScoreboard, getCachedScoreboard, cacheBoxscore, getCachedBoxscore, getSimulationState, setSimulationState, clearBets, clearSimulations, clearScoreboardCache, clearBoxscoreCache } from './db';
 import { renderScoreboard } from './ui/scoreboard';
 import { renderBetSlip, renderBankroll, renderBetLists } from './ui/bets';
-import type { BetLeg, BetSlip, BoxscorePayload, ScoreboardPayload } from './types';
+import type { BetLeg, BetSlip, BoxscorePayload, ScoreboardPayload, SystemState } from './types';
 import { settleSlip } from './settlement';
 import { formatCurrency } from './utils';
 
@@ -33,18 +33,74 @@ let blackjackHandsSinceShuffle = 0;
 
 type RouletteChoice = 'red' | 'black' | 'green';
 
+type InsideBetType = 'straight' | 'split' | 'street' | 'corner' | 'sixline';
+
+interface RouletteBetEntry {
+  id: string;
+  label: string;
+  numbers: string[];
+  amount: number;
+  payout: number;
+  kind: 'inside' | 'outside';
+}
+
+interface GridPosition {
+  row: number;
+  col: number;
+}
+
 const ROULETTE_SEQUENCE = [
-  0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24,
-  16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26,
+  '0', '32', '15', '19', '4', '21', '2', '25', '17', '34', '6', '27', '13', '36', '11', '30', '8', '23',
+  '10', '5', '24', '16', '33', '1', '20', '14', '31', '9', '22', '18', '29', '7', '28', '12', '35', '3',
+  '26',
 ];
-const ROULETTE_RED_NUMBERS = new Set<number>([
-  1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36,
+const ROULETTE_RED_NUMBERS = new Set<string>([
+  '1', '3', '5', '7', '9', '12', '14', '16', '18', '19', '21', '23', '25', '27', '30', '32', '34', '36',
 ]);
 const ROULETTE_SEGMENT = 360 / ROULETTE_SEQUENCE.length;
 const ROULETTE_SPIN_DURATION = 3200;
 
-function getRouletteColor(value: number): RouletteChoice {
-  if (value === 0) return 'green';
+const ALL_NUMBER_STRINGS = Array.from({ length: 36 }, (_, i) => String(i + 1));
+
+const COLUMN_NUMBERS: Record<'column1' | 'column2' | 'column3', string[]> = {
+  column1: ALL_NUMBER_STRINGS.filter((n) => (Number(n) - 1) % 3 === 0),
+  column2: ALL_NUMBER_STRINGS.filter((n) => (Number(n) - 1) % 3 === 1),
+  column3: ALL_NUMBER_STRINGS.filter((n) => (Number(n) - 1) % 3 === 2),
+};
+
+const DOZEN_NUMBERS: Record<'dozen1' | 'dozen2' | 'dozen3', string[]> = {
+  dozen1: ALL_NUMBER_STRINGS.filter((n) => Number(n) <= 12),
+  dozen2: ALL_NUMBER_STRINGS.filter((n) => Number(n) >= 13 && Number(n) <= 24),
+  dozen3: ALL_NUMBER_STRINGS.filter((n) => Number(n) >= 25),
+};
+
+const EVEN_NUMBERS = ALL_NUMBER_STRINGS.filter((n) => Number(n) % 2 === 0);
+const ODD_NUMBERS = ALL_NUMBER_STRINGS.filter((n) => Number(n) % 2 === 1);
+const LOW_NUMBERS = ALL_NUMBER_STRINGS.filter((n) => Number(n) <= 18);
+const HIGH_NUMBERS = ALL_NUMBER_STRINGS.filter((n) => Number(n) >= 19);
+const BLACK_NUMBERS = ALL_NUMBER_STRINGS.filter((n) => !ROULETTE_RED_NUMBERS.has(n));
+
+const TOP_LINE_NUMBERS = ['0', '1', '2', '3'];
+
+const ZERO_SPLIT_KEYS = new Set(['0-1', '0-2', '0-3']);
+
+const OUTSIDE_BET_DEFS: Record<string, { label: string; numbers: string[]; payout: number }> = {
+  red: { label: 'Red', numbers: Array.from(ROULETTE_RED_NUMBERS), payout: 1 },
+  black: { label: 'Black', numbers: BLACK_NUMBERS, payout: 1 },
+  odd: { label: 'Odd', numbers: ODD_NUMBERS, payout: 1 },
+  even: { label: 'Even', numbers: EVEN_NUMBERS, payout: 1 },
+  low: { label: 'Low (1-18)', numbers: LOW_NUMBERS, payout: 1 },
+  high: { label: 'High (19-36)', numbers: HIGH_NUMBERS, payout: 1 },
+  dozen1: { label: '1st 12', numbers: DOZEN_NUMBERS.dozen1, payout: 2 },
+  dozen2: { label: '2nd 12', numbers: DOZEN_NUMBERS.dozen2, payout: 2 },
+  dozen3: { label: '3rd 12', numbers: DOZEN_NUMBERS.dozen3, payout: 2 },
+  column1: { label: 'Column 1', numbers: COLUMN_NUMBERS.column1, payout: 2 },
+  column2: { label: 'Column 2', numbers: COLUMN_NUMBERS.column2, payout: 2 },
+  column3: { label: 'Column 3', numbers: COLUMN_NUMBERS.column3, payout: 2 },
+};
+
+function getRouletteColor(value: string): RouletteChoice {
+  if (value === '0') return 'green';
   return ROULETTE_RED_NUMBERS.has(value) ? 'red' : 'black';
 }
 
@@ -87,13 +143,15 @@ async function boot() {
   const blackjackSplitBtn = document.getElementById('blackjack-split') as HTMLButtonElement;
   const blackjackStatus = document.getElementById('blackjack-status') as HTMLElement;
   const rouletteStakeInput = document.getElementById('roulette-stake') as HTMLInputElement;
+  const rouletteInsideSelect = document.getElementById('roulette-inside-type') as HTMLSelectElement;
+  const rouletteTopLineBtn = document.getElementById('roulette-top-line') as HTMLButtonElement;
+  const rouletteOutsideButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-outside-bet]'));
   const rouletteBtn = document.getElementById('roulette-spin') as HTMLButtonElement;
   const rouletteClearBtn = document.getElementById('roulette-clear') as HTMLButtonElement;
   const rouletteStatus = document.getElementById('roulette-status') as HTMLElement;
   const rouletteWheel = document.getElementById('roulette-wheel') as HTMLElement;
   const rouletteBall = document.getElementById('roulette-ball') as HTMLElement;
   const rouletteBoard = document.getElementById('roulette-board') as HTMLElement;
-  const rouletteDenomButtons = Array.from(document.querySelectorAll<HTMLButtonElement>('.roulette-chip.denom'));
 
   const manifest = await safeFetchManifest();
   let system = await getSystem();
@@ -108,7 +166,7 @@ async function boot() {
     const currentDate = system.currentDate;
     const needsReset = !currentDate || (manifestDates.size > 0 && currentDate && !manifestDates.has(currentDate));
     if (needsReset) {
-      system = await setSystem({ currentDate: fallbackDate });
+      system = await applySystem({ currentDate: fallbackDate });
     }
     if (scoreboardDateInput) {
       scoreboardDateInput.min = manifest.start_date;
@@ -118,18 +176,66 @@ async function boot() {
   let selections: BetLeg[] = [];
   let pending: BetSlip[] = [];
   let settled: BetSlip[] = [];
-  let bankroll = { available: system.bankroll, pending_stake: system.pendingStake, pending_potential: system.pendingPotential };
+  let bankroll = {
+    available: system.bankroll ?? system.initialBankroll ?? 0,
+    pending_stake: system.pendingStake ?? 0,
+    pending_potential: system.pendingPotential ?? 0,
+  };
+  let sportsbookStats = {
+    wagered: system.sportsbookWagered ?? 0,
+    profit: system.sportsbookProfit ?? 0,
+  };
+  let casinoStats = {
+    wagered: system.casinoWagered ?? 0,
+    profit: system.casinoProfit ?? 0,
+  };
   let activeBetTab: 'pending' | 'settled' = 'pending';
   let oddsFormat: 'american' | 'decimal' = 'american';
   let activeBetPanel: 'slip' | 'history' = 'slip';
   let betSlipMessage = '';
   let blackjackState: BlackjackRound | null = null;
   let latestPendingDate: string | undefined = manifest?.start_date || system.currentDate;
-  const rouletteBoardCells = new Map<number, HTMLElement>();
-  const rouletteBets = new Map<number, number>();
-  let selectedDenomination = 0;
+  const rouletteBoardCells = new Map<string, HTMLElement>();
+  const rouletteBets = new Map<string, RouletteBetEntry>();
+  let rouletteStake = 10;
+  if (rouletteStakeInput) {
+    const initialStake = Number(rouletteStakeInput.value || 10);
+    rouletteStake = Number.isFinite(initialStake) && initialStake > 0 ? initialStake : 10;
+    rouletteStakeInput.value = String(rouletteStake);
+  }
+  let rouletteInsideType: InsideBetType = rouletteInsideSelect ? (rouletteInsideSelect.value as InsideBetType) : 'straight';
+  let insideSelection: { firstValue?: string; firstPos?: GridPosition; firstRow?: number } = {};
   let rouletteSpinning = false;
   let wheelRotation = 0;
+
+  async function applySystem(patch: Partial<SystemState>) {
+    const next = await setSystem(patch);
+    system = next;
+    return next;
+  }
+
+  function syncFinancials(extra?: Partial<SystemState>) {
+    const patch: Partial<SystemState> = {
+      bankroll: bankroll.available,
+      pendingStake: bankroll.pending_stake,
+      pendingPotential: bankroll.pending_potential,
+      sportsbookWagered: sportsbookStats.wagered,
+      sportsbookProfit: sportsbookStats.profit,
+      casinoWagered: casinoStats.wagered,
+      casinoProfit: casinoStats.profit,
+      ...extra,
+    };
+    applySystem(patch).catch(() => {
+      /* noop */
+    });
+  }
+
+  function recordCasinoWager(amount: number) {
+    if (!(amount > 0)) return;
+    casinoStats.wagered += amount;
+    renderBankroll(header, bankroll, sportsbookStats, casinoStats);
+    syncFinancials();
+  }
 
   function setDate(d: string) {
     const currentDate = system.currentDate;
@@ -143,7 +249,9 @@ async function boot() {
       }
     }
     system = { ...system, currentDate: d };
-    setSystem({ currentDate: d });
+    applySystem({ currentDate: d }).catch(() => {
+      /* noop */
+    });
     scoreboardDateInput.value = d;
     selections = [];
     betSlipMessage = '';
@@ -255,12 +363,23 @@ async function boot() {
     const base = system.initialBankroll ?? 1000;
     const available = base + settledDelta - pendingStake;
     bankroll = { available, pending_stake: pendingStake, pending_potential: pendingPotential };
-    await setSystem({ bankroll: available, pendingStake, pendingPotential });
+    const sportsbookWagered = all.reduce((sum, bet) => sum + bet.stake, 0);
+    const sportsbookProfit = settled.reduce((sum, bet) => sum + ((bet.payout || 0) - bet.stake), 0);
+    sportsbookStats = { wagered: sportsbookWagered, profit: sportsbookProfit };
+    system = {
+      ...system,
+      bankroll: available,
+      pendingStake,
+      pendingPotential,
+      sportsbookWagered,
+      sportsbookProfit,
+    };
+    syncFinancials();
     render();
   }
 
   function render() {
-    renderBankroll(header, bankroll);
+    renderBankroll(header, bankroll, sportsbookStats, casinoStats);
     renderBetSlip(aside, { selections, bankroll }, oddsFormat, betSlipMessage, (_value) => render(), placeBet, clearSlip, removeSelection);
     renderBetLists(pendingRoot, settledRoot, pending, settled, oddsFormat);
     activateBetTab(activeBetTab);
@@ -339,11 +458,9 @@ async function boot() {
   function adjustBankroll(delta: number) {
     if (!Number.isFinite(delta) || delta === 0) return;
     bankroll.available = Math.max(0, bankroll.available + delta);
-    setSystem({ bankroll: bankroll.available }).then((next) => {
-      system = { ...system, bankroll: next.bankroll };
-    }).catch(() => {
-      /* noop */
-    });
+    casinoStats.profit += delta;
+    renderBankroll(header, bankroll, sportsbookStats, casinoStats);
+    syncFinancials();
   }
 
   async function simulateCurrentDay() {
@@ -377,22 +494,40 @@ async function boot() {
   if (blackjackStandBtn) blackjackStandBtn.onclick = () => playerStand();
   if (blackjackDoubleBtn) blackjackDoubleBtn.onclick = () => playerDouble();
   if (blackjackSplitBtn) blackjackSplitBtn.onclick = () => playerSplit();
-  rouletteDenomButtons.forEach((chip) => {
-    chip.onclick = () => selectRouletteDenomination(chip);
-  });
   if (rouletteClearBtn) rouletteClearBtn.onclick = () => clearRouletteBet();
   if (betPanelSlipBtn) betPanelSlipBtn.onclick = () => setActiveBetPanel('slip');
   if (betPanelHistoryBtn) betPanelHistoryBtn.onclick = () => setActiveBetPanel('history');
   if (rouletteStakeInput) {
     rouletteStakeInput.oninput = () => {
-      const value = Math.max(0, Number(rouletteStakeInput.value || 0));
-      rouletteStakeInput.value = Number.isFinite(value) ? String(value) : '0';
+      const value = Math.max(1, Number(rouletteStakeInput.value || 0));
+      rouletteStake = Number.isFinite(value) ? value : 1;
+      rouletteStakeInput.value = String(rouletteStake);
+      if (rouletteStatus) {
+        rouletteStatus.textContent = `Stake set to ${formatCurrency(rouletteStake)}.`;
+        rouletteStatus.classList.add('muted');
+      }
     };
   }
+  if (rouletteInsideSelect) {
+    rouletteInsideSelect.onchange = () => {
+      rouletteInsideType = (rouletteInsideSelect.value as InsideBetType) || 'straight';
+      insideSelection = {};
+      if (rouletteStatus) {
+        rouletteStatus.textContent = `Inside bet set to ${getInsideBetLabel(rouletteInsideType)}.`;
+        rouletteStatus.classList.add('muted');
+      }
+    };
+  }
+  if (rouletteTopLineBtn) rouletteTopLineBtn.onclick = () => placeTopLineBet();
+  rouletteOutsideButtons.forEach((btn) => {
+    const betId = btn.dataset.outsideBet;
+    if (!betId) return;
+    btn.onclick = () => placeOutsideBet(betId);
+  });
   if (rouletteBtn) rouletteBtn.onclick = () => playRoulette();
   await loadScoreboard(start);
   if (blackjackStatus) blackjackStatus.textContent = 'Select a stake and deal.';
-  if (rouletteStatus) rouletteStatus.textContent = 'Choose a chip, then tap the board.';
+  if (rouletteStatus) rouletteStatus.textContent = 'Enter a stake, then tap the board.';
   setRouletteWheelGradient();
   buildRouletteBoard();
   updateRouletteStakeDisplay();
@@ -415,7 +550,17 @@ async function boot() {
     const confirmed = window.confirm('Reset to season start? Current progress will remain but you will jump back to the first day.');
     if (!confirmed) return;
     const initial = 1000;
-    system = await setSystem({ currentDate: startDate, bankroll: initial, initialBankroll: initial, pendingStake: 0, pendingPotential: 0 });
+    system = await applySystem({
+      currentDate: startDate,
+      bankroll: initial,
+      initialBankroll: initial,
+      pendingStake: 0,
+      pendingPotential: 0,
+      sportsbookWagered: 0,
+      sportsbookProfit: 0,
+      casinoWagered: 0,
+      casinoProfit: 0,
+    });
     scoreboardDateInput.value = startDate;
     selections = [];
     currentSimulated = false;
@@ -424,6 +569,8 @@ async function boot() {
     pending = [];
     settled = [];
     bankroll = { available: initial, pending_stake: 0, pending_potential: 0 };
+    sportsbookStats = { wagered: 0, profit: 0 };
+    casinoStats = { wagered: 0, profit: 0 };
     activeBetTab = 'pending';
     betSlipMessage = '';
     blackjackState = null;
@@ -433,11 +580,6 @@ async function boot() {
     if (blackjackStakeInput) blackjackStakeInput.value = '10';
     rouletteBets.clear();
     activeBetPanel = 'slip';
-    selectedDenomination = 0;
-    rouletteDenomButtons.forEach((chip) => {
-      chip.classList.remove('selected');
-      chip.disabled = false;
-    });
     if (rouletteClearBtn) rouletteClearBtn.disabled = false;
     rouletteSpinning = false;
     wheelRotation = 0;
@@ -451,7 +593,7 @@ async function boot() {
     renderRouletteBoardBets();
     updateBetPanelView();
     if (rouletteStatus) {
-      rouletteStatus.textContent = 'Choose a chip, then tap the board.';
+      rouletteStatus.textContent = 'Enter a stake, then tap the board.';
       rouletteStatus.classList.add('muted');
     }
     render();
@@ -547,8 +689,8 @@ async function boot() {
       blackjackShoe = createShoe();
       blackjackHandsSinceShuffle = 0;
     }
+    recordCasinoWager(stake);
     adjustBankroll(-stake);
-    renderBankroll(header, bankroll);
 
     const playerCards = [drawCard(), drawCard()];
     const dealerCards = [drawCard(), drawCard()];
@@ -587,7 +729,7 @@ async function boot() {
         blackjackState.message = 'Blackjack! Paid 3:2.';
         adjustBankroll(stake * 2.5);
       }
-      renderBankroll(header, bankroll);
+      renderBankroll(header, bankroll, sportsbookStats, casinoStats);
       blackjackHandsSinceShuffle += 1;
       renderBlackjack();
       return;
@@ -643,8 +785,8 @@ async function boot() {
     if (!blackjackState || !blackjackState.inRound) return;
     const hand = getActiveHand();
     if (!hand || !canDouble(hand)) return;
+    recordCasinoWager(hand.bet);
     adjustBankroll(-hand.bet);
-    renderBankroll(header, bankroll);
     hand.bet *= 2;
     hand.doubled = true;
     hand.cards.push(drawCard());
@@ -670,8 +812,8 @@ async function boot() {
       renderBlackjack();
       return;
     }
+    recordCasinoWager(hand.bet);
     adjustBankroll(-hand.bet);
-    renderBankroll(header, bankroll);
     const [firstCard, secondCard] = hand.cards;
     hand.cards = [firstCard, drawCard()];
     hand.status = 'playing';
@@ -783,7 +925,6 @@ async function boot() {
     }
     if (totalDelta !== 0) {
       adjustBankroll(totalDelta);
-      renderBankroll(header, bankroll);
     }
     renderBlackjack();
   }
@@ -885,7 +1026,7 @@ async function boot() {
     if (rouletteSpinning) return;
     const totalStake = getRouletteTotalStake();
     if (!(totalStake > 0)) {
-      rouletteStatus.textContent = 'Place chips on the board before spinning.';
+      rouletteStatus.textContent = 'Place bets on the table before spinning.';
       rouletteStatus.classList.remove('muted');
       return;
     }
@@ -895,13 +1036,11 @@ async function boot() {
       return;
     }
 
-    const betsSnapshot = new Map(rouletteBets);
+    const betsSnapshot = Array.from(rouletteBets.values()).map((bet) => ({ ...bet }));
+    recordCasinoWager(totalStake);
     rouletteSpinning = true;
     rouletteStatus.textContent = 'Spinning...';
     rouletteStatus.classList.remove('muted');
-    rouletteDenomButtons.forEach((chip) => {
-      chip.disabled = true;
-    });
     if (rouletteClearBtn) rouletteClearBtn.disabled = true;
     if (rouletteBtn) rouletteBtn.disabled = true;
     rouletteBoardCells.forEach((cell) => cell.classList.remove('active'));
@@ -932,16 +1071,15 @@ async function boot() {
       rouletteStatus.classList.toggle('muted', result.delta === 0);
       if (result.delta !== 0) {
         adjustBankroll(result.delta);
+      } else {
+        syncFinancials();
+        renderBankroll(header, bankroll, sportsbookStats, casinoStats);
       }
-      renderBankroll(header, bankroll);
 
       rouletteBets.clear();
       renderRouletteBoardBets();
       updateRouletteStakeDisplay();
-
-      rouletteDenomButtons.forEach((chip) => {
-        chip.disabled = false;
-      });
+      insideSelection = {};
       if (rouletteClearBtn) rouletteClearBtn.disabled = false;
       if (rouletteBtn) rouletteBtn.disabled = false;
       rouletteSpinning = false;
@@ -1037,71 +1175,301 @@ async function boot() {
     return `${hand[0]} ??`;
   }
 
-  function selectRouletteDenomination(chip: HTMLButtonElement) {
-    const amount = Number(chip.dataset.amount || 0);
-    if (!(amount > 0)) return;
-    selectedDenomination = amount;
-    rouletteDenomButtons.forEach((btn) => btn.classList.toggle('selected', btn === chip));
+  function addRouletteBet(label: string, numbers: string[], payout: number, kind: 'inside' | 'outside') {
+    const normalized = numbers.slice().sort(compareNumbers);
+    const key = `${kind}:${normalized.join('-')}:${payout}`;
+    const existing = rouletteBets.get(key);
+    if (existing) {
+      existing.amount += rouletteStake;
+    } else {
+      rouletteBets.set(key, { id: key, label, numbers: normalized, amount: rouletteStake, payout, kind });
+    }
+    renderRouletteBoardBets();
+    const total = getRouletteTotalStake();
     if (rouletteStatus) {
-      rouletteStatus.textContent = `Selected ${formatCurrency(amount)} chip. Tap the board to place it.`;
+      rouletteStatus.textContent = `${label} placed for ${formatCurrency(rouletteStake)}. Total staked: ${formatCurrency(total)}.`;
       rouletteStatus.classList.add('muted');
+    }
+    insideSelection = {};
+  }
+
+  function placeOutsideBet(betId: string) {
+    const definition = OUTSIDE_BET_DEFS[betId];
+    if (!definition) return;
+    if (!canAffordStake()) return;
+    addRouletteBet(definition.label, definition.numbers, definition.payout, 'outside');
+  }
+
+  function placeTopLineBet() {
+    if (!canAffordStake()) return;
+    addRouletteBet('Basket (0,1,2,3)', TOP_LINE_NUMBERS, 8, 'inside');
+  }
+
+  function getInsideBetLabel(type: InsideBetType) {
+    switch (type) {
+      case 'straight':
+        return 'Straight (1 number)';
+      case 'split':
+        return 'Split (2 numbers)';
+      case 'street':
+        return 'Street (3 numbers)';
+      case 'corner':
+        return 'Corner (4 numbers)';
+      case 'sixline':
+        return 'Six Line (6 numbers)';
+      default:
+        return 'Inside bet';
     }
   }
 
-  function handleRouletteCellClick(value: number) {
-    if (rouletteSpinning) return;
-    if (!(selectedDenomination > 0)) {
-      if (rouletteStatus) {
-        rouletteStatus.textContent = 'Select a chip value before placing bets.';
-        rouletteStatus.classList.remove('muted');
-      }
-      return;
-    }
-    const projectedTotal = getRouletteTotalStake() + selectedDenomination;
+  function canAffordStake() {
+    const projectedTotal = getRouletteTotalStake() + rouletteStake;
     if (projectedTotal > bankroll.available) {
       if (rouletteStatus) {
-        rouletteStatus.textContent = 'Stake exceeds available balance.';
+        rouletteStatus.textContent = `Total staked would be ${formatCurrency(projectedTotal)}, exceeding available balance ${formatCurrency(bankroll.available)}.`;
+        rouletteStatus.classList.remove('muted');
+      }
+      return false;
+    }
+    return true;
+  }
+
+  function isZeroValue(value: string) {
+    return value === '0';
+  }
+
+function isValidZeroSplit(first: string, second: string) {
+  const key = [first, second].sort(compareNumbers).join('-');
+  return ZERO_SPLIT_KEYS.has(key);
+}
+
+function getSplitPrompt(value: string) {
+  if (value === '0') return 'Choose 1, 2, or 3 to finish your split.';
+  return 'Select the adjacent number to complete your split.';
+}
+
+  function handleRouletteCellClick(value: string) {
+    if (rouletteSpinning) return;
+    if (!(rouletteStake > 0)) {
+      if (rouletteStatus) {
+        rouletteStatus.textContent = 'Enter a stake before placing bets.';
         rouletteStatus.classList.remove('muted');
       }
       return;
     }
-    rouletteBets.set(value, (rouletteBets.get(value) || 0) + selectedDenomination);
-    updateRouletteStakeDisplay();
-    renderRouletteBoardBets();
-    if (rouletteStatus) {
-      rouletteStatus.textContent = `Placed ${formatCurrency(selectedDenomination)} on ${value === 0 ? '0' : value}.`;
-      rouletteStatus.classList.add('muted');
+    switch (rouletteInsideType) {
+      case 'straight': {
+        if (!canAffordStake()) return;
+        addRouletteBet(`Straight ${value}`, [value], 35, 'inside');
+        insideSelection = {};
+        break;
+      }
+      case 'split': {
+        const zeroCell = isZeroValue(value);
+        const pos = zeroCell ? null : getGridPosition(value);
+        if (!zeroCell && !pos) {
+          if (rouletteStatus) {
+            rouletteStatus.textContent = 'Split bets must use numbers on the main grid.';
+            rouletteStatus.classList.remove('muted');
+          }
+          insideSelection = {};
+          return;
+        }
+        if (!insideSelection.firstValue) {
+          insideSelection = { firstValue: value, firstPos: pos ?? undefined };
+          if (rouletteStatus) {
+            rouletteStatus.textContent = getSplitPrompt(value);
+            rouletteStatus.classList.remove('muted');
+          }
+          return;
+        }
+        const firstValue = insideSelection.firstValue;
+        const firstPos = insideSelection.firstPos ?? null;
+        const firstIsZero = isZeroValue(firstValue);
+        const secondIsZero = zeroCell;
+        const secondPos = pos;
+        let combo: string[] | null = null;
+        if (!firstIsZero && !secondIsZero && firstPos && secondPos && areSplitNeighbors(firstPos, secondPos)) {
+          combo = [firstValue, value].sort(compareNumbers);
+        } else if (isValidZeroSplit(firstValue, value)) {
+          combo = [firstValue, value].sort(compareNumbers);
+        }
+        if (!combo) {
+          insideSelection = {};
+          if (rouletteStatus) {
+            rouletteStatus.textContent = 'Those numbers do not form a valid split.';
+            rouletteStatus.classList.remove('muted');
+          }
+          return;
+        }
+        if (!canAffordStake()) return;
+        addRouletteBet(`Split ${combo.join('-')}`, combo, 17, 'inside');
+        insideSelection = {};
+        break;
+      }
+      case 'street': {
+        const pos = getGridPosition(value);
+        if (!pos) {
+          if (rouletteStatus) {
+            rouletteStatus.textContent = 'Street bets apply to numbers 1-36 only.';
+            rouletteStatus.classList.remove('muted');
+          }
+          return;
+        }
+        if (!canAffordStake()) return;
+        const numbers = getStreetNumbers(pos.row);
+        addRouletteBet(`Street ${numbers.join('-')}`, numbers, 11, 'inside');
+        insideSelection = {};
+        break;
+      }
+      case 'corner': {
+        const pos = getGridPosition(value);
+        if (!pos) {
+          if (rouletteStatus) {
+            rouletteStatus.textContent = 'Corner bets apply to numbers 1-36 only.';
+            rouletteStatus.classList.remove('muted');
+          }
+          return;
+        }
+        if (!insideSelection.firstValue || !insideSelection.firstPos) {
+          insideSelection = { firstValue: value, firstPos: pos };
+          if (rouletteStatus) {
+            rouletteStatus.textContent = 'Select the diagonal neighbor to complete your corner.';
+            rouletteStatus.classList.remove('muted');
+          }
+          return;
+        }
+        const corner = getCornerNumbers(insideSelection.firstPos, pos);
+        if (!corner) {
+          insideSelection = {};
+          if (rouletteStatus) {
+            rouletteStatus.textContent = 'Corner bets require diagonal neighbors.';
+            rouletteStatus.classList.remove('muted');
+          }
+          return;
+        }
+        if (!canAffordStake()) return;
+        addRouletteBet(`Corner ${corner.join('-')}`, corner, 8, 'inside');
+        insideSelection = {};
+        break;
+      }
+      case 'sixline': {
+        const pos = getGridPosition(value);
+        if (!pos) {
+          if (rouletteStatus) {
+            rouletteStatus.textContent = 'Six line bets apply to numbers 1-36 only.';
+            rouletteStatus.classList.remove('muted');
+          }
+          return;
+        }
+        const row = pos.row;
+        if (insideSelection.firstRow == null) {
+          insideSelection = { firstRow: row };
+          if (rouletteStatus) {
+            rouletteStatus.textContent = 'Select the row above or below to complete your six line.';
+            rouletteStatus.classList.remove('muted');
+          }
+          return;
+        }
+        const otherRow = insideSelection.firstRow;
+        if (Math.abs(otherRow - row) !== 1) {
+          insideSelection = {};
+          if (rouletteStatus) {
+            rouletteStatus.textContent = 'Six line rows must be adjacent.';
+            rouletteStatus.classList.remove('muted');
+          }
+          return;
+        }
+        if (!canAffordStake()) return;
+        const rows = [otherRow, row].sort((a, b) => a - b);
+        const numbers = [...getStreetNumbers(rows[0]), ...getStreetNumbers(rows[1])];
+        addRouletteBet(`Six Line ${numbers.join('-')}`, numbers, 5, 'inside');
+        insideSelection = {};
+        break;
+      }
+      default:
+        break;
     }
   }
 
   function clearRouletteBet() {
     rouletteBets.clear();
+    insideSelection = {};
     updateRouletteStakeDisplay();
     renderRouletteBoardBets();
     if (rouletteStatus) {
-      rouletteStatus.textContent = 'Bets cleared. Select a chip and tap the board.';
+      rouletteStatus.textContent = `Bets cleared. Total staked: ${formatCurrency(0)}. Enter a stake and tap the board.`;
       rouletteStatus.classList.add('muted');
     }
   }
 
   function updateRouletteStakeDisplay() {
     if (!rouletteStakeInput) return;
-    rouletteStakeInput.value = String(getRouletteTotalStake());
+    rouletteStakeInput.value = String(rouletteStake);
   }
+
+  function getGridPosition(value: string): GridPosition | null {
+    if (value === '0') return null;
+    const num = Number(value);
+    if (!Number.isFinite(num) || num < 1 || num > 36) return null;
+    const row = Math.floor((num - 1) / 3);
+    const col = (num - 1) % 3;
+    return { row, col };
+  }
+
+  function getNumberAt(row: number, col: number): string {
+    return String(row * 3 + col + 1);
+  }
+
+  function getStreetNumbers(row: number): string[] {
+    return [0, 1, 2].map((offset) => getNumberAt(row, offset));
+  }
+
+  function areSplitNeighbors(a: GridPosition, b: GridPosition) {
+    return (a.row === b.row && Math.abs(a.col - b.col) === 1) || (a.col === b.col && Math.abs(a.row - b.row) === 1);
+  }
+
+  function getCornerNumbers(a: GridPosition, b: GridPosition): string[] | null {
+    if (Math.abs(a.row - b.row) !== 1 || Math.abs(a.col - b.col) !== 1) return null;
+    const topRow = Math.min(a.row, b.row);
+    const leftCol = Math.min(a.col, b.col);
+    return [
+      getNumberAt(topRow, leftCol),
+      getNumberAt(topRow, leftCol + 1),
+      getNumberAt(topRow + 1, leftCol),
+      getNumberAt(topRow + 1, leftCol + 1),
+    ];
+  }
+
+  function compareNumbers(a: string, b: string) {
+    return normalizeNumberValue(a) - normalizeNumberValue(b);
+  }
+
+function normalizeNumberValue(value: string) {
+  if (value === '0') return 0;
+  return Number(value);
+}
 
   function getRouletteTotalStake() {
     let total = 0;
-    rouletteBets.forEach((amount) => {
-      total += amount;
+    rouletteBets.forEach((bet) => {
+      total += bet.amount;
     });
     return total;
   }
 
   function renderRouletteBoardBets() {
+    const cellTotals = new Map<string, number>();
+    rouletteBets.forEach((bet) => {
+      if (bet.kind !== 'inside') return;
+      for (const number of bet.numbers) {
+        cellTotals.set(number, (cellTotals.get(number) || 0) + bet.amount);
+      }
+    });
     rouletteBoardCells.forEach((cell, number) => {
       const stack = cell.querySelector('.roulette-chip-stack') as HTMLElement | null;
       if (!stack) return;
-      const amount = rouletteBets.get(number) || 0;
+      const amount = cellTotals.get(number) || 0;
       if (amount > 0) {
         stack.textContent = formatCurrency(amount);
         stack.classList.add('active');
@@ -1112,7 +1480,7 @@ async function boot() {
     });
   }
 
-  function highlightRouletteOutcome(value: number) {
+  function highlightRouletteOutcome(value: string) {
     rouletteBoardCells.forEach((cell) => cell.classList.remove('active'));
     const target = rouletteBoardCells.get(value);
     if (target) target.classList.add('active');
@@ -1124,15 +1492,19 @@ async function boot() {
     rouletteBoardCells.clear();
 
     const zeroCell = document.createElement('div');
-   zeroCell.className = 'roulette-zero';
+    zeroCell.className = 'roulette-zero';
     zeroCell.dataset.number = '0';
     zeroCell.innerHTML = '<span>0</span>';
     const zeroStack = document.createElement('div');
     zeroStack.className = 'roulette-chip-stack';
     zeroCell.appendChild(zeroStack);
-    zeroCell.addEventListener('click', () => handleRouletteCellClick(0));
-    rouletteBoard.appendChild(zeroCell);
-    rouletteBoardCells.set(0, zeroCell);
+    zeroCell.addEventListener('click', () => handleRouletteCellClick('0'));
+    const zeroColumn = document.createElement('div');
+    zeroColumn.className = 'roulette-zero-column';
+    zeroColumn.appendChild(zeroCell);
+    rouletteBoardCells.set('0', zeroCell);
+
+    rouletteBoard.appendChild(zeroColumn);
 
     const grid = document.createElement('div');
     grid.className = 'roulette-grid';
@@ -1140,15 +1512,16 @@ async function boot() {
       for (let col = 0; col < 3; col += 1) {
         const number = row * 3 + (3 - col);
         const cell = document.createElement('div');
-        cell.className = `roulette-cell ${getRouletteColor(number)}`;
-        cell.dataset.number = String(number);
-        cell.innerHTML = `<span>${number}</span>`;
+        const value = String(number);
+        cell.className = `roulette-cell ${getRouletteColor(value)}`;
+        cell.dataset.number = value;
+        cell.innerHTML = `<span>${value}</span>`;
         const stack = document.createElement('div');
         stack.className = 'roulette-chip-stack';
         cell.appendChild(stack);
-        cell.addEventListener('click', () => handleRouletteCellClick(number));
+        cell.addEventListener('click', () => handleRouletteCellClick(value));
         grid.appendChild(cell);
-        rouletteBoardCells.set(number, cell);
+        rouletteBoardCells.set(value, cell);
       }
     }
     rouletteBoard.appendChild(grid);
@@ -1187,17 +1560,22 @@ async function boot() {
     rouletteWheel.appendChild(container);
   }
 
-  function resolveRouletteWinnings(bets: Map<number, number>, resultNumber: number) {
-    const totalStake = Array.from(bets.values()).reduce((sum, amount) => sum + amount, 0);
-    const winningStake = bets.get(resultNumber) || 0;
+  function resolveRouletteWinnings(bets: RouletteBetEntry[], resultNumber: string) {
+    const totalStake = bets.reduce((sum, bet) => sum + bet.amount, 0);
     const color = getRouletteColor(resultNumber);
-    let delta = -totalStake;
-    if (winningStake > 0) {
-      delta += winningStake * 36;
+    let delta = 0;
+    const winSummaries: string[] = [];
+    for (const bet of bets) {
+      delta -= bet.amount;
+      if (bet.numbers.includes(resultNumber)) {
+        const profit = bet.amount * bet.payout;
+        delta += bet.amount + profit;
+        winSummaries.push(`${bet.label} wins ${formatCurrency(profit)}.`);
+      }
     }
     let message = `Ball lands on ${resultNumber} ${color === 'green' ? 'GREEN' : color.toUpperCase()}.`;
-    if (winningStake > 0) {
-      message += ` You win ${formatCurrency(winningStake * 35)}.`;
+    if (winSummaries.length) {
+      message += ` ${winSummaries.join(' ')}`;
     } else if (totalStake > 0) {
       message += ` You lose ${formatCurrency(totalStake)}.`;
     }

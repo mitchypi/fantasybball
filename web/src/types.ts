@@ -101,6 +101,10 @@ export interface SystemState {
   initialBankroll: number;
   pendingStake: number;
   pendingPotential: number;
+  sportsbookWagered?: number;
+  sportsbookProfit?: number;
+  casinoWagered?: number;
+  casinoProfit?: number;
 }
 
 export interface SimulationState {
