@@ -1,6 +1,6 @@
 # Fantasy Replay – Quickstart Guide
 
-A slim guide to get the Fantasy Basketball simulator running right after cloning the repository. These steps cover installing dependencies and launching the FastAPI backend plus the dashboard — no data downloads required.
+A slim guide to get the Fantasy Basketball simulator running right after cloning the repository. These steps cover installing dependencies and launching the FastAPI backend plus the dashboard
 
 ## Prerequisites
 
